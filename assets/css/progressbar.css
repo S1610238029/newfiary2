@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+*{
+    margin:0;
+    padding:0;
+}
+
+/* Color Constants */
+:root {
+    --grey: #505050;
+    --red: rgb(141, 4, 3);
+}
+
+/* Die Color Konstanten können folgendermaßen genutzt werden - Beispiel:
+background: var(--grey); */
+
+/* Start Login CSS */
+
+body{
+    background: var(--grey);
+}
+
+/* Aussehen des eigentlichen Forms */
+#form-id{
+    width:70%;
+    margin:50px auto;
+    text-align:center;
+    position: relative;
+}
+
+#form-id fieldset{
+    background:#fff;
+    border:0 none;
+    border-radius:3px;
+    box-sizing:border-box;
+    padding:20px 30px;
+    width:80%;
+    margin:0 10%;
+    position: relative;
+}
+#form-id fieldset:not(:first-of-type){
+    display:none;
+}
+
+#form-id input{
+    border:1px solid #ccc;
+    border-radius:3px;
+    padding:15px;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom:15px;
+    font-size:13px;
+    box-sizing:border-box;
+    width:100%;
+}
+
+#form-id textarea {
+    border:1px solid #ccc;
+    border-radius:3px;
+    padding:15px;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom:15px;
+    font-size:13px;
+    box-sizing:border-box;
+    width:100%;
+}
+
+#form-id select {
+    border:1px solid #ccc;
+    border-radius:3px;
+    padding:15px;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom:15px;
+    font-size:13px;
+    box-sizing:border-box;
+    width:100%;
+}
+
+.links {
+    width: 50%;
+    float: left;
+}
+
+.rechts {
+    width: 50%;
+    float: right;
+}
+
+#form-id .custom-button{
+    width:100px;
+    background: var(--red);
+    font-weight: bold;
+    color:#fff;
+    border:0;
+    padding:10px;
+    margin:10px;
+}
+
+#form-id .custom-button:hover{
+    box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--red)
+}
+
+.title{
+    font-size:15px;
+    margin-bottom:10px;
+    color:var(--red);
+    text-transform:uppercase;
+}
+.sub-title{
+    font-size:13px;
+    margin-bottom:20px;
+    font-weight:normal;
+    color:#666;
+}
+/*Progressbar*/
+.progress {
+    margin-bottom: 40px;
+    /*CSS counters to number the steps*/
+    counter-reset: step;
+}
+.progress li {
+    margin-bottom: 20px;
+    list-style-type: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 12px;
+    width: 20%;
+    float: left;
+    position: relative;
+}
+.progress li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 20px;
+    line-height: 20px;
+    display: block;
+    font-size: 10px;
+    color: #333;
+    background: white;
+    border-radius: 3px;
+    margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+.progress li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    position: absolute;
+    left: -50%;
+    top: 9px;
+    z-index:-1; /*put it behind the numbers*/
+}
+.progress li:first-child:after {
+    /*connector not needed before the first step*/
+    content: none;
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+.progress li.active:before,  .progress li.active:after{
+    background: var(--red);
+    color: white;
+}
+
+/* Checkbox CSS */
+
+/* Kommt hier noch */
+
+/* Focus Colors */
+
+input:focus {
+    outline: none !important;
+    border-color: #8d0403;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+}
+
+select:focus {
+    outline: none !important;
+    border-color: #8d0403;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+}
+
+textarea:focus {
+    outline: none !important;
+    border-color: #8d0403;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+}
+
+fieldset:focus {
+    outline: none !important;
+    border-color: #8d0403;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+}
+
+

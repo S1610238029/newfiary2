@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Support{% endblock %}
+
+{% block body %}
+
+    <!-- Funktioniert nur hier eingebunden aber nicht im mystyle css?
+    Drum bitte hier lassen und nicht rauslöschen -->
+
+    <style>
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .redbutton {
+            background-color: #8d0403;
+            color: #FFF;
+            width: 100%;
+            padding: 10px 20px;
+            display: block;
+            height: 39px;
+            border-radius: 20px;
+            margin-top: 30px;
+            transition: all 0.5s ease-in-out;
+            border: none;
+            text-transform: uppercase;
+        }
+
+        .redbutton:hover {
+            background: #c10612;
+            cursor: pointer;
+            /*  box-shadow: 0px 4px 35px -5px #c10612;  */
+        }
+
+        .support {
+            width: 85%;
+        }
+
+        /* Changing the Input Focus Color
+            https://stackoverflow.com/questions/14820952/change-bootstrap-input-focus-blue-glow
+        */
+
+        .form-control:focus {
+            border-color: #8d0403;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+        }
+
+    </style>
+
+    <h1>Support</h1>
+
+    <p>Es gibt ein Problem? Teile es hier mit!</p><br>
+
+    <!-- Validation ob es leer ist wird hier bereits von Boostrap via Required übernommen jedoch
+    fehlt hier noch die Validation EMail Phone etc. ob das auch Valid ist  -->
+
+    <div class="support">
+
+        <form>
+            <div class="form-group">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="mobile" name="phone" placeholder="Telefonnummer" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="subject" name="thema" placeholder="Thema" required>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" id="message" placeholder="Beschreibe dein Problem"
+                          maxlength="250" rows="7" required></textarea>
+            </div>
+
+            <!-- Verlinkung für die E-Mail wo das hinsoll fehlt hier noch -->
+            <button type="submit" class="redbutton">
+                Abschicken!
+            </button>
+        </form>
+
+    </div>
+
+{% endblock %}
