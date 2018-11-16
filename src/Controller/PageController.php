@@ -81,13 +81,5 @@ class PageController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/newentry", name="newentry")
-     */
-    public function newEntryAction(Request $request)
-    {
-        return $this->render('pages/newentry.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
-    }
+
 }
