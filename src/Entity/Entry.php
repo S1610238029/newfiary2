@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\File\File;
  * Entity
  *
  * @ORM\Table(name="logbuch")
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Entity
  */
 class Entry
 {
