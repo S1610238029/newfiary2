@@ -191,8 +191,6 @@ class Entry
 
 
 
-
-
     /**
      * @Assert\Image()
      */
