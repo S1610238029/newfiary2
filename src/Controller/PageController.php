@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
 class PageController extends AbstractController
 {
     /**
@@ -61,15 +62,7 @@ class PageController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/schwarzes_brett", name="blackboard")
-     */
-    public function blackboardAction(Request $request)
-    {
-        return $this->render('pages/blackboard.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
-    }
+
 
     /**
      * @Route("/support", name="support")

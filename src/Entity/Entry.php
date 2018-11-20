@@ -3,64 +3,59 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Entity
  *
- * @ORM\Table(name="logbuch")
+ * @ORM\Table(name="logbuch_test")
  * @ORM\Entity
  */
 class Entry
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idlogbuch", type="integer")
      * @ORM\Id
+     * @ORM\Column(name="idlogbuch", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $idlogbuch;
-
-    /**
-     * @OneToMany(targetEntity="EntryKategorie", mappedBy="idcategory", cascade={"ALL"}, indexBy="kategorie")
-     */
-    protected $kategorie;
+    private $idlogbuch;
 
     /**
      *
-     * @OneToMany(targetEntity="EinsatzArt", mappedBy="ideinsatzart", cascade={"ALL"}, indexBy="unterkategorie")
+     * @ORM\ManyToOne(targetEntity="kategorie")
+     * @ORM\JoinColumn(name="idcategory", referencedColumnName="kategorie_id")
      */
-    protected $unterkategorie;
+    private $kategorie_id;
 
     /**
-     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="unterkategorie")
+     * @ORM\JoinColumn(name="ideinsatzart", referencedColumnName="unterkategorie_id")
+     */
+    private $unterkategorie;
+
+    /**
      *
      * @Assert\NotBlank()
-     * @Assert\Length(
-     *      max=4096
-     *      maxMessage = "Your description cannot be longer than {{ limit }} characters")
-     * @ORM\Column(name="beschreibung", type="string", length=4096)
+     * @ORM\Column(name="beschreibung", type="text")
      */
-    protected $beschreibung;
+    private $beschreibung;
 
 
     /**
      * @Assert\DateTime
      *
-     * @ORM\Column(name="alarmzeit")
+     * @ORM\Column(name="alarmzeit", type="datetime")
      */
-    protected $alarmzeit;
+    private $alarmzeit;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="anforderer_name", type="string", length=255)
+     * @Assert\Length(min="3", max="255")
+     * @ORM\Column(name="anforderer_name", type="string", nullable=TRUE)
      */
-    protected $anforderer_name;
+    private $anforderer_name;
 
     /**
      *
@@ -68,124 +63,117 @@ class Entry
      *     pattern="/^(0|\+)[0-9]/",
      *     message="Please enter a valid phone number"
      * )
-     * @ORM\Column(name="anforderer_telefon_nr", type="integer", length=255)
+     * @ORM\Column(name="anforderer_telefon_nr", type="integer", nullable=TRUE)
      */
-    protected $anforderer_telefon_nr;
+    private $anforderer_telefon_nr;
 
     /**
      * @Assert\Date
      *
      * @ORM\Column(name="beginn_datum")
      */
-    protected $beginn_datum;
+    private $beginn_datum;
 
     /**
      * @Assert\Time
      *
      * @ORM\Column(name="beginn_zeit")
      */
-    protected $beginn_zeit;
+    private $beginn_zeit;
 
     /**
      * @Assert\Date
      *
      * @ORM\Column(name="ende_datum")
      */
-    protected $ende_datum;
+    private $ende_datum;
 
     /**
      * @Assert\Time
      *
      * @ORM\Column(name="ende_zeit")
      */
-    protected $ende_zeit;
+    private $ende_zeit;
 
     /**
-     * @var int
      *
      * @Assert\Length(
-     *     min=4
-     *     max=4
+     *     min=4,
+     *     max=4,
      *     exactMessage="This value should have exactly {{ limit }} characters.")
      *
-     * @ORM\Column(name="plz", type="integer", length="4")
+     * @ORM\Column(name="plz", type="integer")
      */
-    protected $plz;
+    private $plz;
 
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="ort", type="string", length="255")
+     * @Assert\Length(min="2", max="255")
+     * @ORM\Column(name="ort", type="string")
      */
-    protected $ort;
+    private $ort;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="straße", type="string", length="600")
+     * @Assert\Length(min="3", max="600")
+     * @ORM\Column(name="straße", type="string")
      */
-    protected $straße;
+    private $straße;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="hausnummer", type="string", length="50")
+     * @Assert\Length(max="255")
+     * @ORM\Column(name="hausnummer", type="string")
      */
-    protected $hausnummer;
+    private $hausnummer;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="betriebsmittel", type="string", length="5000")
+     * @Assert\Length(min="1", max="255")
+     * @ORM\Column(name="betriebsmittel", type="string", nullable=TRUE)
      */
-    protected $betriebsmittel;
+    private $betriebsmittel;
 
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="bericht", type="string", length="20000")
+     *
+     * @ORM\Column(name="bericht", type="text", nullable=TRUE)
      */
-    protected $bericht;
+    private $bericht;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="wetter", type="string", length="5000")
+     * @ORM\Column(name="wetter", type="array", nullable=TRUE)
      */
-    protected $wetter;
+    private $wetter;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="bodenbeschaffenheit", type="string", length="5000")
+     * @ORM\Column(name="bodenbeschaffenheit", type="array", nullable=TRUE)
      */
-    protected $bodenbeschaffenheit;
+    private $bodenbeschaffenheit;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="notizen", type="string", length="5000")
+     * @ORM\Column(name="notizen", type="text", nullable=TRUE)
      */
-    protected $notizen;
+    private $notizen;
 
     /**
      * @var int
      *
      * @ORM\Column(name="idbenutzer_benutzer")
-     * @OneToMany(targetEntity="IdBenutzer", mappedBy="idbenutzer", cascade={"ALL"}, indexBy="idbenutzer")
+     *
      */
-    protected $idbenutzer;
+    private $idbenutzer;
 
     /**
      * @Assert\DateTime
      *
-     * @ORM\Column(name="metadata")
+     * @ORM\Column(name="metadata", type="datetime")
      */
-    protected $metaData; //current datetime, when entry is entered
-
-
+    private $metaData; //current datetime, when entry is entered
 
 
 
@@ -194,7 +182,7 @@ class Entry
     /**
      * @Assert\Image()
      */
-    protected $headshot;
+    private $headshot;
 
     public function setHeadshot(File $file = null)
     {
@@ -210,126 +198,270 @@ class Entry
 
 
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
+    public function getIdlogbuch(): ?int
     {
-        return $this->id;
+        return $this->idlogbuch;
     }
 
-    /**
-     * Set username
-     *
-     * @param string $username
-     *
-     * @return User
-     */
-    public function setUsername($username)
+    public function getBeschreibung(): ?string
     {
-        $this->username = $username;
+        return $this->beschreibung;
+    }
+
+    public function setBeschreibung(string $beschreibung): self
+    {
+        $this->beschreibung = $beschreibung;
 
         return $this;
     }
 
-    /**
-     * Get username
-     *
-     * @return string
-     */
-    public function getUsername()
+    public function getAlarmzeit(): ?\DateTimeInterface
     {
-        return $this->username;
+        return $this->alarmzeit;
     }
 
-    public function getPlainPassword()
+    public function setAlarmzeit(\DateTimeInterface $alarmzeit): self
     {
-    return $this->plainPassword;
-    }
-
-    public function setPlainPassword($password)
-    {
-        $this->plainPassword = $password;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
+        $this->alarmzeit = $alarmzeit;
 
         return $this;
     }
 
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
+    public function getAnfordererName(): ?string
     {
-        return $this->email;
+        return $this->anforderer_name;
     }
 
-    /**
-     * Set password
-     *
-     * @param string $password
-     *
-     * @return User
-     */
-    public function setPassword($password)
+    public function setAnfordererName(?string $anforderer_name): self
     {
-        $this->password = $password;
+        $this->anforderer_name = $anforderer_name;
+
         return $this;
     }
 
-    /**
-     * Get password
-     *
-     * @return string
-     */
-    public function getPassword()
+    public function getAnfordererTelefonNr(): ?int
     {
-        return $this->password;
+        return $this->anforderer_telefon_nr;
+    }
+
+    public function setAnfordererTelefonNr(?int $anforderer_telefon_nr): self
+    {
+        $this->anforderer_telefon_nr = $anforderer_telefon_nr;
+
+        return $this;
+    }
+
+    public function getBeginnDatum(): ?string
+    {
+        return $this->beginn_datum;
+    }
+
+    public function setBeginnDatum(string $beginn_datum): self
+    {
+        $this->beginn_datum = $beginn_datum;
+
+        return $this;
+    }
+
+    public function getBeginnZeit(): ?string
+    {
+        return $this->beginn_zeit;
+    }
+
+    public function setBeginnZeit(string $beginn_zeit): self
+    {
+        $this->beginn_zeit = $beginn_zeit;
+
+        return $this;
+    }
+
+    public function getEndeDatum(): ?string
+    {
+        return $this->ende_datum;
+    }
+
+    public function setEndeDatum(string $ende_datum): self
+    {
+        $this->ende_datum = $ende_datum;
+
+        return $this;
+    }
+
+    public function getEndeZeit(): ?string
+    {
+        return $this->ende_zeit;
+    }
+
+    public function setEndeZeit(string $ende_zeit): self
+    {
+        $this->ende_zeit = $ende_zeit;
+
+        return $this;
+    }
+
+    public function getPlz(): ?int
+    {
+        return $this->plz;
+    }
+
+    public function setPlz(int $plz): self
+    {
+        $this->plz = $plz;
+
+        return $this;
+    }
+
+    public function getOrt(): ?string
+    {
+        return $this->ort;
+    }
+
+    public function setOrt(string $ort): self
+    {
+        $this->ort = $ort;
+
+        return $this;
+    }
+
+    public function getStraße(): ?string
+    {
+        return $this->straße;
+    }
+
+    public function setStraße(string $straße): self
+    {
+        $this->straße = $straße;
+
+        return $this;
+    }
+
+    public function getHausnummer(): ?string
+    {
+        return $this->hausnummer;
+    }
+
+    public function setHausnummer(string $hausnummer): self
+    {
+        $this->hausnummer = $hausnummer;
+
+        return $this;
+    }
+
+    public function getBetriebsmittel(): ?string
+    {
+        return $this->betriebsmittel;
+    }
+
+    public function setBetriebsmittel(?string $betriebsmittel): self
+    {
+        $this->betriebsmittel = $betriebsmittel;
+
+        return $this;
+    }
+
+    public function getBericht(): ?string
+    {
+        return $this->bericht;
+    }
+
+    public function setBericht(?string $bericht): self
+    {
+        $this->bericht = $bericht;
+
+        return $this;
+    }
+
+    public function getWetter(): ?array
+    {
+        return $this->wetter;
+    }
+
+    public function setWetter(?array $wetter): self
+    {
+        $this->wetter = $wetter;
+
+        return $this;
+    }
+
+    public function getBodenbeschaffenheit(): ?array
+    {
+        return $this->bodenbeschaffenheit;
+    }
+
+    public function setBodenbeschaffenheit(?array $bodenbeschaffenheit): self
+    {
+        $this->bodenbeschaffenheit = $bodenbeschaffenheit;
+
+        return $this;
+    }
+
+    public function getNotizen(): ?string
+    {
+        return $this->notizen;
+    }
+
+    public function setNotizen(?string $notizen): self
+    {
+        $this->notizen = $notizen;
+
+        return $this;
+    }
+
+    public function getIdbenutzer(): ?string
+    {
+        return $this->idbenutzer;
+    }
+
+    public function setIdbenutzer(string $idbenutzer): self
+    {
+        $this->idbenutzer = $idbenutzer;
+
+        return $this;
+    }
+
+    public function getMetaData(): ?\DateTimeInterface
+    {
+        return $this->metaData;
+    }
+
+    public function setMetaData(\DateTimeInterface $metaData): self
+    {
+        $this->metaData = $metaData;
+
+        return $this;
+    }
+
+    public function getKategorieId(): ?kategorie
+    {
+        return $this->kategorie_id;
+    }
+
+    public function setKategorieId(?kategorie $kategorie_id): self
+    {
+        $this->kategorie_id = $kategorie_id;
+
+        return $this;
+    }
+
+    public function getUnterkategorie(): ?unterkategorie
+    {
+        return $this->unterkategorie;
+    }
+
+    public function setUnterkategorie(?unterkategorie $unterkategorie): self
+    {
+        $this->unterkategorie = $unterkategorie;
+
+        return $this;
     }
 
 
-    public function getRoles(){
-      return [
-        'ROLE_USER'
-      ];
-    }
 
-    public function getSalt(){
-        return null;
-    }
 
-    public function eraseCredentials(){}
-
-    public function serialize(){
-      return serialize([
-        $this->id,
-        $this->username,
-        $this->email,
-        $this->password,
-      ]);
-    }
-
-    public function unserialize($string){
-      list(
-        $this->id,
-        $this->username,
-        $this->email,
-        $this->password,
-        ) = unserialize($string, ['allowed_classes' => false]);
-    }
 
 }
+
+
+
+
+
