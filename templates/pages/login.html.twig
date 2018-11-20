@@ -54,10 +54,12 @@
 
     </form>
 
-    <!-- Link to Register Form -->
-    <button type="button" class="signin" onclick="location.href='register.html.twig'">
+    <!--Link to Register Form -->
+      <button type="button" class="signin" onclick="location.href='{{ path('user_registration') }}'">
         No User? Register here!
     </button>
+
+
 
 </div>
 {% endblock %}

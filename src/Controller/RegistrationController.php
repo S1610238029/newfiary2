@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use AppBundle\Entity\User;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -44,5 +44,7 @@ class RegistrationController extends AbstractController
             'pages/register.html.twig',
             array('form' => $form->createView())
         );
+
+
     }
 }
