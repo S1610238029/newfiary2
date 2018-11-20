@@ -36,11 +36,11 @@ class Feed
     private $feed;
 
     /**
-     * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime", nullable=false)
+     *
+     * @ORM\Column(name="date", type="date")
      */
-    private $date=\DateTime("now");
+    private $date;
 
     public function getIdfeed(): ?int
     {
@@ -59,17 +59,7 @@ class Feed
         return $this;
     }
 
-    public function getDate(): ?string
-    {
-        return date_format($this->date, 'd.m.y');
-    }
 
-    public function setDate(): self
-    {
-        $this->date = new \DateTime("now");
-
-        return $this;
-    }
 
     public function getTitle(): ?string
     {
@@ -79,6 +69,18 @@ class Feed
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getDate(): ?string
+    {
+        return date_format($this->date,"d.m.y");
+    }
+
+    public function setDate($date): self
+    {
+        $this->date = $date;
 
         return $this;
     }

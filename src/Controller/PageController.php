@@ -6,9 +6,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Mitglieder;
 
 
-class PageController extends AbstractController
+class PageController extends Controller //AbstracController
 {
     /**
      * @Route("/", name="homepage")
@@ -57,8 +58,22 @@ class PageController extends AbstractController
      */
     public function infoAction(Request $request)
     {
+        $rep = $this->getDoctrine()->getRepository(Mitglieder::class);
+        $mitglieder = $rep->findAll();
+
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+        /*    $paginator = $this->get('knp_paginator');
+            $result=$paginator->paginate(
+                $mitglieder,
+                $request->query->getInt('page',1),
+                $request->query->getInt('limit',1)
+        );*/
+
+
         return $this->render('pages/info.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+            'mitglieder' => $mitglieder,
         ]);
     }
 

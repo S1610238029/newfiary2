@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Feed;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -41,6 +41,7 @@ class FeedController extends AbstractController
     public function newFeed(Request $request)
     {
         $feed = new Feed();
+        $feed->setDate(new \DateTime("now"));
         $form = $this->buildForm($feed);
 
         $form->handleRequest($request);
