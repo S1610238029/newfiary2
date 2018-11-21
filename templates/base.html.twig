@@ -7,10 +7,6 @@
     <link rel="stylesheet" href= "{{ asset('assets/css/mystyle.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-
-
-
-
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
@@ -20,9 +16,6 @@
 <div class="wrapper">
 
     <nav id="sidebar">
-
-
-       <!-- <span class="dot"></span>-->
 
         <div class="sidebar-header">
             <img id="profile_pic" class="rounded-circle" src="{{ asset('assets/img/logo_circular.jpg') }}" alt="profile-picture">
@@ -36,10 +29,10 @@
                 </a>
             </li>
             <li class="nav-item">
-                 <a class="nav-link" href="{{ path('statistics') }}">
-                     <i><img src="{{  asset('assets/img/stats.svg') }}" alt="home symbol"></i>
-                     <span>Statistiken</span>
-                 </a>
+                <a class="nav-link" href="{{ path('statistics') }}">
+                    <i><img src="{{  asset('assets/img/stats.svg') }}" alt="home symbol"></i>
+                    <span>Statistiken</span>
+                </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('entries') }}">
@@ -48,22 +41,22 @@
                 </a>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="{{ path('infos') }}">
-                   <i><img src="{{  asset('assets/img/info.svg') }}" alt="entries symbol"></i>
-                   <span>Info & Downloads</span>
-               </a>
+                <a class="nav-link" href="{{ path('infos') }}">
+                    <i><img src="{{  asset('assets/img/info.svg') }}" alt="entries symbol"></i>
+                    <span>Info & Downloads</span>
+                </a>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="{{ path('blackboard') }}">
-                   <i><img src="{{  asset('assets/img/bookmark.svg') }}" alt="entries symbol"></i>
-                   <span>Schwarzes Brett</span>
-               </a>
+                <a class="nav-link" href="{{ path('blackboard') }}">
+                    <i><img src="{{  asset('assets/img/bookmark.svg') }}" alt="entries symbol"></i>
+                    <span>Schwarzes Brett</span>
+                </a>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="{{ path('support') }}">
-                   <i><img src="{{  asset('assets/img/settings.svg') }}" alt="entries symbol"></i>
-                   <span>Support</span>
-               </a>
+                <a class="nav-link" href="{{ path('support') }}">
+                    <i><img src="{{  asset('assets/img/settings.svg') }}" alt="entries symbol"></i>
+                    <span>Support</span>
+                </a>
             </li>
         </ul>
 
@@ -78,23 +71,67 @@
             </div>
         </div>
 
-        <div class="menu-toggler container-fluid">
+        <div class="menu-toggler container-fluid ">
             <!--<span>Menu</span>-->
-            <button onclick="closeNav()" id="sidebarCollapse" class="btn">
-               <img  id="arrow" src=" {{ asset('assets/img/close-menu.svg') }}" alt="logout symbol">
+            <button type="button" id="sidebarCollapse" class="btn" onclick="closeNav()" >
+                <img  id="arrow" src=" {{ asset('assets/img/close-menu.svg') }}" alt="logout symbol">
             </button>
         </div>
 
     </nav>
 
     <div id="content">
+        <nav id="mobileNav" class="navbar navbar-dark">
 
+            <div class="d-flex">
+                <div class="mr-auto">
+                    <a class="navbar-brand" href="#">
+                        <img id="profile_pic" class="rounded-circle" src="{{ asset('assets/img/logo_circular.jpg') }}" alt="profile-picture">
+                        <span>Username</span>
+                    </a>
+                </div>
+
+
+
+                <button type="button" class="ml-auto navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <div class="my-toggler-icon" onclick="toggleIcon(this)">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
+                </button>
+            </div>
+
+
+            <div class="collapse navbar-collapse" id="navbarText">
+
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="active nav-item">
+                        <a class="nav-link" href="{{ path('homepage') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('statistics') }}">Statistiken</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('entries') }}">Einträge</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('infos') }}">Info & Downloads</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('blackboard') }}">Schwarzes Brett</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('support') }}">Support</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
         <div class="container">
 
             {% block body %}{% endblock %}
-
         </div>
-
     </div>
 </div>
 

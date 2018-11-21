@@ -67,18 +67,16 @@
 
 
     <!-- Other Form that was already here -->
-    {{ form(form, {'attr': {'novalidate':'novalidate'}}) }}
+    {{ form_start(form , {'attr': {'novalidate':'novalidate'}} ) }}
+        {{ form_row(form.username, {attr: {class: 'text'} }) }}
+        {{ form_row(form.email, {attr: {class: 'text'} })  }}
+        {{ form_row(form.plainPassword.first, {attr: {class: 'text'} })  }}
+        {{ form_row(form.plainPassword.second, {attr: {class: 'text'} })  }}
 
-    {{ form_start(form) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.plainPassword.first) }}
-    {{ form_row(form.plainPassword.second) }}
+        <button type="submit" class="signin">Register</button>
     {{ form_end(form) }}
 
-    <button type="submit" class="signin">
-        Register
-    </button>
+
 
 </div>
 {% endblock %}

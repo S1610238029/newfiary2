@@ -48,13 +48,16 @@ h2 {
     font-weight: 100;
 }
 
-span {
+/* habe span zu label geändert, aufgrund geändertem code in register.html
+    muss evtl auch noch anderswo angepasst werden?
+*/
+label {
     text-transform: uppercase;
     font-size: 12px;
     opacity: 0.4;
     display: inline-block;
-    position: relative;
-    top: -65px;
+    /*position: relative;
+    top: -65px;*/
     transition: all 0.5s ease-in-out;
 }
 
