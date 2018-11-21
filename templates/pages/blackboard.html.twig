@@ -2,6 +2,32 @@
 
 {% block title %}Schwarzes Brett{% endblock %}
 
+
+
 {% block body %}
     <h1>Schwarzes Brett</h1>
+
+    <a href="{{ path('blackboard_neu') }}">Neuen Feed anlegen</a>
+
+    <section class="details-card">
+        <div class="container">
+            <div class="row">
+                {%  for entry in feeds %}
+                <div class="col-md-4">
+                    <div class="card-content">
+                       <div class="card-desc">
+                            <h3>{{ entry.title }}</h3>
+                            <p>{{ entry.feed }}</p>
+                            <p class="btn-card">Erstellt am: {{ entry.date }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                    {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
