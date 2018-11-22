@@ -144,11 +144,31 @@ class User implements UserInterface, \Serializable
         return $this->password;
     }
 
+    /**
+     * @var array
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $roles = [];
+
+    public static function getRoleOptions()
+    {
+        return ['User' => 'ROLE_USER', 'Admin' => 'ROLE_ADMIN', 'Registered' =>'ROLE_REGISTERED'];
+    }
 
     public function getRoles(){
-      return [
-        'ROLE_USER'
-      ];
+        $tmpRoles = $this->roles;
+
+        if(in_array('ROLE_USER', $tmpRoles) === false) {
+            $tmpRoles[] = 'ROLE_USER';
+            if ($this->getUsername() === 'admin') {
+                $tmpRoles[] = 'ROLE_ADMIN';
+            }
+        }
+       return $tmpRoles;
+    }
+
+    public function setRoles($roles) {
+        $this->roles = $roles;
     }
 
     public function getSalt(){

@@ -193,6 +193,10 @@ i {
         background-color: var(--grey);
     }
 
+    .logout.mobile {
+
+    }
+
     #mobileNav .nav-item, #mobileNav .navbar-brand {
         padding-left: 5vw;
     }
@@ -224,5 +228,11 @@ i {
         background-color: rgba(255, 255, 255, 0.9);
         margin: 6px 0;
         transition: 0.4s;
+    }
+
+    h1 {
+        padding-top: 1em;
+        font-size: 16pt;
+        font-weight: bold;
     }
 }

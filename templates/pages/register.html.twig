@@ -20,51 +20,7 @@
 
     <!-- Headline of the Register Form  -->
     <h2 class="active"> Register for Fiary </h2>
-
-{#
-    <form method="POST">
-
-        <!-- Error Messages here-->
-        {% if error %}
-            <span class="error">{{ error.messageKey }}</span>
-        {% endif %}
-
-        <!-- Username Field -->
-        <input type="email" class="text" name="_usernameRegister" value="{{ last_username }}" placeholder="E-Mail">
-        <span>E-Mail</span>
-
-        <!-- Formatting -->
-        <br>
-
-        <!-- Username Field -->
-        <input type="text" class="text" name="_emailRegister" value="{{ last_username }}" placeholder="Username">
-        <span>Username</span>
-
-        <!-- Formatting -->
-        <br>
-
-        <!-- Password Field -->
-        <input type="password" class="text" name="_passwordRegister" placeholder="Password">
-        <span>Password</span>
-
-        <!-- Formatting -->
-        <br>
-
-        <!-- Password Field -->
-        <input type="password" class="text" name="_passwordRegisterRepeat" placeholder="Password Repeat">
-        <span>Password Repeat</span>
-        <br>
-
-        <!-- Submit Button for Register, Signin Class from Login copy -->
-        <button type="submit" class="signin">
-            Register User!
-        </button>
-
-        <hr>
-
-    </form>
-#}
-
+    
 
     <!-- Other Form that was already here -->
     {{ form_start(form , {'attr': {'novalidate':'novalidate'}} ) }}

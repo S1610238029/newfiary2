@@ -22,6 +22,14 @@
         </div>
 
         <ul class="list-unstyled components">
+            {% if is_granted('ROLE_ADMIN') %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('dashboard') }}">
+                    <i><img src="{{  asset('assets/img/key.svg') }}" alt="home symbol"></i>
+                    <span>User verwalten</span>
+                </a>
+            </li>
+            {% endif %}
             <li class="active nav-item">
                 <a class="nav-link" href="{{ path('homepage') }}">
                     <i><img src="{{  asset('assets/img/home_big.svg') }}" alt="home symbol"></i>
@@ -91,7 +99,15 @@
                     </a>
                 </div>
 
-
+                <div class="logout mobile ml-auto">
+                    <div >
+                        {% if app.user %}
+                            <a href="{{ logout_path('main') }}">
+                                <i><img  src=" {{ asset('assets/img/exit.svg') }}" alt="logout symbol"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
 
                 <button type="button" class="ml-auto navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <div class="my-toggler-icon" onclick="toggleIcon(this)">
@@ -106,7 +122,9 @@
             <div class="collapse navbar-collapse" id="navbarText">
 
                 <ul class="navbar-nav mr-auto">
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('dashboard') }}">User verwalten</a>
+                    </li>
                     <li class="active nav-item">
                         <a class="nav-link" href="{{ path('homepage') }}">Home</a>
                     </li>
