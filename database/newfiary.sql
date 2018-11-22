@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 16. Nov 2018 um 22:03
+-- Erstellungszeit: 22. Nov 2018 um 13:00
 -- Server-Version: 10.1.21-MariaDB
 -- PHP-Version: 7.2.11
 
@@ -102,6 +102,29 @@ CREATE TABLE `fahrzeugbesatzung` (
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `feed`
+--
+
+CREATE TABLE `feed` (
+  `idfeed` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `feed` longtext NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `feed`
+--
+
+INSERT INTO `feed` (`idfeed`, `title`, `feed`, `date`) VALUES
+(1, 'Neues Feuerwehrauto!', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.', '2018-11-20'),
+(2, 'Problem Schlüsselabgabe', 'adfadfasdfasdf', '2018-11-20'),
+(3, 'Neuigkeit im FF HAUS', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam', '2018-11-20'),
+(4, 'Problem', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam', '2018-11-20');
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `kategorie`
 --
 
@@ -126,7 +149,7 @@ INSERT INTO `kategorie` (`idcategory`, `category_name`) VALUES
 --
 
 CREATE TABLE `logbuch` (
-  `idlogbuch` int(11) NOT NULL,
+  `idlogbuch` int(11) UNSIGNED NOT NULL,
   `kategorie` varchar(255) NOT NULL,
   `unterkategorie` varchar(255) NOT NULL,
   `beschreibung` varchar(255) NOT NULL,
@@ -155,7 +178,7 @@ CREATE TABLE `logbuch` (
 --
 
 INSERT INTO `logbuch` (`idlogbuch`, `kategorie`, `unterkategorie`, `beschreibung`, `alarmzeit`, `anforderer_name`, `anforderer_telefon_nr`, `beginn_datum`, `beginn_zeit`, `ende_datum`, `ende_zeit`, `plz`, `ort`, `straße`, `hausnummer`, `betriebsmittel`, `bericht`, `wetter`, `bodenbeschaffenheit`, `notizen`, `idbenutzer_benutzer`, `metadata`) VALUES
-(0, 'einsatz', 'brandeinsatz', 'es hat gebrannt', '2018-10-10 08:08:39', 'unbekannt', 'unterdrückt', '2018-10-11', '00:00:00', '2018-10-09', '00:00:00', 4232, 'Hagenberg', 'Softwarepark', '11', 'viele', 'nix passirt', '{\"Sonne\":\"1\", \"Nebel\":0} für alle Wetterbedingungen mit 0 bzw 1 abspeicher und das heißt hakerl gesetzt oder nicht', 'siehe wetter', 'irgendwas', 1, '2018-11-16 22:01:18');
+(1, 'einsatz', 'brandeinsatz', 'es hat gebrannt', '2018-10-10 08:08:39', 'unbekannt', 'unterdrückt', '2018-10-11', '00:00:00', '2018-10-09', '00:00:00', 4232, 'Hagenberg', 'Softwarepark', '11', 'viele', 'nix passirt', '{\"Sonne\":\"1\", \"Nebel\":0} für alle Wetterbedingungen mit 0 bzw 1 abspeicher und das heißt hakerl gesetzt oder nicht', 'siehe wetter', 'irgendwas', 1, '2018-11-16 22:01:18');
 
 -- --------------------------------------------------------
 
@@ -174,6 +197,14 @@ CREATE TABLE `mitglieder` (
   `email` varchar(255) NOT NULL,
   `atemschutztauglich` tinyint(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `mitglieder`
+--
+
+INSERT INTO `mitglieder` (`idmitglieder`, `standesbuchnummer`, `dienstgrad`, `vorname`, `nachname`, `telefon_nr`, `adresse`, `email`, `atemschutztauglich`) VALUES
+(1, 56, 'SB', 'Gregor', 'Leitner', '0650/7526088', 'Am Hang 434', 'leitnergregor@gmail.com', 1),
+(2, 23, 'OBI', 'Erich', 'Theuerkauf', '0650235212', 'Musterhausen 1', 'erich.mustermann@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -251,6 +282,12 @@ ALTER TABLE `fahrzeugbesatzung`
   ADD KEY `idmitglieder_mitglieder` (`idmitglieder_mitglieder`);
 
 --
+-- Indizes für die Tabelle `feed`
+--
+ALTER TABLE `feed`
+  ADD PRIMARY KEY (`idfeed`);
+
+--
 -- Indizes für die Tabelle `kategorie`
 --
 ALTER TABLE `kategorie`
@@ -260,6 +297,7 @@ ALTER TABLE `kategorie`
 -- Indizes für die Tabelle `logbuch`
 --
 ALTER TABLE `logbuch`
+  ADD PRIMARY KEY (`idlogbuch`),
   ADD KEY `idbenutzer_benutzer` (`idbenutzer_benutzer`);
 
 --
@@ -300,15 +338,25 @@ ALTER TABLE `einsatzart`
 ALTER TABLE `fahrzeug`
   MODIFY `idfahrzeug` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT für Tabelle `feed`
+--
+ALTER TABLE `feed`
+  MODIFY `idfeed` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT für Tabelle `kategorie`
 --
 ALTER TABLE `kategorie`
   MODIFY `idcategory` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
+-- AUTO_INCREMENT für Tabelle `logbuch`
+--
+ALTER TABLE `logbuch`
+  MODIFY `idlogbuch` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT für Tabelle `mitglieder`
 --
 ALTER TABLE `mitglieder`
-  MODIFY `idmitglieder` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idmitglieder` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT für Tabelle `rolle`
 --
