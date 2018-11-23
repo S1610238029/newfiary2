@@ -7,7 +7,9 @@
 {% block body %}
     <h1>Schwarzes Brett</h1>
 
-    <a href="{{ path('blackboard_neu') }}">Neuen Feed anlegen</a>
+    {% if is_granted('ROLE_REGISTERED') %}
+        <a href="{{ path('blackboard_neu') }}">Neuen Feed anlegen</a>
+    {% endif %}
 
     <section class="details-card">
         <div class="container">

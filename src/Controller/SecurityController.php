@@ -85,6 +85,7 @@ class SecurityController extends AbstractController
      */
     public function editUserAction($id, Request $request) {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
         $form = $this->buildForm($user);

@@ -40,6 +40,7 @@ class FeedController extends AbstractController
      */
     public function newFeed(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_REGISTERED', null, 'Unable to access this page!');
         $feed = new Feed();
         $feed->setDate(new \DateTime("now"));
         $form = $this->buildForm($feed);
