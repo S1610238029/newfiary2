@@ -20,6 +20,7 @@ class RegistrationController extends AbstractController
         // 1) build the form
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
+        //TODO: hier eventuell form mit Email-Type erstellen
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
