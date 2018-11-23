@@ -15,7 +15,10 @@ security:
                 password: geheim
                 roles: 'ROLE_ADMIN'
 
-
+    role_hierarchy:
+      ROLE_USER:       ROLE_USER
+      ROLE_REGISTERED: [ROLE_REGISTERED, ROLE_USER]
+      ROLE_ADMIN:      [ROLE_REGISTERED, ROLE_ADMIN]
 
     firewalls:
         dev:
@@ -48,6 +51,6 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-          - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
           - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
           - { path: ^/, roles: ROLE_USER }

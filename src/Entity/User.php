@@ -152,7 +152,7 @@ class User implements UserInterface, \Serializable
 
     public static function getRoleOptions()
     {
-        return ['User' => 'ROLE_USER', 'Admin' => 'ROLE_ADMIN', 'Registered' =>'ROLE_REGISTERED'];
+        return ['User' => 'ROLE_USER', 'Registered' =>'ROLE_REGISTERED', 'Admin' => 'ROLE_ADMIN'];
     }
 
     public function getRoles(){
