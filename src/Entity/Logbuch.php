@@ -168,6 +168,15 @@ class Logbuch
      */
     private $metadata = 'CURRENT_TIMESTAMP';
 
+
+    public static function getKategorieOptions(){
+        return["einsatz", "übung", "tätigkeit"];
+    }
+    public static function getUnterKategorieOptions(){
+        return["technischerEinsatz", "übung", "tätigkeit"];
+    }
+
+
     public function getIdlogbuch(): ?int
     {
         return $this->idlogbuch;
