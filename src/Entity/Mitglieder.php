@@ -52,16 +52,18 @@ class Mitglieder
     /**
      * @var string
      *
-     * @ORM\Column(name="telefon_nr", type="string", length=255, nullable=false)
+     * @ORM\Column(name="telefon_nr", type="string", length=255, nullable=true)
      */
     private $telefonNr;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="adresse", type="string", length=255, nullable=false)
+     * @ORM\Column(name="mobil", type="string", length=255, nullable=true)
      */
-    private $adresse;
+    private $mobil;
+
+
 
     /**
      * @var string
@@ -142,14 +144,14 @@ class Mitglieder
         return $this;
     }
 
-    public function getAdresse(): ?string
+    public function getMobil(): ?string
     {
-        return $this->adresse;
+        return $this->mobil;
     }
 
-    public function setAdresse(string $adresse): self
+    public function setMobil(string $mobil): self
     {
-        $this->adresse = $adresse;
+        $this->mobil = $mobil;
 
         return $this;
     }
