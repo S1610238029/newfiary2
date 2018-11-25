@@ -3,6 +3,9 @@
 {% block title %}Schwarzes Brett{% endblock %}
 
 {% block body %}
+
+    {#wenn Feed bearbeitet wird -> dann H1 bezeichnung auf "Feed bearbeiten" ändern#}
+
     <h1>Neuen Feed anlegen</h1>
 
     {{ form(form, {'attr': {'novalidate':'novalidate'}}) }}
