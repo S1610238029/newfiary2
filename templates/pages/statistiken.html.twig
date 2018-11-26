@@ -4,6 +4,232 @@
 
 
 {% block body %}
+
+    <style>
+
+        @-webkit-keyframes bars {
+            from {
+                -webkit-transform: scaleY(0);
+                transform: scaleY(0);
+            }
+            to {
+                -webkit-transform: scaleY(1);
+                transform: scaleY(1);
+            }
+        }
+        @keyframes bars {
+            from {
+                -webkit-transform: scaleY(0);
+                transform: scaleY(0);
+            }
+            to {
+                -webkit-transform: scaleY(1);
+                transform: scaleY(1);
+            }
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: normal;
+            margin: 0;
+        }
+
+
+        .statistics {
+            background-color: white;
+            box-shadow: 0 20px 70px 4px rgba(0, 0, 0, 0.15);
+            display: flex;
+            -webkit-transform: translate(-20px, -20px);
+            transform: translate(-20px, -20px);
+            width: 100%;
+            color: #8c939e;
+        }
+
+        .consumption-panel {
+            width: 53%;
+            padding: 50px;
+        }
+
+        .consumption {
+            color: #42474e;
+        }
+
+        .axis path {
+            fill: none;
+            stroke: #777;
+            shape-rendering: crispEdges;
+        }
+
+        .axis text {
+            font-size: 13px;
+        }
+
+        #visualisation {
+            border-bottom: 1px solid #d8d8d8;
+            max-width: 100%;
+            min-width: 100%;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .bar-chart {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .progress {
+            align-items: flex-end;
+            background-color: #E5E5E5;
+            display: flex;
+            height: 150px;
+            position: relative;
+            width: 35px;
+        }
+
+        .progress__fill {
+            background-color: #5484E4;
+            height: 0%;
+            position: relative;
+            -webkit-transform: scaleY(0);
+            transform: scaleY(0);
+            -webkit-transform-origin: 50% 100%;
+            transform-origin: 50% 100%;
+            width: 100%;
+            -webkit-animation: bars 1.5s ease-in-out forwards;
+            animation: bars 1.5s ease-in-out forwards;
+        }
+
+        .progress__caption {
+            bottom: -40px;
+            font-size: 0.75rem;
+            left: 50%;
+            position: absolute;
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+        }
+
+        .lamps__list {
+            display: flex;
+            text-align: center;
+        }
+
+        .lamps__item {
+            padding: 80px 0;
+        }
+
+        .lamps__count {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        .lamps__description {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .lamps__total {
+            background-color: #4577DA;
+            flex: 1;
+        }
+
+        .lamps__active {
+            background-color: #5484E4;
+            flex: 1;
+        }
+
+        .title {
+            margin-bottom: 20px;
+        }
+
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-1 {
+            flex: 1;
+        }
+
+        .flex--justify-between {
+            justify-content: space-between;
+        }
+
+    </style>
+
     <h1>Statistiken</h1>
+
+    <h2>Dies hier sind noch Placeholder!</h2><br><br>
+
+    <!--
+https://dribbble.com/shots/2227352-Day-067-Smart-Home-UI/attachments/414148
+-->
+
+
+        <div class="statistics">
+            <div class="consumption-panel">
+                <div class="flex flex--justify-between">
+                    <p>
+                        Ausfahrten Insgesamt:
+                    </p>
+                </div>
+                <h1 class="consumption">120 Einsätze!</h1>
+                <svg id="visualisation" width="600" height="100"></svg>
+
+                <p class="title">Einsatzarten</p>
+                <div class="bar-chart">
+
+                    <div class="progress progress--vertical">
+                        <div class="progress__fill" style="height: 87%"></div>
+                        <p class="progress__caption">Brandschutzeinsatz</p>
+                    </div>
+
+
+                    <div class="progress progress--vertical">
+                        <div class="progress__fill" style="height: 50%"></div>
+                        <p class="progress__caption">Unfall Einsatz</p>
+                    </div>
+
+                    <div class="progress progress--vertical">
+                        <div class="progress__fill" style="height: 64%"></div>
+                        <p class="progress__caption">Weiterer Einsatz</p>
+                    </div>
+
+                    <div class="progress progress--vertical">
+                        <div class="progress__fill" style="height: 78%"></div>
+                        <p class="progress__caption">Dritter Einsatz</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="flex-1">
+                <ul class="lamps__list">
+
+                    <li class="lamps__item  lamps__total">
+                        <h2 class="lamps__count">20</h2>
+                        <p class="lamps__description">Einsätze 2017</p>
+                    </li>
+
+                    <li class="lamps__item  lamps__active">
+                        <h2 class="lamps__count">4</h2>
+                        <p class="lamps__description">Einsätze 2018</p>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /.right-column -->
+        </div>
+        <!-- /.statistics -->
+
 
 {% endblock %}
