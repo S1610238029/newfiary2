@@ -56,9 +56,18 @@ h1 {
     transition: 0.3s ease-in-out;
 }
 
+.menu-toggler {
+    padding: 0.375rem 2rem;
+}
+
+.nav-btn {
+    padding: 0.735rem 0;
+}
+
 .logout {
     background-color: rgba(0, 0, 0, 0.8);
-    padding: 1rem 2rem;
+    width: 100%;
+    border-radius: 0;
 }
 
 .logout a {
