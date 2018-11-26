@@ -68,7 +68,18 @@
         {% for user in users %}
             <li class="list-group-item list-group-item-action" id="format">
                 <a href="{{  path('user_edit', {id: user.id}) }}">
-                    {{  user.username }} -- Rolle: {{ roleOptions[user.roles] }}
+
+                    {{  user.username }} --  Rechte:
+            {% for rollen in user.roles %}
+                {% if  rollen =="ROLE_USER" %}
+                User
+                    {% elseif rollen=="ROLE_ADMIN" %}
+                    Administrator
+                    {% else %}
+                    Register
+                    {% endif %}
+
+            {% endfor %}
                 </a>
             </li>
         {% endfor %}
