@@ -56,11 +56,17 @@ class SecurityController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
         $em = $this->getDoctrine()->getManager();
-
         $users = $em->getRepository(User::class)->findAll(); //???
+
+        $roleArray = array();
+        foreach($users as $user) {
+            $highestRole = $user->getHighestRole($user->getRoles());
+            $roleArray[$user->getId()] = $highestRole;
+        }
+
         return $this->render('security/dashboard.html.twig', [
             'users' => $users,
-            'roleOptions' => User::getRoleOptions()
+            'roleArray' => $roleArray,
         ]);
     }
 

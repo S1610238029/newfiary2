@@ -70,17 +70,14 @@
                 <a href="{{  path('user_edit', {id: user.id}) }}">
 
                     {{  user.username }} --  Rechte:
-            {% for rollen in user.roles %}
-                    
-                    {% if rollen=="ROLE_ADMIN" or rollen=="ROLE_USER" and rollen=="ROLE_ADMIN" or rollen=="ROLE_REGISTERED" and rollen =="ROLE_USER" and rollen=="ROLE_ADMIN"%}
-                    Administrator
-                    {% elseif rollen=="ROLE_REGISTERED" or rollen=="ROLE_REGISTERED" and rollen =="ROLE_USER"%}
-                    Register
-                        {% elseif rollen=="ROLE_USER" and rollen!="ROLE_REGISTERED" %}
-                            User
+                    {% if roleArray[user.id] == 'ROLE_ADMIN' %}
+                        Admin
+                    {% elseif roleArray[user.id] == 'ROLE_REGISTERED' %}
+                        Registered
+                    {% elseif roleArray[user.id] == 'ROLE_USER' %}
+                        User
                     {% endif %}
 
-            {% endfor %}
                 </a>
             </li>
         {% endfor %}

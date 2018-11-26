@@ -150,6 +150,19 @@ class User implements UserInterface, \Serializable
      */
     private $roles = [];
 
+    public function getHighestRole($role_array)
+    {
+        $rolesSortedByImportance = ['ROLE_ADMIN', 'ROLE_REGISTERED', 'ROLE_USER'];
+        foreach ($rolesSortedByImportance as $role)
+        {
+            if (in_array($role, $role_array))
+            {
+                return $role;
+            }
+        }
+        return false; // Unknown role?
+    }
+
     public static function getRoleOptions()
     {
         return ['User' => 'ROLE_USER', 'Registered' =>'ROLE_REGISTERED', 'Admin' => 'ROLE_ADMIN'];
