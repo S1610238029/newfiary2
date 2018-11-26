@@ -9,7 +9,7 @@
 }
 #accordion a {
     color: #000;
-    display: block;
+
     padding: 10px 15px;
     border-bottom: 1px solid var(--red);
     text-decoration: none;
@@ -85,4 +85,8 @@
 .form-group .btn {
     color: #fff;
     background-color: var(--grey);
+}
+
+#example_previous{
+    display:initial!important;
 }
