@@ -2,7 +2,6 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href= "{{ asset('assets/css/mystyle.css') }}">
@@ -20,7 +19,6 @@
 
         <div class="sidebar-header">
             <img id="profile_pic" class="rounded-circle" src="{{ asset('assets/img/logo_circular.jpg') }}" alt="profile-picture">
-            <div id="username">Username</div>
         </div>
 
         <ul class="list-unstyled components">
@@ -91,18 +89,17 @@
     </nav>
 
     <div id="content">
-        <nav id="mobileNav" class="navbar nav">
+        <nav id="mobileNav" class="navbar navbar-dark">
 
             <div id="mobileBar" class="d-flex">
-                <div class="align-self-center p-2">
-                    <a class="navbar-brand" href="{{ path('homepage') }}">
+                <div class="align-self-center mr-auto p-2">
+                    <a class="navbar-brand" href="#">
                         <img id="profile_pic" class="rounded-circle" src="{{ asset('assets/img/logo_circular.jpg') }}" alt="profile-picture">
+                        <span>Username</span>
                     </a>
-
                 </div>
-                <div id="username" class="align-self-center">Username</div>
 
-                <div class=" p-2 d-flex logout mobile">
+                <div class="d-flex logout mobile p-2">
                     <div class="align-self-center">
                         {% if app.user %}
                             <a href="{{ logout_path('main') }}">

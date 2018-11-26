@@ -11,6 +11,12 @@
     --red: rgb(141, 4, 3);
 }
 
+/* Die Color Konstanten können folgendermaßen genutzt werden - Beispiel:
+background: var(--grey);
+Bitte bei Grau/Rot immer diese zwei Farbtöne als Variablen verwenden, dann müssen wir sie
+stets nur hier umändern!*/
+
+
 /* Start eigenes CSS */
 
 body{
@@ -18,7 +24,9 @@ body{
 }
 
 h1 {
-    margin-bottom: 50px;
+    padding-top: 1em;
+    font-size: 16pt;
+    font-weight: bold;
 }
 
 .container {
@@ -27,6 +35,19 @@ h1 {
 
 #content {
     width: 100%;
+}
+
+.red {
+    color: var(--red);
+}
+
+
+/* BOOTSTRAP STARTER TEMPLATE*/
+
+#main-content {
+    min-width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 i {
@@ -83,8 +104,12 @@ i {
     box-shadow: 0px 5px 60px -5px #2e2e2e;
 }
 
+#overlay::-webkit-scrollbar {
+    display: none;
+}
+
 #sidebar .nav-item {
-    padding: 0.5rem 1rem;
+    padding: 1rem 1rem;
     transition: 0.3s ease-in-out;
 }
 
@@ -106,6 +131,7 @@ i {
     color: #fff;
 }
 
+
 .logout {
     background-color: rgba(0, 0, 0, 0.8);
     padding: 1rem 2rem;
@@ -114,6 +140,7 @@ i {
 
 .logout a {
     display: block;
+    padding: 0.5rem 0;
     color: #fff;
     text-decoration: none;
 }
@@ -126,6 +153,7 @@ i {
 #sidebarCollapse {
     background-color: var(--red);
     border-radius: 0;
+    padding: 0.7rem 0;
     width: 100%;
 }
 
@@ -157,10 +185,12 @@ i {
 
 #profile_pic {
     display: block;
-    height: 150px;
-    width: 150px;
+    height: 180px;
+    width: 180px;
     margin: 10% auto;
 }
+
+
 
 #close-menu img {
     transform: scaleX(-1);
@@ -170,7 +200,7 @@ i {
     display: none;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
     /* 80px and its content aligned to centre. Pushing it off the screen with the
        negative left margin
     */
@@ -193,8 +223,9 @@ i {
         background-color: var(--grey);
     }
 
-    .logout.mobile {
-
+    #mobileBar {
+        height: 80px;
+        min-height: 80px;
     }
 
     #mobileNav .nav-item, #mobileNav .navbar-brand {
@@ -228,11 +259,5 @@ i {
         background-color: rgba(255, 255, 255, 0.9);
         margin: 6px 0;
         transition: 0.4s;
-    }
-
-    h1 {
-        padding-top: 1em;
-        font-size: 16pt;
-        font-weight: bold;
     }
 }
