@@ -4,9 +4,20 @@
 
 {% block body %}
 
+    <style>
+        a {
+            color: white;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: white;
+        }
+
+    </style>
+
     <h1>Homepage</h1>
 
-    <button class="btn"><a href="{{ path('newentry') }}">Eintrag hinzufügen</a></button>
-
+    <button class="bigredbutton"><a href="{{ path('newentry') }}">Eintrag hinzufügen</a></button>
 
 {% endblock %}
