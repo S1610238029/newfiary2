@@ -10,6 +10,7 @@
 
      .panel {
          width: 80%;
+         color: var(--red);
      }
 
      .panel-heading {
@@ -25,6 +26,10 @@
 
      .panel-body {
          text-transform: capitalize;
+     }
+
+     .panel {
+         background-image: none;
      }
 
      /* Form Submit = Bootstrap ID for Submit Button */
@@ -45,9 +50,11 @@
          cursor: pointer;
      }
 
+
+
     </style>
 
-   <div class="panel">
+   <div class="panel" id="panelcss">
        <h5>Current User:</h5>
        <div class="panel-heading">
            <!-- "" Damit es für den User leichter erkenntlich ist -->
@@ -58,4 +65,5 @@
            {{ form(form) }}
        </div>
    </div>
+
 {% endblock %}
