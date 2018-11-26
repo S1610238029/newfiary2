@@ -71,12 +71,13 @@
 
                     {{  user.username }} --  Rechte:
             {% for rollen in user.roles %}
-                {% if  rollen =="ROLE_USER" %}
-                User
-                    {% elseif rollen=="ROLE_ADMIN" %}
+                    
+                    {% if rollen=="ROLE_ADMIN" or rollen=="ROLE_USER" and rollen=="ROLE_ADMIN" or rollen=="ROLE_REGISTERED" and rollen =="ROLE_USER" and rollen=="ROLE_ADMIN"%}
                     Administrator
-                    {% else %}
+                    {% elseif rollen=="ROLE_REGISTERED" or rollen=="ROLE_REGISTERED" and rollen =="ROLE_USER"%}
                     Register
+                        {% elseif rollen=="ROLE_USER" and rollen!="ROLE_REGISTERED" %}
+                            User
                     {% endif %}
 
             {% endfor %}
