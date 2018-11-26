@@ -84,6 +84,13 @@ class Mitglieder
         return $this->idmitglieder;
     }
 
+    public function setIdmiglieder(int $idmitglieder): self
+    {
+        $this->idmitglieder = $idmitglieder;
+
+        return $this;
+    }
+
     public function getStandesbuchnummer(): ?int
     {
         return $this->standesbuchnummer;

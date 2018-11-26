@@ -114,32 +114,48 @@ class SecurityController extends AbstractController
 
     public function buildMemberForm($member) {
         return $this->createFormBuilder($member)
-            ->add('email', EmailType::class)
-            ->add('username', TextType::class)
-            ->add('plainPassword', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
-            ))
-            ->add('roles',ChoiceType::class, [
-                'multiple' => true,
+            ->add('standesbuchnummer', EmailType::class)
+            ->add('dienstgrad', TextType::class)
+            ->add('vorname', TextType::class)
+            ->add('nachname', TextType::class)
+            ->add('telefonNr', TextType::class)
+            ->add('mobil', TextType::class)
+            ->add('email', TextType::class)
+
+            ->add('atemschutztauglich',ChoiceType::class, [
+                'multiple' => false,
                 'expanded' => true,
-                'choices' =>  (User::getRoleOptions())
+                'choices' =>  ['Ja' => true, 'Nein' => false]
             ])
-            ->add('submit', SubmitType::class)
             ->getForm();
     }
 
     /**
-     * @Route("newMember", name="member_new")
+     * @Route("/newMember", name="member_new")
      */
     public function newMemberAction(Request $request) {
+        $members = $this->getDoctrine()->getRepository(Mitglieder::class)->findAll();
+        $lastId = $members[(sizeof($members)-1)]->getIdmitglieder();
+        echo $lastId;
+
         $member = new Mitglieder();
         $form = $this->buildMemberForm($member);
+        $member->setIdmiglieder($lastId);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $member = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($member);
+            $em->flush();
+
+            return $this->redirectToRoute('dashboard');
+        }
 
         return $this->render('security/newMember.html.twig', [
-            'user' => $user,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 }
