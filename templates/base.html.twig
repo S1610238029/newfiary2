@@ -72,7 +72,7 @@
             </li>
         </ul>
 
-        <button type="button" class="btn logout">
+        <button type="button" class="btn nav-btn logout">
             {% if app.user %}
                 <a href="{{ logout_path('main') }}">
                     <img  src=" {{ asset('assets/img/exit.svg') }}" alt="logout symbol">
@@ -82,7 +82,7 @@
         </button>
 
         <div class="menu-toggler container-fluid ">
-            <button type="button" id="sidebarCollapse" class="btn" onclick="closeNav()" >
+            <button type="button" id="sidebarCollapse" class="btn nav-btn" onclick="closeNav()" >
                 <img  id="arrow" src=" {{ asset('assets/img/close-menu-resized.svg') }}" alt="logout symbol">
             </button>
         </div>
