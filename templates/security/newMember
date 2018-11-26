@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>{% block title %}New Member{% endblock %}</title>
+
+    <!-- Including the Stylesheet -->
+
+    <link rel="stylesheet" href= "{{ asset('assets/css/register_test.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+</head>
+<body>
+{% block body %}
+
+    <div class="login">
+
+        <img  src=" {{ asset('Assets/img/logo_white.png') }}" alt="logout symbol"><br>
+
+        <!-- Headline of the Register Form  -->
+        <h2 class="active"> Register for Fiary </h2>
+
+
+        {{ form_start(form , {'attr': {'novalidate':'novalidate'}} ) }}
+        {{ form_row(form.username, {attr: {class: 'text'} }) }}
+        {{ form_row(form.email, {attr: {class: 'text'} })  }}
+        {{ form_row(form.plainPassword.first, {attr: {class: 'text'} })  }}
+        {{ form_row(form.plainPassword.second, {attr: {class: 'text'} })  }}
+
+        <button type="submit" class="signin">Register</button>
+        {{ form_end(form) }}
+
+
+
+    </div>
+{% endblock %}
+</body>
+</html>

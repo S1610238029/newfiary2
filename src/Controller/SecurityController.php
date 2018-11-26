@@ -20,6 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\UserType;
 use App\Entity\User;
+use App\Entity\Mitglieder;
 
 class SecurityController extends AbstractController
 {
@@ -100,6 +101,37 @@ class SecurityController extends AbstractController
         }
 
         return $this->render('security/editUser.html.twig', [
+            'user' => $user,
+            'form' => $form->createView()
+        ]);
+    }
+
+    public function buildMemberForm($member) {
+        return $this->createFormBuilder($member)
+            ->add('email', EmailType::class)
+            ->add('username', TextType::class)
+            ->add('plainPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+            ))
+            ->add('roles',ChoiceType::class, [
+                'multiple' => true,
+                'expanded' => true,
+                'choices' =>  (User::getRoleOptions())
+            ])
+            ->add('submit', SubmitType::class)
+            ->getForm();
+    }
+
+    /**
+     * @Route("newMember", name="member_new")
+     */
+    public function newMemberAction(Request $request) {
+        $member = new Mitglieder();
+        $form = $this->buildMemberForm($member);
+
+        return $this->render('security/newMember.html.twig', [
             'user' => $user,
             'form' => $form->createView()
         ]);
