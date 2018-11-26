@@ -58,7 +58,8 @@ class SecurityController extends AbstractController
 
         $users = $em->getRepository(User::class)->findAll(); //???
         return $this->render('security/dashboard.html.twig', [
-            'users' => $users
+            'users' => $users,
+            'roleOptions' => User::getRoleOptions()
         ]);
     }
 
