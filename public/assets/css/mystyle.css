@@ -263,3 +263,40 @@ h1 {
     }
 
 }
+
+
+/** Button CSS */
+
+.bigredbutton {
+    background-color: var(--red);
+    color: #FFF;
+    width: 20vw;
+    padding: 10px 20px;
+    display: block;
+    border-radius: 10px;
+    border: none;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+}
+
+.bigredbutton:hover {
+    background: #c10612;
+    cursor: pointer;
+    color: #FFF;
+    text-decoration: none;
+    /*  box-shadow: 0px 4px 35px -5px #c10612;  */
+}
+
+@media (min-width: 501px) {
+    .bigredbutton {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 500px) {
+    .bigredbutton {
+        font-size: 8px;
+    }
+
+}

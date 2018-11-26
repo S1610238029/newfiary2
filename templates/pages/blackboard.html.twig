@@ -8,14 +8,9 @@
 
     <h1>Schwarzes Brett</h1>
 
-    <!-- Pen
-    https://codepen.io/ChynoDeluxe/pen/bdXeqQ -->
-
-    <!-- https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/357152/1160/772/m1/fpnw/wm0/creativboard-converted-01-.jpg?1424110121&s=85afe5b6b257966e62b4e078e869ff46 -->
-
     <!--Permission Überprüfung -->
     {% if is_granted('ROLE_REGISTERED') %}
-        <a href="{{ path('blackboard_neu') }}">Neuen Feed anlegen</a>
+        <a href="{{ path('blackboard_neu') }}" class="bigredbutton">Neuen Feed anlegen</a>
     {% endif %}
 
     <section>
@@ -26,8 +21,6 @@
 
                     <div class="blog-card">
                         <div class="meta">
-                            <div class="photo" style="background-image:
-                            url(https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/357152/1160/772/m1/fpnw/wm0/creativboard-converted-01-.jpg?1424110121&s=85afe5b6b257966e62b4e078e869ff46)"></div>
                             <ul class="details">
                                 <p>Erstellt am: {{ entry.date }}<br>
                                     Beitrag erstellt von: Autor </p>
@@ -36,13 +29,23 @@
                         <div class="description">
                             <h1>{{ entry.title }}</h1>
                             <h2>Beitrag erstellt am: {{ entry.date }}</h2>
-                            <p>{{ entry.feed }}</p>
-                            <p class="read-more">
-                                <a href="#">Read More</a>
-                            </p>
+                            <p>{{ entry.feed }}</p><br>
+                            <div id="buttons">
+                                {% if is_granted('ROLE_REGISTERED') %}
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <a href="{{ path('feed_edit', {'id':entry.idfeed}) }}" class="bigredbutton">Bearbeiten</a></li>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <a href="{{ path('feed_delete', {'id':entry.idfeed}) }}" class="bigredbutton">Löschen</a></li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
-
                 {% endfor %}
 
             </div>
@@ -50,43 +53,30 @@
     </section>
 
     <!-- Ursprünglicher Code -->
-
     <!--
-
-    <!--
-
     <section class="details-card">
         <div class="container">
             <div class="row">
                 {%  for entry in feeds %}
                 <div class="col-md-4">
                     <div class="card">
-
                     <div class="card-content">
                        <div class="card-desc">
                             <h3>{{ entry.title }}</h3>
                             <p>{{ entry.feed }}</p>
                             <p class="btn-card">Erstellt am: {{ entry.date }}</p>
-
-                           {% if is_granted('ROLE_REGISTERED') %}
-                               <a href="{{ path('feed_edit', {'id':entry.idfeed}) }}">Bearbeiten</a><br>
-                               <a href="{{ path('feed_delete', {'id':entry.idfeed}) }}">Löschen</a>
-                           {% endif %}
-
                         </div>
                     </div>
                     </div>
                 </div>
-
                     {% endfor %}
-
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </section>  -->
 
--->
+    <!-- Pen :  https://codepen.io/ChynoDeluxe/pen/bdXeqQ -->
 
 {% endblock %}
 
