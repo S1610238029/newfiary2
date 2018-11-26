@@ -15,3 +15,6 @@
 ###> symfony/web-server-bundle ###
 /.web-server-pid
 ###< symfony/web-server-bundle ###
+.idea/newfiary.iml
+.idea/newfiary.iml
+.idea/workspace.xml

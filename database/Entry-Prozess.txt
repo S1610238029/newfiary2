@@ -1,0 +1,18 @@
+//Kategorie wählen -> zwischenspeichern
+
+var kategorie=(einsatz, übung, tätigkeit);
+
+if(kategorie==einsatz){
+
+//dropdown-feld für unterkategorien
+ unterkategorien(
+ Brandeinsatz
+ Brandsich
+
+
+}else if(kategorie==übung){
+
+
+}else if(kategorie==tätigkeit){
+
+}
