@@ -1,11 +1,58 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Edit User{% endblock %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
 {% block body %}
 
+    <style>
+
+     .panel {
+         width: 80%;
+     }
+
+     .panel-heading {
+         text-transform: uppercase;
+         color: var(--red);
+         font-weight: bold;
+     }
+
+     h5 {
+         color: var(--red);
+         font-weight: bold;
+     }
+
+     .panel-body {
+         text-transform: capitalize;
+     }
+
+     /* Form Submit = Bootstrap ID for Submit Button */
+     #form_submit {
+         background-color: var(--red);
+         color: #FFF;
+         width: 20vw;
+         padding: 10px 20px;
+         display: block;
+         border-radius: 10px;
+         border: none;
+         text-decoration: none;
+         text-align: center;
+     }
+
+     #form_submit:hover {
+         background: #c10612;
+         cursor: pointer;
+     }
+
+    </style>
+
    <div class="panel">
+       <h5>Current User:</h5>
        <div class="panel-heading">
-           {{ user.username }}
-       </div>
+           <!-- "" Damit es für den User leichter erkenntlich ist -->
+           "{{ user.username }}"
+       </div><br>
 
        <div class="panel-body">
            {{ form(form) }}

@@ -2,9 +2,56 @@
 
 {% block body %}
 
-    <ul class="list-group">
+    <style>
+
+        /* Bereits responsive */
+        #adduser {
+            background-color: var(--red);
+            color: #FFF;
+            width: 15vw;
+            padding: 10px 20px;
+            display: block;
+            border-radius: 10px;
+            border: none;
+            text-decoration: none;
+            text-align: center;
+            /*font-size: 1vw;*/
+        }
+
+        #adduser:hover {
+            background: #c10612;
+            cursor: pointer;
+        }
+
+        /* Hier müssen die Werte dann noch an das Burgermenü angepasst werden*/
+        @media (min-width: 501px) {
+            #adduser {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            #adduser {
+                font-size: 8px;
+            }
+        }
+
+
+        /* Formatting the User List itself */
+        #userlist {
+            color: var(--red) !important;
+            text-transform: capitalize; /* Kann man auch weggeben wenn nicht benötigt */
+            text-decoration: none;
+            width: 80%;
+        }
+
+    </style>
+
+    <h2>Registrierte Nutzer:</h2><br>
+
+    <ul class="list-group" id="userlist">
         {% for user in users %}
-            <li class="list-group-item">
+            <li class="list-group-item list-group-item-action">
                 <a href="{{  path('user_edit', {id: user.id}) }}">
                     {{  user.username }}
                 </a>
@@ -12,5 +59,6 @@
         {% endfor %}
     </ul>
 
-    <a href="{{  path('user_registration') }}">Neuen User anlegen</a>
+    <br>
+    <a href="{{  path('user_registration') }}" id="adduser">Nutzer anlegen</a>
 {% endblock %}
