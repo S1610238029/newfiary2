@@ -159,7 +159,7 @@ h1 {
         align-items: stretch;
     }
 
-    #sidebar {
+    #sidebar, #placeholder {
         display: block !important;
         background-color: var(--grey);
         min-width: 250px;
@@ -169,7 +169,12 @@ h1 {
         transition: 0.3s ease-in-out;
     }
 
-    #sidebar.active {
+    #sidebar {
+        position: fixed;
+        z-index: 1;
+    }
+
+    #sidebar.active, #placeholder.active {
         min-width: 80px;
         max-width: 80px;
         text-align: center;
