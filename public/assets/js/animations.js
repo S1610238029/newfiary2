@@ -1,6 +1,17 @@
 function closeNav(){
 
-    document.getElementById("sidebar").classList.toggle("active");
+    var sidebar = document.getElementById("sidebar").classList.toggle("active");
     document.getElementById("arrow").classList.toggle("active");
     console.log("toggle");
+
+    if (sidebar.hasClass("active")){
+        
+    }
+
+
+    let element = document.getElementById("sidebar");
+    element.addEventListener("transitionend", function(event) {
+
+    }, false);
 }
+
