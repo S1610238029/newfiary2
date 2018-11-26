@@ -97,7 +97,7 @@
     }
 
     .blog-card .description {
-        flex-basis: 60%;
+        flex-basis: 70%;
     }
     .blog-card .description:before {
         -webkit-transform: skewX(-3deg);
