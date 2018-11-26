@@ -2,9 +2,10 @@
 
 {% block title %}Schwarzes Brett{% endblock %}
 
-
-
 {% block body %}
+
+    <link rel="stylesheet" href= "{{ asset('assets/css/newsfeed.css') }}">
+
     <h1>Schwarzes Brett</h1>
 
 
@@ -13,11 +14,50 @@
         <a href="{{ path('blackboard_neu') }}">Neuen Feed anlegen</a>
     {% endif %}
 
+    <section>
+        <div class="container">
+            <div class="row">
+
+                {%  for entry in feeds %}
+
+                    <div class="blog-card">
+                        <div class="meta">
+                            <div class="photo" style="background-image:
+                            url(https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/357152/1160/772/m1/fpnw/wm0/creativboard-converted-01-.jpg?1424110121&s=85afe5b6b257966e62b4e078e869ff46)"></div>
+                            <ul class="details">
+                                <p>Erstellt am: {{ entry.date }}<br>
+                                    Beitrag erstellt von: Autor </p>
+                            </ul>
+                        </div>
+                        <div class="description">
+                            <h1>{{ entry.title }}</h1>
+                            <h2>Beitrag erstellt am: {{ entry.date }}</h2>
+                            <p>{{ entry.feed }}</p>
+                            <p class="read-more">
+                                <a href="#">Read More</a>
+                            </p>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Ursprünglicher Code -->
+
+    <!--
+
+    <!--
+
     <section class="details-card">
         <div class="container">
             <div class="row">
                 {%  for entry in feeds %}
                 <div class="col-md-4">
+                    <div class="card">
+
                     <div class="card-content">
                        <div class="card-desc">
                             <h3>{{ entry.title }}</h3>
@@ -31,6 +71,7 @@
 
                         </div>
                     </div>
+                    </div>
                 </div>
 
                     {% endfor %}
@@ -40,4 +81,8 @@
             </div>
         </div>
     </section>
+
+-->
+
 {% endblock %}
+
