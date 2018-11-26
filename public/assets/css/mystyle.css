@@ -135,6 +135,8 @@ h1 {
     color: #fff;
     margin: 0 auto;
     text-align: center;
+    opacity: 0;
+    animation: 0.3s linear 0.3s forwards delayedShow;
 }
 
 @media (min-width: 992px) {
@@ -174,6 +176,17 @@ h1 {
         z-index: 1;
     }
 
+    #sidebar .link-content {
+        opacity: 0;
+        animation: 0.3s linear 0.3s forwards delayedShow;
+    }
+
+    @keyframes delayedShow {
+        to {
+            opacity: 1;
+        }
+    }
+
     #sidebar.active, #placeholder.active {
         min-width: 80px;
         max-width: 80px;
@@ -208,19 +221,25 @@ h1 {
     #sidebar #profile_pic {
         display: block;
         margin: 0 auto;
-        height: 100px;
+        height: auto;
         width: 100px;
+        max-width: 100px;
+        -webkit-transition: width 0.3s ease-in-out;
+        -moz-transition: width 0.3s ease-in-out;
+        -o-transition: width 0.3s ease-in-out;
+        transition: width 0.3s ease-in-out;
+    }
+
+    #sidebar.active #profile_pic {
+        min-width: 60px !important;
+        max-width: 60px !important;
+        height: auto;
+        width: 60px;
     }
 
     #sidebar #username {
         margin-top: 1rem;
         text-align: center;
-    }
-
-    #sidebar.active #profile_pic {
-        min-width: 60px;
-        max-width: 60px;
-        height: auto;
     }
 
     #sidebar .nav-item {
