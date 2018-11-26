@@ -1,18 +1,215 @@
-//Kategorie w�hlen -> zwischenspeichern
+//Kategorie wählen -> zwischenspeichern (dynamic select statements): https://www.w3.org/TR/WCAG20-TECHS/SCR19.html
 
-var kategorie=(einsatz, �bung, t�tigkeit);
+private $kategorie=(einsatz, Übung, tätigkeit);
 
 if(kategorie==einsatz){
 
-//dropdown-feld f�r unterkategorien
- unterkategorien(
- Brandeinsatz
- Brandsich
+        //dropdown-feld für unterkategorien
+         private $unterkategorie=(
+         Brandeinsatz
+         Brandsicherheitswache
+         Technischer Einsatz
+         )
+
+         if (unterkategorie==Brandeinsatz){
+
+                 //jeweils datum + uhrzeit
+                  private $brandaus;
+
+                  private $brandwache_start;
+
+                  private $brandwache_ende;
+
+                  //Textfield mit Hint-Fragezeichen (z.B. PKW, Wohnung, Kamin, Gewerbebetrieb)
+                  private $brandobjekte;
+
+                  //Checkbox
+                  private $ausmass = (
+                  Großbrand,
+                  Mittelbrand,
+                  Kleinbrand,
+                  Vor Eintreffen gelöscht,
+                  Sonstige:...
+                  );
 
 
-}else if(kategorie==�bung){
+         }else if(unterkategorie==Brandsicherheitswache){
+
+                 //string, jedoch als Checkbox oder Dropdown
+                 private $anlass = (brandgefährliche Tätigkeit, bei Veranstaltung);
+
+         }else if(unterkategorie==technischer Einsatz){
+
+                 //single-choice-field
+                 private $technischerEinsatzArt=(
+                 Auslaufen von Öl bzw. Treibstoff,
+                 Auspumparbeiten,
+                 Einsätze nach VU (als Hint: Bergen von KFZ, Freimachen bzw. Sichern von Verkehrswegen),
+                 Hochwassereinsatz,
+                 Insekten-, Bienen-, Wespeneinsätze,
+                 Kanalreinigungsarbeiten,
+                 Retten/Befreien von Menschen,
+                 Retten/Befreien von Tieren,
+                 Straßen reinigen,
+                 Sturmeinsatz,
+                 Unfall mit Schadstoffen,
+                 Unwetter,
+                 Wasserversorgung,
+                 Wasserfüllarbeiten (Hint dazu..),
+                 Sonstige:...
+                 );
 
 
-}else if(kategorie==t�tigkeit){
+          }
+
+        //textfeld gleich wie bei einsätze die ausgangslage
+        private $lagebeimEintreffen;
+
+        private $geschädigter_name;*
+
+        //textfeld für adresse+plz+ort
+        private $geschädigter_adresse;
+
+        private $geschädigter_tel;
+
+        private $geschädigter_kennzeichen;
+
+
+
+        //checkboxen
+        private $wetter=(
+        Bedeckt
+        Glatteis
+        Nebel
+        Schnee
+        Wind/Sturm
+        Glätte
+        Hagel
+        Regen
+        Sonne
+        Sonstiges...);
+
+        //Hint, Placeholder: Ölbindemittel, Petrotech, Pulver, Schaummittel
+        private $verbrauchtebetriebsmittel;
+
+        //
+        private $anwesend;
+
+
+}else if(kategorie==Übung){
+
+        //dropdown-feld für unterkategorien
+         private $unterkategorie=(
+            Atemschutzübung
+            Begehung
+            Bewerbsübung
+            Branddienstübung
+            Chargenschulung
+            FMD-Schulung
+            Funkübung
+            Gesamtübung
+            Gruppenübung
+            KHD Übung
+            Kraftfahrübung
+            Prüfung AP Atemschutz
+            Prüfung AP Löscheinsatz
+            Prüfung AP Technischer Einsatz
+            Schadstoffübung
+            Schulung
+            Sprengdienstübung
+            Tauchdienstübung
+            Technische Übung
+            Vorbereitung AP Atemschutz
+            Vorbereitung AP Löscheinsatz
+            Vorbereitung AP Technischer Einsatz
+            Wasserdienstübung
+            Zugsübung 1.Zug
+            Zugsübung 2.Zug
+            Sonstiges
+         )
+
+         //textfeld gleich wie bei einsätze die ausgangslage
+         private $übungsannahme;
+
+         //Hint: Ausarbeiter der Übung; einfaches string Textfeld
+         private $übungsleitung:
+
+}else if(kategorie==tätigkeit){
+
+            //Checkbox oder Dropdown
+            private $unterkategorie=(
+            Atemschutz
+            Ausbildung
+            Beratung der Behörden
+            Chargensitzung
+            Dienstbesprechung
+            EDV
+            Fahrzeug- und Gerätedienst/Fahrmeister
+            Fahrzeug- und Gerätedienst/Zeugmeister
+            Feuerwehrball
+            Feuerwehrfest
+            Feuerwehrmedizinischer Dienst
+            Inspektion
+            Kirchgang
+            Kommandobesprechung
+            Mitgliederbesprechung
+            Nachrichtendienst
+            Öffentlichkeitsarbiet und Dokumentation
+            Repräsentationen
+            Schadstoffdienst
+            Schriftverkehr
+            Sprengdienst
+            Strahlenschutzdienst
+            Tätigkeit im Feuerwehrhaus
+            Veranstaltungen
+            Versorgungsdienst
+            Verwaltungstätigkeiten
+            Vorbeugender Brandschutz
+            Vorträge/Schulungen
+            Wartungsarbeiten
+            Wasserdienst
+            Sonstiges
+
+            )
 
 }
+
+//strasse+hausnummer in einem textfeld
+private $strasse;*
+
+//vierstellige Integer Zahl
+private $plz;*
+
+//string, Tetfeld
+private $ort;*
+
+//datum und uhzeit
+private $uhrzeitAlarmierung;
+
+private $datum+uhrzeit_beginn;*
+
+private $datum+uhrzeit_ende;*
+
+//textfield für E,U,T
+private $tätigkeit_bericht;*
+
+
+//E,U,T; textfeld mit Hints bzw. Placeholder: Hydraulisches Rettungsgerät, Pressluftatmer, sonstige ATS-Geräte, Stromerzeuger)
+private $eingesetzteGeräte;
+
+
+<!--FAHRZEUG/MITGLIED KOMBI -->
+//hlf3, lfab, kdof, vf, privat
+private $beteiligteFahrzeuge;
+//welches Mitglied in welchem Fahrzeug mit welcher Funktion
+private $beteiligteMitglieder;
+//Fahrer, GRKDT, Weitere Mitglieder + ATS-Checkbox bei jedem Mitglied
+private $funktionMitglied;
+
+//mit Placeholder bzw. Hint: Geschädigte Mitglieder,
+private $notizen;
+
+
+
+
+

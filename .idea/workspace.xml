@@ -25,7 +25,7 @@
         <entry file="file://$PROJECT_DIR$/src/Controller/SecurityController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="378">
-              <caret line="64" column="5" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
+              <caret line="86" column="5" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
               <folding>
                 <element signature="e#35#67#0#PHP" expanded="true" />
               </folding>
@@ -47,9 +47,13 @@
         <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="286">
-              <caret line="154" column="55" selection-start-line="154" selection-start-column="55" selection-end-line="154" selection-end-column="70" />
+              <caret line="168" column="5" selection-start-line="167" selection-start-column="55" selection-end-line="167" selection-end-column="70" />
               <folding>
                 <element signature="e#30#62#0#PHP" expanded="true" />
+                <marker date="1543252526415" expanded="true" signature="3195:3353" ph="..." />
+                <marker date="1543252526415" expanded="true" signature="3286:3343" ph="..." />
+                <marker date="1543252526415" expanded="true" signature="3621:3721" ph="..." />
+                <marker date="1543252526415" expanded="true" signature="3622:3720" ph="..." />
               </folding>
             </state>
           </provider>
@@ -59,9 +63,9 @@
         <entry file="file://$PROJECT_DIR$/templates/security/dashboard.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="448">
-              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+              <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
               <folding>
-                <marker date="1543249183032" expanded="true" signature="1791:2273" ph="{% if rollen==&quot;ROLE_ADMIN&quot; or rollen==&quot;ROLE_USER&quot; and rollen==&quot;ROLE_ADMIN&quot; or rollen==&quot;ROLE_REGISTERED&quot; and rollen ==&quot;ROLE_USER&quot; and rollen==&quot;ROLE_ADMIN&quot;...%}" />
+                <marker date="1543260537932" expanded="true" signature="1739:2057" ph="{% for rollen in user.roles ...%}" />
               </folding>
             </state>
           </provider>
@@ -127,16 +131,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="newsfeed.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/assets/css/newsfeed.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2728">
-              <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -196,6 +190,7 @@
         <option value="$PROJECT_DIR$/public/assets/js/animations.js" />
         <option value="$PROJECT_DIR$/public/assets/css/info.css" />
         <option value="$PROJECT_DIR$/templates/pages/info.html.twig" />
+        <option value="$PROJECT_DIR$/database/Entry-Prozess.txt" />
       </list>
     </option>
   </component>
@@ -430,6 +425,20 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newfiary" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newfiary" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="database" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -514,12 +523,12 @@
       <workItem from="1542212989818" duration="48031000" />
       <workItem from="1543178064858" duration="2154000" />
       <workItem from="1543225483896" duration="7735000" />
-      <workItem from="1543244021378" duration="6503000" />
+      <workItem from="1543244021378" duration="12049000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71902000" />
+    <option name="totallyTimeSpent" value="77448000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="0" width="1918" height="1031" extended-state="0" />
@@ -562,7 +571,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/security/Core/User/UserInterface.php" />
     <entry file="file://$PROJECT_DIR$/src/Entity/Uebungsart.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
@@ -583,6 +591,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2278">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -821,9 +830,13 @@
     <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
-          <caret line="154" column="55" selection-start-line="154" selection-start-column="55" selection-end-line="154" selection-end-column="70" />
+          <caret line="168" column="5" selection-start-line="167" selection-start-column="55" selection-end-line="167" selection-end-column="70" />
           <folding>
             <element signature="e#30#62#0#PHP" expanded="true" />
+            <marker date="1543252526415" expanded="true" signature="3195:3353" ph="..." />
+            <marker date="1543252526415" expanded="true" signature="3286:3343" ph="..." />
+            <marker date="1543252526415" expanded="true" signature="3621:3721" ph="..." />
+            <marker date="1543252526415" expanded="true" signature="3622:3720" ph="..." />
           </folding>
         </state>
       </provider>
@@ -831,7 +844,7 @@
     <entry file="file://$PROJECT_DIR$/src/Controller/SecurityController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
-          <caret line="64" column="5" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
+          <caret line="86" column="5" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
           <folding>
             <element signature="e#35#67#0#PHP" expanded="true" />
           </folding>
@@ -849,9 +862,9 @@
     <entry file="file://$PROJECT_DIR$/templates/security/dashboard.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="448">
-          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
           <folding>
-            <marker date="1543249183032" expanded="true" signature="1791:2273" ph="{% if rollen==&quot;ROLE_ADMIN&quot; or rollen==&quot;ROLE_USER&quot; and rollen==&quot;ROLE_ADMIN&quot; or rollen==&quot;ROLE_REGISTERED&quot; and rollen ==&quot;ROLE_USER&quot; and rollen==&quot;ROLE_ADMIN&quot;...%}" />
+            <marker date="1543260537932" expanded="true" signature="1739:2057" ph="{% for rollen in user.roles ...%}" />
           </folding>
         </state>
       </provider>
@@ -902,6 +915,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/Entry-Prozess.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="194" column="0" selection-start-line="194" selection-start-column="0" selection-end-line="194" selection-end-column="0" />
           <folding />
         </state>
       </provider>
