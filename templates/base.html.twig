@@ -72,21 +72,18 @@
             </li>
         </ul>
 
-        <div class="logout">
-            <div >
-                {% if app.user %}
-                    <a href="{{ logout_path('main') }}">
-                        <i><img  src=" {{ asset('assets/img/exit.svg') }}" alt="logout symbol"></i>
-                        <span>Logout</span>
-                    </a>
-                {% endif %}
-            </div>
-        </div>
+        <button type="button" class="btn logout">
+            {% if app.user %}
+                <a href="{{ logout_path('main') }}">
+                    <img  src=" {{ asset('assets/img/exit.svg') }}" alt="logout symbol">
+                    <span>Logout</span>
+                </a>
+            {% endif %}
+        </button>
 
         <div class="menu-toggler container-fluid ">
-            <!--<span>Menu</span>-->
             <button type="button" id="sidebarCollapse" class="btn" onclick="closeNav()" >
-                <img  id="arrow" src=" {{ asset('assets/img/close-menu.svg') }}" alt="logout symbol">
+                <img  id="arrow" src=" {{ asset('assets/img/close-menu-resized.svg') }}" alt="logout symbol">
             </button>
         </div>
 
