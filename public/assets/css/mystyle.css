@@ -175,7 +175,7 @@ h1 {
         text-align: center;
     }
 
-    #sidebar.active, #sidebar.active span {
+    #sidebar.active, #sidebar.active #username, #sidebar.active span {
         display: none;
     }
 
