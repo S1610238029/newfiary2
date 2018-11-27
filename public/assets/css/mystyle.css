@@ -95,6 +95,10 @@ h1 {
 /* -------------------------------------------*/
 
 /* MQ SPECIFIC*/
+#content .container {
+    margin: 6vh 4vw;
+}
+
 #sidebar {
     display: none;
 }
