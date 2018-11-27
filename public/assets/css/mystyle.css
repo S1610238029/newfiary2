@@ -19,22 +19,21 @@
 /* ALLGEMEINES */
 body {
     font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
 }
 
 h1 {
     font-size: 3em;
 }
 
-.container {
-    margin: 50px;
+.base-container {
+    width: 95%;
+    min-width: 95%;
+    margin: 6vh auto 0 auto;
 }
 
 #content {
     width: 100%;
-}
-
-#content .container {
-    margin: 2vh 4vw;
 }
 
 h1 {
@@ -95,9 +94,6 @@ h1 {
 /* -------------------------------------------*/
 
 /* MQ SPECIFIC*/
-#content .container {
-    margin: 6vh 4vw;
-}
 
 #sidebar {
     display: none;
@@ -186,6 +182,13 @@ h1 {
 
     body {
         font-size: 10pt;
+    }
+
+    .base-container {
+        width: 80%;
+        min-width:80%;
+        margin: 2vh 4vw;
+        /*margin: 6vh 4vw;*/
     }
 
     /* MQ SPECIFIC*/
@@ -331,7 +334,6 @@ h1 {
 
 /** Button CSS */
 
-/** Button CSS */
 
 .bigredbutton {
     background-color: var(--red);

@@ -167,7 +167,8 @@ class SecurityController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('infos');
+        //$route = $this->get('router')->generate('infos', ['_framgent' => 'panelBodyTwo']);
+        return $this->redirectToRoute('infos', ['_framgent' => 'panelBodyTwo']);
     }
 
     /**
@@ -187,7 +188,7 @@ class SecurityController extends AbstractController
                 $em->persist($member);
                 $em->flush();
 
-                return $this->redirectToRoute('infos');
+                return $this->redirectToRoute('infos', ['_framgent' => 'panelBodyTwo']);
             }
 
             return $this->render('security/editMember.html.twig', [
@@ -197,7 +198,7 @@ class SecurityController extends AbstractController
 
         }
 
-        return $this->redirectToRoute('infos');
+        return $this->redirectToRoute('infos', ['_framgent' => 'panelBodyTwo']);
     }
 
 

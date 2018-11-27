@@ -45,10 +45,11 @@
     transform: rotate(0deg);
     transition: all 0.2s ease-in;
 }
-
+/*
 #accordion .panel-body .panel-content {
     padding: 20px;
 }
+*/
 
 #accordion .panel-body .panel-content ul li {
     list-style: none;
@@ -91,37 +92,63 @@
     display:initial!important;
 }
 
-#accordion #addmember {
+#accordion #adduser {
+    width: 200px;
+    padding: 10px 20px;
+}
+
+/* MITGLIEDER */
+#accordion .biggreybutton {
     background-color: var(--grey);
     color: #FFF;
-    width: 15vw;
-    padding: 10px 20px;
     display: block;
     border-radius: 10px;
     border: none;
     text-decoration: none;
     text-align: center;
+    transition: all 0.5s ease-in-out;
 }
 
-#accordion #addmember:hover {
+#accordion .biggreybutton:hover {
     background: rgba(0, 0, 0, 0.9);
     cursor: pointer;
 }
 
+/* Tabelle*/
+.smallredbutton {
+    background-color: var(--red);
+    border-radius: 10px;
+    border: none;
+    transition: all 0.5s ease-in-out;
+}
+
+.smallredbutton:hover {
+    background: #c10612;
+    cursor: pointer;
+}
+
+#example_wrapper {
+    margin: 4vh 0;
+}
+
 #accordion td a {
-    text-decoration: none;
+    border-bottom: none;
 }
 
 /* Hier müssen die Werte dann noch an das Burgermenü angepasst werden*/
 @media (min-width: 501px) {
-    #addmember {
+    #accordion #adduser, #accordion .biggreybutton {
         font-size: 15px;
     }
 }
 
-@media (max-width: 500px) {
-    #addmember {
-        font-size: 8px;
+
+@media (max-width: 720px) {
+    #accordion #adduser, .biggreybutton {
+        font-size: 12px;
+        width: 180px;
+        margin: 20px auto;
     }
 }
+
 

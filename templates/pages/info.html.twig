@@ -7,10 +7,10 @@
 
 
 {% block body %}
-    <h1>Info & Downloads</h1>
+    <div class="row">
+        <div class="col-12 col-sm-12">
+            <h1>Info & Downloads</h1>
 
-    <div class="col-md-12">
-        <div class="row">
             <div id="accordion" class="panel-group">
                 <div class="panel">
                     <div class="panel-heading">
@@ -28,13 +28,13 @@
                     <div id="panelBodyOne" class="panel-collapse collapse show in">
                         <div class="panel-body">
                             <div class="panel-content">
-                                 <form>
+                                <form>
                                     <div class="form-group row">
-                                        <label for="example-date-input" class="col-2 col-form-label">Datum</label>
-                                        <div class="col-8">
+                                        <label for="example-date-input" class="col-2 col-md-1 col-form-label">Datum</label>
+                                        <div class="col-10 col-md-6">
                                             <input class="form-control" type="date" value="2018-11-9" id="example-date-input">
                                         </div>
-                                        <button class="col-2 btn">Generieren</button>
+                                        <button class="col-8 col-sm-3 col-md-4 offset-md-0 btn biggreybutton">Generieren</button>
                                     </div>
                                 </form>
                                 <ul>
@@ -78,7 +78,7 @@
                     <div id="panelBodyTwo" class="panel-collapse collapse">
                         <div class="panel-body">
                             {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{  path('member_new') }}" id="addmember">Mitglied hinzufügen</a>
+                            <a href="{{  path('member_new') }}" id="adduser" class="biggreybutton">Mitglied hinzufügen</a>
                             {% endif %}
                             <div class="panel-content">
                                 <!--  version 1 -->
@@ -88,79 +88,82 @@
 
                                         <div class="row">
                                             <div class="col-md-12">
+                                                <div class="table-responsive">
+                                                    <table class="table display" id="example"  style="width:100%">
 
-                                               <table id="example" class="display"  style="width:100%">
+                                                        <thead>
+                                                        <tr>
+                                                            <th >Stb-Nr.</th>
+                                                            <th>Dienstgrad</th>
+                                                            <th>Vorname</th>
+                                                            <th>Nachname</th>
+                                                            <th>Festnetz</th>
+                                                            <th>Mobiltelefon</th>
+                                                            <th>E-Mail</th>
+                                                            <th>ATS-Tauglichkeit</th>
+                                                            {% if is_granted('ROLE_ADMIN') %}
+                                                                <th>Bearbeiten</th>
+                                                                <th>Löschen</th>
+                                                            {% endif %}
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for mitglied in mitglieder %}
+                                                            <tr>
 
-                                                   <thead>
-                                                   <tr>
-                                                       <th>Stb-Nr.</th>
-                                                       <th>Dienstgrad</th>
-                                                       <th>Vorname</th>
-                                                       <th>Nachname</th>
-                                                       <th>Festnetz</th>
-                                                       <th>Mobiltelefon</th>
-                                                       <th>E-Mail</th>
-                                                       <th>ATS-Tauglichkeit</th>
-                                                       {% if is_granted('ROLE_ADMIN') %}
-                                                       <th>Bearbeiten</th>
-                                                       <th>Löschen</th>
-                                                       {% endif %}
-                                                   </tr>
-                                                   </thead>
-                                                   <tbody>
-                                                    {% for mitglied in mitglieder %}
-                                                   <tr>
-
-                                                       <td>{% if mitglied.standesbuchnummer %}{{ mitglied.standesbuchnummer }}{% else %}  {% endif %}</td>
-
-
-                                                       <td> {% if mitglied.dienstgrad %}{{ mitglied.dienstgrad }}{% else %}  {% endif %}</td>
+                                                                <td>{% if mitglied.standesbuchnummer %}{{ mitglied.standesbuchnummer }}{% else %}  {% endif %}</td>
 
 
-
-                                                       <td>{% if mitglied.vorname %}{{ mitglied.vorname }}{% else %}  {% endif %}</td>
+                                                                <td> {% if mitglied.dienstgrad %}{{ mitglied.dienstgrad }}{% else %}  {% endif %}</td>
 
 
 
-                                                       <td>{% if mitglied.nachname %}{{ mitglied.nachname }}{% else %}  {% endif %}</td>
+                                                                <td>{% if mitglied.vorname %}{{ mitglied.vorname }}{% else %}  {% endif %}</td>
 
 
 
-                                                       <td>{% if mitglied.telefonNr %} {{ mitglied.telefonNr }}{% else %}  {% endif %}</td>
+                                                                <td>{% if mitglied.nachname %}{{ mitglied.nachname }}{% else %}  {% endif %}</td>
 
 
 
-                                                       <td>{% if mitglied.mobil %} {{ mitglied.mobil }} {% else %}  {% endif %}</td>
+                                                                <td>{% if mitglied.telefonNr %} {{ mitglied.telefonNr }}{% else %}  {% endif %}</td>
 
 
 
-                                                       <td>{% if mitglied.email %} {{ mitglied.email}} {% else %}  {% endif %}</td>
+                                                                <td>{% if mitglied.mobil %} {{ mitglied.mobil }} {% else %}  {% endif %}</td>
 
 
 
-                                                        <td>   {% if mitglied.atemschutztauglich == 1 %}JA{% elseif mitglied.atemschutztauglich == 0 %}NEIN{% endif %}</td>
-                                                       {% if is_granted('ROLE_ADMIN') %}
-                                                       <td>
-                                                           <a href="{{ path('member_edit', {'id':mitglied.idmitglieder} ) }}">
-                                                               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000" width="20" height="20"
-                                                                       viewBox="0 0 129 129" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">
-                                                                   <path d="m119.2,114.3h-109.4c-2.3,0-4.1,1.9-4.1,4.1s1.9,4.1 4.1,4.1h109.5c2.3,0 4.1-1.9 4.1-4.1s-1.9-4.1-4.2-4.1z"></path>
-                                                                   <path d="m5.7,78l-.1,19.5c0,1.1 0.4,2.2 1.2,3 0.8,0.8 1.8,1.2 2.9,1.2l19.4-.1c1.1,0 2.1-0.4 2.9-1.2l67-67c1.6-1.6 1.6-4.2 0-5.9l-19.2-19.4c-1.6-1.6-4.2-1.6-5.9-1.77636e-15l-13.4,13.5-53.6,53.5c-0.7,0.8-1.2,1.8-1.2,2.9zm71.2-61.1l13.5,13.5-7.6,7.6-13.5-13.5 7.6-7.6zm-62.9,62.9l49.4-49.4 13.5,13.5-49.4,49.3-13.6,.1 .1-13.5z"></path>
-                                                                </svg>
-                                                           </a>
-                                                       </td>
-                                                       <td>
-                                                           <a href="{{ path('member_delete', {'id':mitglied.idmitglieder} ) }}">
-                                                               <i><img src="{{  asset('assets/img/delete_big.svg') }}" alt="delete symbol"></i>
-                                                           </a>
-                                                       </td>
-                                                       {% endif %}
+                                                                <td>{% if mitglied.email %} {{ mitglied.email}} {% else %}  {% endif %}</td>
 
-                                                   </tr>
-                                                    {% endfor %}
 
-                                                   </tbody>
-                                               </table>
+
+                                                                <td>   {% if mitglied.atemschutztauglich == 1 %}JA{% elseif mitglied.atemschutztauglich == 0 %}NEIN{% endif %}</td>
+                                                                {% if is_granted('ROLE_ADMIN') %}
+                                                                    <td>
+                                                                        <a type="button" role="button" class="btn bnt-link smallredbutton" href="{{ path('member_edit', {'id':mitglied.idmitglieder} ) }}">
+                                                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#fff" width="20" height="20"
+                                                                                 viewBox="0 0 129 129" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">
+                                                                                <path d="m119.2,114.3h-109.4c-2.3,0-4.1,1.9-4.1,4.1s1.9,4.1 4.1,4.1h109.5c2.3,0 4.1-1.9 4.1-4.1s-1.9-4.1-4.2-4.1z"></path>
+                                                                                <path d="m5.7,78l-.1,19.5c0,1.1 0.4,2.2 1.2,3 0.8,0.8 1.8,1.2 2.9,1.2l19.4-.1c1.1,0 2.1-0.4 2.9-1.2l67-67c1.6-1.6 1.6-4.2 0-5.9l-19.2-19.4c-1.6-1.6-4.2-1.6-5.9-1.77636e-15l-13.4,13.5-53.6,53.5c-0.7,0.8-1.2,1.8-1.2,2.9zm71.2-61.1l13.5,13.5-7.6,7.6-13.5-13.5 7.6-7.6zm-62.9,62.9l49.4-49.4 13.5,13.5-49.4,49.3-13.6,.1 .1-13.5z"></path>
+                                                                            </svg>
+                                                                        </a>
+                                                                    </td>
+                                                                    <td>
+                                                                        <a type="button" role="button" class="btn btn-link smallredbutton" href="{{ path('member_delete', {'id':mitglied.idmitglieder} ) }}">
+                                                                            <i><img src="{{  asset('assets/img/delete_big.svg') }}" alt="delete symbol"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                {% endif %}
+
+                                                            </tr>
+                                                        {% endfor %}
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+
 
 
 
