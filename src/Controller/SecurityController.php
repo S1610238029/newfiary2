@@ -168,4 +168,35 @@ class SecurityController extends AbstractController
         return $this->redirectToRoute('infos');
     }
 
+    /**
+     * @Route("editMember/{id}", name="member_edit")
+     */
+    public function editMemberAction($id, Request $request) {
+        $member = $this->getDoctrine()->getRepository(Mitglieder::class)->find($id);
+
+        if ($member) {
+            $form = $this->buildMemberForm($member);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $member = $form->getData();
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($member);
+                $em->flush();
+
+                return $this->redirectToRoute('infos');
+            }
+
+            return $this->render('security/editMember.html.twig', [
+                'member' => $member,
+                'form' => $form->createView(),
+            ]);
+
+        }
+
+        return $this->redirectToRoute('infos');
+    }
+
+
 }
