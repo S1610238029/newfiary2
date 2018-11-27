@@ -1,26 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
+{% extends 'base.html.twig' %}
 
-    <title>{% block title %}New Member{% endblock %}</title>
+{% block title %}Neues Mitglied anlegen!{% endblock %}
 
-    <!-- Including the Stylesheet -->
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 
-    <link rel="stylesheet" href= "{{ asset('assets/css/newMember.css') }}">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-
-</head>
-<body>
 {% block body %}
 
-    <div class="login">
+    <style>
+        h2 {
+            color: var(--red);
+        }
 
-        <img  src=" {{ asset('Assets/img/logo_white.png') }}" alt="logout symbol"><br>
+        #form {
+            width: 85%;
+        }
+    </style>
+
+    <div class="form">
 
         <!-- Headline of the Register Form  -->
-        <h2 class="active"> Neues Mitglied anlegen</h2>
-
+        <h2 class="active"> Neues Mitglied anlegen</h2><br>
 
         {{ form_start(form , {'attr': {'novalidate':'novalidate'}} ) }}
             {{ form_row(form.standesbuchnummer, {attr: {class: 'text'} }) }}
@@ -31,10 +30,8 @@
             {{ form_row(form.mobil, {attr: {class: 'text'} }) }}
             {{ form_row(form.email, {attr: {class: 'text'} })  }}
             {{ form_row(form.atemschutztauglich) }}
-        <button type="submit" class="signin">Add member</button>
+        <button type="submit" class="bigredbutton">Add member</button>
         {{ form_end(form) }}
 
     </div>
 {% endblock %}
-</body>
-</html>
