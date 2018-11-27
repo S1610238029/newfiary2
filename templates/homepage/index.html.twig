@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Homepage{% endblock %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" href= "{{ asset('assets/css/newsfeed.css') }}">
+{% endblock %}
 {% block body %}
 
     <style>
@@ -18,6 +20,20 @@
 
     <h1>Homepage</h1>
 
+    <div class="blog-card">
+        <div class="meta">
+            <ul class="details">
+                <p>Erstellt am: {{ entry.date }}<br>
+                    Beitrag erstellt von: Autor </p>
+            </ul>
+        </div>
+        <div class="description">
+            <h1>{{ entry.title }}</h1>
+            <h2>Beitrag erstellt am: {{ entry.date }}</h2>
+            <p>{{ entry.feed }}</p><br>
+        </div>
+    </div>
+    
     <button class="bigredbutton"><a href="{{ path('newentry') }}">Eintrag hinzufügen</a></button>
 
 {% endblock %}

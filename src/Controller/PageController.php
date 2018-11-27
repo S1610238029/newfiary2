@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Feed;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,11 +17,30 @@ class PageController extends Controller //AbstracController
      */
     public function indexAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $allFeeds =  $em->getRepository(Feed::class)->findAll();
+        $allDates = [];
+        foreach($allFeeds as $feed) {
+            $allDates[] = $feed->getDate();
+        }
+
+        usort($allDates, function($a, $b) {
+            return strtotime($a) - strtotime($b);
+        });
+
+        foreach($allFeeds as $feed) {
+            if ($feed->getDate() == $allDates[0]){
+                $ultimateFeed = $feed;
+            }
+        }
         // replace this example code with whatever you need
         return $this->render('homepage/index.html.twig', [
+            'entry' => $ultimateFeed,
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
     }
+
 
     /**
      * @Route("/pages", name="pages")
