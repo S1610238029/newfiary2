@@ -1,60 +1,24 @@
 
 /* Start Card CSS */
 .blog-card {
-    display: flex;
     flex-direction: column;
-    margin: auto;
-    box-shadow: 0 3px 7px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 2px 3px rgba(0, 0, 0, 0.1);
     margin-bottom: 1.6%;
-    line-height: 1.4;
-    font-family: sans-serif;
-    border-radius: 5px;
     overflow: hidden;
     z-index: 0;
+    margin-left: -5%;
 }
-.blog-card .details,
-.blog-card .details ul {
-    margin: auto;
-    padding: 0;
-    list-style: none;
-}
-.blog-card .details {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: -100%;
-    margin: auto;
-    transition: left .2s;
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    padding: 10px;
-    width: 100%;
-    font-size: .9rem;
-}
-.blog-card .details a {
-    text-decoration: dotted underline;
-}
-.blog-card .details ul li {
-    display: inline-block;
-}
-.blog-card .details .tags ul:before {
-    margin-right: 10px;
-}
-.blog-card .details .tags li {
-    margin-right: 2px;
-}
-.blog-card .details .tags li:first-child {
-    margin-left: -4px;
-}
+
 .blog-card .description {
     padding: 1rem;
     background: #fff;
     position: relative;
     z-index: 1;
 }
-.blog-card .description h1,
-.blog-card .description h2 {
-    font-family: Poppins, sans-serif;
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 0;
 }
 .blog-card .description h1 {
     line-height: 1;
@@ -119,6 +83,10 @@
     }
     .blog-card.alt .details {
         padding-left: 25px;
+    }
+
+    #firstbutton {
+        margin-bottom: 2%;
     }
 }
 

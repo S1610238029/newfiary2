@@ -6,11 +6,11 @@
 
     <link rel="stylesheet" href= "{{ asset('assets/css/newsfeed.css') }}">
 
-    <h1>News</h1>
+    <h1>News</h1><br><hr><br>
 
     <!--Permission Überprüfung -->
     {% if is_granted('ROLE_REGISTERED') %}
-        <a href="{{ path('blackboard_neu') }}" class="bigredbutton">Neuen Feed anlegen</a>
+        <a href="{{ path('blackboard_neu') }}" class="bigredbutton">Neuen Feed anlegen</a><br><hr><br>
     {% endif %}
 
     <!-- CARDS STARTING -->
@@ -21,12 +21,6 @@
                 {%  for entry in feeds %}
 
                     <div class="blog-card">
-                        <div class="meta">
-                            <ul class="details">
-                                <p>Erstellt am: {{ entry.date }}<br>
-                                    Beitrag erstellt von: Autor </p>
-                            </ul>
-                        </div>
                         <div class="description">
                             <h1>{{ entry.title }}</h1>
                             <h2>Beitrag erstellt am: {{ entry.date }}</h2>
@@ -35,7 +29,7 @@
                                 {% if is_granted('ROLE_REGISTERED') %}
                                     <div class="container-fluid">
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-6" id="firstbutton">
                                                 <a href="{{ path('feed_edit', {'id':entry.idfeed}) }}" class="bigredbutton">Bearbeiten</a></li>
                                             </div>
                                             <div class="col-lg-6">
