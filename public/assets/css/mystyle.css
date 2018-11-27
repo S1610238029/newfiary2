@@ -432,7 +432,7 @@ h1 {
 
 /* Responsive Stuff - für die vollwertige Seite */
 
-@media (min-width: 640px) {
+@media (max-width: 640px) {
     .blog-card {
         flex-direction: row;
         max-width: 100%;
@@ -440,7 +440,9 @@ h1 {
 
     .blog-card .description {
         flex-basis: 70%;
+        font-size: 0.8em;
     }
+
     .blog-card .description:before {
         -webkit-transform: skewX(-3deg);
         transform: skewX(-3deg);
@@ -463,11 +465,20 @@ h1 {
         padding-left: 25px;
     }
 
+}
+
+@media (max-width: 880px) {
     #firstbutton {
         margin-bottom: 2%;
     }
 }
 
+@media (max-width: 760px) {
+    .blog-card .description {
+        flex-basis: 70%;
+        font-size: 0.8em;
+    }
+}
 
 /* ------------------------------- */
 /* ------------------------------- */
