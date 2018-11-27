@@ -401,12 +401,12 @@ h1 {
     font-size: 3em;
 }
 
-.blog-card .description h1 {
+.blog-card .description h2 {
     line-height: 1;
     margin: 0;
     font-size: 1.7rem;
 }
-.blog-card .description h2 {
+.blog-card .description h3 {
     font-size: 1rem;
     font-weight: 300;
     color: #a2a2a2;
@@ -469,7 +469,7 @@ h1 {
 
 }
 
-@media (max-width: 880px) {
+@media (max-width: 993px) {
     #firstbutton {
         margin-bottom: 2%;
     }
