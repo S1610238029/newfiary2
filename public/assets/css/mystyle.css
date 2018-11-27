@@ -18,6 +18,10 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+h1 {
+    font-size: 3em;
+}
+
 .container {
     margin: 50px;
 }
@@ -341,3 +345,100 @@ h1 {
     }
 
 }
+
+
+/* CSS für die Blog Cards! */
+
+
+/* Start Card CSS */
+.blog-card {
+    flex-direction: column;
+    box-shadow: 2px 2px 2px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.6%;
+    overflow: hidden;
+    z-index: 0;
+    margin-left: -5%;
+}
+
+.blog-card .description {
+    padding: 1rem;
+    background: #fff;
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+.blog-card .description h1 {
+    line-height: 1;
+    margin: 0;
+    font-size: 1.7rem;
+}
+.blog-card .description h2 {
+    font-size: 1rem;
+    font-weight: 300;
+    color: #a2a2a2;
+    margin-top: 5px;
+}
+
+.blog-card p {
+    position: relative;
+    margin: 1rem 0 0;
+}
+.blog-card p:first-of-type {
+    margin-top: 1.25rem;
+}
+
+/* Roter Streifen! */
+.blog-card p:first-of-type:before {
+    content: "";
+    position: absolute;
+    height: 5px;
+    background: var(--red);
+    width: 35px;
+    top: -0.75rem;
+    border-radius: 3px;
+}
+
+
+/* Responsive Stuff - für die vollwertige Seite */
+
+@media (min-width: 640px) {
+    .blog-card {
+        flex-direction: row;
+        max-width: 100%;
+    }
+
+    .blog-card .description {
+        flex-basis: 70%;
+    }
+    .blog-card .description:before {
+        -webkit-transform: skewX(-3deg);
+        transform: skewX(-3deg);
+        content: "";
+        background: #fff;
+        width: 30px;
+        position: absolute;
+        left: -10px;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+    }
+    .blog-card.alt .description:before {
+        left: inherit;
+        right: -10px;
+        -webkit-transform: skew(3deg);
+        transform: skew(3deg);
+    }
+    .blog-card.alt .details {
+        padding-left: 25px;
+    }
+
+    #firstbutton {
+        margin-bottom: 2%;
+    }
+}
+
+

@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href= "{{ asset('assets/css/newsfeed.css') }}">
 
-    <h1>News</h1><br><hr><br>
+    <h1 id="newsheading">News</h1><br><hr><br>
 
     <!--Permission Überprüfung -->
     {% if is_granted('ROLE_REGISTERED') %}

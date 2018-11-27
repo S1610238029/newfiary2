@@ -15,24 +15,20 @@
             text-decoration: none;
             color: white;
         }
-
     </style>
 
     <h1>Homepage</h1>
 
-    <div class="blog-card">
-        <div class="meta">
-            <ul class="details">
-                <p>Erstellt am: {{ entry.date }}<br>
-                    Beitrag erstellt von: Autor </p>
-            </ul>
-        </div>
-        <div class="description">
-            <h1>{{ entry.title }}</h1>
-            <h2>Beitrag erstellt am: {{ entry.date }}</h2>
-            <p>{{ entry.feed }}</p><br>
+    <div id="firstentry">
+        <div class="blog-card">
+            <div class="description">
+                <h1>{{ entry.title }}</h1>
+                <h2>Beitrag erstellt am: {{ entry.date }}</h2>
+                <p>{{ entry.feed }}</p><br>
+            </div>
         </div>
     </div>
+
     
     <button class="bigredbutton"><a href="{{ path('newentry') }}">Eintrag hinzufügen</a></button>
 
