@@ -101,8 +101,10 @@
                                                        <th>Mobiltelefon</th>
                                                        <th>E-Mail</th>
                                                        <th>ATS-Tauglichkeit</th>
+                                                       {% if is_granted('ROLE_ADMIN') %}
                                                        <th>Bearbeiten</th>
                                                        <th>Löschen</th>
+                                                       {% endif %}
                                                    </tr>
                                                    </thead>
                                                    <tbody>
@@ -137,7 +139,7 @@
 
 
                                                         <td>   {% if mitglied.atemschutztauglich == 1 %}JA{% elseif mitglied.atemschutztauglich == 0 %}NEIN{% endif %}</td>
-
+                                                       {% if is_granted('ROLE_ADMIN') %}
                                                        <td>
                                                            <a href="{{ path('member_edit', {'id':mitglied.idmitglieder} ) }}">
                                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000" width="20" height="20"
@@ -152,6 +154,7 @@
                                                                <i><img src="{{  asset('assets/img/delete_big.svg') }}" alt="delete symbol"></i>
                                                            </a>
                                                        </td>
+                                                       {% endif %}
 
                                                    </tr>
                                                     {% endfor %}

@@ -134,6 +134,7 @@ class SecurityController extends AbstractController
      * @Route("/newMember", name="member_new")
      */
     public function newMemberAction(Request $request) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $member = new Mitglieder();
         $form = $this->buildMemberForm($member);
         $form->handleRequest($request);
@@ -157,6 +158,7 @@ class SecurityController extends AbstractController
      * @Route("/deleteMember/{id}", name="member_delete")
      */
     public function deleteMemberAction($id) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $member = $this->getDoctrine()->getRepository(Mitglieder::class)->find($id);
 
         if ($member) {
