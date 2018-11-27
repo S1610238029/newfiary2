@@ -122,6 +122,14 @@ h1 {
     color: #fff;
 }
 
+#mobileNav .logout {
+    width: auto;
+}
+
+#mobileNav #username {
+    opacity: 1;
+}
+
 #mobileNav i {
     padding: 0 0.5rem;
 }
