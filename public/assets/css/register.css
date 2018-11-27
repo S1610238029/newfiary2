@@ -4,8 +4,7 @@
     --red: rgb(141, 4, 3);
 }
 
-/* Start Login CSS */
-
+/* Start Register CSS*/
 body,
 .signin {
     background-color: #d3d3d3;
@@ -15,30 +14,16 @@ body,
     letter-spacing: 0.05em;
 }
 
-/* unvisited link */
-a:link {
+a {
     color: #fff;
     text-underline: none;
 }
 
-/* visited link */
-a:visited {
-    color: #fff;
-    text-underline: none;
+h2 {
+    margin-bottom: 0;
 }
 
-/* mouse over link */
-a:hover {
-    color: rgb(141, 4, 3) ;
-    text-underline: none;
-}
-
-.link {
-    color: #fff;
-    text-underline: none;
-}
-
-.login {
+.register {
     position: relative;
     height: 80vh;
     width: 25vw;
@@ -60,20 +45,23 @@ form {
 
 /* Responsive */
 h2 {
-    font-size: 2vw;
+    font-size: 4vh;
     text-transform: uppercase;
     padding-bottom: 0.6vh;
     display: inline-block;
     font-weight: 100;
 }
 
-span {
+/* habe span zu label geändert, aufgrund geändertem code in register.html
+    muss evtl auch noch anderswo angepasst werden?
+*/
+label {
     text-transform: uppercase;
     font-size: 12px;
     opacity: 0.4;
     display: inline-block;
-    position: relative;
-    top: -65px;
+    /*position: relative;
+    top: -65px;*/
     transition: all 0.5s ease-in-out;
 }
 
@@ -154,7 +142,7 @@ label {
     padding-left: 5px;
 }
 
-.signin {
+.registerbutton {
     background-color: #8d0403;
     color: #FFF;
     width: 100%;
@@ -168,7 +156,7 @@ label {
     text-transform: uppercase;
 }
 
-.signin:hover {
+.registerbutton:hover {
     background: #c10612;
     cursor: pointer;
     /*  box-shadow: 0px 4px 35px -5px #c10612;  */

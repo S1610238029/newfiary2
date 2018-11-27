@@ -7,14 +7,14 @@
 
     <!-- Including the Stylesheet -->
 
-    <link rel="stylesheet" href= "{{ asset('assets/css/register_test.css') }}">
+    <link rel="stylesheet" href= "{{ asset('assets/css/register.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
 </head>
 <body>
 {% block body %}
 
-<div class="login">
+<div class="register">
 
     <img  src=" {{ asset('Assets/img/logo_white.png') }}" alt="logout symbol"><br>
 
@@ -28,7 +28,7 @@
         {{ form_row(form.plainPassword.first, {attr: {class: 'text'} })  }}
         {{ form_row(form.plainPassword.second, {attr: {class: 'text'} })  }}
 
-        <button type="submit" class="signin">Register</button>
+        <button type="submit" class="registerbutton">Register</button>
     {{ form_end(form) }}
 
 
