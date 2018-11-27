@@ -90,3 +90,33 @@
 #example_previous{
     display:initial!important;
 }
+
+#accordion #addmember {
+    background-color: var(--grey);
+    color: #FFF;
+    width: 15vw;
+    padding: 10px 20px;
+    display: block;
+    border-radius: 10px;
+    border: none;
+    text-decoration: none;
+    text-align: center;
+}
+
+#accordion #addmember:hover {
+    background: rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+}
+
+/* Hier müssen die Werte dann noch an das Burgermenü angepasst werden*/
+@media (min-width: 501px) {
+    #addmember {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 500px) {
+    #addmember {
+        font-size: 8px;
+    }
+}

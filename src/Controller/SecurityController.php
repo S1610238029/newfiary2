@@ -134,24 +134,18 @@ class SecurityController extends AbstractController
      * @Route("/newMember", name="member_new")
      */
     public function newMemberAction(Request $request) {
-        $members = $this->getDoctrine()->getRepository(Mitglieder::class)->findAll();
-        $lastId = $members[(sizeof($members)-1)]->getIdmitglieder();
-        echo $lastId;
-
         $member = new Mitglieder();
         $form = $this->buildMemberForm($member);
-        $member->setIdmiglieder($lastId);
-
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
 
+        if ($form->isSubmitted() && $form->isValid()) {
             $member = $form->getData();
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($member);
             $em->flush();
 
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('infos');
         }
 
         return $this->render('security/newMember.html.twig', [

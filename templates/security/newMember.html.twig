@@ -7,7 +7,7 @@
 
     <!-- Including the Stylesheet -->
 
-    <link rel="stylesheet" href= "{{ asset('assets/css/register_test.css') }}">
+    <link rel="stylesheet" href= "{{ asset('assets/css/newMember.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
 </head>
@@ -23,20 +23,16 @@
 
 
         {{ form_start(form , {'attr': {'novalidate':'novalidate'}} ) }}
-        {{ form_row(form.standesbuchnummer, {attr: {class: 'text'} }) }}
-        {{ form_row(form.dienstgrad, {attr: {class: 'text'} }) }}
-        {{ form_row(form.vorname, {attr: {class: 'text'} }) }}
-        {{ form_row(form.nachname, {attr: {class: 'text'} }) }}
-        {{ form_row(form.telefonNr, {attr: {class: 'text'} }) }}
-        {{ form_row(form.mobil, {attr: {class: 'text'} }) }}
-        {{ form_row(form.email, {attr: {class: 'text'} })  }}
-        {{ form_row(form.atemschutztauglich, {attr: {class: 'text'} }) }}
-
-
-        <button type="submit" class="signin">Register</button>
+            {{ form_row(form.standesbuchnummer, {attr: {class: 'text'} }) }}
+            {{ form_row(form.dienstgrad, {attr: {class: 'text'} }) }}
+            {{ form_row(form.vorname, {attr: {class: 'text'} }) }}
+            {{ form_row(form.nachname, {attr: {class: 'text'} }) }}
+            {{ form_row(form.telefonNr, {attr: {class: 'text'} }) }}
+            {{ form_row(form.mobil, {attr: {class: 'text'} }) }}
+            {{ form_row(form.email, {attr: {class: 'text'} })  }}
+            {{ form_row(form.atemschutztauglich) }}
+        <button type="submit" class="signin">Add member</button>
         {{ form_end(form) }}
-
-
 
     </div>
 {% endblock %}

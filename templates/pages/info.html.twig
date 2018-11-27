@@ -74,8 +74,12 @@
                             </a>
                         </h4>
                     </div>
+
                     <div id="panelBodyTwo" class="panel-collapse collapse">
                         <div class="panel-body">
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{  path('member_new') }}" id="addmember">Mitglied hinzufügen</a>
+                            {% endif %}
                             <div class="panel-content">
                                 <!--  version 1 -->
 
