@@ -152,4 +152,20 @@ class SecurityController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/deleteMember/{id}", name="member_delete")
+     */
+    public function deleteMemberAction($id) {
+        $member = $this->getDoctrine()->getRepository(Mitglieder::class)->find($id);
+
+        if ($member) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($member);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('infos');
+    }
+
 }

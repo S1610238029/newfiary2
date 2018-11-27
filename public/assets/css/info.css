@@ -108,6 +108,10 @@
     cursor: pointer;
 }
 
+#accordion td a {
+    text-decoration: none;
+}
+
 /* Hier müssen die Werte dann noch an das Burgermenü angepasst werden*/
 @media (min-width: 501px) {
     #addmember {
@@ -120,3 +124,4 @@
         font-size: 8px;
     }
 }
+
