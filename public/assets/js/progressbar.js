@@ -29,7 +29,7 @@ $(document).ready(function() {
     });
 
     /* Funktioniert noh nicht 100% */
-    $(".reset-button").click(function() {
+  /*  $(".reset-button").click(function() {
         var current = $(this).parent();
         var next = $(this)
             .first();
@@ -38,26 +38,76 @@ $(document).ready(function() {
             .addClass("active");
         current.hide();
         next.show();
+    });*/
+    $(".reset-button").click(function() {
+        var current = $(this).parent();
+        $(".progress li").removeClass("active");
+        $(".progress li:first-child").addClass("active");
+        current.hide();
+        $("fieldset#kategoriewahl").show();
     });
 
     /* Abbrechen */
 
-    /*if kategorie is einsatz dann show fieldset with id="einsatz"*/
-    $(".einsatz-button").click(function() {
-        var current = $(this).parent();
-        var next = $(this)
-            .parent()
-            .next();
-        $(".progress li")
-            .eq($("fieldset#einsatz").index(next))
-            .addClass("active");
-        current.hide();
-        next.show();
-        $("p#kategorie_einfügen").html("Kategorie Einsatz");
+
+    /*on document load hide all einsatzkategories*/
+    $('div#brandeinsatz').hide();
+    $('div#brandsicherheitswache').hide();
+    $('div#technischerEinsatz').hide();
+
+
+
+
+
+    /*while clicking on one of the main kategories*/
+    $(".kategorie").click(function() {
+        var kategorie=$(this).val();
+        $("p#kategorie_einfügen").text('Kategorie: '+ kategorie);
+
+        if(kategorie=='Einsatz') {
+            $("#title").text(kategorie + 'details');
+            $("#subtitle").text('Bitte gib hier die Details des Einsatzes bekannt!');
+            $('#form_unterkategorie').prepend($('<option>', {value : 'false', selected : 'selected', text: 'Bitte wählen...'}));
+
+
+        }else{
+            $("#title").text(kategorie + 'sdetails');
+            $("#subtitle").text('Bitte gib hier die Details der '+ kategorie +' bekannt!');
+
+            $('div#einsatz').hide();
+        }
+
+
+
+
+        $('#form_unterkategorie').change(function(){
+            var selectedKategorie=$(this).val();
+            console.log(selectedKategorie);
+            if(selectedKategorie=='0'){ //brandeinsatz
+                $('div#brandsicherheitswache').hide();
+                $('div#technischerEinsatz').hide();
+                $('div#brandeinsatz').show();
+            }else if(selectedKategorie=='1'){
+                $('div#brandeinsatz').hide();
+                $('div#technischerEinsatz').hide();
+                $('div#brandsicherheitswache').show();
+            }else{
+                $('div#brandsicherheitswache').hide();
+                $('div#brandeinsatz').hide();
+                $('div#technischerEinsatz').show();
+            }
+
+
+        });
+
+
+
     });
 
 
-
-
 });
+
+
+
+
 

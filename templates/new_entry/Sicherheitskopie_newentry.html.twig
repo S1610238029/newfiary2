@@ -12,8 +12,6 @@
     <link rel="stylesheet" href= "{{ asset('assets/css/mystyle.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="{{ asset('assets/js/progressbar.js') }}"></script>
 
@@ -26,16 +24,15 @@
     Drum bitte hier lassen und nicht rauslöschen -->
 
 
-    <!--<form id="form-id">-->
-    {{ form_start(form_einsatz, {attr: {id: 'form-id'} }) }}
-        {{ form_errors(form_einsatz) }}
+
+    <form id="form-id">
 
         <!--Progressbar-->
         <ul class='progress'>
             <li class="active">Kategorie auswählen</li>
             <li>Allgemeine Details</li>
-            <li>Zusatzinfos</li>
             <li>Besatzung</li>
+            <li>Wetter und Straßenbeschaffenheit</li>
             <li>Zusammenfassung</li>
         </ul>
 
@@ -46,97 +43,80 @@
             <h2 class='title'>Kategorie Auswahl</h2>
             <h3 class='sub-title'>Wähle die Kategorie des Eintrags aus aus</h3>
             <p>--[Aktuell bringt dich jede Kategorie auf die nächste Seite]--</p>
-            <input type='button' name='next' class='next-button custom-button kategorie' value="Einsatz"><br>
-            <input type='button' name='next' class='next-button custom-button kategorie' value="Übung"><br>
-            <input type='button' name='next' class='next-button custom-button kategorie' value="Tätigkeit"><br>
+            <input type='button' name='next' class='einsatz-button custom-button' value="Einsatz"><br>
+            <input type='button' name='next' class='next-button custom-button' value="Übung"><br>
+            <input type='button' name='next' class='next-button custom-button' value="Tätigkeit"><br>
         </fieldset>
 
 
         <!--Einsatzfieldsetz if kategorie ist einsatz-->
-        <fieldset>
-
-
-            <h2 class='title' id="title">Einsatzdetails</h2>
-            <h3 class='sub-title' id="subtitle">Bitte gib hier die Details des Einsatzes bekannt!</h3>
+        <fieldset id="einsatz">
+            <h2 class='title'>Einsatzdetails</h2>
+            <h3 class='sub-title'>Bitte gib hier die Details des Einsatzes bekannt!</h3>
 
             <!-- Hier fehlt noch die Kategorie die ausgewählt wurde -->
             <p id="kategorie_einfügen">-- [Hier kommt die ausgewählte Kategorie] --</p><br>
             <!-- Hier muss dann das aus/eingebelendet werden was zu der jeweiligen Kategorie gehört -->
 
-            <div id="einsatz">
 
+            <!-- Eintragsbezeichnung -->
+            <label for="eintragsbezeichnung">Eintragsbezeichnung -  </label><i class="fas fa-info"></i><br>
+            <input id="eintragsbezeichnung" type='text' placeholder='Eintragsbezeichnung'><br>
 
-            {{ form_row(form_einsatz.unterkategorie,  {attr: {id: 'underkategorie'} }) }}
+            <!-- Einsatzart -->
+            <label for="einsatzart">Einsatzart:</label><br>
+            <select id="einsatzart">
+                <option value="brandeinsatz">Brandeinsatz</option>
+                <option value="techeinsatz">Brandsicherheitswache</option>
+                <option value="weiteres1">Technischer Einsatz</option>
+            </select>
 
+            <!-- Ausfahrt -->
+            <!-- bei Ausfahrt & Rückkunft müssen wir Uhrzeit und Tag noch kombinieren! -->
+            <div class="links">
+                <!-- Alarmtag -->
+                <label for="alarmtag">Alarmtag:</label><br>
+                <input id="alarmtag" type='date'>
 
-                <div id="brandeinsatz">
-                    <legend class="legends">Details zum Brand:</legend>
-                    <!--Brandaus-->
-                    <div class="links">
-                        {{ form_row(form_einsatz.brandausDate) }}
-                    </div>
+                <!-- Ausfahrtstag -->
+                <label for="ausfahrttag">Ausfahrtstag:</label><br>
+                <input id="ausfahrttag" type='date'>
 
-                    <div class="rechts">
-                        {{ form_row(form_einsatz.brandausTime) }}
-                    </div>
-                    <br>
-
-                    <!--Brandwache Start-->
-                    <div class="links">
-                        {{ form_row(form_einsatz.brandwacheStartDate) }}
-                    </div>
-
-                    <div class="rechts">
-                        {{ form_row(form_einsatz.brandwacheStartTime) }}
-                    </div>
-                    <br>
-
-                    <!--Brandwache Ende-->
-                    <div class="links">
-                        {{ form_row(form_einsatz.brandwacheEndeDate) }}
-                    </div>
-
-                    <div class="rechts">
-                        {{ form_row(form_einsatz.brandwacheEndeTime) }}
-                    </div>
-                    <br>
-
-                    <div>
-
-                        {{ form_row(form_einsatz.brandobjekte, {'attr': {'placeholder': 'z.B. PKW, Wohnung, Kamin, Gewerbebetrieb'} }) }}
-
-                        {{ form_row(form_einsatz.brandausmass) }}
-                        
-
-                    </div>
-
-
-                </div>
-
-
-                <div id="brandsicherheitswache">
-                    <legend class="legends">Details zur Brandsicherheitswache:</legend>
-
-                </div>
-
-
-                <div id="technischerEinsatz">
-                    <legend class="legends">Details zum technischen Einsatz:</legend>
-
-                </div>
-
-
-
-                </div>
-
-            <div id="übung">
+                <!-- Rückkunftstag -->
+                <label for="rueckfahrttag">Rückkunftstag:</label><br>
+                <input id="rueckfahrttag" type='date'>
             </div>
 
-            <div id="tätigkeit">
+            <div class="rechts">
+                <!-- Alarmzeit -->
+                <label for="alarmzeit">Alarmzeit:</label><br>
+                <input id="alarmzeit" type='time'>
 
+                <!-- Ausfahrtszeit -->
+                <label for="ausfahrtzeit">Ausfahrtszeit:</label><br>
+                <input id="ausfahrtzeit" type='time'>
+
+                <!-- Rückkunftszeit -->
+                <label for="rueckfahrtzeit">Rückkunftszeit:</label><br>
+                <input id="rueckfahrtzeit" type='time'>
             </div>
+            <br>
 
+            <!-- Eintragsort -->
+            <label for="eintragsort">Eintrags Ort:</label><br>
+            <input id="eintragsort" type='text' placeholder='Eintrags Ort - hier fehlt noch Straße PLZ Ort!'>
 
+            <!-- Anforderer Name -->
+            <label for="anforderername">Anforderer Name:</label><br>
+            <input id="anforderername" type='text' placeholder='Name des Anforderers'>
+
+            <!-- Anforderer Telefonnummer -->
+            <label for="anforderertel">Anforderer Telefonnummer:</label><br>
+            <input id="anforderertel" type='tel' placeholder='+43 699 123 456 789'>
+
+            <!-- Details des Einsatzes -->
+            <label for="details">Eintrags Details:</label><br>
+            <textarea id="details" type='text' placeholder='Eintrags Details kommen hier ... '></textarea><br>
 
             <!-- Buttons -->
             <p>Neustart/Abbruch funktioniert aktuell noch nicht</p>
@@ -150,7 +130,7 @@
         </fieldset>
 
         <!--Allgemeine Details des Eintrags-->
-    {#    <fieldset>
+        <fieldset>
             <h2 class='title'>Eintrags Details</h2>
             <h3 class='sub-title'>Bitte gib hier die Details der ausgeübten Aufgabe bekannt!</h3>
 
@@ -227,7 +207,7 @@
             <input type='button' name='restart' class='reset-button custom-button' value="Abbruch">
 
 
-        </fieldset>#}
+        </fieldset>
 
         <!--Besatzung-->
         <fieldset>
@@ -304,15 +284,11 @@
             <input type='button' name='restart' class='reset-button custom-button' value="Abbruch">
 
         </fieldset>
-    {{ form_end(form_einsatz, {'render_rest': false}) }}
-    {{ form_widget(form_einsatz._token) }}
-        <!--</form>-->
+        </form>
 
 
 
 {% endblock %}
-
-
 
 </body>
 </html>

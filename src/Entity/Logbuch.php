@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Logbuch
@@ -36,32 +37,133 @@ class Logbuch
     private $unterkategorie;
 
     /**
-     * @var string
      *
+     *
+     * @ORM\Column(name="unterunterkategorie", type="integer",  nullable=true)
+     */
+    private $unterunterkategorie;
+
+    /**
+     * @var string
+     * @Assert\NotBlank()
      * @ORM\Column(name="beschreibung", type="string", length=255, nullable=false)
      */
     private $beschreibung;
 
     /**
+     * @var string
+     * @Assert\NotBlank()
+     * @ORM\Column(name="lagebeimEintreffen", type="string", nullable=false)
+     */
+    private $lagebeimEintreffen;
+
+    /**
+     * @var string
+     * @Assert\NotBlank()
+     * @ORM\Column(name="geschaedigter_name", type="string", length=255, nullable=false)
+     */
+    private $geschaedigterName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="geschaedigterAdresse", type="string", length=255, nullable=true)
+     */
+    private $geschaedigterAdresse;
+
+    /**
+     * @var string
+     * @Assert\Regex(
+     *     pattern="/^(0|\+)[0-9]/",
+     *     message="Bitte eine gültige Telefonnummer eingeben"
+     * )
+     * @ORM\Column(name="geschaedigterTel", type="string", length=255, nullable=true)
+     */
+    private $geschaedigterTel;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="geschaedigterKennzeichen", type="string", length=255, nullable=true)
+     */
+    private $geschaedigterKennzeichen;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="anwesend", type="string", length=255, nullable=true)
+     */
+    private $anwesend;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="brandobjekte", type="string", length=255, nullable=true)
+     */
+    private $brandobjekte;
+
+
+    /**
+     *
+     *
+     * @ORM\Column(name="brandausDate", type="date", nullable=true)
+     */
+    private $brandausDate;
+
+    /**
      * @var \DateTime
      *
-     * @ORM\Column(name="alarmzeit", type="datetime", nullable=false)
+     * @ORM\Column(name="brandausTime", type="time", nullable=true)
+     */
+    private $brandausTime;
+
+    /**
+     *
+     * @ORM\Column(name="brandwacheStartDate", type="date", nullable=true)
+     */
+    private $brandwacheStartDate;
+
+    /**
+     *
+     * @ORM\Column(name="brandwacheStartTime", type="time", nullable=true)
+     */
+    private $brandwacheStartTime;
+
+    /**
+     *
+     *
+     * @ORM\Column(name="brandwacheEndeDate", type="date", nullable=true)
+     */
+    private $brandwacheEndeDate;
+
+    /**
+     *
+     *
+     * @ORM\Column(name="brandwacheEndeTime", type="time", nullable=true)
+     */
+    private $brandwacheEndeTime;
+
+    /**
+     *
+     *
+     * @ORM\Column(name="brandausmass", type="integer",  nullable=true)
+     */
+    private $brandausmass;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="anlass", type="string", length=255, nullable=true)
+     */
+    private $anlass;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="alarmzeit", type="datetime")
      */
     private $alarmzeit;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="anforderer_name", type="string", length=255, nullable=false)
-     */
-    private $anfordererName;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="anforderer_telefon_nr", type="string", length=255, nullable=false)
-     */
-    private $anfordererTelefonNr;
 
     /**
      * @var \DateTime
@@ -141,11 +243,11 @@ class Logbuch
     private $wetter;
 
     /**
-     * @var string|null
+     * @var string
      *
-     * @ORM\Column(name="bodenbeschaffenheit", type="string", length=255, nullable=true)
+     * @ORM\Column(name="eingesetzteGeräte", type="string", length=255, nullable=true)
      */
-    private $bodenbeschaffenheit;
+    private $eingesetzteGeräte;
 
     /**
      * @var string
@@ -172,9 +274,93 @@ class Logbuch
     public static function getKategorieOptions(){
         return["einsatz", "übung", "tätigkeit"];
     }
-    public static function getUnterKategorieOptionsEinsatz(){
+    public static function getUnterKategorieOptions_Einsatz(){
         return["Brandeinsatz", "Brandsicherheitswache", "Technischer Einsatz"];
     }
+
+    public static function getUnterKategorieOptions_Übung(){
+        return["Atemschutzübung", "Begehung", "Bewerbsübung",
+            "Branddienstübung",
+            "Chargenschulung",
+            "FMD-Schulung",
+            "Funkübung",
+            "Gesamtübung",
+            "Gruppenübung",
+            "KHD Übung",
+            "Kraftfahrübung",
+            "Prüfung AP Atemschutz",
+            "Prüfung AP Löscheinsatz",
+            "Prüfung AP Technischer Einsatz",
+            "Schadstoffübung",
+            "Schulung",
+            "Sprengdienstübung",
+            "Tauchdienstübung",
+            "Technische Übung",
+            "Vorbereitung AP Atemschutz",
+            "Vorbereitung AP Löscheinsatz",
+            "Vorbereitung AP Technischer Einsatz",
+            "Wasserdienstübung",
+            "Zugsübung 1.Zug",
+            "Zugsübung 2.Zug",
+            "Sonstiges"
+        ];
+    }
+
+    public static function getUnterKategorieOptions_Tätigkeit(){
+        return["Atemschutz", "Ausbildung", "Beratung der Behörden", "Chargensitzung", "Dienstbesprechung",
+            "EDV", "Fahrzeug- und Gerätedienst/Fahrmeister","Fahrzeug- und Gerätedienst/Zeugmeister",
+            "Feuerwehrball", "Feuerwehrfest",
+            "Feuerwehrmedizinischer Dienst",
+            "Inspektion",
+            "Kirchgang",
+            "Kommandobesprechung",
+            "Mitgliederbesprechung",
+            "Nachrichtendienst",
+            "Öffentlichkeitsarbiet und Dokumentation",
+            "Repräsentationen",
+            "Schadstoffdienst",
+            "Schriftverkehr",
+            "Sprengdienst",
+            "Strahlenschutzdienst",
+            "Tätigkeit im Feuerwehrhaus",
+            "Veranstaltungen",
+            "Versorgungsdienst",
+            "Verwaltungstätigkeiten",
+            "Vorbeugender Brandschutz",
+            "Vorträge/Schulungen",
+            "Wartungsarbeiten",
+            "Wasserdienst",
+            "Sonstiges"
+        ];
+    }
+
+    public static function getUnterKategorien_TechEinsatz(){
+        return["Auslaufen von Öl bzw. Treibstoff",
+                 "Auspumparbeiten",
+                 "Einsätze nach VU",
+                 "Hochwassereinsatz",
+                 "Insekten-, Bienen-, Wespeneinsätze",
+                 "Kanalreinigungsarbeiten",
+                 "Retten/Befreien von Menschen",
+                 "Retten/Befreien von Tieren",
+                 "Straßen reinigen",
+                 "Sturmeinsatz",
+                 "Unfall mit Schadstoffen",
+                 "Unwetter",
+                 "Wasserversorgung",
+                 "Wasserfüllarbeiten",
+                 "Sonstige"
+                 ];
+    }
+
+    public static function getBrandausmassOptions(){
+        return["Großbrand", "Mittelbrand", "Kleinbrand", "Vor Eintreffen gelöscht", "Sonstige"];
+    }
+
+    public static function getWetterOptions(){
+        return["Bedeckt", "Glatteis", "Nebel", "Schnee", "Wind/Sturm", "Glätte", "Hagel", "Regen", "Sonne", "Sonstiges"];
+    }
+
 
 
     public function getIdlogbuch(): ?int
@@ -194,17 +380,30 @@ class Logbuch
         return $this;
     }
 
-    public function getUnterkategorie(): ?string
+    public function getUnterkategorie(): ?int
     {
         return $this->unterkategorie;
     }
 
-    public function setUnterkategorie(string $unterkategorie): self
+    public function setUnterkategorie(int $unterkategorie): self
     {
         $this->unterkategorie = $unterkategorie;
 
         return $this;
     }
+
+    public function getUnterunterkategorie(): ?int
+    {
+        return $this->unterunterkategorie;
+    }
+
+    public function setUnterunterkategorie(int $unterunterkategorie): self
+    {
+        $this->unterunterkategorie = $unterunterkategorie;
+
+        return $this;
+    }
+
 
     public function getBeschreibung(): ?string
     {
@@ -230,29 +429,6 @@ class Logbuch
         return $this;
     }
 
-    public function getAnfordererName(): ?string
-    {
-        return $this->anfordererName;
-    }
-
-    public function setAnfordererName(string $anfordererName): self
-    {
-        $this->anfordererName = $anfordererName;
-
-        return $this;
-    }
-
-    public function getAnfordererTelefonNr(): ?string
-    {
-        return $this->anfordererTelefonNr;
-    }
-
-    public function setAnfordererTelefonNr(string $anfordererTelefonNr): self
-    {
-        $this->anfordererTelefonNr = $anfordererTelefonNr;
-
-        return $this;
-    }
 
     public function getBeginnDatum(): ?\DateTimeInterface
     {
@@ -386,18 +562,6 @@ class Logbuch
         return $this;
     }
 
-    public function getBodenbeschaffenheit(): ?string
-    {
-        return $this->bodenbeschaffenheit;
-    }
-
-    public function setBodenbeschaffenheit(?string $bodenbeschaffenheit): self
-    {
-        $this->bodenbeschaffenheit = $bodenbeschaffenheit;
-
-        return $this;
-    }
-
     public function getNotizen(): ?string
     {
         return $this->notizen;
@@ -430,6 +594,200 @@ class Logbuch
     public function setMetadata(\DateTimeInterface $metadata): self
     {
         $this->metadata = $metadata;
+
+        return $this;
+    }
+
+    public function getBrandobjekte(): ?string
+    {
+        return $this->brandobjekte;
+    }
+
+    public function setBrandobjekte(?string $brandobjekte): self
+    {
+        $this->brandobjekte = $brandobjekte;
+
+        return $this;
+    }
+
+
+
+    public function getBrandausmass(): ?int
+    {
+        return $this->brandausmass;
+    }
+
+    public function setBrandausmass(?int $brandausmass): self
+    {
+        $this->brandausmass = $brandausmass;
+
+        return $this;
+    }
+
+    public function getLagebeimEintreffen(): ?string
+    {
+        return $this->lagebeimEintreffen;
+    }
+
+    public function setLagebeimEintreffen(string $lagebeimEintreffen): self
+    {
+        $this->lagebeimEintreffen = $lagebeimEintreffen;
+
+        return $this;
+    }
+
+    public function getGeschaedigterName(): ?string
+    {
+        return $this->geschaedigterName;
+    }
+
+    public function setGeschaedigterName(string $geschaedigterName): self
+    {
+        $this->geschaedigterName = $geschaedigterName;
+
+        return $this;
+    }
+
+    public function getGeschaedigterAdresse(): ?string
+    {
+        return $this->geschaedigterAdresse;
+    }
+
+    public function setGeschaedigterAdresse(?string $geschaedigterAdresse): self
+    {
+        $this->geschaedigterAdresse = $geschaedigterAdresse;
+
+        return $this;
+    }
+
+    public function getGeschaedigterTel(): ?string
+    {
+        return $this->geschaedigterTel;
+    }
+
+    public function setGeschaedigterTel(?string $geschaedigterTel): self
+    {
+        $this->geschaedigterTel = $geschaedigterTel;
+
+        return $this;
+    }
+
+    public function getGeschaedigterKennzeichen(): ?string
+    {
+        return $this->geschaedigterKennzeichen;
+    }
+
+    public function setGeschaedigterKennzeichen(?string $geschaedigterKennzeichen): self
+    {
+        $this->geschaedigterKennzeichen = $geschaedigterKennzeichen;
+
+        return $this;
+    }
+
+    public function getAnwesend(): ?string
+    {
+        return $this->anwesend;
+    }
+
+    public function setAnwesend(?string $anwesend): self
+    {
+        $this->anwesend = $anwesend;
+
+        return $this;
+    }
+
+    public function getEingesetzteGeräte(): ?string
+    {
+        return $this->eingesetzteGeräte;
+    }
+
+    public function setEingesetzteGeräte(?string $eingesetzteGeräte): self
+    {
+        $this->eingesetzteGeräte = $eingesetzteGeräte;
+
+        return $this;
+    }
+
+    public function getAnlass(): ?string
+    {
+        return $this->anlass;
+    }
+
+    public function setAnlass(?string $anlass): self
+    {
+        $this->anlass = $anlass;
+
+        return $this;
+    }
+
+    public function getBrandausDate(): ?\DateTimeInterface
+    {
+        return $this->brandausDate;
+    }
+
+    public function setBrandausDate(?\DateTimeInterface $brandausDate): self
+    {
+        $this->brandausDate = $brandausDate;
+
+        return $this;
+    }
+
+    public function getBrandausTime(): ?\DateTimeInterface
+    {
+        return $this->brandausTime;
+    }
+
+    public function setBrandausTime(?\DateTimeInterface $brandausTime): self
+    {
+        $this->brandausTime = $brandausTime;
+
+        return $this;
+    }
+
+    public function getBrandwacheStartDate(): ?\DateTimeInterface
+    {
+        return $this->brandwacheStartDate;
+    }
+
+    public function setBrandwacheStartDate(?\DateTimeInterface $brandwacheStartDate): self
+    {
+        $this->brandwacheStartDate = $brandwacheStartDate;
+
+        return $this;
+    }
+
+    public function getBrandwacheStartTime(): ?\DateTimeInterface
+    {
+        return $this->brandwacheStartTime;
+    }
+
+    public function setBrandwacheStartTime(?\DateTimeInterface $brandwacheStartTime): self
+    {
+        $this->brandwacheStartTime = $brandwacheStartTime;
+
+        return $this;
+    }
+
+    public function getBrandwacheEndeDate(): ?\DateTimeInterface
+    {
+        return $this->brandwacheEndeDate;
+    }
+
+    public function setBrandwacheEndeDate(?\DateTimeInterface $brandwacheEndeDate): self
+    {
+        $this->brandwacheEndeDate = $brandwacheEndeDate;
+
+        return $this;
+    }
+
+    public function getBrandwacheEndeTime(): ?\DateTimeInterface
+    {
+        return $this->brandwacheEndeTime;
+    }
+
+    public function setBrandwacheEndeTime(?\DateTimeInterface $brandwacheEndeTime): self
+    {
+        $this->brandwacheEndeTime = $brandwacheEndeTime;
 
         return $this;
     }

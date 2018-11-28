@@ -191,3 +191,9 @@ fieldset:focus {
 }
 
 
+.legends{
+    font-size: 1rem;
+    color: var(--red);
+    margin-top: 10px;
+    font-weight: 600;
+}
