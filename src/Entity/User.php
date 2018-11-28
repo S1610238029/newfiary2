@@ -102,8 +102,11 @@ class User implements UserInterface, \Serializable
     }
 
     public function getUserInitials() {
-        $initials = $this->getFirstName()[0] . $this->getLastName()[0];
-        return $initials;
+        if ($this->getFirstName() && $this->getLastName()) {
+            $initials = $this->getFirstName()[0] . $this->getLastName()[0];
+            return $initials;
+        }
+        return null;
     }
 
     public function setFirstName($firstname)
