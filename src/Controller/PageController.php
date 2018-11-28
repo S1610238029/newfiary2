@@ -110,4 +110,15 @@ class PageController extends Controller //AbstracController
     }
 
 
+    /**
+     * @Route("/datenschutz", name="datenschutz")
+     */
+    public function datenschutzAction(Request $request)
+    {
+        return $this->render('pages/datenschutz.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        ]);
+    }
+
+
 }

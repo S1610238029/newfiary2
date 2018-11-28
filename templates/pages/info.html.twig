@@ -7,6 +7,15 @@
 
 {% block body %}
 
+    <style>
+        #datenschutz {
+            margin: auto;
+        }
+        #linie {
+            margin-top: 5%;
+        }
+    </style>
+
       <div class="row">
         <div class="col-12 col-sm-12">
             <h1>Info & Downloads</h1>
@@ -254,6 +263,8 @@
 
         </div>
     </div>
+
+    <hr id="linie"><br><a href="{{ path('datenschutz') }}" class="bigredbutton" id="datenschutz">Datenschutz und Impressum</a>
 
 
 
