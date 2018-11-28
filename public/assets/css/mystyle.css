@@ -196,6 +196,21 @@ h1 {
     animation: 0.3s linear 0.3s forwards delayedShow;
 }
 
+/* Red Small Button */
+.smallredbutton {
+    display: block;
+    border:none;
+    border-radius: 10px;
+    background-color: var(--red);
+    transition: all 0.5s ease-in-out;
+}
+
+.smallredbutton:hover {
+    background: #c10612;
+    cursor: pointer;
+}
+
+
 @media (min-width: 992px) {
 
     /* ALLGEMEINES */

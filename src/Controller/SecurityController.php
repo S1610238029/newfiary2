@@ -49,6 +49,26 @@ class SecurityController extends AbstractController
         throw new \RuntimeException('This should never be called directly.');
     }
 
+    public function buildForm($user) {
+        return $this->createFormBuilder($user)
+            ->add('email', EmailType::class)
+            ->add('username', TextType::class)
+            ->add('firstname', TextType::class)
+            ->add('lastname', TextType::class)
+            ->add('plainPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+            ))
+            ->add('roles',ChoiceType::class, [
+                'multiple' => true,
+                'expanded' => true,
+                'choices' =>  (User::getRoleOptions())
+            ])
+            ->add('submit', SubmitType::class)
+            ->getForm();
+    }
+
     /**
      * @Route("/dashboard", name="dashboard")
      */
@@ -70,22 +90,20 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    public function buildForm($user) {
-        return $this->createFormBuilder($user)
-            ->add('email', EmailType::class)
-            ->add('username', TextType::class)
-            ->add('plainPassword', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
-            ))
-            ->add('roles',ChoiceType::class, [
-                'multiple' => true,
-                'expanded' => true,
-                'choices' =>  (User::getRoleOptions())
-            ])
-            ->add('submit', SubmitType::class)
-            ->getForm();
+    /**
+     * @Route("deleteUser/{id}", name="user_delete")
+     */
+    public function deleteUserAction($id, Request $request) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+
+        if ($user) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($user);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('dashboard');
     }
 
     /**
