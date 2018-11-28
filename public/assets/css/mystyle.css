@@ -129,6 +129,29 @@ h1 {
     height: auto;
 }
 
+.dot {
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+#user_profile {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#user_initials {
+    color: var(--red);
+    font-weight: bolder;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 #mobileNav .navbar-toggler {
     fill: #000;
     background-color: var(--red);
@@ -259,51 +282,33 @@ h1 {
 
     }
 
-    #sidebar .dot {
+    #sidebar #user_initials {
+        font-size: 24pt;
+    }
+
+    #sidebar.active #user_initials {
+        font-size: 16pt;
+    }
+
+    #sidebar #profile_pic, #sidebar .dot {
         display: block;
         margin: 0 auto;
         height: 100px;
         width: 100px;
         max-width: 100px;
-        background-color: #fff;
-        border-radius: 50%;
+        -webkit-transition: height 0.3s ease-in-out, width 0.3s ease-in-out ;
+        -moz-transition: height 0.3s ease-in-out, width 0.3s ease-in-out;
+        -o-transition: height 0.3s ease-in-out, width 0.3s ease-in-out;
+        transition: height 0.3s ease-in-out, width 0.3s ease-in-out;
     }
 
-    #sidebar #user_profile {
-        position: relative;
-        width: 100%;
-        height: 100%;
-    }
-
-    #sidebar #user_initials {
-        color: var(--red);
-        font-size: 24pt;
-        font-weight: bolder;
-
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    #sidebar #profile_pic {
-        display: block;
-        margin: 0 auto;
-        height: auto;
-        width: 100px;
-        max-width: 100px;
-        -webkit-transition: width 0.3s ease-in-out;
-        -moz-transition: width 0.3s ease-in-out;
-        -o-transition: width 0.3s ease-in-out;
-        transition: width 0.3s ease-in-out;
-    }
-
-    #sidebar.active #profile_pic {
-        min-width: 60px !important;
-        max-width: 60px !important;
-        height: 60px !important;
-        min-height: 60px;
+    #sidebar.active #profile_pic, #sidebar.active .dot {
         width: 60px;
+        height: 60px;
+        -webkit-transition: height 0.3s ease-in-out, width 0.3s ease-in-out ;
+        -moz-transition: height 0.3s ease-in-out, width 0.3s ease-in-out;
+        -o-transition: height 0.3s ease-in-out, width 0.3s ease-in-out;
+        transition: height 0.3s ease-in-out, width 0.3s ease-in-out;
     }
 
     #sidebar #username {
