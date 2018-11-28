@@ -64,18 +64,8 @@
       <file leaf-file-name="info.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/pages/info.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="449">
-              <caret line="111" column="85" selection-start-line="111" selection-start-column="85" selection-end-line="111" selection-end-column="85" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="datatable.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/assets/js/datatable.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
+            <state relative-caret-position="383">
+              <caret line="108" column="77" selection-start-line="108" selection-start-column="77" selection-end-line="108" selection-end-column="77" />
               <folding />
             </state>
           </provider>
@@ -397,12 +387,12 @@
       <workItem from="1543319058228" duration="10243000" />
       <workItem from="1543401515905" duration="29000" />
       <workItem from="1543405087614" duration="7132000" />
-      <workItem from="1543413039452" duration="792000" />
+      <workItem from="1543413039452" duration="1575000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95644000" />
+    <option name="totallyTimeSpent" value="96427000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="0" width="1918" height="1031" extended-state="0" />
@@ -713,8 +703,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/pages/info.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="111" column="85" selection-start-line="111" selection-start-column="85" selection-end-line="111" selection-end-column="85" />
+        <state relative-caret-position="383">
+          <caret line="108" column="77" selection-start-line="108" selection-start-column="77" selection-end-line="108" selection-end-column="77" />
           <folding />
         </state>
       </provider>
