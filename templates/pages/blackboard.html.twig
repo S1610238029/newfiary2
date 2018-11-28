@@ -42,13 +42,21 @@
             }
 
         }
+
+        #test {
+            margin-left: -2%;
+        }
+
+        #button2 {
+            margin-left: 2%;
+        }
     </style>
 
     <h1 id="newsheading">News</h1><br><hr><br>
 
     <!--Permission Überprüfung -->
     {% if is_granted('ROLE_REGISTERED') %}
-        <a href="{{ path('blackboard_neu') }}" class="bigredbutton">Neuen Feed anlegen</a><br><hr><br>
+        <a href="{{ path('blackboard_neu') }}" class="bigredbutton" id="button2">Neuen Feed anlegen</a><br><hr><br>
     {% endif %}
 
     <!-- CARDS STARTING -->
@@ -58,14 +66,14 @@
 
                 {%  for entry in feeds %}
 
-                    <div class="blog-card">
+                    <div class="blog-card" id="test">
                         <div class="description">
                             <h2>{{ entry.title }}</h2>
                             <h3>Beitrag erstellt am: {{ entry.date }}</h3>
                             <p>{{ entry.feed }}</p><br>
                             <div id="buttons">
                                 {% if is_granted('ROLE_REGISTERED') %}
-                                    <div class="container-fluid">
+
                                         <div class="row">
                                             <div class="imagebutton">
                                                 <a href="{{ path('feed_edit', {'id':entry.idfeed}) }}">
@@ -76,11 +84,11 @@
                                             <div class="imagebutton">
                                                 <a href="{{ path('feed_delete', {'id':entry.idfeed}) }}">
                                                     <img border="0" alt="DeleteIcon" src="{{ asset('assets/img/delete_big.svg') }}" width="20"
-                                                         height="19">
+                                                         height="15">
                                                 </a>
                                             </div>
                                         </div>
-                                    </div>
+
                                 {% endif %}
                             </div>
                         </div>
