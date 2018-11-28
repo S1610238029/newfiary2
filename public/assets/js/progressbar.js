@@ -42,6 +42,20 @@ $(document).ready(function() {
 
     /* Abbrechen */
 
+    /*if kategorie is einsatz dann show fieldset with id="einsatz"*/
+    $(".einsatz-button").click(function() {
+        var current = $(this).parent();
+        var next = $(this)
+            .parent()
+            .next();
+        $(".progress li")
+            .eq($("fieldset#einsatz").index(next))
+            .addClass("active");
+        current.hide();
+        next.show();
+        $("p#kategorie_einfügen").html("Kategorie Einsatz");
+    });
+
 
 
 

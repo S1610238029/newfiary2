@@ -29,9 +29,9 @@ class Logbuch
     private $kategorie;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="unterkategorie", type="string", length=255, nullable=false)
+     *
+     * @ORM\Column(name="unterkategorie", type="integer",  nullable=false)
      */
     private $unterkategorie;
 
@@ -172,8 +172,8 @@ class Logbuch
     public static function getKategorieOptions(){
         return["einsatz", "übung", "tätigkeit"];
     }
-    public static function getUnterKategorieOptions(){
-        return["technischerEinsatz", "übung", "tätigkeit"];
+    public static function getUnterKategorieOptionsEinsatz(){
+        return["Brandeinsatz", "Brandsicherheitswache", "Technischer Einsatz"];
     }
 
 
