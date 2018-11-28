@@ -30,11 +30,9 @@
     <nav id="sidebar">
 
         <div class="sidebar-header">
-            {% if app.user.getUserInitials() === null %}
 
             <img id="profile_pic" class="rounded-circle" src="{{ asset('assets/img/logo_circular.jpg') }}" alt="profile-picture">
 
-            {% elseif %}
             <div class="dot">
                 <div id="user_profile" >
                     <div id="user_initials">
@@ -42,8 +40,7 @@
                     </div>
                 </div>
             </div>
-            {% endif %}
-
+            
             <div id="username"> {{ app.user.username }}</div>
         </div>
 
