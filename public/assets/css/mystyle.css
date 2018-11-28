@@ -259,6 +259,16 @@ h1 {
 
     }
 
+    #sidebar .dot {
+        display: block;
+        margin: 0 auto;
+        height: 100px;
+        width: 100px;
+        max-width: 100px;
+        background-color: #fff;
+        border-radius: 50%;
+    }
+
     #sidebar #profile_pic {
         display: block;
         margin: 0 auto;

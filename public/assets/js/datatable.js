@@ -1,14 +1,8 @@
-function closeNav(){
-    var sidebar = document.getElementById("sidebar").classList.toggle("active");
-    document.getElementById("placeholder").classList.toggle("active");
-    document.getElementById("arrow").classList.toggle("active");
-    console.log("toggle");
-}
-
 $(document).ready(function() {
     $('#example').DataTable( {
         "order": [[ 3, "asc" ]],
         "stateSave": true,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
         "language": {
             "lengthMenu": "Zeige _MENU_ Einträge pro Seite",
             "zeroRecords": "Nichts gefunden - sorry",
@@ -18,7 +12,10 @@ $(document).ready(function() {
             "search": "Suchen",
             "paginatePrevious": "Vorherige"
         }
-
     } );
 } );
+
+
+
+
 

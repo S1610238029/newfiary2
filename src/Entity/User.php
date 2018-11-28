@@ -34,6 +34,20 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
+     * @ORM\Column(name="firstname", type="string", length=255)
+     */
+    private $firstname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lastname", type="string", length=255)
+     */
+    private $lastname;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
      */
     private $email;
@@ -85,6 +99,28 @@ class User implements UserInterface, \Serializable
     public function getUsername()
     {
         return $this->username;
+    }
+
+    public function setFirstName($firstname)
+    {
+        $this->firstname = $firstname;
+        return $this;
+    }
+
+    public function getFirstName()
+    {
+        return $this->firstname;
+    }
+
+    public function setLastName($lastname)
+    {
+        $this->lastname = $lastname;
+        return $this;
+    }
+
+    public function getLastName()
+    {
+        return $this->lastname;
     }
 
     public function getPlainPassword()

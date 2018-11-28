@@ -5,9 +5,9 @@
     <link rel="stylesheet" href= "{{ asset('assets/css/info.css') }}">
 {% endblock %}
 
-
 {% block body %}
-    <div class="row">
+
+      <div class="row">
         <div class="col-12 col-sm-12">
             <h1>Info & Downloads</h1>
 
@@ -89,7 +89,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="table-responsive">
-                                                    <table class="table display" id="example"  style="width:100%">
+                                                    <table class="fixed_header table display" id="example"  style="width:100%">
 
                                                         <thead>
                                                         <tr>
@@ -126,7 +126,7 @@
 
 
 
-                                                                <td>{% if mitglied.telefonNr %} {{ mitglied.telefonNr }}{% else %}  {% endif %}</td>
+                                                                <td width="200px">{% if mitglied.telefonNr %} {{ mitglied.telefonNr }}{% else %}  {% endif %}</td>
 
 
 
@@ -141,18 +141,22 @@
                                                                 <td>   {% if mitglied.atemschutztauglich == 1 %}JA{% elseif mitglied.atemschutztauglich == 0 %}NEIN{% endif %}</td>
                                                                 {% if is_granted('ROLE_ADMIN') %}
                                                                     <td>
-                                                                        <a type="button" role="button" class="btn bnt-link smallredbutton" href="{{ path('member_edit', {'id':mitglied.idmitglieder} ) }}">
-                                                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#fff" width="20" height="20"
-                                                                                 viewBox="0 0 129 129" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">
-                                                                                <path d="m119.2,114.3h-109.4c-2.3,0-4.1,1.9-4.1,4.1s1.9,4.1 4.1,4.1h109.5c2.3,0 4.1-1.9 4.1-4.1s-1.9-4.1-4.2-4.1z"></path>
-                                                                                <path d="m5.7,78l-.1,19.5c0,1.1 0.4,2.2 1.2,3 0.8,0.8 1.8,1.2 2.9,1.2l19.4-.1c1.1,0 2.1-0.4 2.9-1.2l67-67c1.6-1.6 1.6-4.2 0-5.9l-19.2-19.4c-1.6-1.6-4.2-1.6-5.9-1.77636e-15l-13.4,13.5-53.6,53.5c-0.7,0.8-1.2,1.8-1.2,2.9zm71.2-61.1l13.5,13.5-7.6,7.6-13.5-13.5 7.6-7.6zm-62.9,62.9l49.4-49.4 13.5,13.5-49.4,49.3-13.6,.1 .1-13.5z"></path>
-                                                                            </svg>
-                                                                        </a>
+                                                                        <button type="button"  class="btn smallredbutton">
+                                                                            <a href="{{ path('member_edit', {'id':mitglied.idmitglieder} ) }}">
+                                                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#fff" width="20" height="20"
+                                                                                     viewBox="0 0 129 129" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">
+                                                                                    <path d="m119.2,114.3h-109.4c-2.3,0-4.1,1.9-4.1,4.1s1.9,4.1 4.1,4.1h109.5c2.3,0 4.1-1.9 4.1-4.1s-1.9-4.1-4.2-4.1z"></path>
+                                                                                    <path d="m5.7,78l-.1,19.5c0,1.1 0.4,2.2 1.2,3 0.8,0.8 1.8,1.2 2.9,1.2l19.4-.1c1.1,0 2.1-0.4 2.9-1.2l67-67c1.6-1.6 1.6-4.2 0-5.9l-19.2-19.4c-1.6-1.6-4.2-1.6-5.9-1.77636e-15l-13.4,13.5-53.6,53.5c-0.7,0.8-1.2,1.8-1.2,2.9zm71.2-61.1l13.5,13.5-7.6,7.6-13.5-13.5 7.6-7.6zm-62.9,62.9l49.4-49.4 13.5,13.5-49.4,49.3-13.6,.1 .1-13.5z"></path>
+                                                                                </svg>
+                                                                            </a>
+                                                                        </button>
                                                                     </td>
                                                                     <td>
-                                                                        <a type="button" role="button" class="btn btn-link smallredbutton" href="{{ path('member_delete', {'id':mitglied.idmitglieder} ) }}">
-                                                                            <i><img src="{{  asset('assets/img/delete_big.svg') }}" alt="delete symbol"></i>
-                                                                        </a>
+                                                                        <button type="button"  class="btn smallredbutton">
+                                                                            <a href="{{ path('member_delete', {'id':mitglied.idmitglieder} ) }}">
+                                                                                <i><img src="{{  asset('assets/img/delete_big.svg') }}" alt="delete symbol"></i>
+                                                                            </a>
+                                                                        </button>
                                                                     </td>
                                                                 {% endif %}
 

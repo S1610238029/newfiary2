@@ -115,16 +115,51 @@
 }
 
 /* Tabelle*/
-.smallredbutton {
-    background-color: var(--red);
-    border-radius: 10px;
+.table-responsive  thead {
+    background-color: rgba(0, 0, 0, 0.85);
+    color: #fff;
+}
+
+#users .table-responsive tbody tr:nth-child(2n+1), #users .table-responsive tbody tr:nth-child(2n+1)>.sorting_1  {
+
+}
+
+#users .table-responsive tbody tr td:nth-child(5n){
+    width: 100px;
+}
+
+#users .table-responsive tbody tr>.sorting_1 {
+
+}
+
+#users .table-responsive .dataTables_paginate.paging_simple_numbers a {
     border: none;
+}
+
+tr td {
+    transition: all 0.3s ease-in-out;
+}
+
+tr:hover td {
+    background-color: rgba(255, 4, 3, 0.1);
+}
+
+
+.smallredbutton {
+    display: block;
+    border:none;
+    border-radius: 10px;
+    background-color: var(--red);
     transition: all 0.5s ease-in-out;
 }
 
 .smallredbutton:hover {
     background: #c10612;
     cursor: pointer;
+}
+
+#accordion .smallredbutton a {
+    padding: 0;
 }
 
 #example_wrapper {
