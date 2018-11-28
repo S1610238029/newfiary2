@@ -85,11 +85,13 @@
 
                 </a>
 
+                {% if user != app.user %}
                 <button type="button" class="btn smallredbutton ml-auto">
                     <a href="{{ path('user_delete', {'id':user.id}) }}">
                         <i><img src="{{ asset('assets/img/delete_big.svg') }}" alt="delete symbol"></i>
                     </a>
                 </button>
+                {% endif %}
 
 
             </li>
