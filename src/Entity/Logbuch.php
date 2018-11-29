@@ -158,11 +158,18 @@ class Logbuch
     private $anlass;
 
     /**
-     * @var \DateTime
      *
-     * @ORM\Column(name="alarmzeit", type="datetime")
+     *
+     * @ORM\Column(name="alarmzeit", type="date")
      */
     private $alarmzeit;
+
+    /**
+     *
+     *
+     * @ORM\Column(name="alarmdatum", type="time")
+     */
+    private $alarmdatum;
 
 
     /**
@@ -245,9 +252,9 @@ class Logbuch
     /**
      * @var string
      *
-     * @ORM\Column(name="eingesetzteGeräte", type="string", length=255, nullable=true)
+     * @ORM\Column(name="eingesetzteGeraete", type="string", length=255, nullable=true)
      */
-    private $eingesetzteGeräte;
+    private $eingesetzteGeraete;
 
     /**
      * @var string
@@ -416,19 +423,6 @@ class Logbuch
 
         return $this;
     }
-
-    public function getAlarmzeit(): ?\DateTimeInterface
-    {
-        return $this->alarmzeit;
-    }
-
-    public function setAlarmzeit(\DateTimeInterface $alarmzeit): self
-    {
-        $this->alarmzeit = $alarmzeit;
-
-        return $this;
-    }
-
 
     public function getBeginnDatum(): ?\DateTimeInterface
     {
@@ -696,14 +690,14 @@ class Logbuch
         return $this;
     }
 
-    public function getEingesetzteGeräte(): ?string
+    public function getEingesetzteGeraete(): ?string
     {
-        return $this->eingesetzteGeräte;
+        return $this->eingesetzteGeraete;
     }
 
-    public function setEingesetzteGeräte(?string $eingesetzteGeräte): self
+    public function setEingesetzteGeraete(?string $eingesetzteGeraete): self
     {
-        $this->eingesetzteGeräte = $eingesetzteGeräte;
+        $this->eingesetzteGeraete = $eingesetzteGeraete;
 
         return $this;
     }
@@ -788,6 +782,30 @@ class Logbuch
     public function setBrandwacheEndeTime(?\DateTimeInterface $brandwacheEndeTime): self
     {
         $this->brandwacheEndeTime = $brandwacheEndeTime;
+
+        return $this;
+    }
+
+    public function getAlarmzeit(): ?\DateTimeInterface
+    {
+        return $this->alarmzeit;
+    }
+
+    public function setAlarmzeit(\DateTimeInterface $alarmzeit): self
+    {
+        $this->alarmzeit = $alarmzeit;
+
+        return $this;
+    }
+
+    public function getAlarmdatum(): ?\DateTimeInterface
+    {
+        return $this->alarmdatum;
+    }
+
+    public function setAlarmdatum(\DateTimeInterface $alarmdatum): self
+    {
+        $this->alarmdatum = $alarmdatum;
 
         return $this;
     }

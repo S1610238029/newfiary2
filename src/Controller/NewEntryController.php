@@ -72,6 +72,7 @@ class NewEntryController extends AbstractController
             ->add('brandausDate', DateType::class, array(
                 // renders it as a single text box
                 'widget' => 'single_text',
+                'data' => new \DateTime("now")
                 ))
             ->add('brandausTime', TimeType::class, array(
             // renders it as a single text box
@@ -80,6 +81,7 @@ class NewEntryController extends AbstractController
             ->add('brandwacheStartDate', DateType::class, array(
                 // renders it as a single text box
                 'widget' => 'single_text',
+                'data' => new \DateTime("now")
             ))
             ->add('brandwacheStartTime', TimeType::class, array(
                 // renders it as a single text box
@@ -88,6 +90,7 @@ class NewEntryController extends AbstractController
             ->add('brandwacheEndeDate', DateType::class, array(
                 // renders it as a single text box
                 'widget' => 'single_text',
+                'data' => new \DateTime("now")
             ))
             ->add('brandwacheEndeTime', TimeType::class, array(
                 // renders it as a single text box
@@ -109,17 +112,40 @@ class NewEntryController extends AbstractController
             ->add('hausnummer', TextType::class)
             ->add('plz', NumberType::class)
             ->add('ort', TextType::class)
-            ->add('alarmzeit', DateType::class)
-            ->add('beginnDatum', DateType::class)
-            ->add('beginnZeit', TimeType::class)
-            ->add('endeDatum', DateType::class)
-            ->add('endeZeit', TimeType::class)
+            ->add('alarmdatum', DateType::class, array(
+                // renders it as a single text box
+                'widget' => 'single_text',
+                'data' => new \DateTime("now")
+            ))
+            ->add('alarmzeit', TimeType::class, array(
+                // renders it as a single text box
+                'widget' => 'single_text'
+            ))
+            ->add('beginnDatum', DateType::class, array(
+                // renders it as a single text box
+                'widget' => 'single_text',
+                'data' => new \DateTime("now")
+            ))
+            ->add('beginnZeit', TimeType::class, array(
+                // renders it as a single text box
+                'widget' => 'single_text',
+            ))
+            ->add('endeDatum', DateType::class, array(
+                // renders it as a single text box
+                'widget' => 'single_text',
+                'data' => new \DateTime("now")
+            ))
+            ->add('endeZeit', TimeType::class, array(
+                // renders it as a single text box
+                'widget' => 'single_text',
+            ))
             ->add('lagebeimEintreffen', TextareaType::class)
             ->add('beschreibung', TextareaType::class)
             ->add('geschaedigterName', TextType::class)
             ->add('geschaedigterAdresse', TextType::class)
             ->add('geschaedigterTel', TextType::class)
             ->add('geschaedigterKennzeichen', TextType::class)
+            ->add('eingesetzteGeraete', TextType::class)
             ->add('wetter', ChoiceType::class, array(
                 'choices' => array_flip(Logbuch::getWetterOptions()),
                 'multiple'=>true,

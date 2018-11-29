@@ -45,7 +45,7 @@
         <fieldset id="kategoriewahl">
             <h2 class='title'>Kategorie Auswahl</h2>
             <h3 class='sub-title'>Wähle die Kategorie des Eintrags aus aus</h3>
-            <p>--[Aktuell bringt dich jede Kategorie auf die nächste Seite]--</p>
+
             <input type='button' name='next' class='next-button custom-button kategorie' value="Einsatz"><br>
             <input type='button' name='next' class='next-button custom-button kategorie' value="Übung"><br>
             <input type='button' name='next' class='next-button custom-button kategorie' value="Tätigkeit"><br>
@@ -63,11 +63,118 @@
             <p id="kategorie_einfügen">-- [Hier kommt die ausgewählte Kategorie] --</p><br>
             <!-- Hier muss dann das aus/eingebelendet werden was zu der jeweiligen Kategorie gehört -->
 
-            <div id="einsatz">
 
 
-            {{ form_row(form_einsatz.unterkategorie,  {attr: {id: 'underkategorie'} }) }}
 
+                <div class="einsatz">
+                {{ form_row(form_einsatz.unterkategorie,  {attr: {id: 'underkategorie'} }) }}
+                    </div>
+
+                 <div class="allgemein">
+                     <div id="uhrzeit">
+                         <legend class="legends">Zeitliche Details:</legend>
+                         <div class="einsatz">
+                         <div class="links">
+                             {{ form_label(form_einsatz.alarmdatum, 'Datum der Alarmierung') }}
+                             {{ form_errors(form_einsatz.alarmdatum) }}
+                             {{ form_widget(form_einsatz.alarmdatum) }}
+                         </div>
+                         <div class="rechts">
+                             {{ form_label(form_einsatz.alarmzeit, 'Uhrzeit der Alarmierung') }}
+                             {{ form_errors(form_einsatz.alarmzeit) }}
+                             {{ form_widget(form_einsatz.alarmzeit) }}
+                         </div>
+                             </div>
+                         <div class="links">
+                             <div class="einsatz">
+                             {{ form_label(form_einsatz.beginnDatum, 'Datum Einsatzbeginn') }}
+                             </div>
+                             <div class="uebung">
+                             {{ form_label(form_einsatz.beginnDatum, 'Datum Übungsbeginn') }}
+                             </div>
+                             {{ form_errors(form_einsatz.beginnDatum) }}
+                             {{ form_widget(form_einsatz.beginnDatum) }}
+                         </div>
+                         <div class="rechts">
+                             <div class="einsatz">
+                             {{ form_label(form_einsatz.beginnZeit, 'Zeit Einsatzbeginn') }}
+                                 </div>
+                             <div class="uebung">
+                                 {{ form_label(form_einsatz.beginnZeit, 'Zeit Übungsbeginn') }}
+                             </div>
+                             {{ form_errors(form_einsatz.beginnZeit) }}
+                             {{ form_widget(form_einsatz.beginnZeit) }}
+                         </div>
+                         <div class="links">
+                             <div class="einsatz">
+                             {{ form_label(form_einsatz.endeDatum, 'Datum Einsatzende') }}
+                                 </div>
+                             <div class="uebung">
+                                 {{ form_label(form_einsatz.endeDatum, 'Datum Übungsende') }}
+                             </div>
+                             {{ form_errors(form_einsatz.endeDatum) }}
+                             {{ form_widget(form_einsatz.endeDatum) }}
+                         </div>
+                         <div class="rechts">
+                             <div class="einsatz">
+                             {{ form_label(form_einsatz.endeZeit, 'Zeit Einsatzende') }}
+                                 </div>
+                             <div class="uebung">
+                                 {{ form_label(form_einsatz.endeZeit, 'Zeit Übungsende') }}
+                             </div>
+                             {{ form_errors(form_einsatz.endeZeit) }}
+                             {{ form_widget(form_einsatz.endeZeit) }}
+                         </div>
+
+
+                     </div>
+
+
+                     <div id="ort">
+
+                     <legend class="legends">Ort:</legend>
+                     <div class="links">
+                     {{ form_label(form_einsatz.strasse, 'Straße') }}
+                     {{ form_errors(form_einsatz.strasse) }}
+                     {{ form_widget(form_einsatz.strasse,  {attr: {'placeholder': 'Musterstraße'} }) }}
+                     </div>
+                         <div class="rechts">
+                             {{ form_label(form_einsatz.hausnummer, 'Hausnummer') }}
+                     {{ form_errors(form_einsatz.hausnummer) }}
+                     {{ form_widget(form_einsatz.hausnummer,  {attr: {'placeholder': '1'} }) }}
+                    </div>
+                     <div class="links">
+                     {{ form_label(form_einsatz.plz, 'PLZ') }}
+                     {{ form_errors(form_einsatz.plz) }}
+                     {{ form_widget(form_einsatz.plz,  {attr: {'placeholder': '3353'} }) }}
+                     </div>
+                     <div class="rechts">
+                     {{ form_label(form_einsatz.ort, 'Ort') }}
+                     {{ form_errors(form_einsatz.ort) }}
+                     {{ form_widget(form_einsatz.ort,  {attr: {'placeholder': 'Musterstadt'} }) }}
+                     </div>
+                     </div>
+                </div>
+
+                <!--Allgemeine Infos -->
+                <div class="einsatz">
+                {{ form_label(form_einsatz.lagebeimEintreffen, 'Lage beim Eintreffen') }}
+                {{ form_errors(form_einsatz.lagebeimEintreffen) }}
+                {{ form_widget(form_einsatz.lagebeimEintreffen,  {attr: {'placeholder': 'Genau Beschreibung der Lage beim Eintreffen der Einsatzkräfte...'} }) }}
+                 </div>
+
+                <div id="allgemein">
+                    {{ form_label(form_einsatz.beschreibung, 'Tätigkeitsbeschreibung') }}
+                    {{ form_errors(form_einsatz.beschreibung) }}
+                    {{ form_widget(form_einsatz.beschreibung,  {attr: {'placeholder': 'Genau Tätigkeitsbeschreibung...'} }) }}
+
+                    {{ form_label(form_einsatz.eingesetzteGeraete, 'Eingesätze Geräte') }}
+                    {{ form_errors(form_einsatz.eingesetzteGeraete) }}
+                    {{ form_widget(form_einsatz.eingesetzteGeraete,  {attr: {'placeholder': 'z.B. Hydraulisches Rettungsgerät, Pressluftatmer, sonstige ATS-Geräte, Stromerzeuger'} }) }}
+
+                </div>
+
+                <div class="einsatz">
 
                 <div id="brandeinsatz">
                     <legend class="legends">Details zum Brand:</legend>
@@ -106,7 +213,7 @@
                         {{ form_row(form_einsatz.brandobjekte, {'attr': {'placeholder': 'z.B. PKW, Wohnung, Kamin, Gewerbebetrieb'} }) }}
 
                         {{ form_row(form_einsatz.brandausmass) }}
-                        
+
 
                     </div>
 
@@ -116,12 +223,18 @@
 
                 <div id="brandsicherheitswache">
                     <legend class="legends">Details zur Brandsicherheitswache:</legend>
+                    {{ form_row(form_einsatz.anlass) }}
+
 
                 </div>
 
 
                 <div id="technischerEinsatz">
                     <legend class="legends">Details zum technischen Einsatz:</legend>
+
+                    {{ form_label(form_einsatz.unterunterkategorie, 'Technische Einsatzart') }}
+                    {{ form_errors(form_einsatz.unterunterkategorie) }}
+                    {{ form_widget(form_einsatz.unterunterkategorie,  {attr: {id: 'technisch'} }) }}
 
                 </div>
 
@@ -139,95 +252,90 @@
 
 
             <!-- Buttons -->
-            <p>Neustart/Abbruch funktioniert aktuell noch nicht</p>
+
             <input type='button' name='previous' class='prev-button custom-button' value="Zurück">
             <input type='button' name='next' class='next-button custom-button' value="Vorwärts"><br>
 
             <input type='button' name='restart' class='reset-button custom-button' value="Neustart">
-            <input type='button' name='restart' class='reset-button custom-button' value="Abbruch">
+            <button class="home-button custom-button"><a href="{{ path('homepage') }}" class='colorButton'>Abbruch</a></button>
 
 
         </fieldset>
 
-        <!--Allgemeine Details des Eintrags-->
-    {#    <fieldset>
-            <h2 class='title'>Eintrags Details</h2>
-            <h3 class='sub-title'>Bitte gib hier die Details der ausgeübten Aufgabe bekannt!</h3>
 
-            <!-- Hier fehlt noch die Kategorie die ausgewählt wurde -->
-            <p>-- [Hier fehlt noch die ausgewählte Kategorie] --</p><br>
-            <!-- Hier muss dann das aus/eingebelendet werden was zu der jeweiligen Kategorie gehört -->
+    <!-- Wetter und Straßenbeschaffenheit -->
+    <fieldset>
 
+        <!-- Wetter -->
+        <h2 class='title'>Zusätzliche Informationen</h2>
+        <h3 class='sub-title'>Hier werden zusätzliche Informationen erfasst:</h3>
 
-            <!-- Eintragsbezeichnung -->
-            <label for="eintragsbezeichnung">Eintragsbezeichnung -  </label><i class="fas fa-info"></i><br>
-            <input id="eintragsbezeichnung" type='text' placeholder='Eintragsbezeichnung'><br>
-
-            <!-- Einsatzart -->
-            <label for="einsatzart">Einsatzart:</label><br>
-            <select id="einsatzart">
-                <option value="brandeinsatz">Brandeinsatz</option>
-                <option value="techeinsatz">Technischer Einsatz</option>
-                <option value="weiteres1">Weitere Option</option>
-            </select>
-
-            <!-- Ausfahrt -->
-            <!-- bei Ausfahrt & Rückkunft müssen wir Uhrzeit und Tag noch kombinieren! -->
+        <div class="einsatz" >
+            <legend class="legends">Details zum Geschädigten:</legend>
             <div class="links">
-                <!-- Alarmtag -->
-                <label for="alarmtag">Alarmtag:</label><br>
-                <input id="alarmtag" type='date'>
+                {{ form_label(form_einsatz.geschaedigterName, 'Name des Geschädigten') }}
+                {{ form_errors(form_einsatz.geschaedigterName) }}
+                {{ form_widget(form_einsatz.geschaedigterName,  {'attr': {'placeholder': 'Max Mustermann'} }) }}
 
-                <!-- Ausfahrtstag -->
-                <label for="ausfahrttag">Ausfahrtstag:</label><br>
-                <input id="ausfahrttag" type='date'>
-
-                <!-- Rückkunftstag -->
-                <label for="rueckfahrttag">Rückkunftstag:</label><br>
-                <input id="rueckfahrttag" type='date'>
-            </div>
-
+                </div>
             <div class="rechts">
-                <!-- Alarmzeit -->
-                <label for="alarmzeit">Alarmzeit:</label><br>
-                <input id="alarmzeit" type='time'>
+                {{ form_label(form_einsatz.geschaedigterAdresse, 'Adresse des Geschädigten') }}
+                {{ form_errors(form_einsatz.geschaedigterAdresse) }}
+                {{ form_widget(form_einsatz.geschaedigterAdresse,  {'attr': {'placeholder': 'Musterhausen 1, 1111 Musterort'} }) }}
 
-                <!-- Ausfahrtszeit -->
-                <label for="ausfahrtzeit">Ausfahrtszeit:</label><br>
-                <input id="ausfahrtzeit" type='time'>
-
-                <!-- Rückkunftszeit -->
-                <label for="rueckfahrtzeit">Rückkunftszeit:</label><br>
-                <input id="rueckfahrtzeit" type='time'>
             </div>
-            <br>
+            <div class="links">
+                {{ form_label(form_einsatz.geschaedigterTel, 'Telefonnummer des Geschädigten') }}
+                {{ form_errors(form_einsatz.geschaedigterTel) }}
+                {{ form_widget(form_einsatz.geschaedigterTel,  {'attr': {'placeholder': '1234/56789123'} }) }}
 
-            <!-- Eintragsort -->
-            <label for="eintragsort">Eintrags Ort:</label><br>
-            <input id="eintragsort" type='text' placeholder='Eintrags Ort - hier fehlt noch Straße PLZ Ort!'>
+            </div>
+            <div class="rechts">
+                {{ form_label(form_einsatz.geschaedigterKennzeichen, 'KFZ-Kennzeichen des Geschädigten') }}
+                {{ form_errors(form_einsatz.geschaedigterKennzeichen) }}
+                {{ form_widget(form_einsatz.geschaedigterKennzeichen,  {'attr': {'placeholder': 'AM-000-XY'} }) }}
 
-            <!-- Anforderer Name -->
-            <label for="anforderername">Anforderer Name:</label><br>
-            <input id="anforderername" type='text' placeholder='Name des Anforderers'>
+            </div>
 
-            <!-- Anforderer Telefonnummer -->
-            <label for="anforderertel">Anforderer Telefonnummer:</label><br>
-            <input id="anforderertel" type='tel' placeholder='+43 699 123 456 789'>
+            <!--Wetter-->
+            {{ form_label(form_einsatz.wetter, 'Wetter') }}
+            {{ form_errors(form_einsatz.wetter) }}
 
-            <!-- Details des Einsatzes -->
-            <label for="details">Eintrags Details:</label><br>
-            <textarea id="details" type='text' placeholder='Eintrags Details kommen hier ... '></textarea><br>
+            {{ form_widget(form_einsatz.wetter) }}
 
-            <!-- Buttons -->
-            <p>Neustart/Abbruch funktioniert aktuell noch nicht</p>
-            <input type='button' name='previous' class='prev-button custom-button' value="Zurück">
-            <input type='button' name='next' class='next-button custom-button' value="Vorwärts"><br>
+            {{ form_label(form_einsatz.betriebsmittel, 'Verbrauchte Betriebsmittel') }}
+            {{ form_errors(form_einsatz.betriebsmittel) }}
+            {{ form_widget(form_einsatz.betriebsmittel,  {'attr': {'placeholder': 'z.B. Ölbindemittel, Petrotech, Pulver, Schaummittel'} }) }}
 
-            <input type='button' name='restart' class='reset-button custom-button' value="Neustart">
-            <input type='button' name='restart' class='reset-button custom-button' value="Abbruch">
+            {{ form_label(form_einsatz.anwesend, 'Anwesende') }}
+            {{ form_errors(form_einsatz.anwesend) }}
+            {{ form_widget(form_einsatz.anwesend) }}
+
+            {{ form_label(form_einsatz.notizen, 'Notizen') }}
+            {{ form_errors(form_einsatz.notizen) }}
+            {{ form_widget(form_einsatz.notizen,  {'attr': {'placeholder': 'z.B. verletzte Mitglieder, Schäden...'} }) }}
+
+            {{ form_label(form_einsatz.bericht, 'Ausführlicher Bericht') }}
+            {{ form_errors(form_einsatz.bericht) }}
+            {{ form_widget(form_einsatz.bericht,  {'attr': {'placeholder': 'Genauer Bericht für die Homepage'} }) }}
+
+            <p>Hier kommt eventuell ein File-Upload hin!</p>
 
 
-        </fieldset>#}
+        </div>
+
+
+
+
+        <!-- Buttons -->
+
+        <input type='button' name='previous' class='prev-button custom-button' value="Zurück">
+        <input type='button' name='next' class='next-button custom-button' value="Vorwärts"><br>
+
+        <input type='button' name='restart' class='reset-button custom-button' value="Neustart">
+        <input type='button' name='restart' class='reset-button custom-button' value="Abbruch">
+
+    </fieldset>
 
         <!--Besatzung-->
         <fieldset>
@@ -245,46 +353,7 @@
 
         </fieldset>
 
-        <!-- Wetter und Straßenbeschaffenheit -->
-        <fieldset>
 
-            <!-- Wetter -->
-            <h2 class='title'>Wetter Straßenbeschaffenheit</h2>
-            <h3 class='sub-title'>Bitte die Wetterumstände des Eintrags auswählen:</h3>
-
-            <label for="sonne">Sonne</label>
-            <input id="sonne" type="checkbox" name="sonne" value="sonne" class="checkmark">
-
-            <label for="wolken">Wolken</label>
-            <input id="wolken" type="checkbox" name="wolken" value="wolken" class="checkmark">
-
-            <label for="wind">Wind</label>
-            <input id="wind" type="checkbox" name="wind" value="wind" class="checkmark">
-
-
-            <!-- Straßenbeschaffenheit -->
-            <h2 class='title'>Straßenbeschaffenheit</h2>
-            <h3 class='sub-title'>Bitte die Straßenbeschaffenheit des Eintrags auswählen:</h3>
-
-            <label for="eis">Eis</label>
-            <input id="eis" type="checkbox" name="sonne" value="sonne" class="checkmark">
-
-            <label for="schnee">Schnee</label>
-            <input id="schnee" type="checkbox" name="wolken" value="wolken" class="checkmark">
-
-            <label for="mehr">Mehr</label>
-            <input id="mehr" type="checkbox" name="wind" value="wind" class="checkmark">
-
-
-            <!-- Buttons -->
-            <p>Neustart/Abbruch funktioniert aktuell noch nicht</p>
-            <input type='button' name='previous' class='prev-button custom-button' value="Zurück">
-            <input type='button' name='next' class='next-button custom-button' value="Vorwärts"><br>
-
-            <input type='button' name='restart' class='reset-button custom-button' value="Neustart">
-            <input type='button' name='restart' class='reset-button custom-button' value="Abbruch">
-
-        </fieldset>
 
         <!-- Zusammenfassung -->
         <fieldset>
@@ -296,7 +365,6 @@
             <input type='text' name='address' placeholder='Address'>
 
             <!-- Buttons -->
-            <p>Neustart/Abbruch funktioniert aktuell noch nicht</p>
             <input type='button' name='previous' class='prev-button custom-button' value="Zurück">
             <input type='button' name='next' class='next-button custom-button' value="Vorwärts"><br>
 

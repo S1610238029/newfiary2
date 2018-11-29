@@ -47,6 +47,7 @@ $(document).ready(function() {
         $("fieldset#kategoriewahl").show();
     });
 
+
     /* Abbrechen */
 
 
@@ -57,7 +58,8 @@ $(document).ready(function() {
 
 
 
-
+    $('div.uebung').hide();
+    $('div.einsatz').hide();
 
     /*while clicking on one of the main kategories*/
     $(".kategorie").click(function() {
@@ -67,18 +69,21 @@ $(document).ready(function() {
         if(kategorie=='Einsatz') {
             $("#title").text(kategorie + 'details');
             $("#subtitle").text('Bitte gib hier die Details des Einsatzes bekannt!');
-            $('#form_unterkategorie').prepend($('<option>', {value : 'false', selected : 'selected', text: 'Bitte wählen...'}));
+            $('#form_unterkategorie').prepend($('<option>', {value : '', selected : 'selected', text: 'Bitte wählen...'}));
 
-
+            $('div.uebung').hide();
+            $('div.einsatz').show();
         }else{
             $("#title").text(kategorie + 'sdetails');
             $("#subtitle").text('Bitte gib hier die Details der '+ kategorie +' bekannt!');
 
-            $('div#einsatz').hide();
+            $('div.einsatz').hide();
+            $('div.uebung').show();
         }
 
-
-
+        $('#form_unterunterkategorie').prepend($('<option>', {value : '', selected : 'selected', text: 'Bitte wählen...'}));
+        $('#form_unterunterkategorie').attr('required', 'true');
+        $('#form_unterkategorie').attr('required', 'true');
 
         $('#form_unterkategorie').change(function(){
             var selectedKategorie=$(this).val();
@@ -91,10 +96,16 @@ $(document).ready(function() {
                 $('div#brandeinsatz').hide();
                 $('div#technischerEinsatz').hide();
                 $('div#brandsicherheitswache').show();
-            }else{
+            }else if(selectedKategorie=='2'){
+
                 $('div#brandsicherheitswache').hide();
                 $('div#brandeinsatz').hide();
                 $('div#technischerEinsatz').show();
+            }else{
+                $('div#brandeinsatz').hide();
+                $('div#brandsicherheitswache').hide();
+                $('div#technischerEinsatz').hide();
+
             }
 
 

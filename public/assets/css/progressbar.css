@@ -41,7 +41,7 @@ body{
     display:none;
 }
 
-#form-id input{
+#form-id input, .home-button{
     border:1px solid #ccc;
     border-radius:3px;
     padding:15px;
@@ -50,6 +50,7 @@ body{
     font-size:13px;
     box-sizing:border-box;
     width:100%;
+    text-decoration:none;
 }
 
 #form-id textarea {
@@ -196,4 +197,30 @@ fieldset:focus {
     color: var(--red);
     margin-top: 10px;
     font-weight: 600;
+}
+
+#brandeinsatz, #technischerEinsatz, #brandsicherheitswache{
+    padding:5px;
+    background-color: #f1f1f1;
+
+}
+
+/*#ort{
+    border: 1px solid #e3e3e3;
+    padding:5px;
+}*/
+
+#form-id div > label:nth-child(1), #form-id fieldset div.einsatz>label.required, div.allgemein div.links label.required,
+form#form-id fieldset div#allgemein label.required{
+    font-weight: bold;
+
+    font-variant-caps: all-small-caps;
+
+    font-size: 1.2em !important;
+    color:var(--red);
+}
+
+.colorButton{
+    color:white;
+    text-decoration:none;
 }
