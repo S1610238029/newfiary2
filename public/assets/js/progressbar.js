@@ -9,7 +9,7 @@ $(document).ready(function() {
         var next = $(this)
             .parent()
             .next();
-        $(".progress li")
+        $(".progressbar li")
             .eq($("fieldset").index(next))
             .addClass("active");
         current.hide();
@@ -21,7 +21,7 @@ $(document).ready(function() {
         var prev = $(this)
             .parent()
             .prev();
-        $(".progress li")
+        $(".progressbar li")
             .eq($("fieldset").index(current))
             .removeClass("active");
         current.hide();
@@ -41,8 +41,8 @@ $(document).ready(function() {
     });*/
     $(".reset-button").click(function() {
         var current = $(this).parent();
-        $(".progress li").removeClass("active");
-        $(".progress li:first-child").addClass("active");
+        $(".progressbar li").removeClass("active");
+        $(".progressbar li:first-child").addClass("active");
         current.hide();
         $("fieldset#kategoriewahl").show();
     });
@@ -56,7 +56,11 @@ $(document).ready(function() {
     $('div#brandsicherheitswache').hide();
     $('div#technischerEinsatz').hide();
 
-
+    /*wrap input+label checkboxes into a deiv*/
+    $('input[type=checkbox]+label').each(function(){
+        $(this).prepend($(this).prev());
+        $(this).wrap("<div class='col-sm-2 col-lg-3 left'></div>");
+    });
 
     $('div.uebung').hide();
     $('div.einsatz').hide();
