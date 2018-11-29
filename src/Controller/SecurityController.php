@@ -122,6 +122,8 @@ class SecurityController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+
+            return $this->redirectToRoute('dashboard');
         }
 
         return $this->render('security/editUser.html.twig', [
