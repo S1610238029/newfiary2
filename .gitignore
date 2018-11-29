@@ -19,3 +19,4 @@
 .idea/newfiary.iml
 .idea/workspace.xml
 database/1_isabella_newfiary.sql
+templates/security/editUser.html.twig
