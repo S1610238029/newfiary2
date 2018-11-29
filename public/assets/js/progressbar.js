@@ -1,6 +1,9 @@
 /**
  * Created by Natascha on 06.11.2018.
- */
+*/
+$(".costum-button").on("click", function() {
+    $("body").scrollTop(0);
+});
 
 /* Erster Test der Animationen für die Progress Bar beim Eintrag erstellen */
 $(document).ready(function() {
@@ -9,7 +12,7 @@ $(document).ready(function() {
         var next = $(this)
             .parent()
             .next();
-        $(".progress li")
+        $(".progressbar li")
             .eq($("fieldset").index(next))
             .addClass("active");
         current.hide();
@@ -21,12 +24,23 @@ $(document).ready(function() {
         var prev = $(this)
             .parent()
             .prev();
-        $(".progress li")
+        $(".progressbar li")
             .eq($("fieldset").index(current))
             .removeClass("active");
         current.hide();
         prev.show();
     });
+
+
+
+    $(".custom-button").click(function() {
+        $("html, body").animate({
+            scrollTop: 0
+        }, 800);
+        return false;
+    });
+
+
 
     /* Funktioniert noh nicht 100% */
   /*  $(".reset-button").click(function() {
@@ -41,8 +55,8 @@ $(document).ready(function() {
     });*/
     $(".reset-button").click(function() {
         var current = $(this).parent();
-        $(".progress li").removeClass("active");
-        $(".progress li:first-child").addClass("active");
+        $(".progressbar li").removeClass("active");
+        $(".progressbar li:first-child").addClass("active");
         current.hide();
         $("fieldset#kategoriewahl").show();
     });
@@ -56,7 +70,15 @@ $(document).ready(function() {
     $('div#brandsicherheitswache').hide();
     $('div#technischerEinsatz').hide();
 
-
+    /*wrap input+label checkboxes into a deiv*/
+  /*  $('input[type=checkbox]+label').each(function(){
+        $(this).prepend($(this).prev());
+        $(this).wrap("<div class='col-sm-2 col-lg-3 left'></div>");
+    });
+    $('input[type=radio]+label').each(function(){
+        $(this).prepend($(this).prev());
+        $(this).wrap("<div class='col-sm-2 col-lg-3 left'></div>");
+    });*/
 
     $('div.uebung').hide();
     $('div.einsatz').hide();
