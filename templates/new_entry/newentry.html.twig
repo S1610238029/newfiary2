@@ -234,18 +234,107 @@
         </div>
 
         <!--Allgemeine Infos -->
+        <div class="einsatz">
+            {{ form_label(form_einsatz.lagebeimEintreffen, 'Lage beim Eintreffen') }}
+            {{ form_errors(form_einsatz.lagebeimEintreffen) }}
+            {{ form_widget(form_einsatz.lagebeimEintreffen,  {attr: {'placeholder': 'Genau Beschreibung der Lage beim Eintreffen der Einsatzkräfte...'} }) }}
+        </div>
 
+        <div class="allgemein">
+            {{ form_label(form_einsatz.beschreibung, 'Tätigkeitsbeschreibung') }}
+            {{ form_errors(form_einsatz.beschreibung) }}
+            {{ form_widget(form_einsatz.beschreibung,  {attr: {'placeholder': 'Genau Tätigkeitsbeschreibung...'} }) }}
+
+            {{ form_label(form_einsatz.eingesetzteGeraete, 'Eingesätze Geräte') }}
+            {{ form_errors(form_einsatz.eingesetzteGeraete) }}
+            {{ form_widget(form_einsatz.eingesetzteGeraete,  {attr: {'placeholder': 'z.B. Hydraulisches Rettungsgerät, Pressluftatmer, sonstige ATS-Geräte, Stromerzeuger'} }) }}
+
+        </div>
+
+        <div class="einsatz">
+
+            <div id="brandeinsatz">
+                <p class="legends">Details zum Brand:</p>
+                <!--Brandaus-->
+                <div class="links">
+                    {{ form_row(form_einsatz.brandausDate) }}
+                </div>
+
+                <div class="rechts">
+                    {{ form_row(form_einsatz.brandausTime) }}
+                </div>
+
+
+                <!--Brandwache Start-->
+                <div class="links">
+                    {{ form_row(form_einsatz.brandwacheStartDate) }}
+                </div>
+
+                <div class="rechts">
+                    {{ form_row(form_einsatz.brandwacheStartTime) }}
+                </div>
+
+
+                <!--Brandwache Ende-->
+                <div class="links">
+                    {{ form_row(form_einsatz.brandwacheEndeDate) }}
+                </div>
+
+                <div class="rechts">
+                    {{ form_row(form_einsatz.brandwacheEndeTime) }}
+                </div>
+
+
+                <div>
+
+                    {{ form_row(form_einsatz.brandobjekte, {'attr': {'placeholder': 'z.B. PKW, Wohnung, Kamin, Gewerbebetrieb'} }) }}
+
+                    {{ form_row(form_einsatz.brandausmass) }}
+
+
+                </div>
+
+
+            </div>
+
+
+            <div id="brandsicherheitswache">
+                <p class="legends">Details zur Brandsicherheitswache:</p>
+                {{ form_row(form_einsatz.anlass) }}
+
+
+            </div>
+
+
+            <div id="technischerEinsatz">
+                <p class="legends">Details zum technischen Einsatz:</p>
+
+                {{ form_label(form_einsatz.unterunterkategorie, 'Technische Einsatzart') }}
+                {{ form_errors(form_einsatz.unterunterkategorie) }}
+                {{ form_widget(form_einsatz.unterunterkategorie,  {attr: {id: 'technisch'} }) }}
+
+            </div>
+
+
+        </div>
+
+        <div id="übung">
+        </div>
+
+        <div id="tätigkeit">
+
+        </div>
 
 
         <!-- Buttons -->
-        <div style="width:100%;">
+
             <input type='button' name='previous' class='prev-button custom-button' value="Zurück">
             <input type='button' name='next' class='next-button custom-button' value="Vorwärts"><br>
 
             <input type='button' name='restart' class='reset-button custom-button' value="Neustart">
             <button class="home-button custom-button"><a href="{{ path('homepage') }}" class='colorButton'>Abbruch</a>
             </button>
-        </div>
+
 
     </fieldset>
 
