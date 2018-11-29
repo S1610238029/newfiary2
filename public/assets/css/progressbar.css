@@ -211,7 +211,7 @@ fieldset:focus {
     background-color: #f1f1f1;
 }
 
-div#ort{
+div#ort, div#geschädigter{
     border: 1px solid #e3e3e3;
     padding:5px;
 }
@@ -222,7 +222,7 @@ form#form-id fieldset div#allgemein label.required{
 
     font-variant-caps: all-small-caps;
 
-    font-size: 1.2em !important;
+    font-size: 1.2em;
     color:var(--red);
 }
 
@@ -239,3 +239,14 @@ form#form-id fieldset div#allgemein label.required{
     width:100%;
 
 }
+
+div.checkboxFormat>label{
+    font-weight:lighter!important;
+    font-size:0.8em !important;
+
+}
+div.checkboxFormat>label>input{
+   margin-bottom:0!important;
+}
+
+
