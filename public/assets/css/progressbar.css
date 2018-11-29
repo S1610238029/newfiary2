@@ -205,10 +205,10 @@ fieldset:focus {
 
 }
 
-/*#ort{
+#ort{
     border: 1px solid #e3e3e3;
     padding:5px;
-}*/
+}
 
 #form-id div > label:nth-child(1), #form-id fieldset div.einsatz>label.required, div.allgemein div.links label.required,
 form#form-id fieldset div#allgemein label.required{

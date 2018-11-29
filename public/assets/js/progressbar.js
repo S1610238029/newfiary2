@@ -1,6 +1,9 @@
 /**
  * Created by Natascha on 06.11.2018.
- */
+*/
+$(".costum-button").on("click", function() {
+    $("body").scrollTop(0);
+});
 
 /* Erster Test der Animationen für die Progress Bar beim Eintrag erstellen */
 $(document).ready(function() {
@@ -27,6 +30,17 @@ $(document).ready(function() {
         current.hide();
         prev.show();
     });
+
+
+
+    $(".custom-button").click(function() {
+        $("html, body").animate({
+            scrollTop: 0
+        }, 800);
+        return false;
+    });
+
+
 
     /* Funktioniert noh nicht 100% */
   /*  $(".reset-button").click(function() {
@@ -57,10 +71,14 @@ $(document).ready(function() {
     $('div#technischerEinsatz').hide();
 
     /*wrap input+label checkboxes into a deiv*/
-    $('input[type=checkbox]+label').each(function(){
+  /*  $('input[type=checkbox]+label').each(function(){
         $(this).prepend($(this).prev());
         $(this).wrap("<div class='col-sm-2 col-lg-3 left'></div>");
     });
+    $('input[type=radio]+label').each(function(){
+        $(this).prepend($(this).prev());
+        $(this).wrap("<div class='col-sm-2 col-lg-3 left'></div>");
+    });*/
 
     $('div.uebung').hide();
     $('div.einsatz').hide();
