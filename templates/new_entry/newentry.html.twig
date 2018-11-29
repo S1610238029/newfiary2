@@ -70,8 +70,57 @@
         {{ form_einsatz.vars.value.unterkategorie }}
 
         <div class="allgemein">
-            <div id="uhrzeit">
+            <div id="uhrzeit clear">
+
                 <p class="legends">Zeitliche Details:</p>
+
+                    <div class="form-row einsatz">
+                        <div class="col-12 col-sm-12 col-md-6">
+                            {{ form_label(form_einsatz.alarmdatum, 'Datum der Alarmierung') }}
+                            {{ form_errors(form_einsatz.alarmdatum) }}
+                            {{ form_widget(form_einsatz.alarmdatum) }}
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6">
+                            {{ form_label(form_einsatz.alarmzeit, 'Uhrzeit der Alarmierung') }}
+                            {{ form_errors(form_einsatz.alarmzeit) }}
+                            {{ form_widget(form_einsatz.alarmzeit) }}
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="einsatz"> {{ form_label(form_einsatz.beginnDatum, 'Datum Einsatzbeginn') }}</div>
+                            <div class="übung">{{ form_label(form_einsatz.beginnDatum, 'Datum Übungsbeginn') }}</div>
+
+                            {{ form_errors(form_einsatz.beginnDatum) }}
+                            {{ form_widget(form_einsatz.beginnDatum) }}
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="einsatz">{{ form_label(form_einsatz.beginnZeit, 'Zeit Einsatzbeginn') }}</div>
+                            <div class="übung"> {{ form_label(form_einsatz.beginnZeit, 'Zeit Übungsbeginn') }}</div>
+
+                            {{ form_errors(form_einsatz.beginnZeit) }}
+                            {{ form_widget(form_einsatz.beginnZeit) }}
+                        </div>
+                    </div>
+
+                <div class="form-row">
+                    <div class="col-12 col-sm-12 col-md-6">
+                        <div class="einsatz"> {{ form_label(form_einsatz.endeDatum, 'Datum Einsatzende') }}</div>
+                        <div class="übung"> {{ form_label(form_einsatz.endeDatum, 'Datum Übungsende') }}</div>
+
+                        {{ form_errors(form_einsatz.endeDatum) }}
+                        {{ form_widget(form_einsatz.endeDatum) }}
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6">
+                        <div class="einsatz"> {{ form_label(form_einsatz.endeZeit, 'Zeit Einsatzende') }}</div>
+                        <div class="übung"> {{ form_label(form_einsatz.endeZeit, 'Zeit Übungsende') }}</div>
+                        {{ form_errors(form_einsatz.endeZeit) }}
+                        {{ form_widget(form_einsatz.endeZeit) }}
+                    </div>
+                </div>
+
+                <!--
                 <div class="einsatz">
                     <div class="links">
                         {{ form_label(form_einsatz.alarmdatum, 'Datum der Alarmierung') }}
@@ -114,6 +163,8 @@
                     {{ form_errors(form_einsatz.endeDatum) }}
                     {{ form_widget(form_einsatz.endeDatum) }}
                 </div>
+
+
                 <div class="rechts">
                     <div class="einsatz">
                         {{ form_label(form_einsatz.endeZeit, 'Zeit Einsatzende') }}
@@ -124,14 +175,41 @@
                     {{ form_errors(form_einsatz.endeZeit) }}
                     {{ form_widget(form_einsatz.endeZeit) }}
                 </div>
-
-
+                -->
             </div>
 
 
             <div id="ort">
-
                 <p class="legends">Ort:</p>
+
+                <div class="form-row">
+                    <div class="col-12 col-sm-12 col-md-6">
+                        {{ form_label(form_einsatz.strasse, 'Straße') }}
+                        {{ form_errors(form_einsatz.strasse) }}
+                        {{ form_widget(form_einsatz.strasse,  {attr: {'placeholder': 'Musterstraße'} }) }}
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6">
+                        {{ form_label(form_einsatz.hausnummer, 'Hausnummer') }}
+                        {{ form_errors(form_einsatz.hausnummer) }}
+                        {{ form_widget(form_einsatz.hausnummer,  {attr: {'placeholder': '1'} }) }}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-12 col-sm-12 col-md-6">
+                        {{ form_label(form_einsatz.plz, 'PLZ') }}
+                        {{ form_errors(form_einsatz.plz) }}
+                        {{ form_widget(form_einsatz.plz,  {attr: {'placeholder': '3353'} }) }}
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6">
+                        {{ form_label(form_einsatz.ort, 'Ort') }}
+                        {{ form_errors(form_einsatz.ort) }}
+                        {{ form_widget(form_einsatz.ort,  {attr: {'placeholder': 'Musterstadt'} }) }}
+                    </div>
+                </div>
+
+
+           <!--     <p class="legends">Ort:</p>
                 <div class="links">
                     {{ form_label(form_einsatz.strasse, 'Straße') }}
                     {{ form_errors(form_einsatz.strasse) }}
@@ -151,7 +229,7 @@
                     {{ form_label(form_einsatz.ort, 'Ort') }}
                     {{ form_errors(form_einsatz.ort) }}
                     {{ form_widget(form_einsatz.ort,  {attr: {'placeholder': 'Musterstadt'} }) }}
-                </div>
+                </div>-->
             </div>
         </div>
 

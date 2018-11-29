@@ -7,6 +7,7 @@ use function PHPSTORM_META\type;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -19,6 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\UserType;
+use App\Form\ChangePasswordType;
 use App\Entity\User;
 use App\Entity\Mitglieder;
 
@@ -57,13 +59,14 @@ class SecurityController extends AbstractController
             ->add('lastname', TextType::class)
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
+                'first_options'  => array('label' => 'Password', 'always_empty' => false),
+                'second_options' => array('label' => 'Repeat Password', 'always_empty' => false),
+
             ))
             ->add('roles',ChoiceType::class, [
                 'multiple' => true,
                 'expanded' => true,
-                'choices' =>  (User::getRoleOptions())
+                'choices' =>  (User::getRoleOptions()),
             ])
             ->add('submit', SubmitType::class)
             ->getForm();
@@ -106,24 +109,55 @@ class SecurityController extends AbstractController
         return $this->redirectToRoute('dashboard');
     }
 
+    public function buildPasswordForm($user) {
+        return $this->createFormBuilder($user)
+            ->add('email', EmailType::class)
+            ->add('username', TextType::class)
+            ->add('firstname', TextType::class)
+            ->add('lastname', TextType::class)
+            ->add('plainPassword', PasswordType::class)
+            ->add('newPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'first_options' => array('label' => 'New Password'),
+                'second_options' => array('label' => 'Repeat New Password')
+            ))
+            ->add('roles',ChoiceType::class, [
+                'multiple' => true,
+                'expanded' => true,
+                'choices' =>  (User::getRoleOptions()),
+            ])
+            ->add('submit', SubmitType::class)
+            ->getForm();
+    }
+
     /**
      * @Route("editUser/{id}", name="user_edit")
      */
-    public function editUserAction($id, Request $request) {
+    public function editUserAction($id, Request $request, UserPasswordEncoderInterface $encoder) {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
         $form = $this->buildForm($user);
+        //$form = $this->buildPasswordForm($user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
+            /*echo "hallo";
+            echo $request->request->get('form[plainPassword]');
+            if ($user->getPlainPassword() == $request->request->get('plainPassword')){
+                echo "same";
+                if($request->request->get('plainPassword')['first_options'] == $request->request->get('plainPassword')['second_options']){
+                   echo "also same";
+                }
+            }*/
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('dashboard');
+            echo "erfolg";
+            //return $this->redirectToRoute('dashboard');
         }
 
         return $this->render('security/editUser.html.twig', [

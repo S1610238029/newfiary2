@@ -59,6 +59,9 @@ class User implements UserInterface, \Serializable
       private $plainPassword;
 
 
+    private $newPassword;
+
+
     /**
      * @var string
      *
@@ -131,9 +134,19 @@ class User implements UserInterface, \Serializable
         return $this->lastname;
     }
 
+
+    public function getNewPassword(){
+        return $this->newPassword;
+    }
+
+    public function setNewPassword($password)
+    {
+        $this->newPassword = $password;
+    }
+
     public function getPlainPassword()
     {
-    return $this->plainPassword;
+        return $this->plainPassword;
     }
 
     public function setPlainPassword($password)
