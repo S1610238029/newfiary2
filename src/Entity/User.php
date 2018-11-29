@@ -60,7 +60,7 @@ class User implements UserInterface, \Serializable
 
 
     private $newPassword;
-
+    private $oldPassword;
 
     /**
      * @var string
@@ -142,6 +142,15 @@ class User implements UserInterface, \Serializable
     public function setNewPassword($password)
     {
         $this->newPassword = $password;
+    }
+
+    public function getOldPassword(){
+        return $this->oldPassword;
+    }
+
+    public function setOldPassword($password)
+    {
+        $this->oldPassword = $password;
     }
 
     public function getPlainPassword()

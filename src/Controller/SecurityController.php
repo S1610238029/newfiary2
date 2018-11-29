@@ -51,28 +51,6 @@ class SecurityController extends AbstractController
         throw new \RuntimeException('This should never be called directly.');
     }
 
-    public function buildForm($user) {
-        return $this->createFormBuilder($user)
-            ->add('email', EmailType::class)
-            ->add('username', TextType::class)
-            ->add('firstname', TextType::class)
-            ->add('lastname', TextType::class)
-            ->add('plainPassword', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'mapped' => false,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
-
-            ))
-            ->add('roles',ChoiceType::class, [
-                'multiple' => true,
-                'expanded' => true,
-                'choices' =>  (User::getRoleOptions()),
-            ])
-            ->add('submit', SubmitType::class)
-            ->getForm();
-    }
-
     /**
      * @Route("/dashboard", name="dashboard")
      */
@@ -110,17 +88,18 @@ class SecurityController extends AbstractController
         return $this->redirectToRoute('dashboard');
     }
 
-    public function buildPasswordForm($user) {
+    public function buildForm($user) {
         return $this->createFormBuilder($user)
             ->add('email', EmailType::class)
             ->add('username', TextType::class)
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
-            ->add('plainPassword', PasswordType::class)
-            ->add('newPassword', RepeatedType::class, array(
+            ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options' => array('label' => 'New Password', 'mapped' => false),
-                'second_options' => array('label' => 'Repeat New Password', 'mapped' => false)
+                'mapped' => false,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+
             ))
             ->add('roles',ChoiceType::class, [
                 'multiple' => true,
@@ -141,24 +120,15 @@ class SecurityController extends AbstractController
 
         $form = $this->createForm(UserEditType::class, $user);
         //$form = $this->buildForm($user);
-        //$form = $this->buildPasswordForm($user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
-            /*echo "hallo";
-            echo $request->request->get('form[plainPassword]');
-            if ($user->getPlainPassword() == $request->request->get('plainPassword')){
-                echo "same";
-                if($request->request->get('plainPassword')['first_options'] == $request->request->get('plainPassword')['second_options']){
-                   echo "also same";
-                }
-            }*/
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
-            //return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('dashboard');
         }
 
         return $this->render('security/editUser.html.twig', [

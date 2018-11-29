@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 class RegistrationController extends AbstractController
 {
     /**
@@ -52,9 +56,12 @@ class RegistrationController extends AbstractController
     public function buildForm($user) {
         return $this->createFormBuilder($user)
             ->add('username', TextType::class)
-            ->add('plainPassword', PasswordType::class)
-            ->add('newPassword', PasswordType::class)
-
+            ->add('oldPassword', PasswordType::class, ['always_empty' => false])
+            ->add('newPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+            ))
             ->add('submit', SubmitType::class)
             ->getForm();
     }
@@ -62,34 +69,31 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/recover", name="password_recover")
      */
-    public function changePwdAction(Request $request) {
+    public function changePwdAction(Request $request, UserPasswordEncoderInterface $passwordEncoder) {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $form = $this->buildForm($user);
 
+        echo 'hallo';
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $passwordEncoder = $this->get('security.password_encoder');
-            $oldPassword = $request->request->get('etiquettebundle_user')['oldPassword'];
-
-            // Si l'ancien mot de passe est bon
-            if ($passwordEncoder->isPasswordValid($user, $oldPassword)) {
-                $newEncodedPassword = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            echo 'submit';
+           // $passwordEncoder = $this->get('security.password_encoder');
+           // $oldPassword = $request->request->get('etiquettebundle_user')['oldPassword'];
+            $plainPassword = $user->getPlainPassword();
+            $oldPassword = $user->getOldPassword();
+            echo $oldPassword;
+            echo $plainPassword;
+         /*   if($oldPassword == $savePassword) {
+                $newEncodedPassword = $passwordEncoder->encodePassword($user, $user->getNewPassword());
                 $user->setPassword($newEncodedPassword);
 
                 $em->persist($user);
                 $em->flush();
-
-                $this->addFlash('notice', 'Votre mot de passe à bien été changé !');
-
-                return $this->redirectToRoute('profile');
-            } else {
-                $form->addError(new FormError('Ancien mot de passe incorrect'));
-            }
+            }*/
         }
 
-        return $this->render('account/edit.html.twig', array(
+        return $this->render('security/recover.html.twig', array(
             'form' => $form->createView(),
         ));
 
