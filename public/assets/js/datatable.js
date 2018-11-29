@@ -2,6 +2,12 @@ $(document).ready(function() {
     $('#example').DataTable( {
         "order": [[ 3, "asc" ]],
         "stateSave": true,
+        dom: 'Blfrtip',
+        buttons: [{
+                extend: 'pdfHtml5',
+                orientation: 'landscape',
+                pageSize: 'LEGAL'
+        }],
         "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
         "language": {
             "lengthMenu": "Zeige _MENU_ Einträge pro Seite",
