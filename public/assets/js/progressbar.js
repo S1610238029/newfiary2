@@ -73,11 +73,11 @@ $(document).ready(function() {
     /*wrap input+label checkboxes into a div*/
     $('input[type=checkbox]+label').each(function(){
         $(this).prepend($(this).prev());
-        $(this).wrap("<div class='col-sm-2 col-lg-3 left'></div>");
+        $(this).wrap("<div class='col-6 col-sm-6 col-lg-3 left checkboxFormat'></div>");
     });
     $('input[type=radio]+label').each(function(){
         $(this).prepend($(this).prev());
-        $(this).wrap("<div class='col-sm-2 col-lg-3 left'></div>");
+        $(this).wrap("<div class='col-6 col-sm-6 col-lg-3 left checkboxFormat'></div>");
     });
 
     $('div.uebung').hide();

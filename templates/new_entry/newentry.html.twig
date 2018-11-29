@@ -67,6 +67,15 @@
             {{ form_row(form_einsatz.unterkategorie,  {attr: {id: 'underkategorie'} }) }}
         </div>
 
+        <div class="uebung">
+           <p class="legends">Details zum technischen Einsatz:</p>
+            <div class="form-row">
+                {{ form_label(form_einsatz.unterkategorie, 'Übungskategorie') }}
+                {{ form_errors(form_einsatz.unterkategorie) }}
+                {{ form_widget(form_einsatz.unterkategorie,  {attr: {id: 'uebung'} }) }}
+            </div>
+         </div>
+
         {{ form_einsatz.vars.value.unterkategorie }}
 
         <div class="allgemein">
@@ -90,14 +99,14 @@
                     <div class="form-row">
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="einsatz"> {{ form_label(form_einsatz.beginnDatum, 'Datum Einsatzbeginn') }}</div>
-                            <div class="übung">{{ form_label(form_einsatz.beginnDatum, 'Datum Übungsbeginn') }}</div>
+                            <div class="uebung">{{ form_label(form_einsatz.beginnDatum, 'Datum Übungsbeginn') }}</div>
 
                             {{ form_errors(form_einsatz.beginnDatum) }}
                             {{ form_widget(form_einsatz.beginnDatum) }}
                         </div>
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="einsatz">{{ form_label(form_einsatz.beginnZeit, 'Zeit Einsatzbeginn') }}</div>
-                            <div class="übung"> {{ form_label(form_einsatz.beginnZeit, 'Zeit Übungsbeginn') }}</div>
+                            <div class="uebung"> {{ form_label(form_einsatz.beginnZeit, 'Zeit Übungsbeginn') }}</div>
 
                             {{ form_errors(form_einsatz.beginnZeit) }}
                             {{ form_widget(form_einsatz.beginnZeit) }}
@@ -107,14 +116,14 @@
                 <div class="form-row">
                     <div class="col-12 col-sm-12 col-md-6">
                         <div class="einsatz"> {{ form_label(form_einsatz.endeDatum, 'Datum Einsatzende') }}</div>
-                        <div class="übung"> {{ form_label(form_einsatz.endeDatum, 'Datum Übungsende') }}</div>
+                        <div class="uebung"> {{ form_label(form_einsatz.endeDatum, 'Datum Übungsende') }}</div>
 
                         {{ form_errors(form_einsatz.endeDatum) }}
                         {{ form_widget(form_einsatz.endeDatum) }}
                     </div>
                     <div class="col-12 col-sm-12 col-md-6">
                         <div class="einsatz"> {{ form_label(form_einsatz.endeZeit, 'Zeit Einsatzende') }}</div>
-                        <div class="übung"> {{ form_label(form_einsatz.endeZeit, 'Zeit Übungsende') }}</div>
+                        <div class="uebung"> {{ form_label(form_einsatz.endeZeit, 'Zeit Übungsende') }}</div>
                         {{ form_errors(form_einsatz.endeZeit) }}
                         {{ form_widget(form_einsatz.endeZeit) }}
                     </div>
@@ -180,7 +189,7 @@
 
 
             <div id="ort">
-                <p class="legends">Ort:</p>
+                <p class="legends">Örtliche Details:</p>
 
                 <div class="form-row">
                     <div class="col-12 col-sm-12 col-md-6">
@@ -207,48 +216,36 @@
                         {{ form_widget(form_einsatz.ort,  {attr: {'placeholder': 'Musterstadt'} }) }}
                     </div>
                 </div>
-
-
-           <!--     <p class="legends">Ort:</p>
-                <div class="links">
-                    {{ form_label(form_einsatz.strasse, 'Straße') }}
-                    {{ form_errors(form_einsatz.strasse) }}
-                    {{ form_widget(form_einsatz.strasse,  {attr: {'placeholder': 'Musterstraße'} }) }}
-                </div>
-                <div class="rechts">
-                    {{ form_label(form_einsatz.hausnummer, 'Hausnummer') }}
-                    {{ form_errors(form_einsatz.hausnummer) }}
-                    {{ form_widget(form_einsatz.hausnummer,  {attr: {'placeholder': '1'} }) }}
-                </div>
-                <div class="links">
-                    {{ form_label(form_einsatz.plz, 'PLZ') }}
-                    {{ form_errors(form_einsatz.plz) }}
-                    {{ form_widget(form_einsatz.plz,  {attr: {'placeholder': '3353'} }) }}
-                </div>
-                <div class="rechts">
-                    {{ form_label(form_einsatz.ort, 'Ort') }}
-                    {{ form_errors(form_einsatz.ort) }}
-                    {{ form_widget(form_einsatz.ort,  {attr: {'placeholder': 'Musterstadt'} }) }}
-                </div>-->
             </div>
         </div>
 
         <!--Allgemeine Infos -->
+
         <div class="einsatz">
+            <div class="form-row">
+            <div class="col-12">
             {{ form_label(form_einsatz.lagebeimEintreffen, 'Lage beim Eintreffen') }}
             {{ form_errors(form_einsatz.lagebeimEintreffen) }}
             {{ form_widget(form_einsatz.lagebeimEintreffen,  {attr: {'placeholder': 'Genau Beschreibung der Lage beim Eintreffen der Einsatzkräfte...'} }) }}
         </div>
+        </div>
+        </div>
 
         <div class="allgemein">
+            <div class="form-row">
+                <div class="col-12">
             {{ form_label(form_einsatz.beschreibung, 'Tätigkeitsbeschreibung') }}
             {{ form_errors(form_einsatz.beschreibung) }}
             {{ form_widget(form_einsatz.beschreibung,  {attr: {'placeholder': 'Genau Tätigkeitsbeschreibung...'} }) }}
-
+                   </div>
+                </div>
+                    <div class="form-row">
+                        <div class="col-12">
             {{ form_label(form_einsatz.eingesetzteGeraete, 'Eingesätze Geräte') }}
             {{ form_errors(form_einsatz.eingesetzteGeraete) }}
             {{ form_widget(form_einsatz.eingesetzteGeraete,  {attr: {'placeholder': 'z.B. Hydraulisches Rettungsgerät, Pressluftatmer, sonstige ATS-Geräte, Stromerzeuger'} }) }}
-
+                        </div>
+                    </div>
         </div>
 
         <div class="einsatz">
@@ -256,43 +253,50 @@
             <div id="brandeinsatz">
                 <p class="legends">Details zum Brand:</p>
                 <!--Brandaus-->
-                <div class="links">
-                    {{ form_row(form_einsatz.brandausDate) }}
-                </div>
+                <div class="form-row">
+                    <div class="col-12 col-sm-12 col-md-6">
+                        {{ form_row(form_einsatz.brandausDate) }}
+                    </div>
 
-                <div class="rechts">
-                    {{ form_row(form_einsatz.brandausTime) }}
+                    <div class="col-12 col-sm-12 col-md-6">
+                        {{ form_row(form_einsatz.brandausTime) }}
+                    </div>
                 </div>
-
 
                 <!--Brandwache Start-->
-                <div class="links">
-                    {{ form_row(form_einsatz.brandwacheStartDate) }}
-                </div>
+                <div class="form-row">
+                    <div class="col-12 col-sm-12 col-md-6">
+                        {{ form_row(form_einsatz.brandwacheStartDate) }}
+                    </div>
 
-                <div class="rechts">
-                    {{ form_row(form_einsatz.brandwacheStartTime) }}
+                    <div class="col-12 col-sm-12 col-md-6">
+                        {{ form_row(form_einsatz.brandwacheStartTime) }}
+                    </div>
                 </div>
 
 
                 <!--Brandwache Ende-->
-                <div class="links">
-                    {{ form_row(form_einsatz.brandwacheEndeDate) }}
-                </div>
+                <div class="form-row">
+                    <div class="col-12 col-sm-12 col-md-6">
+                        {{ form_row(form_einsatz.brandwacheEndeDate) }}
+                    </div>
 
-                <div class="rechts">
-                    {{ form_row(form_einsatz.brandwacheEndeTime) }}
-                </div>
-
-
-                <div>
-
-                    {{ form_row(form_einsatz.brandobjekte, {'attr': {'placeholder': 'z.B. PKW, Wohnung, Kamin, Gewerbebetrieb'} }) }}
-
-                    {{ form_row(form_einsatz.brandausmass) }}
-
+                    <div class="col-12 col-sm-12 col-md-6">
+                        {{ form_row(form_einsatz.brandwacheEndeTime) }}
+                    </div>
 
                 </div>
+
+                <div class="form-row">
+                    <div class="col-12">
+                        {{ form_row(form_einsatz.brandobjekte, {'attr': {'placeholder': 'z.B. PKW, Wohnung, Kamin, Gewerbebetrieb'} }) }}
+                </div>
+                    </div>
+                <div class="form-row">
+                        {{ form_row(form_einsatz.brandausmass) }}
+
+                </div>
+
 
 
             </div>
@@ -300,7 +304,9 @@
 
             <div id="brandsicherheitswache">
                 <p class="legends">Details zur Brandsicherheitswache:</p>
+                <div class="form-row">
                 {{ form_row(form_einsatz.anlass) }}
+                    </div>
 
 
             </div>
@@ -308,17 +314,17 @@
 
             <div id="technischerEinsatz">
                 <p class="legends">Details zum technischen Einsatz:</p>
-
+                <div class="form-row">
                 {{ form_label(form_einsatz.unterunterkategorie, 'Technische Einsatzart') }}
                 {{ form_errors(form_einsatz.unterunterkategorie) }}
                 {{ form_widget(form_einsatz.unterunterkategorie,  {attr: {id: 'technisch'} }) }}
-
+                </div>
             </div>
 
 
         </div>
 
-        <div id="übung">
+        <div class="übung">
         </div>
 
         <div id="tätigkeit">
@@ -347,61 +353,87 @@
         <h3 class='sub-title'>Hier werden zusätzliche Informationen erfasst:</h3>
 
         <div class="einsatz">
-            <legend class="legends">Details zum Geschädigten:</legend>
-            <div class="links">
-                {{ form_label(form_einsatz.geschaedigterName, 'Name des Geschädigten') }}
-                {{ form_errors(form_einsatz.geschaedigterName) }}
-                {{ form_widget(form_einsatz.geschaedigterName,  {'attr': {'placeholder': 'Max Mustermann'} }) }}
+            <div id="geschädigter">
+            <p class="legends">Details zum Geschädigten:</p>
+            <div class="form-row">
+                <div class="col-12 col-sm-12 col-md-6">
+                    {{ form_label(form_einsatz.geschaedigterName, 'Name des Geschädigten') }}
+                    {{ form_errors(form_einsatz.geschaedigterName) }}
+                    {{ form_widget(form_einsatz.geschaedigterName,  {'attr': {'placeholder': 'Max Mustermann'} }) }}
 
-            </div>
-            <div class="rechts">
-                {{ form_label(form_einsatz.geschaedigterAdresse, 'Adresse des Geschädigten') }}
-                {{ form_errors(form_einsatz.geschaedigterAdresse) }}
-                {{ form_widget(form_einsatz.geschaedigterAdresse,  {'attr': {'placeholder': 'Musterhausen 1, 1111 Musterort'} }) }}
+                </div>
+                <div class="col-12 col-sm-12 col-md-6">
+                    {{ form_label(form_einsatz.geschaedigterAdresse, 'Adresse des Geschädigten') }}
+                    {{ form_errors(form_einsatz.geschaedigterAdresse) }}
+                    {{ form_widget(form_einsatz.geschaedigterAdresse,  {'attr': {'placeholder': 'Musterhausen 1, 1111 Musterort'} }) }}
 
-            </div>
-            <div class="links">
-                {{ form_label(form_einsatz.geschaedigterTel, 'Telefonnummer des Geschädigten') }}
-                {{ form_errors(form_einsatz.geschaedigterTel) }}
-                {{ form_widget(form_einsatz.geschaedigterTel,  {'attr': {'placeholder': '1234/56789123'} }) }}
+                </div>
+                </div>
+            <div class="form-row">
+                <div class="col-12 col-sm-12 col-md-6">
+                    {{ form_label(form_einsatz.geschaedigterTel, 'Telefonnummer des Geschädigten') }}
+                    {{ form_errors(form_einsatz.geschaedigterTel) }}
+                    {{ form_widget(form_einsatz.geschaedigterTel,  {'attr': {'placeholder': '1234/56789123'} }) }}
 
-            </div>
-            <div class="rechts">
-                {{ form_label(form_einsatz.geschaedigterKennzeichen, 'KFZ-Kennzeichen des Geschädigten') }}
-                {{ form_errors(form_einsatz.geschaedigterKennzeichen) }}
-                {{ form_widget(form_einsatz.geschaedigterKennzeichen,  {'attr': {'placeholder': 'AM-000-XY'} }) }}
+                </div>
+                <div class="col-12 col-sm-12 col-md-6">
+                    {{ form_label(form_einsatz.geschaedigterKennzeichen, 'KFZ-Kennzeichen des Geschädigten') }}
+                    {{ form_errors(form_einsatz.geschaedigterKennzeichen) }}
+                    {{ form_widget(form_einsatz.geschaedigterKennzeichen,  {'attr': {'placeholder': 'AM-000-XY'} }) }}
 
-            </div>
+                </div>
+                </div>
+                </div>
 
             <!--Wetter-->
 
-            <div class="checkboxes">
+
+                <div class="form-row">
+                    <div class="col-12">
                 {{ form_label(form_einsatz.wetter, 'Wetter') }}
+                    </div>
                 {{ form_errors(form_einsatz.wetter) }}
 
                 {{ form_widget(form_einsatz.wetter) }}
-            </div>
+                    </div>
 
 
+            <div class="form-row">
+                <div class="col-12">
             {{ form_label(form_einsatz.betriebsmittel, 'Verbrauchte Betriebsmittel') }}
             {{ form_errors(form_einsatz.betriebsmittel) }}
             {{ form_widget(form_einsatz.betriebsmittel,  {'attr': {'placeholder': 'z.B. Ölbindemittel, Petrotech, Pulver, Schaummittel'} }) }}
-
+            </div>
+                </div>
+            <div class="form-row">
+                <div class="col-12">
             {{ form_label(form_einsatz.anwesend, 'Anwesende') }}
+                </div>
             {{ form_errors(form_einsatz.anwesend) }}
             {{ form_widget(form_einsatz.anwesend) }}
 
+        </div>
+            <div class="form-row">
+                <div class="col-12">
             {{ form_label(form_einsatz.notizen, 'Notizen') }}
             {{ form_errors(form_einsatz.notizen) }}
             {{ form_widget(form_einsatz.notizen,  {'attr': {'placeholder': 'z.B. verletzte Mitglieder, Schäden...'} }) }}
-
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-12">
             {{ form_label(form_einsatz.bericht, 'Ausführlicher Bericht') }}
             {{ form_errors(form_einsatz.bericht) }}
             {{ form_widget(form_einsatz.bericht,  {'attr': {'placeholder': 'Genauer Bericht für die Homepage'} }) }}
-
+        </div>
+    </div>
             <p>Hier kommt eventuell ein File-Upload hin!</p>
-
-
+            <div class="form-row">
+                <div class="col-12">
+                    <label>File Upload</label>
+            <input type="file" value="Upload Files">
+                </div>
+            </div>
         </div>
 
 
