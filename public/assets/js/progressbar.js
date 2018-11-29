@@ -71,14 +71,14 @@ $(document).ready(function() {
     $('div#technischerEinsatz').hide();
 
     /*wrap input+label checkboxes into a div*/
-  /*  $('input[type=checkbox]+label').each(function(){
+    $('input[type=checkbox]+label').each(function(){
         $(this).prepend($(this).prev());
         $(this).wrap("<div class='col-sm-2 col-lg-3 left'></div>");
     });
     $('input[type=radio]+label').each(function(){
         $(this).prepend($(this).prev());
         $(this).wrap("<div class='col-sm-2 col-lg-3 left'></div>");
-    });*/
+    });
 
     $('div.uebung').hide();
     $('div.einsatz').hide();
