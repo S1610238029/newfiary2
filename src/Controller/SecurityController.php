@@ -7,6 +7,7 @@ use function PHPSTORM_META\type;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use App\Form\UserType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -113,7 +114,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("editUser/{id}", name="user_edit")
      */
-    public function editUserAction($id, Request $request, UserPasswordEncoderInterface $encoder) {
+    public function editUserAction($id, Request $request, UserPasswordEncoderInterface $passwordEncoder) {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);
@@ -123,7 +124,13 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = $form->getData();
+            //$user = $form->getData();
+            $resetUser = $user;
+            $newPassword = $form->get('newPassword')->getData();
+            $password = $passwordEncoder->encodePassword($resetUser, $newPassword);
+            $user->setPassword($password);
+
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();

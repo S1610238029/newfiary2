@@ -21,8 +21,7 @@
 
     <div id="form">
         {{ form_start(form , {'attr': {'novalidate':'novalidate'}} ) }}
-            {{ form_row(form.username, {'attr': {class: 'text'} }) }}
-            {{ form_row(form.oldPassword, {'attr': {class:'text'}} )  }}
+            {{ form_row(form.plainPassword, {'attr': {class:'text'}} )  }}
             {{ form_row(form.newPassword.first, {'attr': {class: 'text'} })  }}
             {{ form_row(form.newPassword.second, {'attr': {class: 'text'} })  }}
         {{ form_end(form) }}

@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use App\Form\ChangePasswordType;
 use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -56,7 +58,7 @@ class RegistrationController extends AbstractController
     public function buildForm($user) {
         return $this->createFormBuilder($user)
             ->add('username', TextType::class)
-            ->add('oldPassword', PasswordType::class, ['always_empty' => false])
+            ->add('oldPassword', PasswordType::class)
             ->add('newPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password'),
@@ -69,28 +71,28 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/recover", name="password_recover")
      */
-    public function changePwdAction(Request $request, UserPasswordEncoderInterface $passwordEncoder) {
-        $em = $this->getDoctrine()->getManager();
+    public function changePasswdAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, AuthenticationUtils $utils) {
         $user = $this->getUser();
-        $form = $this->buildForm($user);
+        $form = $this->createForm(ChangePasswordType::class, $user);
 
-        echo 'hallo';
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            echo 'submit';
-           // $passwordEncoder = $this->get('security.password_encoder');
-           // $oldPassword = $request->request->get('etiquettebundle_user')['oldPassword'];
-            $plainPassword = $user->getPlainPassword();
-            $oldPassword = $user->getOldPassword();
-            echo $oldPassword;
-            echo $plainPassword;
-         /*   if($oldPassword == $savePassword) {
-                $newEncodedPassword = $passwordEncoder->encodePassword($user, $user->getNewPassword());
-                $user->setPassword($newEncodedPassword);
 
-                $em->persist($user);
-                $em->flush();
-            }*/
+        if ($form->isSubmitted() && $form->isValid()) {
+            $oldPassword = $form->get('plainPassword')->getData();
+
+            if($passwordEncoder->isPasswordValid($user, $oldPassword)) {
+                $newPassword = $form->get('newPassword')->getData();
+                $password = $passwordEncoder->encodePassword($user, $newPassword);
+                $user->setPassword($password);
+            } else {
+                echo "<script type='text/javascript'>alert('falsch');</script>";
+            }
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            // return $this->redirect($this->generateUrl('change_passwd_success'));
         }
 
         return $this->render('security/recover.html.twig', array(
