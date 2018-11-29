@@ -136,6 +136,20 @@
     border: none;
 }
 
+#users .table-responsive .dt-buttons .dt-button {
+    background-color: var(--red);
+    background-image: none;
+    padding: 10px 20px;
+    color: #fff;
+    border-radius: 10px;
+    transition: all 0.5s ease-in-out;
+}
+
+#users .table-responsive .dt-buttons .dt-button:hover {
+    background: #c10612;
+    cursor: pointer;
+}
+
 tr td {
     transition: all 0.3s ease-in-out;
 }
