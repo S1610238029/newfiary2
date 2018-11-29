@@ -70,7 +70,7 @@ $(document).ready(function() {
     $('div#brandsicherheitswache').hide();
     $('div#technischerEinsatz').hide();
 
-    /*wrap input+label checkboxes into a deiv*/
+    /*wrap input+label checkboxes into a div*/
   /*  $('input[type=checkbox]+label').each(function(){
         $(this).prepend($(this).prev());
         $(this).wrap("<div class='col-sm-2 col-lg-3 left'></div>");
