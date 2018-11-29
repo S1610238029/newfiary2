@@ -54,7 +54,7 @@ class User implements UserInterface, \Serializable
 
     /**
        * @Assert\NotBlank()
-       * @Assert\Length(max=4096)
+       * @Assert\Length(max=4096, groups = {"Default"})
        */
       private $plainPassword;
 

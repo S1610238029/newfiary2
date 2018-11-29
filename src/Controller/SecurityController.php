@@ -19,7 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Symfony\Component\HttpFoundation\Request;
-use App\Form\UserType;
+use App\Form\UserEditType;
 use App\Form\ChangePasswordType;
 use App\Entity\User;
 use App\Entity\Mitglieder;
@@ -59,8 +59,9 @@ class SecurityController extends AbstractController
             ->add('lastname', TextType::class)
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password', 'always_empty' => false),
-                'second_options' => array('label' => 'Repeat Password', 'always_empty' => false),
+                'mapped' => false,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
 
             ))
             ->add('roles',ChoiceType::class, [
@@ -118,8 +119,8 @@ class SecurityController extends AbstractController
             ->add('plainPassword', PasswordType::class)
             ->add('newPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options' => array('label' => 'New Password'),
-                'second_options' => array('label' => 'Repeat New Password')
+                'first_options' => array('label' => 'New Password', 'mapped' => false),
+                'second_options' => array('label' => 'Repeat New Password', 'mapped' => false)
             ))
             ->add('roles',ChoiceType::class, [
                 'multiple' => true,
@@ -138,7 +139,8 @@ class SecurityController extends AbstractController
 
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
-        $form = $this->buildForm($user);
+        $form = $this->createForm(UserEditType::class, $user);
+        //$form = $this->buildForm($user);
         //$form = $this->buildPasswordForm($user);
         $form->handleRequest($request);
 
@@ -156,7 +158,6 @@ class SecurityController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            echo "erfolg";
             //return $this->redirectToRoute('dashboard');
         }
 
