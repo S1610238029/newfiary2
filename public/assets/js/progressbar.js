@@ -95,6 +95,7 @@ $(document).ready(function() {
 
             $('div.uebung').hide();
             $('div.einsatz').show();
+            $('#form_unterkategorie option').slice( 4,30 ).remove();
         }else{
             $("#title").text(kategorie + 'sdetails');
             $("#subtitle").text('Bitte gib hier die Details der '+ kategorie +' bekannt!');

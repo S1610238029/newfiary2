@@ -282,7 +282,31 @@ class Logbuch
         return["einsatz", "übung", "tätigkeit"];
     }
     public static function getUnterKategorieOptions_Einsatz(){
-        return["Brandeinsatz", "Brandsicherheitswache", "Technischer Einsatz"];
+        return["Brandeinsatz", "Brandsicherheitswache", "Technischer Einsatz",
+            "Atemschutzübung", "Begehung", "Bewerbsübung",
+            "Branddienstübung",
+            "Chargenschulung",
+            "FMD-Schulung",
+            "Funkübung",
+            "Gesamtübung",
+            "Gruppenübung",
+            "KHD Übung",
+            "Kraftfahrübung",
+            "Prüfung AP Atemschutz",
+            "Prüfung AP Löscheinsatz",
+            "Prüfung AP Technischer Einsatz",
+            "Schadstoffübung",
+            "Schulung",
+            "Sprengdienstübung",
+            "Tauchdienstübung",
+            "Technische Übung",
+            "Vorbereitung AP Atemschutz",
+            "Vorbereitung AP Löscheinsatz",
+            "Vorbereitung AP Technischer Einsatz",
+            "Wasserdienstübung",
+            "Zugsübung 1.Zug",
+            "Zugsübung 2.Zug",
+            "Sonstiges"];
     }
 
     public static function getUnterKategorieOptions_Übung(){

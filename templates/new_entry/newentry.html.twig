@@ -62,19 +62,19 @@
         <p id="kategorie_einfügen">-- [Hier kommt die ausgewählte Kategorie] --</p><br>
         <!-- Hier muss dann das aus/eingebelendet werden was zu der jeweiligen Kategorie gehört -->
 
-
-        <div class="einsatz">
+        <!-- bei jeder kategorie bleibt dropdown mit unterkategorie - nur über js werden andere auswähloptionen ein/ausgeblendet-->
+        <div class="allgemein">
             {{ form_row(form_einsatz.unterkategorie,  {attr: {id: 'underkategorie'} }) }}
         </div>
 
-        <div class="uebung">
+   {#    <div class="uebung">
            <p class="legends">Details zum technischen Einsatz:</p>
             <div class="form-row">
                 {{ form_label(form_einsatz.unterkategorie, 'Übungskategorie') }}
                 {{ form_errors(form_einsatz.unterkategorie) }}
-                {{ form_widget(form_einsatz.unterkategorie,  {attr: {id: 'uebung'} }) }}
+                {{ form_widget(form_einsatz.unterkategorie,  {attr: {id: 'underkategorie'} }) }}
             </div>
-         </div>
+         </div>#}
 
         {{ form_einsatz.vars.value.unterkategorie }}
 
