@@ -54,6 +54,7 @@ $(document).ready(function() {
         next.show();
     });*/
     $(".reset-button").click(function() {
+        location.reload();
         var current = $(this).parent();
         $(".progressbar li").removeClass("active");
         $(".progressbar li:first-child").addClass("active");
@@ -80,28 +81,64 @@ $(document).ready(function() {
         $(this).wrap("<div class='col-6 col-sm-6 col-lg-3 left checkboxFormat'></div>");
     });
 
+    $('div#form_anlass div').each(function(){
+        $(this).removeClass("col-lg-3");
+        $(this).addClass("col-lg-6");
+    });
+
     $('div.uebung').hide();
     $('div.einsatz').hide();
+    $('div.tätigkeiten').hide();
+
+    $('#form_save').addClass("custom-button");
+    $('#form_save').unwrap();
 
     /*while clicking on one of the main kategories*/
     $(".kategorie").click(function() {
         var kategorie=$(this).val();
         $("p#kategorie_einfügen").text('Kategorie: '+ kategorie);
 
-        if(kategorie=='Einsatz') {
+        if(($('#form_unterkategorie option[value=""]').length==0)) {
+            $('#form_unterkategorie').prepend($('<option>', {
+                value: '',
+                selected: 'selected',
+                text: 'Bitte wählen...'
+            }));
+        }
+
+        if(kategorie=='Einsatz') { //Einsatz
             $("#title").text(kategorie + 'details');
             $("#subtitle").text('Bitte gib hier die Details des Einsatzes bekannt!');
-            $('#form_unterkategorie').prepend($('<option>', {value : '', selected : 'selected', text: 'Bitte wählen...'}));
+
 
             $('div.uebung').hide();
+            $('div.tätigkeiten').hide();
             $('div.einsatz').show();
-            $('#form_unterkategorie option').slice( 4,30 ).remove();
-        }else{
+            $('#form_unterkategorie option').slice( 4,61 ).remove(); //remove übung
+
+        }else if (kategorie=='Übung'){ //Übung
             $("#title").text(kategorie + 'sdetails');
             $("#subtitle").text('Bitte gib hier die Details der '+ kategorie +' bekannt!');
 
+            $('#form_unterkategorie option').slice( 1,4 ).remove();
+            $('#form_unterkategorie option').slice( 27, 61 ).remove();
+
             $('div.einsatz').hide();
+            $('div.tätigkeiten').hide();
             $('div.uebung').show();
+
+            $('#lage label').text("Übungsannahme");
+            $('#form_lagebeimEintreffen').attr("placeholder", "Genaue Beschreibung der Übungsannahme...");
+
+        }else{ //Tätigkeit
+            $("#title").text(kategorie + 'sdetails');
+            $("#subtitle").text('Bitte gib hier die Details der '+ kategorie +' bekannt!');
+
+            $('#form_unterkategorie option').slice( 1,30 ).remove();
+
+            $('div.einsatz').hide();
+            $('div.uebung').hide();
+            $('div.tätigkeiten').show();
         }
 
         $('#form_unterunterkategorie').prepend($('<option>', {value : '', selected : 'selected', text: 'Bitte wählen...'}));

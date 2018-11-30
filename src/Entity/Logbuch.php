@@ -259,9 +259,16 @@ class Logbuch
     /**
      * @var string
      *
-     * @ORM\Column(name="notizen", type="text", length=0, nullable=false)
+     * @ORM\Column(name="notizen", type="text", nullable=true)
      */
     private $notizen;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="uebungsleiter", type="text", nullable=true)
+     */
+    private $uebungsleiter;
 
     /**
      * @var int
@@ -283,6 +290,7 @@ class Logbuch
     }
     public static function getUnterKategorieOptions_Einsatz(){
         return["Brandeinsatz", "Brandsicherheitswache", "Technischer Einsatz",
+
             "Atemschutzübung", "Begehung", "Bewerbsübung",
             "Branddienstübung",
             "Chargenschulung",
@@ -306,7 +314,33 @@ class Logbuch
             "Wasserdienstübung",
             "Zugsübung 1.Zug",
             "Zugsübung 2.Zug",
-            "Sonstiges"];
+            "Sonstige Übung",
+
+            "Atemschutz", "Ausbildung", "Beratung der Behörden", "Chargensitzung", "Dienstbesprechung",
+            "EDV", "Fahrzeug- und Gerätedienst/Fahrmeister","Fahrzeug- und Gerätedienst/Zeugmeister",
+            "Feuerwehrball", "Feuerwehrfest",
+            "Feuerwehrmedizinischer Dienst",
+            "Inspektion",
+            "Kirchgang",
+            "Kommandobesprechung",
+            "Mitgliederbesprechung",
+            "Nachrichtendienst",
+            "Öffentlichkeitsarbiet und Dokumentation",
+            "Repräsentationen",
+            "Schadstoffdienst",
+            "Schriftverkehr",
+            "Sprengdienst",
+            "Strahlenschutzdienst",
+            "Tätigkeit im Feuerwehrhaus",
+            "Veranstaltungen",
+            "Versorgungsdienst",
+            "Verwaltungstätigkeiten",
+            "Vorbeugender Brandschutz",
+            "Vorträge/Schulungen",
+            "Wartungsarbeiten",
+            "Wasserdienst",
+            "Sonstige Tätigkeit"
+        ];
     }
 
     public static function getUnterKategorieOptions_Übung(){
@@ -830,6 +864,18 @@ class Logbuch
     public function setAlarmdatum(\DateTimeInterface $alarmdatum): self
     {
         $this->alarmdatum = $alarmdatum;
+
+        return $this;
+    }
+
+    public function getUebungsleiter(): ?string
+    {
+        return $this->uebungsleiter;
+    }
+
+    public function setUebungsleiter(?string $uebungsleiter): self
+    {
+        $this->uebungsleiter = $uebungsleiter;
 
         return $this;
     }

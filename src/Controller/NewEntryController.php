@@ -152,7 +152,7 @@ class NewEntryController extends AbstractController
                 'expanded'=>true,
             ))
             ->add('anwesend', ChoiceType::class, array(
-                'choices'=>array('Bezirkshauptmannschaft'=>'Bezirkshauptmannschaft','EVU'=>'EVU','Polizei'=>'Polizei','Straßenverwaltung'=>'Straßenverwaltung',
+                'choices'=>array('BH'=>'Bezirkshauptmannschaft','EVU'=>'EVU','Polizei'=>'Polizei','Straßenverwaltung'=>'Straßenverwaltung',
                     'BFKDT/AFKDT'=>'BFKDT/AFKDT', 'Gemeinde'=>'Gemeinde', 'Rettung'=>'Rettung', 'Wasserwerk'=>'Wasserwerk', 'Sonstige'=>'Sonstige'),
                 'multiple'=>true,
                 'expanded'=>true,
@@ -160,6 +160,7 @@ class NewEntryController extends AbstractController
             ->add('betriebsmittel', TextType::class)
             ->add('notizen', TextareaType::class)
             ->add('bericht', TextareaType::class)
+            ->add('uebungsleiter', TextType::class)
             ->add('save', SubmitType::class)
             ->getForm();
     }

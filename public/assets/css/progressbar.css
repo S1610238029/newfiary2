@@ -41,7 +41,7 @@ body{
     display:none;
 }
 
-#form-id input, .home-button{
+#form-id input, .home-button, #form-id button, .colorButton{
     border:1px solid #ccc;
     border-radius:3px;
     padding:15px;
@@ -226,7 +226,7 @@ form#form-id fieldset div#allgemein label.required{
     color:var(--red);
 }
 
-.colorButton{
+.colorButton, .colorButton:hover, .colorButton:active{
     color:white;
     text-decoration:none;
 }

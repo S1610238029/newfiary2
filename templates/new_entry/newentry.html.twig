@@ -67,14 +67,6 @@
             {{ form_row(form_einsatz.unterkategorie,  {attr: {id: 'underkategorie'} }) }}
         </div>
 
-   {#    <div class="uebung">
-           <p class="legends">Details zum technischen Einsatz:</p>
-            <div class="form-row">
-                {{ form_label(form_einsatz.unterkategorie, 'Übungskategorie') }}
-                {{ form_errors(form_einsatz.unterkategorie) }}
-                {{ form_widget(form_einsatz.unterkategorie,  {attr: {id: 'underkategorie'} }) }}
-            </div>
-         </div>#}
 
         {{ form_einsatz.vars.value.unterkategorie }}
 
@@ -129,62 +121,7 @@
                     </div>
                 </div>
 
-                <!--
-                <div class="einsatz">
-                    <div class="links">
-                        {{ form_label(form_einsatz.alarmdatum, 'Datum der Alarmierung') }}
-                        {{ form_errors(form_einsatz.alarmdatum) }}
-                        {{ form_widget(form_einsatz.alarmdatum) }}
-                    </div>
-                    <div class="rechts">
-                        {{ form_label(form_einsatz.alarmzeit, 'Uhrzeit der Alarmierung') }}
-                        {{ form_errors(form_einsatz.alarmzeit) }}
-                        {{ form_widget(form_einsatz.alarmzeit) }}
-                    </div>
-                </div>
-                <div class="links">
-                    <div class="einsatz">
-                        {{ form_label(form_einsatz.beginnDatum, 'Datum Einsatzbeginn') }}
-                    </div>
-                    <div class="uebung">
-                        {{ form_label(form_einsatz.beginnDatum, 'Datum Übungsbeginn') }}
-                    </div>
-                    {{ form_errors(form_einsatz.beginnDatum) }}
-                    {{ form_widget(form_einsatz.beginnDatum) }}
-                </div>
-                <div class="rechts">
-                    <div class="einsatz">
-                        {{ form_label(form_einsatz.beginnZeit, 'Zeit Einsatzbeginn') }}
-                    </div>
-                    <div class="uebung">
-                        {{ form_label(form_einsatz.beginnZeit, 'Zeit Übungsbeginn') }}
-                    </div>
-                    {{ form_errors(form_einsatz.beginnZeit) }}
-                    {{ form_widget(form_einsatz.beginnZeit) }}
-                </div>
-                <div class="links">
-                    <div class="einsatz">
-                        {{ form_label(form_einsatz.endeDatum, 'Datum Einsatzende') }}
-                    </div>
-                    <div class="uebung">
-                        {{ form_label(form_einsatz.endeDatum, 'Datum Übungsende') }}
-                    </div>
-                    {{ form_errors(form_einsatz.endeDatum) }}
-                    {{ form_widget(form_einsatz.endeDatum) }}
-                </div>
 
-
-                <div class="rechts">
-                    <div class="einsatz">
-                        {{ form_label(form_einsatz.endeZeit, 'Zeit Einsatzende') }}
-                    </div>
-                    <div class="uebung">
-                        {{ form_label(form_einsatz.endeZeit, 'Zeit Übungsende') }}
-                    </div>
-                    {{ form_errors(form_einsatz.endeZeit) }}
-                    {{ form_widget(form_einsatz.endeZeit) }}
-                </div>
-                -->
             </div>
 
 
@@ -221,9 +158,9 @@
 
         <!--Allgemeine Infos -->
 
-        <div class="einsatz">
+        <div class="einsatz uebung">
             <div class="form-row">
-            <div class="col-12">
+            <div class="col-12" id="lage">
             {{ form_label(form_einsatz.lagebeimEintreffen, 'Lage beim Eintreffen') }}
             {{ form_errors(form_einsatz.lagebeimEintreffen) }}
             {{ form_widget(form_einsatz.lagebeimEintreffen,  {attr: {'placeholder': 'Genau Beschreibung der Lage beim Eintreffen der Einsatzkräfte...'} }) }}
@@ -293,7 +230,9 @@
                 </div>
                     </div>
                 <div class="form-row">
+                    <div class="col-12">
                         {{ form_row(form_einsatz.brandausmass) }}
+                    </div>
 
                 </div>
 
@@ -305,7 +244,9 @@
             <div id="brandsicherheitswache">
                 <p class="legends">Details zur Brandsicherheitswache:</p>
                 <div class="form-row">
+                    <div class="col-12">
                 {{ form_row(form_einsatz.anlass) }}
+                    </div>
                     </div>
 
 
@@ -315,21 +256,19 @@
             <div id="technischerEinsatz">
                 <p class="legends">Details zum technischen Einsatz:</p>
                 <div class="form-row">
+                    <div class="col-12">
                 {{ form_label(form_einsatz.unterunterkategorie, 'Technische Einsatzart') }}
+                    </div>
+                    <div class="col-12">
                 {{ form_errors(form_einsatz.unterunterkategorie) }}
                 {{ form_widget(form_einsatz.unterunterkategorie,  {attr: {id: 'technisch'} }) }}
+                    </div>
                 </div>
             </div>
 
 
         </div>
 
-        <div class="übung">
-        </div>
-
-        <div id="tätigkeit">
-
-        </div>
 
 
         <!-- Buttons -->
@@ -338,8 +277,9 @@
             <input type='button' name='next' class='next-button custom-button' value="Vorwärts"><br>
 
             <input type='button' name='restart' class='reset-button custom-button' value="Neustart">
-            <button class="home-button custom-button"><a href="{{ path('homepage') }}" class='colorButton'>Abbruch</a>
-            </button>
+             <input type='button' name='abbruch' class=' custom-button' onclick="window.location='{{ path('homepage') }}'" value="Abbrechen">
+           {#<a href="{{ path('homepage') }}" class='colorButton custom-button' formnovalidate>Abbruch</a>#}
+
 
 
     </fieldset>
@@ -392,9 +332,11 @@
                     <div class="col-12">
                 {{ form_label(form_einsatz.wetter, 'Wetter') }}
                     </div>
+                    <div class="col-12">
                 {{ form_errors(form_einsatz.wetter) }}
 
                 {{ form_widget(form_einsatz.wetter) }}
+                        </div>
                     </div>
 
 
@@ -409,8 +351,10 @@
                 <div class="col-12">
             {{ form_label(form_einsatz.anwesend, 'Anwesende') }}
                 </div>
+                <div class="col-12">
             {{ form_errors(form_einsatz.anwesend) }}
             {{ form_widget(form_einsatz.anwesend) }}
+                </div>
 
         </div>
             <div class="form-row">
@@ -427,23 +371,34 @@
             {{ form_widget(form_einsatz.bericht,  {'attr': {'placeholder': 'Genauer Bericht für die Homepage'} }) }}
         </div>
     </div>
-            <p>Hier kommt eventuell ein File-Upload hin!</p>
-            <div class="form-row">
-                <div class="col-12">
-                    <label>File Upload</label>
-            <input type="file" value="Upload Files">
-                </div>
+        </div>
+
+    <div class="uebung">
+        <div class="form-row">
+            <div class="col-12">
+                {{ form_label(form_einsatz.uebungsleiter, 'Übungsleiter') }}
+                {{ form_errors(form_einsatz.uebungsleiter) }}
+                {{ form_widget(form_einsatz.uebungsleiter,  {'attr': {'placeholder': 'Den Ausarbeiter der Übung hier eintragen..'} }) }}
             </div>
         </div>
+    </div>
+
+    <p>Hier kommt eventuell ein File-Upload hin!</p>
+    <div class="form-row">
+        <div class="col-12">
+            <label>File Upload</label>
+            <input type="file" value="Upload Files">
+        </div>
+    </div>
 
 
         <!-- Buttons -->
 
-        <input type='button' name='previous' class='prev-button custom-button' value="Zurück">
-        <input type='button' name='next' class='next-button custom-button' value="Vorwärts"><br>
+    <input type='button' name='previous' class='prev-button custom-button' value="Zurück">
+    <input type='button' name='next' class='next-button custom-button' value="Vorwärts"><br>
 
-        <input type='button' name='restart' class='reset-button custom-button' value="Neustart">
-        <input type='button' name='restart' class='reset-button custom-button' value="Abbruch">
+    <input type='button' name='restart' class='reset-button custom-button' value="Neustart">
+        <input type='button' name='abbruch' class=' custom-button' onclick="window.location='{{ path('homepage') }}'" value="Abbrechen">
 
     </fieldset>
 
@@ -459,13 +414,14 @@
         <input type='button' name='next' class='next-button custom-button' value="Vorwärts"><br>
 
         <input type='button' name='restart' class='reset-button custom-button' value="Neustart">
-        <input type='button' name='restart' class='reset-button custom-button' value="Abbruch">
+        <input type='button' name='abbruch' class=' custom-button' onclick="window.location='{{ path('homepage') }}'" value="Abbrechen">
 
     </fieldset>
 
 
 
     <!-- Zusammenfassung -->
+    <fieldset>
     <fieldset>
         <h2 class='title'>Zusammenfassung</h2>
         <h3 class='sub-title'>Hier kommt noch die Zusammenfassung hin</h3>
@@ -476,14 +432,17 @@
 
         <!-- Buttons -->
         <input type='button' name='previous' class='prev-button custom-button' value="Zurück">
-        <input type='button' name='next' class='next-button custom-button' value="Vorwärts"><br>
 
+
+        {{ form_end(form_einsatz, {'attr': {'class': 'custom-button'} }) }}
+
+        <br>
         <input type='button' name='restart' class='reset-button custom-button' value="Neustart">
-        <input type='button' name='restart' class='reset-button custom-button' value="Abbruch">
+        <input type='button' name='abbruch' class=' custom-button' onclick="window.location='{{ path('homepage') }}'" value="Abbrechen">
 
     </fieldset>
-    {{ form_end(form_einsatz, {'render_rest': false}) }}
-    {{ form_widget(form_einsatz._token) }}
+
+
     <!--</form>-->
 
 
