@@ -89,16 +89,16 @@ class Logbuch
     private $geschaedigterKennzeichen;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="anwesend", type="string", length=255, nullable=true)
+     *
+     * @ORM\Column(name="anwesend", type="array", nullable=true)
      */
     private $anwesend;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="brandobjekte", type="string", length=255, nullable=true)
+     * @ORM\Column(name="brandobjekte", type="string", length=255)
      */
     private $brandobjekte;
 
@@ -243,9 +243,10 @@ class Logbuch
     private $bericht;
 
     /**
-     * @var string|null
      *
-     * @ORM\Column(name="wetter", type="string", length=255, nullable=true)
+     *
+     * @ORM\Column(name="wetter", type="array", length=255, nullable=true)
+     *
      */
     private $wetter;
 
@@ -278,9 +279,9 @@ class Logbuch
     private $idbenutzerBenutzer;
 
     /**
-     * @var \DateTime
      *
-     * @ORM\Column(name="metadata", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     *
+     * @ORM\Column(name="metadata", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
     private $metadata = 'CURRENT_TIMESTAMP';
 
@@ -602,12 +603,12 @@ class Logbuch
         return $this;
     }
 
-    public function getWetter(): ?string
+    public function getWetter()
     {
         return $this->wetter;
     }
 
-    public function setWetter(?string $wetter): self
+    public function setWetter($wetter)
     {
         $this->wetter = $wetter;
 
@@ -638,12 +639,12 @@ class Logbuch
         return $this;
     }
 
-    public function getMetadata(): ?\DateTimeInterface
+    public function getMetadata()
     {
         return $this->metadata;
     }
 
-    public function setMetadata(\DateTimeInterface $metadata): self
+    public function setMetadata($metadata): self
     {
         $this->metadata = $metadata;
 
@@ -736,12 +737,12 @@ class Logbuch
         return $this;
     }
 
-    public function getAnwesend(): ?string
+    public function getAnwesend()
     {
         return $this->anwesend;
     }
 
-    public function setAnwesend(?string $anwesend): self
+    public function setAnwesend($anwesend)
     {
         $this->anwesend = $anwesend;
 

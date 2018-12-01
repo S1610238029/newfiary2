@@ -17,42 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class NewEntryController extends AbstractController
 {
-    /**
-     * @Route("/newentry", name="newentry")
-     */
-    public function index(Request $request)
-    {
-
-        $neuereinsatz = new Logbuch();
-        $form_einsatz = $this->buildForm_Einsatz($neuereinsatz);
-        $neuereinsatz->setKategorie('einsatz');
-
-        $form_einsatz->handleRequest($request);
-
-        if ($form_einsatz->isSubmitted() && $form_einsatz->isValid()) {
-
-            $neuereinsatz = $form_einsatz->getData();
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($neuereinsatz);
-            $em->flush();
-
-            return $this->redirectToRoute('homepage');
-
-        }
-
-        return $this->render('new_entry/newentry.html.twig', [
-            'form_einsatz' => $form_einsatz->createView(),
-
-        ]);
-
-
-
-
-      /*  return $this->render('new_entry/newentry.html.twig', [
-            'controller_name' => 'NewEntryController',
-        ]);*/
-    }
 
 
     //build Einsatzform
@@ -164,6 +128,50 @@ class NewEntryController extends AbstractController
             ->add('save', SubmitType::class)
             ->getForm();
     }
+
+    /**
+     * @Route("/newentry", name="newentry")
+     */
+    public function index(Request $request)
+    {
+
+        $neuereinsatz = new Logbuch();
+        $neuereinsatz->setKategorie('einsatz');
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $userId = $user->getId();
+        echo ($userId);
+
+        $neuereinsatz->setIdbenutzerBenutzer($userId);
+        $form_einsatz = $this->buildForm_Einsatz($neuereinsatz);
+
+
+        $form_einsatz->handleRequest($request);
+
+        if ($form_einsatz->isSubmitted() && $form_einsatz->isValid()) {
+
+            $neuereinsatz = $form_einsatz->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($neuereinsatz);
+            $em->flush();
+
+            return $this->redirectToRoute('homepage');
+
+        }
+
+        return $this->render('new_entry/Test_newentry.html.twig', [
+            'form_einsatz' => $form_einsatz->createView(),
+
+        ]);
+
+
+
+
+        /*  return $this->render('new_entry/newentry.html.twig', [
+              'controller_name' => 'NewEntryController',
+          ]);*/
+    }
+
 
 
 
