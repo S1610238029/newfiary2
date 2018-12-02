@@ -24,14 +24,14 @@ class Logbuch
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="kategorie", type="string", length=255, nullable=false)
      */
     private $kategorie;
 
     /**
      *
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="unterkategorie", type="integer",  nullable=false)
      */
     private $unterkategorie;
@@ -52,15 +52,15 @@ class Logbuch
 
     /**
      * @var string
-     * @Assert\NotBlank()
-     * @ORM\Column(name="lagebeimEintreffen", type="string", nullable=false)
+     *
+     * @ORM\Column(name="lagebeimEintreffen", type="string", nullable=true)
      */
     private $lagebeimEintreffen;
 
     /**
      * @var string
-     * @Assert\NotBlank()
-     * @ORM\Column(name="geschaedigter_name", type="string", length=255, nullable=false)
+     *
+     * @ORM\Column(name="geschaedigterName", type="string", length=255, nullable=true)
      */
     private $geschaedigterName;
 
@@ -160,48 +160,49 @@ class Logbuch
     /**
      *
      *
-     * @ORM\Column(name="alarmzeit", type="date")
+     * @ORM\Column(name="alarmzeit", type="time")
      */
     private $alarmzeit;
 
     /**
      *
      *
-     * @ORM\Column(name="alarmdatum", type="time")
+     * @ORM\Column(name="alarmdatum", type="date")
      */
     private $alarmdatum;
 
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="beginn_datum", type="date", nullable=false)
      */
     private $beginnDatum;
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="beginn_zeit", type="time", nullable=false)
      */
     private $beginnZeit;
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="ende_datum", type="date", nullable=false)
      */
     private $endeDatum;
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="ende_zeit", type="time", nullable=false)
      */
     private $endeZeit;
 
     /**
      * @var int
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="plz", type="integer", nullable=false)
      */
@@ -209,21 +210,21 @@ class Logbuch
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="ort", type="string", length=255, nullable=false)
      */
     private $ort;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="strasse", type="string", length=255, nullable=false)
      */
     private $strasse;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="hausnummer", type="string", length=255, nullable=false)
      */
     private $hausnummer;
@@ -273,17 +274,23 @@ class Logbuch
 
     /**
      * @var int
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="idbenutzer_benutzer", type="integer", nullable=false, options={"unsigned"=true})
      */
     private $idbenutzerBenutzer;
 
     /**
+     * @var \DateTime
      *
-     *
-     * @ORM\Column(name="metadata", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     * @ORM\Column(name="metadata", nullable=false)
      */
-    private $metadata = 'CURRENT_TIMESTAMP';
+    private $metadata;
+
+   /* public function __construct()
+    {
+        $this->metadata = (new \DateTime("now"))->format('Y-m-d H-i-s');
+
+    }*/
 
 
     public static function getKategorieOptions(){
@@ -483,48 +490,48 @@ class Logbuch
         return $this;
     }
 
-    public function getBeginnDatum(): ?\DateTimeInterface
+    public function getBeginnDatum()
     {
         return $this->beginnDatum;
     }
 
-    public function setBeginnDatum(\DateTimeInterface $beginnDatum): self
+    public function setBeginnDatum( $beginnDatum)
     {
         $this->beginnDatum = $beginnDatum;
 
         return $this;
     }
 
-    public function getBeginnZeit(): ?\DateTimeInterface
+    public function getBeginnZeit()
     {
         return $this->beginnZeit;
     }
 
-    public function setBeginnZeit(\DateTimeInterface $beginnZeit): self
+    public function setBeginnZeit($beginnZeit): self
     {
         $this->beginnZeit = $beginnZeit;
 
         return $this;
     }
 
-    public function getEndeDatum(): ?\DateTimeInterface
+    public function getEndeDatum()
     {
         return $this->endeDatum;
     }
 
-    public function setEndeDatum(\DateTimeInterface $endeDatum): self
+    public function setEndeDatum( $endeDatum)
     {
         $this->endeDatum = $endeDatum;
 
         return $this;
     }
 
-    public function getEndeZeit(): ?\DateTimeInterface
+    public function getEndeZeit()
     {
         return $this->endeZeit;
     }
 
-    public function setEndeZeit(\DateTimeInterface $endeZeit): self
+    public function setEndeZeit( $endeZeit): self
     {
         $this->endeZeit = $endeZeit;
 
@@ -778,7 +785,7 @@ class Logbuch
         return $this->brandausDate;
     }
 
-    public function setBrandausDate(?\DateTimeInterface $brandausDate): self
+    public function setBrandausDate(?\DateTimeInterface $brandausDate = null): self
     {
         $this->brandausDate = $brandausDate;
 
@@ -790,7 +797,7 @@ class Logbuch
         return $this->brandausTime;
     }
 
-    public function setBrandausTime(?\DateTimeInterface $brandausTime): self
+    public function setBrandausTime(?\DateTimeInterface $brandausTime = null): self
     {
         $this->brandausTime = $brandausTime;
 
@@ -802,7 +809,7 @@ class Logbuch
         return $this->brandwacheStartDate;
     }
 
-    public function setBrandwacheStartDate(?\DateTimeInterface $brandwacheStartDate): self
+    public function setBrandwacheStartDate(?\DateTimeInterface $brandwacheStartDate = null): self
     {
         $this->brandwacheStartDate = $brandwacheStartDate;
 
@@ -814,7 +821,7 @@ class Logbuch
         return $this->brandwacheStartTime;
     }
 
-    public function setBrandwacheStartTime(?\DateTimeInterface $brandwacheStartTime): self
+    public function setBrandwacheStartTime(?\DateTimeInterface $brandwacheStartTime = null): self
     {
         $this->brandwacheStartTime = $brandwacheStartTime;
 
@@ -826,7 +833,7 @@ class Logbuch
         return $this->brandwacheEndeDate;
     }
 
-    public function setBrandwacheEndeDate(?\DateTimeInterface $brandwacheEndeDate): self
+    public function setBrandwacheEndeDate(?\DateTimeInterface $brandwacheEndeDate = null): self
     {
         $this->brandwacheEndeDate = $brandwacheEndeDate;
 
@@ -838,31 +845,21 @@ class Logbuch
         return $this->brandwacheEndeTime;
     }
 
-    public function setBrandwacheEndeTime(?\DateTimeInterface $brandwacheEndeTime): self
+    public function setBrandwacheEndeTime(?\DateTimeInterface $brandwacheEndeTime = null): self
     {
         $this->brandwacheEndeTime = $brandwacheEndeTime;
 
         return $this;
     }
 
-    public function getAlarmzeit(): ?\DateTimeInterface
-    {
-        return $this->alarmzeit;
-    }
 
-    public function setAlarmzeit(\DateTimeInterface $alarmzeit): self
-    {
-        $this->alarmzeit = $alarmzeit;
-
-        return $this;
-    }
 
     public function getAlarmdatum(): ?\DateTimeInterface
     {
         return $this->alarmdatum;
     }
 
-    public function setAlarmdatum(\DateTimeInterface $alarmdatum): self
+    public function setAlarmdatum(\DateTimeInterface $alarmdatum = null): self
     {
         $this->alarmdatum = $alarmdatum;
 
@@ -877,6 +874,18 @@ class Logbuch
     public function setUebungsleiter(?string $uebungsleiter): self
     {
         $this->uebungsleiter = $uebungsleiter;
+
+        return $this;
+    }
+
+    public function getAlarmzeit(): ?\DateTimeInterface
+    {
+        return $this->alarmzeit;
+    }
+
+    public function setAlarmzeit(\DateTimeInterface $alarmzeit = null): self
+    {
+        $this->alarmzeit = $alarmzeit;
 
         return $this;
     }

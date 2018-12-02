@@ -27,8 +27,8 @@
 
     <!--<form id="form-id">-->
     {{ form_start(form_einsatz, {attr: {id: 'form-id'} }) }}
-    {{ form_errors(form_einsatz) }}
-s
+    {#{{ form_errors(form_einsatz) }}#}
+
     <!--Progressbar-->
     <ul class='progressbar'>
         <li class="active">Kategorie auswählen</li>
@@ -48,6 +48,9 @@ s
         <input type='button' name='next' class='next-button custom-button kategorie' value="Einsatz"><br>
         <input type='button' name='next' class='next-button custom-button kategorie' value="Übung"><br>
         <input type='button' name='next' class='next-button custom-button kategorie' value="Tätigkeit"><br>
+        <div style="display:none;">
+        {{ form_row(form_einsatz.kategorie) }}
+        </div>
     </fieldset>
 
 
@@ -433,7 +436,8 @@ s
 
         {{ form_errors(form_einsatz) }}
 
-        {{ form_row(form_einsatz.save) }}
+        {#{{ form_row(form_einsatz.save) }}#}
+
 
         {{ form_end(form_einsatz) }}
 

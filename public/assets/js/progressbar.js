@@ -5,6 +5,8 @@ $(".costum-button").on("click", function() {
     $("body").scrollTop(0);
 });
 
+
+
 /* Erster Test der Animationen für die Progress Bar beim Eintrag erstellen */
 $(document).ready(function() {
     $(".next-button").click(function() {
@@ -60,6 +62,17 @@ $(document).ready(function() {
         $(".progressbar li:first-child").addClass("active");
         current.hide();
         $("fieldset#kategoriewahl").show();
+
+        if($("#form_kategorie_1").hasAttribute("selected")){
+            $("#form_kategorie_1").removeAttr("selected");
+        }
+        if($("#form_kategorie_0").hasAttribute("selected")){
+            $("#form_kategorie_0").removeAttr("selected");
+        }
+
+        if($("#form_kategorie_2").hasAttribute("selected")){
+            $("#form_kategorie_2").removeAttr("selected");
+        }
     });
 
 
@@ -93,6 +106,12 @@ $(document).ready(function() {
     $('#form_save').addClass("custom-button");
     $('#form_save').unwrap();
 
+
+
+
+
+
+
     /*while clicking on one of the main kategories*/
     $(".kategorie").click(function() {
         var kategorie=$(this).val();
@@ -107,6 +126,7 @@ $(document).ready(function() {
         }
 
         if(kategorie=='Einsatz') { //Einsatz
+            $("#form_kategorie_0").attr("selected", "selected");
             $("#title").text(kategorie + 'details');
             $("#subtitle").text('Bitte gib hier die Details des Einsatzes bekannt!');
 
@@ -117,6 +137,7 @@ $(document).ready(function() {
             $('#form_unterkategorie option').slice( 4,61 ).remove(); //remove übung
 
         }else if (kategorie=='Übung'){ //Übung
+            $("#form_kategorie_1").attr("selected", "selected");
             $("#title").text(kategorie + 'sdetails');
             $("#subtitle").text('Bitte gib hier die Details der '+ kategorie +' bekannt!');
 
@@ -131,6 +152,7 @@ $(document).ready(function() {
             $('#form_lagebeimEintreffen').attr("placeholder", "Genaue Beschreibung der Übungsannahme...");
 
         }else{ //Tätigkeit
+            $("#form_kategorie_2").attr("selected", "selected");
             $("#title").text(kategorie + 'sdetails');
             $("#subtitle").text('Bitte gib hier die Details der '+ kategorie +' bekannt!');
 
@@ -142,7 +164,7 @@ $(document).ready(function() {
         }
 
         $('#form_unterunterkategorie').prepend($('<option>', {value : '', selected : 'selected', text: 'Bitte wählen...'}));
-        $('#form_unterunterkategorie').attr('required', 'true');
+        //$('#form_unterunterkategorie').attr('required', 'true');
         $('#form_unterkategorie').attr('required', 'true');
 
         $('#form_unterkategorie').change(function(){
