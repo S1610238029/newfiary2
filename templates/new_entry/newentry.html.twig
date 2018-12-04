@@ -277,7 +277,7 @@
         <!-- Buttons -->
 
             <input type='button' name='previous' class='prev-button custom-button' value="Zurück">
-            <input type='button' name='next' class='next-button custom-button' value="Vorwärts"><br>
+            <input type='button' name='next' class='next-button custom-button' id="firstNextButton" value="Vorwärts"><br>
 
             <input type='button' name='restart' class='reset-button custom-button' value="Neustart">
              <input type='button' name='abbruch' class=' custom-button' onclick="window.location='{{ path('homepage') }}'" value="Abbrechen">
@@ -424,13 +424,16 @@
 
 
     <!-- Zusammenfassung -->
-    <fieldset>
+
     <fieldset>
         <h2 class='title'>Zusammenfassung</h2>
         <h3 class='sub-title'>Hier kommt noch die Zusammenfassung hin</h3>
 
         {{ form_einsatz.vars.value.unterkategorie }}
-        <!-- Buttons -->
+
+        {{ form_einsatz.vars.value.kategorie }}
+
+    <!-- Buttons -->
         <input type='button' name='previous' class='prev-button custom-button' value="Zurück">
 
 

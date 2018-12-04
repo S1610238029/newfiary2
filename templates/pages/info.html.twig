@@ -184,37 +184,7 @@
 
 
 
-                {#                                <div class="list-group list">
 
-                                                    {% for mitglied in mitglieder %}
-
-                                                    <div class="list-group-item">
-                                                        <div class="col-md-10">
-
-                                                            <h4 class="list-group-item-heading name">{{ mitglied.standesbuchnummer }} - {{ mitglied.dienstgrad }} {{ mitglied.vorname }} {{ mitglied.nachname }}</h4>
-                                                            {% if mitglied.mobil %}
-                                                            <p class="list-group-item-text text" style="margin-bottom: 0;">{{ mitglied.mobil }}</p>
-                                                        {% endif %}
-                                                        {% if mitglied.telefonNr %}
-                                                            <p class="list-group-item-text text" style="margin-bottom: 0;">{{ mitglied.telefonNr }}</p>
-                                                            {% endif %}
-                                                            {% if mitglied.email %}
-                                                            <p class="list-group-item-text text" style="margin-bottom: 0;">{{ mitglied.email }}</p>
-                                                                {% endif %}
-                                                            {% if mitglied.atemschutztauglich == 1 %}
-                                                                <p class="list-group-item-text text" style="margin-bottom: 0;">Atemschutztauglich: JA</p>
-                                                            {% elseif mitglied.atemschutztauglich == 0 %}
-                                                                <p class="list-group-item-text text" style="margin-bottom: 0;">Atemschutztauglich: NEIN</p>
-                                                            {% endif %}
-                                                        </div>
-                                                </div>
-
-                                                        <div class="clearfix"></div>
-
-                                                        {% endfor %}
-
-
-                                                </div>#}
 
                                             </div>
                                         </div>
@@ -256,8 +226,42 @@
                     </div>
                     <div id="panelBodyThree" class="panel-collapse collapse">
                         <div class="panel-body">
+
+                            {#wenn Häuserliste upgedatet werden soll, diese Zeilen einkommentieren#}
+                           {# {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{  path('newhaus') }}" id="adduser" class="biggreybutton">Häuser zur Häuserliste hinzufügen</a>
+                            {% endif %}#}
                             <div class="panel-content">
-                                <p>Energistically drive standardized communities through user friendly results. Phosfluorescently initiate superior technologies vis-a-vis low-risk high-yield solutions. Objectively facilitate clicks-and-mortar partnerships vis-a-vis superior partnerships. Continually generate long-term high-impact methodologies via wireless leadership. Holisticly seize resource maximizing solutions via user friendly outsourcing.</p>
+
+                                <table class="fixed_header table display" id="häuser"  style="width:100%">
+
+                                    <thead>
+                                    <tr>
+                                        <th >Strasse</th>
+                                        <th>Hausnummer</th>
+                                        <th>Bewohner</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for haus in haeuser %}
+                                        <tr>
+
+                                            <td>{% if haus.strasse %}{{ haus.strasse }}{% else %}  {% endif %}</td>
+
+
+                                            <td> {% if haus.hausNr %}{{ haus.hausNr }}{% else %}  {% endif %}</td>
+
+
+
+                                            <td>{% if haus.bewohner %}{{ haus.bewohner }}{% else %}  {% endif %}</td>
+
+
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+
                             </div>
                         </div>
                     </div>

@@ -6,8 +6,10 @@ use App\Entity\Feed;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Mitglieder;
+use App\Entity\Haus;
 
 
 class PageController extends Controller //AbstracController
@@ -81,21 +83,54 @@ class PageController extends Controller //AbstracController
         $rep = $this->getDoctrine()->getRepository(Mitglieder::class);
         $mitglieder = $rep->findAll();
 
-        /**
-         * @var $paginator \Knp\Component\Pager\Paginator
-         */
-        /*    $paginator = $this->get('knp_paginator');
-            $result=$paginator->paginate(
-                $mitglieder,
-                $request->query->getInt('page',1),
-                $request->query->getInt('limit',1)
-        );*/
-
+        $repo=$this->getDoctrine()->getRepository(Haus::class);
+        $häuser = $repo->findAll();
 
         return $this->render('pages/info.html.twig', [
             'mitglieder' => $mitglieder,
+            'haeuser'=>$häuser,
         ]);
     }
+
+    /**
+     * @Route("/info/newhaus", name="newhaus")
+     */
+    public function newHausAction(Request $request)
+    {
+        $this->denyAccessUnlessGranted('ROLE_REGISTERED', null, 'Unable to access this page!');
+        $row = 1;
+        if (($handle = fopen("Häuserliste.csv", "r")) !== FALSE) {
+            while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+                $num = count($data);
+                echo "<p> $num Felder in Zeile $row: <br /></p>\n";
+                $row++;
+                $haus = new Haus();
+                $haus->setStrasse($data[0]);
+                $haus->setHausNr($data[1]);
+                //encode the names of bewohner
+                $bewohner=base64_encode($data[2]);
+                //for decoding: base64_decode(base64_encode($string)):
+                $haus->setBewohner($bewohner);
+              for ($c=0; $c < $num; $c++) {
+                    echo $data[$c] . "<br />\n";
+
+
+                }
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($haus);
+                $em->flush();
+            }
+            fclose($handle);
+        }
+
+
+
+        return new Response(
+            '<html><body>Häuserliste wurde upgedatet!</body></html>'
+        );
+    }
+
+
 
 
 

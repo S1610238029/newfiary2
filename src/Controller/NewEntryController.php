@@ -26,10 +26,9 @@ class NewEntryController extends AbstractController
         return $this->createFormBuilder($entry)
 
             ->add('kategorie', ChoiceType::class, array(
-                'choices'=>array('Einsatz'=>'Einsatz','Übung'=>'Übung', 'Tätigkeit'=> 'Tätigkeit'),
-                'multiple'=>false,
-                'expanded'=>true,
-                'required' =>false
+                'choices'=>array('Einsatz'=>'Einsatz','Übung'=>'Übung', 'Tätigkeit'=> 'Tätigkeit')
+
+
             ))
             ->add('unterkategorie', ChoiceType::class, [
                 'choices' => array_flip(Logbuch::getUnterKategorieOptions_Einsatz())
@@ -78,7 +77,9 @@ class NewEntryController extends AbstractController
                 'choices' => array_flip(Logbuch::getBrandausmassOptions()),
                 'multiple'=>false,
                 'expanded'=>true,
+                'placeholder' => false,
                 'required'=>false
+
             ))
             ->add('brandobjekte', TextType::class, array(
                 'required'=>false
@@ -87,7 +88,7 @@ class NewEntryController extends AbstractController
             ->add('anlass', ChoiceType::class, array(
                 'choices'=>array('brandgefährliche Tätigkeit'=>'brandgefährliche Tätigkeit','bei Veranstaltung'=>'bei Veranstaltung'),
                 'multiple'=>false,
-                'expanded'=>true,
+                'expanded'=>true,'placeholder' => false,
                 'required'=>false
             ))
             ->add('strasse', TextType::class)
@@ -156,8 +157,8 @@ class NewEntryController extends AbstractController
                 'choices'=>array('BH'=>'Bezirkshauptmannschaft','EVU'=>'EVU','Polizei'=>'Polizei','Straßenverwaltung'=>'Straßenverwaltung',
                     'BFKDT/AFKDT'=>'BFKDT/AFKDT', 'Gemeinde'=>'Gemeinde', 'Rettung'=>'Rettung', 'Wasserwerk'=>'Wasserwerk', 'Sonstige'=>'Sonstige'),
                 'multiple'=>true,
-                'expanded'=>true,
-                'required'=>false
+                'expanded'=>true
+
             ))
             ->add('betriebsmittel', TextType::class, array(
                 'required'=>false

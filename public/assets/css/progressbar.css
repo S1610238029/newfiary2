@@ -249,4 +249,9 @@ div.checkboxFormat>label>input{
    margin-bottom:0!important;
 }
 
+.errors{
+    background: #8d0403;
+
+}
+
 

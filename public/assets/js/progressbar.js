@@ -5,6 +5,51 @@ $(".costum-button").on("click", function() {
     $("body").scrollTop(0);
 });
 
+var errorP='<p class="errors">Pflichtfeld darf nicht leer sein!</p>';
+
+/*$('#firstNextButton').on("click", function(){
+    if($('#form_kategorie').val()=='Einsatz'){
+
+    }else if($('#form_kategorie').val()=='Übung'){
+
+    }else if($('#form_kategorie').val()=='Tätigkeit'){
+        if($('#form_unterkategorie').val()==''){
+        $(this).prepend(errorP);
+
+        if($('#form_beginnDatum').val()==''){
+            $(this).prepend(errorP);
+
+        }
+
+        if($('#form_endeDatum').val()==''){
+            $(this).prepend(errorP);
+
+        }
+
+        if($('#form_beginnZeit').val()==''){
+            $(this).prepend(errorP);
+
+        }
+        if($('#form_endeZeit').val()==''){
+            $(this).prepend(errorP);
+
+        }
+        if($('#form_strasse').val()==''){
+            $(this).prepend(errorP);
+
+        }
+        if($('#form_hausnummer').val()==''){
+            $(this).prepend(errorP);
+
+        }
+        if($('#form_plz').val()==''){
+            $(this).prepend(errorP);
+
+        }
+    }else{
+        //throw error
+    }
+    });*/
 
 
 /* Erster Test der Animationen für die Progress Bar beim Eintrag erstellen */
@@ -126,7 +171,7 @@ $(document).ready(function() {
         }
 
         if(kategorie=='Einsatz') { //Einsatz
-            $("#form_kategorie_0").attr("selected", "selected");
+            $('#form_kategorie option[value="Einsatz"]').attr("selected", "selected");
             $("#title").text(kategorie + 'details');
             $("#subtitle").text('Bitte gib hier die Details des Einsatzes bekannt!');
 
@@ -137,7 +182,7 @@ $(document).ready(function() {
             $('#form_unterkategorie option').slice( 4,61 ).remove(); //remove übung
 
         }else if (kategorie=='Übung'){ //Übung
-            $("#form_kategorie_1").attr("selected", "selected");
+            $('#form_kategorie option[value="Übung"]').attr("selected", "selected");
             $("#title").text(kategorie + 'sdetails');
             $("#subtitle").text('Bitte gib hier die Details der '+ kategorie +' bekannt!');
 
@@ -152,7 +197,7 @@ $(document).ready(function() {
             $('#form_lagebeimEintreffen').attr("placeholder", "Genaue Beschreibung der Übungsannahme...");
 
         }else{ //Tätigkeit
-            $("#form_kategorie_2").attr("selected", "selected");
+            $('#form_kategorie option[value="Tätigkeit"]').attr("selected", "selected");
             $("#title").text(kategorie + 'sdetails');
             $("#subtitle").text('Bitte gib hier die Details der '+ kategorie +' bekannt!');
 
@@ -172,21 +217,30 @@ $(document).ready(function() {
             console.log(selectedKategorie);
             if(selectedKategorie=='0'){ //brandeinsatz
                 $('div#brandsicherheitswache').hide();
+                $('div#brandsicherheitswache input').attr('disabled', 'true');
                 $('div#technischerEinsatz').hide();
+                $('div#technischerEisnatz select').attr('disabled', 'true');
                 $('div#brandeinsatz').show();
             }else if(selectedKategorie=='1'){
                 $('div#brandeinsatz').hide();
+                $('div#brandeinsatz input').attr('disabled', 'true');
                 $('div#technischerEinsatz').hide();
+                $('div#technischerEisnatz select').attr('disabled', 'true');
                 $('div#brandsicherheitswache').show();
             }else if(selectedKategorie=='2'){
 
                 $('div#brandsicherheitswache').hide();
+                $('div#brandsicherheitswache input').attr('disabled', 'true');
                 $('div#brandeinsatz').hide();
+                $('div#brandeinsatz input').attr('disabled', 'true');
                 $('div#technischerEinsatz').show();
             }else{
                 $('div#brandeinsatz').hide();
+                $('div#brandeinsatz input').attr('disabled', 'true');
                 $('div#brandsicherheitswache').hide();
+                $('div#brandsicherheitswache input').attr('disabled', 'true');
                 $('div#technischerEinsatz').hide();
+                $('div#technischerEisnatz select').attr('disabled', 'true');
 
             }
 
