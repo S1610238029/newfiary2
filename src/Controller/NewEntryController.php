@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use App\Entity\Logbuch;
+use App\Entity\Haus;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\Choice;
 
@@ -196,6 +197,9 @@ class NewEntryController extends AbstractController
 
         $form_einsatz->handleRequest($request);
 
+        $repo=$this->getDoctrine()->getRepository(Haus::class);
+        $häuser = $repo->findAll();
+
         if ($form_einsatz->isSubmitted() && $form_einsatz->isValid()) {
 
             $neuereinsatz = $form_einsatz->getData();
@@ -210,6 +214,7 @@ class NewEntryController extends AbstractController
 
         return $this->render('new_entry/newentry.html.twig', [
             'form_einsatz' => $form_einsatz->createView(),
+            'haeuser'=>$häuser,
 
         ]);
 

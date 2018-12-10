@@ -267,26 +267,29 @@ div.checkboxFormat>label>input{
 
 #wrapper.toggled #sidebar-wrapper {
     width: 300px;                       /* SZEROKOŚĆ SIDEBARA */
+    display:inherit;
+
 }
 
 #sidebar-wrapper {
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     -webkit-transition: all 0.5s ease;
-    background: #1a1a1a;                /* KOLOR SIDEBARA */
+    background: whitesmoke;                /* KOLOR SIDEBARA */
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
     transition: all 0.5s ease;
     width: 0;
     z-index: 1000;
+    display:none;
 }
 
 #sidebar-wrapper::-webkit-scrollbar {
     display: none;
 }
 
-.sidebar-nav {
+.sidebar-navnew {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -294,23 +297,25 @@ div.checkboxFormat>label>input{
     top: 0;
     width: 300px;
     right: 0;/* SZEROKOŚĆ ZAWARTOŚCI SIDEBARA */
+    background:var(--red);
+    z-index:1000;
 }
 
-.sidebar-nav li {
+.sidebar-navnew li {
     display: inline-block;
     line-height: 20px;
     position: relative;
     width: 100%;
 }
 
-.sidebar-nav li a {
+.sidebar-navnew li a {
     color: #dddddd;
     display: block;
     padding: 10px 15px 10px 30px;
     text-decoration: none;
 }
 
-.sidebar-nav .dropdown-menu {
+.sidebar-navnew .dropdown-menu {
     background-color: grey;             /* KOLOR BG DROPDOWNA */
     border-radius: 0;
     border: none;
@@ -321,19 +326,19 @@ div.checkboxFormat>label>input{
     width: 100%;
 }
 
-.sidebar-nav li a:hover,
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus,
-.sidebar-nav li.active a,
-.sidebar-nav li.active a:hover,
-.sidebar-nav li.active a:active,
-.sidebar-nav li.active a:focus {
+.sidebar-navnew li a:hover,
+.sidebar-navnew li a:active,
+.sidebar-navnew li a:focus,
+.sidebar-navnew li.active a,
+.sidebar-navnew li.active a:hover,
+.sidebar-navnew li.active a:active,
+.sidebar-navnew li.active a:focus {
     background-color: transparent;
     color: red;
     text-decoration: none;
 }
 
-.sidebar-nav > .sidebar-brand {
+.sidebar-navnew > .sidebar-brand {
     font-size: 20px;
     height: 65px;
     line-height: 44px;
@@ -350,7 +355,7 @@ div.checkboxFormat>label>input{
     top: 20px;
     width: 32px;
     right: 0;
-    z-index: 999;
+    z-index: 1001;
 }
 
 .hamburger:hover,
@@ -359,7 +364,7 @@ div.checkboxFormat>label>input{
     outline: none;
 }
 
-.hamburger.open-nav:before {
+.hamburger.open-navnew:before {
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-transition: all 0.35s ease-in-out;
     color: #ffffff;
@@ -372,44 +377,44 @@ div.checkboxFormat>label>input{
     width: 100px;
 }
 
-.hamburger.open-nav:hover before {
-    -webkit-transform: translate3d(-100px, 0, 0);
+.hamburger.open-navnew:hover before {
+    -webkit-transform: translate3d(100px, 0, 0);
     -webkit-transition: all 0.35s ease-in-out;
     display: block;
     opacity: 1;
 }
 
-.hamburger.open-nav:hover .hamb-top {
+.hamburger.open-navnew:hover .hamb-top {
     -webkit-transition: all 0.35s ease-in-out;
     top: 0;
 }
 
-.hamburger.open-nav:hover .hamb-bottom {
+.hamburger.open-navnew:hover .hamb-bottom {
     -webkit-transition: all 0.35s ease-in-out;
     bottom: 0;
 }
 
-.hamburger.open-nav .hamb-top {
+.hamburger.open-navnew .hamb-top {
     -webkit-transition: all 0.35s ease-in-out;
     background-color: rgba(255, 255, 255, 0.7);
     top: 5px;
 }
 
-.hamburger.open-nav .hamb-middle {
+.hamburger.open-navnew .hamb-middle {
     background-color: rgba(255, 255, 255, 0.7);
     margin-top: -2px;
     top: 50%;
 }
 
-.hamburger.open-nav .hamb-bottom {
+.hamburger.open-navnew .hamb-bottom {
     -webkit-transition: all 0.35s ease-in-out;
     background-color: rgba(255, 255, 255, 0.7);
     bottom: 5px;
 }
 
-.hamburger.open-nav .hamb-top,
-.hamburger.open-nav .hamb-middle,
-.hamburger.open-nav .hamb-bottom {
+.hamburger.open-navnew .hamb-top,
+.hamburger.open-navnew .hamb-middle,
+.hamburger.open-navnew .hamb-bottom {
     height: 4px;
     left: 0;
     position: absolute;
@@ -419,8 +424,18 @@ div.checkboxFormat>label>input{
 
 
 /* FOR left side */
-.navbar-fixed-top {
+.navbarnew-fixed-top {
     left: auto;
 }
 
 
+/*Häuserliste in Navbar*/
+#häuser_newentry_length{
+    text-align:right!important;
+    float:right!important;
+    padding-top:20px!important;
+
+}
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate{
+    color:white!important;
+}

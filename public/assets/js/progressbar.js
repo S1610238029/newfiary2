@@ -255,19 +255,41 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    var open = $('.open-nav'),
-        close = $('.close');
-
+    var open = $('.open-navnew'),
+        close = $('.close'),
+        overlay = $('.overlay');
 
     open.click(function() {
-
+        overlay.show();
         $('#wrapper').addClass('toggled');
     });
 
     close.click(function() {
-
+        overlay.hide();
         $('#wrapper').removeClass('toggled');
     });
+
+
+    $('#häuser_newentry').DataTable( {
+        "order": [[ 0, "asc" ]],
+        "stateSave": true,
+        "pagingType": "simple",
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "language": {
+            "lengthMenu": "Zeige _MENU_ Einträge pro Seite",
+            "zeroRecords": "Nichts gefunden - sorry",
+            "info": "Seite _PAGE_ von _PAGES_",
+            "infoEmpty": "Keien Einträge verfügbar",
+            "infoFiltered": "(gefiltert von _MAX_ Gesamteinträgen)",
+            "search": "Suchen",
+            "paginate":{
+                "previous":"<",
+                "next":">"
+            }
+
+
+        }
+    } );
 });
 
 
