@@ -23,7 +23,37 @@
 
     <!-- Funktioniert nur hier eingebunden aber nicht im mystyle css?
     Drum bitte hier lassen und nicht rauslöschen -->
+    <div id="wrapper">
 
+
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Mitgliederliste und Häuserliste
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-cog"></i> Third page</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i> Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="dropdown-header">Dropdown heading</li>
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="close">Close</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <!-- /#sidebar-wrapper -->
 
     <!--<form id="form-id">-->
     {{ form_start(form_einsatz, {attr: {id: 'form-id'} }) }}
@@ -37,6 +67,8 @@
         <li>Besatzung</li>
         <li>Zusammenfassung</li>
     </ul>
+
+
 
     <!-- Allgemein noch eine Variable anlegen vlt statt Eintrag dann die gewählte Kategorie!! -->
 

@@ -254,6 +254,22 @@ $(document).ready(function() {
 
 });
 
+$(document).ready(function() {
+    var open = $('.open-nav'),
+        close = $('.close');
+
+
+    open.click(function() {
+
+        $('#wrapper').addClass('toggled');
+    });
+
+    close.click(function() {
+
+        $('#wrapper').removeClass('toggled');
+    });
+});
+
 
 
 

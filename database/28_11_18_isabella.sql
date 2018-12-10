@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 25. Nov 2018 um 22:38
--- Server-Version: 10.1.21-MariaDB
--- PHP-Version: 7.2.11
+-- Erstellungszeit: 28. Nov 2018 um 12:50
+-- Server-Version: 10.1.35-MariaDB
+-- PHP-Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -29,6 +31,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `benutzer` (
   `idbenutzer` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
+  `firstname` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `roles` longtext
@@ -38,10 +42,11 @@ CREATE TABLE `benutzer` (
 -- Daten für Tabelle `benutzer`
 --
 
-INSERT INTO `benutzer` (`idbenutzer`, `username`, `email`, `password`, `roles`) VALUES
-(5, 'admin', 'admin@fiary.com', '$2y$13$sxfUU5OZC/au2UKo/HdUD.o1HwILrjbQFW9lHQ6lBqyASx9p8H30G', 'a:0:{}'),
-(6, 'user', 'user@fiary.com', '$2y$13$XKqYloH3PT6Mi5r0OgiAh.HMmNBeN7QS0L710cGdqWMTWNJBxm7yq', 'a:0:{}'),
-(7, 'registered', 'registered@fiary.com', '$2y$13$j4DPHgNJ6Yj45jCY4sWeIe8F67WgHCedVainWY04GmN0MnsJ0Fo5a', 'a:0:{}');
+INSERT INTO `benutzer` (`idbenutzer`, `username`, `firstname`, `lastname`, `email`, `password`, `roles`) VALUES
+(5, 'admin', '', '', 'admin@fiary.com', '$2y$13$sxfUU5OZC/au2UKo/HdUD.o1HwILrjbQFW9lHQ6lBqyASx9p8H30G', 'a:0:{}'),
+(6, 'user', '', '', 'user@fiary.com', '$2y$13$XKqYloH3PT6Mi5r0OgiAh.HMmNBeN7QS0L710cGdqWMTWNJBxm7yq', 'a:0:{}'),
+(7, 'registered', '', '', 'registered@fiary.com', '$2y$13$j4DPHgNJ6Yj45jCY4sWeIe8F67WgHCedVainWY04GmN0MnsJ0Fo5a', 'a:0:{}'),
+(8, 'hansi', 'Hans', 'Pe', 'ha@pe.com', '$2y$13$G1o.LJRcIKi2Gt0dmQfO5ufaMMxaW2dMGmjDmeitLVLOpFFO680FG', 'a:0:{}');
 
 -- --------------------------------------------------------
 
@@ -121,7 +126,8 @@ CREATE TABLE `feed` (
 INSERT INTO `feed` (`idfeed`, `title`, `feed`, `date`) VALUES
 (1, 'Neues Feuerwehrauto!', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.', '2018-11-20'),
 (3, 'Neuigkeit im FF HAUS', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam', '2018-11-20'),
-(4, 'Problem', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam', '2018-11-20');
+(4, 'Problem', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam', '2018-11-20'),
+(5, 'Test für Homepage', 'Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it? Do you see a little Asian child with a blank expression on his face sitting outside on a mechanical helicopter that shakes when you put quarters in it? No? Well, that\'s what you see at a toy store. And you must think you\'re in a toy store, because you\'re here shopping for an infant named Jeb.', '2018-11-28');
 
 -- --------------------------------------------------------
 
@@ -204,7 +210,7 @@ CREATE TABLE `mitglieder` (
 --
 
 INSERT INTO `mitglieder` (`idmitglieder`, `standesbuchnummer`, `nachname`, `vorname`, `dienstgrad`, `mobil`, `telefon_nr`, `email`, `atemschutztauglich`) VALUES
-(0, 43, 'Aigner', 'Arnold', 'BM', '0650 7201249', '', 'a.aigner@kreativmoebel.com', 1),
+(1, 43, 'Aigner', 'Arnold', 'BM', '0650 7201249', '', 'a.aigner@kreativmoebel.com', 1),
 (2, 15, 'Aigner', 'Lukas', 'LM', '0650 4062067', '', 'lukas-aigner@hotmail.com', 1),
 (3, 2, 'Bachner', 'Otto', 'EOBI', '0699 10206635', '', 'otto.bachner@aon.at', 0),
 (4, 47, 'Bichler', 'Wolfgang', 'LM', '0650 9326842', '', '', 1),
@@ -285,7 +291,8 @@ INSERT INTO `mitglieder` (`idmitglieder`, `standesbuchnummer`, `nachname`, `vorn
 (79, 53, 'Wagner', 'Johann', 'EHBM', '0676 6858864', '07476 8270', '', 0),
 (80, 26, 'Wasserthal', 'Simon', 'FM', '0680 2138412', '', '', 1),
 (81, 21, 'Wieser', 'Franz', 'HFM', '0650 4359652', '', '', 0),
-(82, 7, 'Zeitlhofer', 'Thomas', 'LM', '0680 1217021', '', 'thomas.zeitlhofer@gmx.at', 1);
+(82, 7, 'Zeitlhofer', 'Thomas', 'LM', '0680 1217021', '', 'thomas.zeitlhofer@gmx.at', 1),
+(86, 111, 'Test', 'Test', '11', '4321', '1234', 'test@example.com', 1);
 
 -- --------------------------------------------------------
 
@@ -407,42 +414,57 @@ ALTER TABLE `uebungsart`
 -- AUTO_INCREMENT für Tabelle `benutzer`
 --
 ALTER TABLE `benutzer`
-  MODIFY `idbenutzer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idbenutzer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT für Tabelle `einsatzart`
 --
 ALTER TABLE `einsatzart`
   MODIFY `ideinsatzart` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT für Tabelle `fahrzeug`
 --
 ALTER TABLE `fahrzeug`
   MODIFY `idfahrzeug` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT für Tabelle `feed`
 --
 ALTER TABLE `feed`
-  MODIFY `idfeed` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idfeed` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT für Tabelle `kategorie`
 --
 ALTER TABLE `kategorie`
   MODIFY `idcategory` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT für Tabelle `logbuch`
 --
 ALTER TABLE `logbuch`
   MODIFY `idlogbuch` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT für Tabelle `mitglieder`
+--
+ALTER TABLE `mitglieder`
+  MODIFY `idmitglieder` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+
 --
 -- AUTO_INCREMENT für Tabelle `rolle`
 --
 ALTER TABLE `rolle`
   MODIFY `idrolle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT für Tabelle `uebungsart`
 --
 ALTER TABLE `uebungsart`
   MODIFY `iduebungsart` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
