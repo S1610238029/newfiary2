@@ -6,10 +6,11 @@
 {% block body %}
 
     <link rel="stylesheet" href= "{{ asset('assets/css/statistics.css') }}">
+    <link rel="stylesheet" type="text/css" href="http://www.prepbootstrap.com/Content/shieldui-lite/dist/css/light/all.min.css" />
 
     <h1>Statistiken</h1>
 
-    <h2>Dies hier sind noch Placeholder!</h2><br><br>
+  
 
     <!--
 https://dribbble.com/shots/2227352-Day-067-Smart-Home-UI/attachments/414148
@@ -24,7 +25,7 @@ https://dribbble.com/shots/2227352-Day-067-Smart-Home-UI/attachments/414148
                         Ausfahrten Insgesamt:
                     </p>
                 </div>
-                <h1 class="consumption">120 Einsätze!</h1>
+                <h1 class="consumption">{{ gesamt }} Reportings!</h1>
                 <svg id="visualisation" width="600" height="100"></svg>
 
                 <p class="title">Einsatzarten</p>
@@ -32,43 +33,74 @@ https://dribbble.com/shots/2227352-Day-067-Smart-Home-UI/attachments/414148
 
                     <div class="progress progress--vertical">
                         <p class="progress__caption">---</p>
-                        <div class="progress__fill" style="height: 87%"></div>
+                        <div class="progress__fill" style="height: {{ brandeinsatz }}%"></div>
+
                     </div>
+                    <p style="text-align:center;">Brandeinsätze</p>
 
                     <div class="progress progress--vertical">
-                        <div class="progress__fill" style="height: 50%"></div>
+                        <div class="progress__fill" style="height: {{ technischer }}%"></div>
                         <p class="progress__caption">---</p>
+
                     </div>
+                    <p style="text-align:center;">Technische Einsätze</p>
 
                     <div class="progress progress--vertical">
-                        <div class="progress__fill" style="height: 64%"></div>
+                        <div class="progress__fill" style="height: {{ brandsicherheitswache }}%"></div>
                         <p class="progress__caption">---</p>
-                    </div>
 
-                    <div class="progress progress--vertical">
-                        <div class="progress__fill" style="height: 78%"></div>
-                        <p class="progress__caption">---</p>
                     </div>
+                    <p style="text-align:center;">Brandsicherheitswachen</p>
 
+
+                </div>
+
+
+                <div class="flex flex--justify-between" style="padding-top:100px;">
+
+                    <div class="numbers">
+                        <h2 class="einsatz__count" style="color:var(--red);">{{ einsaetze|number_format }}</h2>
+                        <p>Einsätze</p>
+                    </div>
+                    <div class="numbers">
+                        <h2 class="einsatz__count" style="color:var(--red);">{{ uebungen|number_format }}</h2>
+                        <p>Übungen</p>
+                    </div>
+                    <div class="numbers">
+                        <h2 class="einsatz__count" style="color:var(--red);">{{ taetigkeiten|number_format }}</h2>
+                        <p>Tätigkeiten</p>
+                    </div>
                 </div>
             </div>
 
             <div class="flex-1">
                 <ul class="einsatz__list">
                     <li class="einsatz__item  einsatz__total">
-                        <h2 class="einsatz__count">20</h2>
-                        <p class="einsatz__description">Einsätze 2017</p>
+                        <h2 class="einsatz__count">{{ einsaetze_last|number_format }}</h2>
+                        <p class="einsatz__description">Einsätze {{ year-1 }}</p>
                     </li>
 
                     <li class="einsatz__item  einsatz__active">
-                        <h2 class="einsatz__count">4</h2>
-                        <p class="einsatz__description">Einsätze 2018</p>
+
+                        <h2 class="einsatz__count">{{ einsaetze|number_format }}</h2>
+
+                        <p class="einsatz__description">Einsätze {{ year }}</p>
                     </li>
                 </ul>
             </div>
             <!-- /.right-column -->
+
+
+
         </div>
         <!-- /.statistics -->
+
+
+
+
+
+
+
 
 
 {% endblock %}

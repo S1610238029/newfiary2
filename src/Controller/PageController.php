@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Mitglieder;
 use App\Entity\Haus;
+use App\Entity\Logbuch;
 
 
 class PageController extends Controller //AbstracController
@@ -60,8 +61,105 @@ class PageController extends Controller //AbstracController
      */
     public function statisticAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $repository =  $em->getRepository(Logbuch::class);
+
+        $lastDayofYear=date('Y') . '-12-31';
+        $firstDayofYear=date('Y') . '-01-01';
+        $year=date('Y');
+        $lastDayofYearBefore=date('Y')-1 . '-12-31';
+        $firstDayofYearBefore=date('Y')-1 . '-01-01';
+
+        $einsätze=$repository->createQueryBuilder('fc')
+         ->andWhere('fc.kategorie = :kategorie and (fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
+        ->setParameter('kategorie', 'einsatz')
+            ->setParameter('enddatum', $lastDayofYear)
+            ->setParameter('startdatum', $firstDayofYear)
+         ->select('COUNT(fc.idlogbuch) as einsaetze')
+         ->getQuery()
+         ->getSingleScalarResult();
+
+        $übungen=$repository->createQueryBuilder('fc')
+            ->andWhere('fc.kategorie = :kategorie and (fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
+            ->setParameter('kategorie', 'übung')
+            ->setParameter('enddatum', $lastDayofYear)
+            ->setParameter('startdatum', $firstDayofYear)
+            ->select('COUNT(fc.idlogbuch) as uebungen')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $brandeinsatz=$repository->createQueryBuilder('fc')
+            ->andWhere('fc.kategorie = :kategorie and (fc.beginnDatum BETWEEN :startdatum AND :enddatum) and fc.unterkategorie = :unterkategorie')
+            ->setParameter('kategorie', 'einsatz')
+            ->setParameter('unterkategorie', '0')
+            ->setParameter('enddatum', $lastDayofYear)
+            ->setParameter('startdatum', $firstDayofYear)
+            ->select('COUNT(fc.idlogbuch) as brandeinsatz')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $brandsicherheitswache=$repository->createQueryBuilder('fc')
+            ->andWhere('fc.kategorie = :kategorie and (fc.beginnDatum BETWEEN :startdatum AND :enddatum) and fc.unterkategorie = :unterkategorie')
+            ->setParameter('kategorie', 'einsatz')
+            ->setParameter('unterkategorie', '1')
+            ->setParameter('enddatum', $lastDayofYear)
+            ->setParameter('startdatum', $firstDayofYear)
+            ->select('COUNT(fc.idlogbuch) as brandsicherheitswache')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $technischer=$repository->createQueryBuilder('fc')
+            ->andWhere('fc.kategorie = :kategorie and (fc.beginnDatum BETWEEN :startdatum AND :enddatum) and fc.unterkategorie = :unterkategorie')
+            ->setParameter('kategorie', 'einsatz')
+            ->setParameter('unterkategorie', '2')
+            ->setParameter('enddatum', $lastDayofYear)
+            ->setParameter('startdatum', $firstDayofYear)
+            ->select('COUNT(fc.idlogbuch) as technischer')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $tätigkeiten=$repository->createQueryBuilder('fc')
+            ->andWhere('fc.kategorie = :kategorie and (fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
+            ->setParameter('kategorie', 'tätigkeit')
+            ->setParameter('enddatum', $lastDayofYear)
+            ->setParameter('startdatum', $firstDayofYear)
+            ->select('COUNT(fc.idlogbuch) as taetigkeiten')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $einsätze_last=$repository->createQueryBuilder('fc')
+            ->andWhere('fc.kategorie = :kategorie and (fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
+            ->setParameter('kategorie', 'einsatz')
+            ->setParameter('enddatum', $lastDayofYearBefore)
+            ->setParameter('startdatum', $firstDayofYearBefore)
+            ->select('COUNT(fc.idlogbuch) as einsaetze_last')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $gesamt=$repository->createQueryBuilder('fc')
+            ->andWhere('(fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
+            ->setParameter('enddatum', $lastDayofYear)
+            ->setParameter('startdatum', $firstDayofYear)
+            ->select('COUNT(fc.idlogbuch) as gesamt')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+
+
+
         return $this->render('pages/statistiken.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+            'einsaetze'=> $einsätze,
+            'year'=>$year,
+            'einsaetze_last'=>$einsätze_last,
+            'gesamt'=>$gesamt,
+            'uebungen'=>$übungen,
+            'taetigkeiten'=>$tätigkeiten,
+            'brandeinsatz'=>($brandeinsatz/$einsätze*100),
+            'technischer'=>($technischer/$einsätze*100),
+            'brandsicherheitswache'=>($brandsicherheitswache/$einsätze*100),
+
         ]);
     }
 

@@ -256,18 +256,21 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     var open = $('.open-navnew'),
-        close = $('.close'),
-        overlay = $('.overlay');
+        close = $('.close');
+
 
     open.click(function() {
-        overlay.show();
-        $('#wrapper').addClass('toggled');
+        if($('#wrapper').hasClass('toggled')){
+
+            $('#wrapper').removeClass('toggled');
+        }else{
+
+            $('#wrapper').addClass('toggled');
+        }
+
     });
 
-    close.click(function() {
-        overlay.hide();
-        $('#wrapper').removeClass('toggled');
-    });
+
 
 
     $('#häuser_newentry').DataTable( {

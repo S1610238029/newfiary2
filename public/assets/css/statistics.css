@@ -142,3 +142,11 @@ ul {
 .flex--justify-between {
     justify-content: space-between;
 }
+
+
+.numbers{
+    text-align:center;
+    padding-right:20px;
+    padding-left:20px;
+
+}
