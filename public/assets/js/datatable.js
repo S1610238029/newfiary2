@@ -7,7 +7,7 @@ $(document).ready(function() {
                 extend: 'pdfHtml5',
                 orientation: 'portrait',
                 pageSize: 'A4',
-                filename: 'Mitgliederliste.pdf'
+                filename: 'Mitgliederliste'
         }],
         "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
         "language": {

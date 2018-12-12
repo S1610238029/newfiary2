@@ -277,7 +277,7 @@ $(document).ready(function() {
         "order": [[ 0, "asc" ]],
         "stateSave": true,
         "pagingType": "simple",
-        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "lengthMenu": [[3, 5, 10, 20, -1], [3, 5, 10, 20, "All"]],
         "language": {
             "lengthMenu": "Zeige _MENU_ Einträge pro Seite",
             "zeroRecords": "Nichts gefunden - sorry",
