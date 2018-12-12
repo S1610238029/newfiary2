@@ -24,9 +24,7 @@ jQuery(document).ready(function($){
             }, scroll_top_duration
         );
     });
-
 });
-
 
 jQuery('#cody-info ul li').eq(1).on('click', function(){
     $('#cody-info').hide();
