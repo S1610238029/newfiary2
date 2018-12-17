@@ -8,9 +8,150 @@
     <link rel="stylesheet" href= "{{ asset('assets/css/statistics.css') }}">
     <link rel="stylesheet" type="text/css" href="http://www.prepbootstrap.com/Content/shieldui-lite/dist/css/light/all.min.css" />
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+
+            function sliceSize(dataNum, dataTotal) {
+                return (dataNum / dataTotal) * 360;
+            }
+
+            function addSlice(id, sliceSize, pieElement, offset, sliceID, color) {
+                $(pieElement).append("<div class='slice "+ sliceID + "'><span></span></div>");
+                var offset = offset - 1;
+                var sizeRotation = -179 + sliceSize;
+
+                $(id + " ." + sliceID).css({
+                    "transform": "rotate(" + offset + "deg) translate3d(0,0,0)"
+                });
+
+                $(id + " ." + sliceID + " span").css({
+                    "transform"       : "rotate(" + sizeRotation + "deg) translate3d(0,0,0)",
+                    "background-color": color
+                });
+            }
+
+            function iterateSlices(id, sliceSize, pieElement, offset, dataCount, sliceCount, color) {
+                var
+                        maxSize = 179,
+                        sliceID = "s" + dataCount + "-" + sliceCount;
+
+                if( sliceSize <= maxSize ) {
+                    addSlice(id, sliceSize, pieElement, offset, sliceID, color);
+                } else {
+                    addSlice(id, maxSize, pieElement, offset, sliceID, color);
+                    iterateSlices(id, sliceSize-maxSize, pieElement, offset+maxSize, dataCount, sliceCount+1, color);
+                }
+            }
+
+            function createPie(id) {
+                var
+                        listData      = [],
+                        listTotal     = 0,
+                        offset        = 0,
+                        i             = 0,
+                        pieElement    = id + " .pie-chart__pie";
+                dataElement   = id + " .pie-chart__legend";
+
+                /* Hier auf Wunsch weiter Farben einbauen */
+                color         = [
+                    "orange",
+                    "tomato",
+                    "crimson",
+                    "purple"
+                ];
+
+                color = shuffle( color );
+
+                $(dataElement+" span").each(function() {
+                    listData.push(Number($(this).html()));
+                });
+
+                for(i = 0; i < listData.length; i++) {
+                    listTotal += listData[i];
+                }
+
+                for(i=0; i < listData.length; i++) {
+                    var size = sliceSize(listData[i], listTotal);
+                    iterateSlices(id, size, pieElement, offset, i, 0, color[i]);
+                    $(dataElement + " li:nth-child(" + (i + 1) + ")").css("border-color", color[i]);
+                    offset += size;
+                }
+            }
+
+            function shuffle(a) {
+                var j, x, i;
+                for (i = a.length; i; i--) {
+                    j = Math.floor(Math.random() * i);
+                    x = a[i - 1];
+                    a[i - 1] = a[j];
+                    a[j] = x;
+                }
+
+                return a;
+            }
+
+            function createPieCharts() {
+                createPie('.pieID--micro-skills' );
+                createPie('.pieID--categories' );
+                createPie('.pieID--operations' );
+            }
+
+            createPieCharts();
+
+        }
+    </script>
+
     <h1>Statistiken</h1>
 
+    <!-- Neuer Versuch für mehr Staistiken - PieCharts -->
+    <!-- Verwendeter Codepen: -->
+    <!--https://codepen.io/MaciejCaputa/pen/VjVpRZ -->
+    <!-- https://codepen.io/MaciejCaputa/pen/VjVpRZ -->
 
+    <div class="wrapper">
+        <div class="pie-charts">
+            <div class="pieID--micro-skills pie-chart--wrapper">
+                <h2>Bisherige Ausfahrten</h2>
+                <div class="pie-chart">
+                    <div class="pie-chart__pie"></div>
+                    <ul class="pie-chart__legend">
+                        <li><em>Einsätze</em><span>{{ einsaetze|number_format }}</span></li>
+                        <li><em>Übungen</em><span>{{ uebungen|number_format }}</span></li>
+                        <li><em>Tätigkeiten</em><span>{{ taetigkeiten|number_format }}</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pieID--categories pie-chart--wrapper">
+                <h2>Gesamte Einsätze pro Jahr</h2>
+                <div class="pie-chart">
+                    <div class="pie-chart__pie"></div>
+                    <ul class="pie-chart__legend">
+                        <li><em>2016</em><span>20</span></li>
+                        <li><em>2017</em><span>10</span></li>
+                        <li><em>2018</em><span>{{ einsaetze|number_format }}</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pieID--operations pie-chart--wrapper">
+                <h2>Hier können noch mehr Infos hin</h2>
+                <div class="pie-chart">
+                    <div class="pie-chart__pie"></div>
+                    <ul class="pie-chart__legend">
+                        <li><em>Part A</em><span>20</span></li>
+                        <li><em>Part B</em><span>40</span></li>
+                        <li><em>Part C</em><span>10</span></li>
+                        <li><em>Part D</em><span>20</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <br>
+    <hr>
+    <br>
 
     <!--
 https://dribbble.com/shots/2227352-Day-067-Smart-Home-UI/attachments/414148
@@ -18,6 +159,7 @@ https://dribbble.com/shots/2227352-Day-067-Smart-Home-UI/attachments/414148
 
     <!-- https://codepen.io/anthonykoch/pen/GpQYrJ -->
 
+    <div id="wrapper2">
         <div class="statistics">
             <div class="consumption-panel">
                 <div class="flex flex--justify-between">
@@ -90,16 +232,9 @@ https://dribbble.com/shots/2227352-Day-067-Smart-Home-UI/attachments/414148
             </div>
             <!-- /.right-column -->
 
-
-
-        </div>
-        <!-- /.statistics -->
-
-
-
-
-
-
+                </div>
+                <!-- /.statistics -->
+    </div>
 
 
 

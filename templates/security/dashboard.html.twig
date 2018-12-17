@@ -6,44 +6,35 @@
 
     <style>
 
-        /* Bereits responsive */
-        #adduser {
-            background-color: var(--red);
-            color: #FFF;
-            width: 15vw;
-            padding: 10px 20px;
-            display: block;
-            border-radius: 10px;
-            border: none;
-            text-decoration: none;
-            text-align: center;
-            /*font-size: 1vw;*/
+        #format {
+            margin-top: 2%;
+            font-size: 1.2em;
         }
 
-        #adduser:hover {
-            background: #c10612;
-            cursor: pointer;
+        #text {
+            margin-top: 0.5%;
         }
+
 
         /* Hier müssen die Werte dann noch an das Burgermenü angepasst werden*/
-        @media (min-width: 501px) {
-            #adduser {
-                font-size: 15px;
+        @media (max-width: 599px) {
+            #userlist {
+                width: 100%;
             }
         }
 
-        @media (max-width: 500px) {
-            #adduser {
-                font-size: 8px;
+        @media (min-width: 600px) {
+            #userlist {
+                width: 80%;
             }
         }
+
 
         /* Formatting the User List itself */
         #userlist {
             color: var(--red) !important;
             text-transform: capitalize; /* Kann man auch weggeben wenn nicht benötigt */
             text-decoration: none;
-            width: 80%;
         }
 
         a {
@@ -60,13 +51,14 @@
 
     </style>
 
+    <br>
     <h2>Registrierte Nutzer</h2><br>
 
     <div class="formatting">
     <ul class="list-group" id="userlist">
         {% for user in users %}
             <li class="d-flex list-group-item list-group-item-action" id="format">
-                <a href="{{  path('user_edit', {id: user.id}) }}">
+                <a href="{{  path('user_edit', {id: user.id}) }}" id="text">
 
                     {{  user.username }}<em> -   </em>
 
@@ -100,6 +92,6 @@
     </div>
 
     <br>
-    <a href="{{  path('user_registration') }}" id="adduser">Nutzer anlegen</a><br>
+    <a href="{{  path('user_registration') }}" id="adduser" class="bigredbutton">Nutzer anlegen</a><br>
 
 {% endblock %}

@@ -8,19 +8,13 @@
 
     <style>
 
-     .panel {
+     .panel-body {
          width: 80%;
          color: var(--red);
      }
 
      .panel-heading {
          text-transform: uppercase;
-         color: var(--red);
-         font-weight: bold;
-     }
-
-     h5 {
-         color: var(--red);
          font-weight: bold;
      }
 
@@ -53,18 +47,16 @@
 
     </style>
 
-   <div class="panel" id="panelcss">
-       <h5>Current User:</h5>
-       <div class="panel-heading">
-           <!-- "" Damit es für den User leichter erkenntlich ist -->
-           "{{ user.username }}"
-       </div><br>
+    <br>
+    <div class="panel" id="panelcss">
+        <div class="panel-heading">
+            <!-- "" Damit es für den User leichter erkenntlich ist -->
+            <h2>Current User   -  "{{ user.username }}"</h2>
+        </div><br>
 
-       <div class="panel-body">
-           {{ form(form) }}
-
-       </div>
-
-   </div>
+        <div class="panel-body">
+            {{ form(form) }}
+        </div>
+    </div>
 
 {% endblock %}
