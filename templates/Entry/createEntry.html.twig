@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>{% block title %}Neuen Eintrag erstellen{% endblock %}</title>
+
+    <!-- Including the Stylesheet -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('assets/css/progressbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/mystyle.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="{{ asset('assets/js/multistep.js') }}"></script>
+
+</head>
+
+<body>
+{% block form %}
+
+    <div id="wrapper">
+
+    <nav class="navbarnew navbarnew-inverse navbarnew-fixed-top" id="sidebar-wrapper" role="navigation">
+        <ul class="navnew sidebar-navnew">
+            <li class="active">
+                <table class="fixed_header table display" id="häuser_newentry"  style="width:100%">
+
+                    <thead>
+                    <tr>
+                        <th >Str.</th>
+                        <th>Nr.</th>
+                        <th>Bew.</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for haus in haeuser %}
+                        <tr>
+
+                            <td>{% if haus.strasse %}{{ haus.strasse }}{% else %}  {% endif %}</td>
+
+
+                            <td> {% if haus.hausNr %}{{ haus.hausNr }}{% else %}  {% endif %}</td>
+
+
+
+                            <td>{% if haus.bewohner %}{{ haus.bewohner }}{% else %}  {% endif %}</td>
+
+
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </li>
+
+        </ul>
+    </nav>
+    <!-- /#sidebar-wrapper -->
+    <div id="page-content-wrapper">
+    <button type="button" id="homebutton" class="hamburger open-navnew is-closed animated fadeInLeft">
+        <i><img src="{{  asset('assets/img/home_big.svg') }}" alt="home symbol"></i>
+    </button>
+
+
+        <div class="container">
+
+        <div>
+            Steps:
+            {% include '@CraueFormFlow/FormFlow/stepList.html.twig' %}
+        </div>
+
+
+    {{ form_start(form, {'action': path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')), 'attr': {'class': 'flow-form', 'id':'form-id'}}) }}
+
+    <fieldset>
+    {{ form_start(form) }}
+	{{ form_errors(form) }}
+
+	{% if flow.getCurrentStepNumber() == 1 %}
+        <div>
+            When selecting four wheels you have to choose the engine in the next step.<br />
+            {{ form_row(form.kategorie) }}
+        </div>
+    {% endif %}
+
+
+    {% if flow.getCurrentStepNumber() == 5 %}
+        {{ 'Zusammnenfassung'}}
+        <br /><br />
+        <b>{{ 'kategorie' | trans }}</b>
+        <dl>
+            <dt>{{ 'Ort' | trans }}:</dt>
+            <dd>{{ formData.ort }}</dd>
+
+            {% if formData.strasse is not empty %}
+                <dt>{{ 'strasse' | trans }}:</dt>
+                <dd>{{ formData.strasse }}</dd>
+            {% endif %}
+        </dl>
+
+    {% endif %}
+
+	{{ form_rest(form) }}
+    </fieldset>
+
+	{% include '@CraueFormFlow/FormFlow/buttons.html.twig' with {
+    craue_formflow_button_class_last: 'btn btn-primary',
+    craue_formflow_button_class_back: 'btn',
+    craue_formflow_button_class_reset: 'btn btn-warning',
+    craue_formflow_button_label_finish: 'submit',
+    craue_formflow_button_label_reset: 'reset the flow',
+    } %}
+    {{ form_end(form) }}
+
+    </div>
+        </div>
+{% endblock %}
+
+        {% block javascripts %}{% endblock %}
+        <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+        <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+
+        </body>
+        </html>
