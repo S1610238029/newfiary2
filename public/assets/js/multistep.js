@@ -53,30 +53,7 @@ var errorP='<p class="errors">Pflichtfeld darf nicht leer sein!</p>';
 
 
 /* Erster Test der Animationen für die Progress Bar beim Eintrag erstellen */
-$(document).ready(function() {
-    $(".next-button").click(function() {
-        var current = $(this).parent();
-        var next = $(this)
-            .parent()
-            .next();
-        $(".progressbar li")
-            .eq($("fieldset").index(next))
-            .addClass("active");
-        current.hide();
-        next.show();
-    });
 
-    $(".prev-button").click(function() {
-        var current = $(this).parent();
-        var prev = $(this)
-            .parent()
-            .prev();
-        $(".progressbar li")
-            .eq($("fieldset").index(current))
-            .removeClass("active");
-        current.hide();
-        prev.show();
-    });
 
 
 
@@ -88,37 +65,6 @@ $(document).ready(function() {
     });
 
 
-
-    /* Funktioniert noh nicht 100% */
-  /*  $(".reset-button").click(function() {
-        var current = $(this).parent();
-        var next = $(this)
-            .first();
-        $(".progress li")
-            .eq($("fieldset").index(0))
-            .addClass("active");
-        current.hide();
-        next.show();
-    });*/
-    $(".reset-button").click(function() {
-        location.reload();
-        var current = $(this).parent();
-        $(".progressbar li").removeClass("active");
-        $(".progressbar li:first-child").addClass("active");
-        current.hide();
-        $("fieldset#kategoriewahl").show();
-
-        if($("#form_kategorie_1").hasAttribute("selected")){
-            $("#form_kategorie_1").removeAttr("selected");
-        }
-        if($("#form_kategorie_0").hasAttribute("selected")){
-            $("#form_kategorie_0").removeAttr("selected");
-        }
-
-        if($("#form_kategorie_2").hasAttribute("selected")){
-            $("#form_kategorie_2").removeAttr("selected");
-        }
-    });
 
 
     /* Abbrechen */
@@ -252,7 +198,6 @@ $(document).ready(function() {
     });
 
 
-});
 
 $(document).ready(function() {
     var open = $('.open-navnew'),
