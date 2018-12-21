@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Logbuch
@@ -13,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Logbuch
 {
+    const UPLOAD_MAX_FILESIZE = '50k';
     /**
      * @var int
      *
@@ -21,6 +23,12 @@ class Logbuch
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idlogbuch;
+
+    /**
+     *
+     * @Assert\Image()
+     */
+    private $photo;
 
     /**
      * @var string
@@ -889,6 +897,26 @@ class Logbuch
 
         return $this;
     }
+
+    public function getPhotoDataBase64Encoded() {
+        return base64_encode(file_get_contents($this->photo->getPathname()));
+    }
+    public function getPhotoMimeType() {
+        return $this->photo->getMimeType();
+    }
+
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
 
 
 }

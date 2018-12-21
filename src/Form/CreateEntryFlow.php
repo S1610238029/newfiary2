@@ -6,7 +6,7 @@ use Craue\FormFlowBundle\Form\FormFlowInterface;
 
 class CreateEntryFlow extends FormFlow
 {
-    protected $handleFileUploadsTempDir = '/public/images/';
+    /*protected $handleFileUploadsTempDir = '/public/images/';*/
     protected $allowDynamicStepNavigation = true;
 
 

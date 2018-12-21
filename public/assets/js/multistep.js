@@ -7,49 +7,7 @@ $(".costum-button").on("click", function() {
 
 var errorP='<p class="errors">Pflichtfeld darf nicht leer sein!</p>';
 
-/*$('#firstNextButton').on("click", function(){
-    if($('#form_kategorie').val()=='Einsatz'){
 
-    }else if($('#form_kategorie').val()=='Übung'){
-
-    }else if($('#form_kategorie').val()=='Tätigkeit'){
-        if($('#form_unterkategorie').val()==''){
-        $(this).prepend(errorP);
-
-        if($('#form_beginnDatum').val()==''){
-            $(this).prepend(errorP);
-
-        }
-
-        if($('#form_endeDatum').val()==''){
-            $(this).prepend(errorP);
-
-        }
-
-        if($('#form_beginnZeit').val()==''){
-            $(this).prepend(errorP);
-
-        }
-        if($('#form_endeZeit').val()==''){
-            $(this).prepend(errorP);
-
-        }
-        if($('#form_strasse').val()==''){
-            $(this).prepend(errorP);
-
-        }
-        if($('#form_hausnummer').val()==''){
-            $(this).prepend(errorP);
-
-        }
-        if($('#form_plz').val()==''){
-            $(this).prepend(errorP);
-
-        }
-    }else{
-        //throw error
-    }
-    });*/
 
 
 /* Erster Test der Animationen für die Progress Bar beim Eintrag erstellen */
@@ -68,7 +26,7 @@ var errorP='<p class="errors">Pflichtfeld darf nicht leer sein!</p>';
 
 
     /* Abbrechen */
-
+$(document).ready(function() {
 
     /*on document load hide all einsatzkategories*/
     $('div#brandeinsatz').hide();
@@ -76,16 +34,16 @@ var errorP='<p class="errors">Pflichtfeld darf nicht leer sein!</p>';
     $('div#technischerEinsatz').hide();
 
     /*wrap input+label checkboxes into a div*/
-    $('input[type=checkbox]+label').each(function(){
+    $('input[type=checkbox]+label').each(function () {
         $(this).prepend($(this).prev());
         $(this).wrap("<div class='col-6 col-sm-6 col-lg-3 left checkboxFormat'></div>");
     });
-    $('input[type=radio]+label').each(function(){
+    $('input[type=radio]+label').each(function () {
         $(this).prepend($(this).prev());
         $(this).wrap("<div class='col-6 col-sm-6 col-lg-3 left checkboxFormat'></div>");
     });
 
-    $('div#form_anlass div').each(function(){
+    $('div#form_anlass div').each(function () {
         $(this).removeClass("col-lg-3");
         $(this).addClass("col-lg-6");
     });
@@ -97,43 +55,49 @@ var errorP='<p class="errors">Pflichtfeld darf nicht leer sein!</p>';
     $('#form_save').addClass("custom-button");
     $('#form_save').unwrap();
 
+    var textkategorie=sessionStorage.getItem('kategorie');
+    $("p#kategorie_einfügen").text('Kategorie: ' + textkategorie);
 
+    /*$('button.next-button').hide();*/
 
-
-
-
+    if($("#createEntry_beginnZeit").val()!= null){
+        $('button.next-button').show();
+}
 
     /*while clicking on one of the main kategories*/
-    $(".kategorie").click(function() {
-        var kategorie=$(this).val();
-        $("p#kategorie_einfügen").text('Kategorie: '+ kategorie);
+    $(".kategorie").click(function () {
 
-        if(($('#form_unterkategorie option[value=""]').length==0)) {
-            $('#form_unterkategorie').prepend($('<option>', {
-                value: '',
-                selected: 'selected',
-                text: 'Bitte wählen...'
-            }));
-        }
+    $('button.next-button').show();
 
-        if(kategorie=='Einsatz') { //Einsatz
-            $('#form_kategorie option[value="Einsatz"]').attr("selected", "selected");
-            $("#title").text(kategorie + 'details');
+
+
+        var kategorie = $(this).val();
+        console.log(kategorie);
+        sessionStorage.setItem('kategorie', kategorie);
+
+    });
+
+
+
+
+        if (textkategorie == 'Einsatz') { //Einsatz
+            $('#createEntry_kategorie option[value="Einsatz"]').attr("selected", "selected");
+            $("#title").text(textkategorie + 'details');
             $("#subtitle").text('Bitte gib hier die Details des Einsatzes bekannt!');
 
 
             $('div.uebung').hide();
             $('div.tätigkeiten').hide();
             $('div.einsatz').show();
-            $('#form_unterkategorie option').slice( 4,61 ).remove(); //remove übung
+            $('#createEntry_unterkategorie option').slice(4, 61).remove(); //remove übung
 
-        }else if (kategorie=='Übung'){ //Übung
-            $('#form_kategorie option[value="Übung"]').attr("selected", "selected");
-            $("#title").text(kategorie + 'sdetails');
-            $("#subtitle").text('Bitte gib hier die Details der '+ kategorie +' bekannt!');
+        } else if (textkategorie == 'Übung') { //Übung
+            $('#createEntry_kategorie option[value="Übung"]').attr("selected", "selected");
+            $("#title").text(textkategorie + 'sdetails');
+            $("#subtitle").text('Bitte gib hier die Details der ' + textkategorie + ' bekannt!');
 
-            $('#form_unterkategorie option').slice( 1,4 ).remove();
-            $('#form_unterkategorie option').slice( 27, 61 ).remove();
+            $('#createEntry_unterkategorie option').slice(1, 4).remove();
+            $('#createEntry_unterkategorie option').slice(27, 61).remove();
 
             $('div.einsatz').hide();
             $('div.tätigkeiten').hide();
@@ -142,60 +106,62 @@ var errorP='<p class="errors">Pflichtfeld darf nicht leer sein!</p>';
             $('#lage label').text("Übungsannahme");
             $('#form_lagebeimEintreffen').attr("placeholder", "Genaue Beschreibung der Übungsannahme...");
 
-        }else{ //Tätigkeit
-            $('#form_kategorie option[value="Tätigkeit"]').attr("selected", "selected");
-            $("#title").text(kategorie + 'sdetails');
-            $("#subtitle").text('Bitte gib hier die Details der '+ kategorie +' bekannt!');
+        } else { //Tätigkeit
+            $('#createEntry_kategorie option[value="Tätigkeit"]').attr("selected", "selected");
+            $("#title").text(textkategorie + 'sdetails');
+            $("#subtitle").text('Bitte gib hier die Details der ' + textkategorie + ' bekannt!');
 
-            $('#form_unterkategorie option').slice( 1,30 ).remove();
+            $('#createEntry_unterkategorie option').slice(1, 30).remove();
 
             $('div.einsatz').hide();
             $('div.uebung').hide();
             $('div.tätigkeiten').show();
         }
 
-        $('#form_unterunterkategorie').prepend($('<option>', {value : '', selected : 'selected', text: 'Bitte wählen...'}));
-        //$('#form_unterunterkategorie').attr('required', 'true');
-        $('#form_unterkategorie').attr('required', 'true');
 
-        $('#form_unterkategorie').change(function(){
-            var selectedKategorie=$(this).val();
+        //$('#form_unterunterkategorie').attr('required', 'true');
+        $('#createEntry_unterkategorie').attr('required', 'true');
+
+        $('#createEntry_unterkategorie').change(function () {
+            var selectedKategorie = $(this).val();
             console.log(selectedKategorie);
-            if(selectedKategorie=='0'){ //brandeinsatz
+            if (selectedKategorie == '0') { //brandeinsatz
                 $('div#brandsicherheitswache').hide();
                 $('div#brandsicherheitswache input').attr('disabled', 'true');
                 $('div#technischerEinsatz').hide();
                 $('div#technischerEisnatz select').attr('disabled', 'true');
                 $('div#brandeinsatz').show();
-            }else if(selectedKategorie=='1'){
+            } else if (selectedKategorie == '1') {
                 $('div#brandeinsatz').hide();
                 $('div#brandeinsatz input').attr('disabled', 'true');
                 $('div#technischerEinsatz').hide();
                 $('div#technischerEisnatz select').attr('disabled', 'true');
                 $('div#brandsicherheitswache').show();
-            }else if(selectedKategorie=='2'){
+            } else if (selectedKategorie == '2') {
 
                 $('div#brandsicherheitswache').hide();
                 $('div#brandsicherheitswache input').attr('disabled', 'true');
                 $('div#brandeinsatz').hide();
                 $('div#brandeinsatz input').attr('disabled', 'true');
                 $('div#technischerEinsatz').show();
-            }else{
+            } else if (selectedKategorie == '3'){
                 $('div#brandeinsatz').hide();
                 $('div#brandeinsatz input').attr('disabled', 'true');
                 $('div#brandsicherheitswache').hide();
                 $('div#brandsicherheitswache input').attr('disabled', 'true');
                 $('div#technischerEinsatz').hide();
                 $('div#technischerEisnatz select').attr('disabled', 'true');
+                $('div#createEntry_unterunterkategorie').attr('required', 'true');
 
             }
 
 
-        });
 
 
 
     });
+
+});
 
 
 

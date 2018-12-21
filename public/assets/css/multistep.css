@@ -102,8 +102,24 @@ body{
     margin:10px;
 }
 
+#form-id .custom-button:active{
+    width:100px;
+    background: white;
+    font-weight: bold;
+    color:#fff;
+    border:0;
+    padding:10px;
+    margin:10px;
+}
+
+
 #form-id .custom-button:hover{
-    box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--red)
+    box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--red);
+}
+
+.white{
+    background-color:white!important;
+    color:black!important;
 }
 
 .title{

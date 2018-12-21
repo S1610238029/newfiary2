@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use App\Entity\Logbuch;
 
 
@@ -24,19 +26,22 @@ class CreateEntryForm extends AbstractType
         switch ($options['flow_step']) {
             case 1:
                 $builder->add('kategorie', ChoiceType::class, array(
-                'choices'=>array('Einsatz'=>'Einsatz','Übung'=>'Übung', 'Tätigkeit'=> 'Tätigkeit')
+                'choices'=>array('Einsatz'=>'Einsatz','Übung'=>'Übung', 'Tätigkeit'=> 'Tätigkeit'),
+                    'placeholder'=> 'Wähle eine Kategorie..'
             ));
                 break;
             case 2:
                 // This form type is not defined in the example.
                 $builder->add('unterkategorie', ChoiceType::class, [
-                    'choices' => array_flip(Logbuch::getUnterKategorieOptions_Einsatz())
+                    'choices' => array_flip(Logbuch::getUnterKategorieOptions_Einsatz()),
+                    'placeholder'=> 'Wähle eine Unterkategorie'
                 ])
                     //beim technischen einsatz gibts ne unterunterkategorie
                     ->add('unterunterkategorie', ChoiceType::class, array(
 
                         'choices' => array_flip(Logbuch::getUnterKategorien_TechEinsatz()),
-                        'required'=>false
+                        'required'=>false,
+                        'placeholder' => 'Wähle...'
                     ))
                     //wenn unterkategorie==brandeinsatz
                     ->add('brandausDate', DateType::class, array(
@@ -174,9 +179,12 @@ class CreateEntryForm extends AbstractType
                     ))
                     ->add('uebungsleiter', TextType::class, array(
                         'required'=>false
-                    ));
+                    ))
+                    ->add('photo', FileType::class);
                 break;
             case 4:
+
+
                 break;
                 //C:\xampp\htdocs\newfiary\vendor\symfony\framework-bundle\Resources\views\Form
 
@@ -186,5 +194,18 @@ class CreateEntryForm extends AbstractType
 
     public function getBlockPrefix() {
         return 'createEntry';
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getName() {
+        return $this->getBlockPrefixFoto();
+    }
+    /**
+     * {@inheritDoc}
+     */
+    public function getBlockPrefixFoto() {
+        return 'photoUpload';
     }
 }
