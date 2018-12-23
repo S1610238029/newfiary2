@@ -81,6 +81,23 @@
                 margin-right: auto;
             }
         }
+
+        .firstelement {
+            width: 94%;
+            margin-left: 3.5%;
+        }
+
+        #zindex {
+            z-index: 0;
+        }
+
+        #firstheading {
+            margin: auto;
+            margin-bottom: 3%;
+            color: var(--red);
+            font-weight: bold;
+        }
+
     </style>
 
     <h1 id="newsheading">News</h1><br><hr><br>
@@ -93,17 +110,59 @@
     <!-- CARDS STARTING -->
     <section>
         <div class="container">
+
             <div class="row">
 
                 {%  for entry in feeds %}
 
-                    <div class="blog-card" id="test">
-                        <div class="description">
-                            <h2>{{ entry.title }}</h2>
-                            <h3>Beitrag erstellt am: {{ entry.date }}</h3>
-                            <p>{{ entry.feed }}</p><br>
-                            <div id="buttons">
-                                {% if is_granted('ROLE_REGISTERED') %}
+                    {% if loop.first %}
+
+                        <div class="firstelement">
+                        <div class="row">
+                            <div class="blog-card" id="test">
+                                <div class="description">
+                                    <h2>{{ entry.title }}</h2>
+                                    <h3>Beitrag erstellt am: {{ entry.date }}</h3>
+                                    <p>{{ entry.feed }}</p><br>
+                                    <div id="buttons">
+                                        {% if is_granted('ROLE_REGISTERED') %}
+
+                                            <div class="row">
+                                                <div class="imagebutton">
+                                                    <a href="{{ path('feed_edit', {'id':entry.idfeed}) }}">
+                                                        <img border="0" alt="EditIcon" src="{{ asset('assets/img/entries.svg') }}" width="20"
+                                                             height="20">
+                                                    </a>
+                                                </div>
+                                                <div class="imagebutton">
+                                                    <a href="{{ path('feed_delete', {'id':entry.idfeed}) }}">
+                                                        <img border="0" alt="DeleteIcon" src="{{ asset('assets/img/delete_big.svg') }}" width="20"
+                                                             height="15">
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <hr><br>
+                        </div>
+
+
+                    {% endif %}
+
+                {% if not loop.first %}
+
+                        <div class="col-sm-6" id="zindex">
+                        <div class="blog-card" id="test">
+                            <div class="description">
+                                <h2>{{ entry.title }}</h2>
+                                <h3>Beitrag erstellt am: {{ entry.date }}</h3>
+                                <p>{{ entry.feed }}</p><br>
+                                <div id="buttons">
+                                    {% if is_granted('ROLE_REGISTERED') %}
 
                                         <div class="row">
                                             <div class="imagebutton">
@@ -120,13 +179,20 @@
                                             </div>
                                         </div>
 
-                                {% endif %}
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                            <br>
+                        </div>
+
+                {% endif %}
+
+
                 {% endfor %}
 
             </div>
+
         </div>
     </section>
 
