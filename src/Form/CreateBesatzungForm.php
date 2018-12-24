@@ -53,10 +53,6 @@ class CreateBesatzungForm extends AbstractType
         return 'createEntry2';
     }
 
-    public function getParent()
-    {
-        return Logbuch::class;
-    }
 
 
 

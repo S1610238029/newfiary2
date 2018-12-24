@@ -32,7 +32,7 @@ class Fahrzeugbesatzung
 
     /**
      *
-     * @ORM\JoinColumn(name="idfahrzeug_fahrzeug",referencedColumnName="idfahrzeug", nullable=false)
+     * @ORM\JoinColumn(name="idfahrzeug_fahrzeug", referencedColumnName="idfahrzeug", nullable=false)
      * @ORM\ManyToOne(targetEntity="App\Entity\Fahrzeug", inversedBy="besatzung")
      */
     private $idfahrzeugFahrzeug;
@@ -64,14 +64,14 @@ class Fahrzeugbesatzung
         return $this->idfahrzeugbesatzung;
     }
 
-    public function getIdlogbuchLogbuch(): ?Logbuch
+    public function getIdlogbuchLogbuch(): ?int
     {
         return $this->idlogbuchLogbuch;
     }
 
 
 
-    public function setIdlogbuchLogbuch(?Logbuch $idlogbuchLogbuch): self
+    public function setIdlogbuchLogbuch(?int $idlogbuchLogbuch): self
     {
         $this->idlogbuchLogbuch = $idlogbuchLogbuch;
 

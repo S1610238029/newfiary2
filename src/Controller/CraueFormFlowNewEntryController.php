@@ -81,6 +81,23 @@ class CraueFormFlowNewEntryController extends Controller
                 // flow finished
                 $em = $this->getDoctrine()->getManager();
 
+
+                $repository =  $em->getRepository(Logbuch::class);
+
+               /* $lastinsertedID=$repository->createQuery('
+        SELECT LAST_INSERT_ID()');*/
+
+               /* $lastinsertedID=$em->createQuery("select LAST_INSERT_ID() as id FROM Logbuch");
+                $id=$lastinsertedID->getResult();*/
+
+                $lastinsertedID=$repository->createQueryBuilder('c')
+                    ->select('MAX(c.idlogbuch)')
+                    ->getQuery()
+                    ->getSingleScalarResult();
+
+                echo ($lastinsertedID);
+                $besatzung->setIdlogbuchLogbuch($lastinsertedID+1);
+
                 $em->persist($formData);
 
                 $em->persist($besatzung);

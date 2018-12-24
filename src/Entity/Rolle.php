@@ -32,7 +32,7 @@ class Rolle
     private $rollenname;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Fahrzeugbesatzung", mappedBy="$rolle", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Fahrzeugbesatzung", mappedBy="rolle", cascade={"persist", "remove"})
      */
     private $besatzung;
 

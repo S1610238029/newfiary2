@@ -45,7 +45,7 @@ class Fahrzeug
     private $gesamtkilometer;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Fahrzeugbesatzung", mappedBy="$idfahrzeugFahrzeug", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Fahrzeugbesatzung", mappedBy="idfahrzeugFahrzeug", cascade={"persist", "remove"})
      */
     private $besatzung;
 

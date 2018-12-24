@@ -82,7 +82,7 @@ class Mitglieder
     private $atemschutztauglich;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Fahrzeugbesatzung", mappedBy="$idmitgliederMitglieder", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Fahrzeugbesatzung", mappedBy="idmitgliederMitglieder", cascade={"persist", "remove"})
      */
     private $besatzung;
 
