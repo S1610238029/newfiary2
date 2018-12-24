@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use App\Entity\Logbuch;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 
 class CreateEntryForm extends AbstractType
@@ -180,11 +181,16 @@ class CreateEntryForm extends AbstractType
                     ->add('uebungsleiter', TextType::class, array(
                         'required'=>false
                     ))
-                    ->add('photo', FileType::class);
+                    ->add('photo', FileType::class, array(
+                        'required'=>false
+                    ));
                 break;
             case 4:
 
-
+                $builder->add('besatzung', CollectionType::class, array(
+                    'entry_type' => BesetzungsType::class,
+                    'allow_add'    => true,
+                ));
                 break;
                 //C:\xampp\htdocs\newfiary\vendor\symfony\framework-bundle\Resources\views\Form
 

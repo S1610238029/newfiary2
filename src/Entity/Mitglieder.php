@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Mitglieder
@@ -78,6 +80,48 @@ class Mitglieder
      * @ORM\Column(name="atemschutztauglich", type="boolean", nullable=false)
      */
     private $atemschutztauglich;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Fahrzeugbesatzung", mappedBy="$idmitgliederMitglieder", cascade={"persist", "remove"})
+     */
+    private $besatzung;
+
+    public function __construct()
+    {
+        $this->besatzung = new ArrayCollection();
+
+    }
+
+    /**
+     * @return Collection|Fahrzeugbesatzung[]
+     */
+    public function getBesatzung(): Collection
+    {
+        return $this->besatzung;
+    }
+
+    public function addBesatzung(Fahrzeugbesatzung $besatzungeinzeln): self
+    {
+        if (!$this->besatzung->contains($besatzungeinzeln)) {
+            $this->besatzung[] = $besatzungeinzeln;
+            $besatzungeinzeln->setIdmitgliederMitglieder($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBesatzung(Fahrzeugbesatzung $besatzungeinzeln): self
+    {
+        if ($this->besatzung->contains($besatzungeinzeln)) {
+            $this->besatzung->removeElement($besatzungeinzeln);
+            // set the owning side to null (unless already changed)
+            if ($besatzungeinzeln->getIdmitgliederMitglieder() === $this) {
+                $besatzungeinzeln->setIdmitgliederMitglieder(null);
+            }
+        }
+
+        return $this;
+    }
 
     public function getIdmitglieder(): ?int
     {

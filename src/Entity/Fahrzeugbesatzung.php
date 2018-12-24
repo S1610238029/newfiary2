@@ -7,42 +7,48 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Fahrzeugbesatzung
  *
- * @ORM\Table(name="fahrzeugbesatzung", indexes={@ORM\Index(name="idlogbuch_logbuch", columns={"idlogbuch_logbuch"}), @ORM\Index(name="idfahrzeug_fahrzeug", columns={"idfahrzeug_fahrzeug"}), @ORM\Index(name="idmitglieder_mitglieder", columns={"idmitglieder_mitglieder"})})
+ * @ORM\Table(name="fahrzeugbesatzung")
  * @ORM\Entity
  */
 class Fahrzeugbesatzung
 {
+
     /**
      * @var int
      *
-     * @ORM\Column(name="idlogbuch_logbuch", type="integer", nullable=false, options={"unsigned"=true})
+     * @ORM\Column(name="idfahrzeugbesatzung", type="integer", nullable=false, options={"unsigned"=true})
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idfahrzeugbesatzung;
+
+
+    /**
+     *
+     *
+     * @ORM\Column(name="idlogbuch_logbuch", type="integer", nullable=false)
      */
     private $idlogbuchLogbuch;
 
     /**
-     * @var int
      *
-     * @ORM\Column(name="idfahrzeug_fahrzeug", type="integer", nullable=false, options={"unsigned"=true})
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\JoinColumn(name="idfahrzeug_fahrzeug",referencedColumnName="idfahrzeug", nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Fahrzeug", inversedBy="besatzung")
      */
     private $idfahrzeugFahrzeug;
 
     /**
-     * @var int
      *
-     * @ORM\Column(name="idmitglieder_mitglieder", type="integer", nullable=false, options={"unsigned"=true})
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     *
+     * @ORM\JoinColumn(name="idmitglieder_mitglieder", referencedColumnName="idmitglieder",nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Mitglieder",  inversedBy="besatzung")
      */
     private $idmitgliederMitglieder;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="rolle", type="string", length=255, nullable=false)
+     * @ORM\JoinColumn(name="rolle", referencedColumnName="idrolle",nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Rolle",  inversedBy="besatzung")
      */
     private $rolle;
 
@@ -53,27 +59,55 @@ class Fahrzeugbesatzung
      */
     private $atemschutz;
 
-    public function getIdlogbuchLogbuch(): ?int
+    public function getIdfahrzeugbesatzung(): ?int
+    {
+        return $this->idfahrzeugbesatzung;
+    }
+
+    public function getIdlogbuchLogbuch(): ?Logbuch
     {
         return $this->idlogbuchLogbuch;
     }
 
-    public function getIdfahrzeugFahrzeug(): ?int
+
+
+    public function setIdlogbuchLogbuch(?Logbuch $idlogbuchLogbuch): self
+    {
+        $this->idlogbuchLogbuch = $idlogbuchLogbuch;
+
+        return $this;
+    }
+
+    public function getIdfahrzeugFahrzeug(): ?Fahrzeug
     {
         return $this->idfahrzeugFahrzeug;
     }
 
-    public function getIdmitgliederMitglieder(): ?int
+    public function setIdfahrzeugFahrzeug(?Fahrzeug $idfahrzeugFahrzeug): self
+    {
+        $this->idfahrzeugFahrzeug = $idfahrzeugFahrzeug;
+
+        return $this;
+    }
+
+    public function getIdmitgliederMitglieder(): ?Mitglieder
     {
         return $this->idmitgliederMitglieder;
     }
 
-    public function getRolle(): ?string
+    public function setIdmitgliederMitglieder(?Mitglieder $idmitgliederMitglieder): self
+    {
+        $this->idmitgliederMitglieder = $idmitgliederMitglieder;
+
+        return $this;
+    }
+
+    public function getRolle(): ?Rolle
     {
         return $this->rolle;
     }
 
-    public function setRolle(string $rolle): self
+    public function setRolle(Rolle $rolle): self
     {
         $this->rolle = $rolle;
 

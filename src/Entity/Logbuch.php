@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
@@ -14,7 +16,7 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class Logbuch
 {
-    const UPLOAD_MAX_FILESIZE = '50k';
+    const UPLOAD_MAX_FILESIZE = '5000k';
     /**
      * @var int
      *
@@ -294,11 +296,54 @@ class Logbuch
      */
     private $metadata;
 
-   /* public function __construct()
-    {
-        $this->metadata = (new \DateTime("now"))->format('Y-m-d H-i-s');
 
-    }*/
+//    /**
+//     * @ORM\OneToMany(targetEntity="App\Entity\Fahrzeugbesatzung", mappedBy="$idlogbuchLogbuch", cascade={"persist", "remove"})
+//     */
+//    private $besatzung;
+//
+//   /* public function __construct()
+//    {
+//        $this->metadata = (new \DateTime("now"))->format('Y-m-d H-i-s');
+//
+//    }*/
+//
+//    public function __construct()
+//    {
+//        $this->besatzung = new ArrayCollection();
+//
+//    }
+//
+//    /**
+//     * @return Collection|Fahrzeugbesatzung[]
+//     */
+//    public function getBesatzung(): Collection
+//    {
+//        return $this->besatzung;
+//    }
+//
+//    public function addBesatzung(Fahrzeugbesatzung $besatzungeinzeln): self
+//    {
+//        if (!$this->besatzung->contains($besatzungeinzeln)) {
+//            $this->besatzung[] = $besatzungeinzeln;
+//            $besatzungeinzeln->setIdlogbuchLogbuch($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeBesatzung(Fahrzeugbesatzung $besatzungeinzeln): self
+//    {
+//        if ($this->besatzung->contains($besatzungeinzeln)) {
+//            $this->besatzung->removeElement($besatzungeinzeln);
+//            // set the owning side to null (unless already changed)
+//            if ($besatzungeinzeln->getIdlogbuchLogbuch() === $this) {
+//                $besatzungeinzeln->setIdlogbuchLogbuch(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
 
 
     public static function getKategorieOptions(){

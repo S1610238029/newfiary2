@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Fahrzeugbesatzung;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -40,14 +41,24 @@ class CraueFormFlowNewEntryController extends Controller
     public function createEntryAction() {
         $formData = new Logbuch(); // Your form data class. Has to be an object, won't work properly with an array.
 
+        $besatzung = new Fahrzeugbesatzung();
+        //$besatzung->setIdlogbuchLogbuch($formData);
+        //$besatzung->setIdlogbuchLogbuch(); //letzte Id von logbuch holen +1
+
+
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $userId = $user->getId();
         //echo ($userId);
 
         $formData->setIdbenutzerBenutzer($userId);
 
+
         $flow = $this->get('app.form.flow.createEntry'); // must match the flow's service id
+
+
         $flow->bind($formData);
+
+
 
         $repo=$this->getDoctrine()->getRepository(Haus::class);
         $häuser = $repo->findAll();
@@ -69,7 +80,11 @@ class CraueFormFlowNewEntryController extends Controller
             } else {
                 // flow finished
                 $em = $this->getDoctrine()->getManager();
+
                 $em->persist($formData);
+
+                $em->persist($besatzung);
+
                 $em->flush();
 
                 $flow->reset(); // remove step data from the session
