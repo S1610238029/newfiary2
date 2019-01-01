@@ -127,9 +127,9 @@
                 <div class="pie-chart">
                     <div class="pie-chart__pie"></div>
                     <ul class="pie-chart__legend">
-                        <li><em>2016</em><span>20</span></li>
-                        <li><em>2017</em><span>10</span></li>
-                        <li><em>2018</em><span>{{ einsaetze|number_format }}</span></li>
+                        <li><em>{{ lastyear-1 }}</em><span>20</span></li>
+                        <li><em>{{ lastyear }}</em><span>{{ einsaetze_last|number_format }}</span></li>
+                        <li><em>{{ year }}</em><span>{{ einsaetze|number_format }}</span></li>
                     </ul>
                 </div>
             </div>

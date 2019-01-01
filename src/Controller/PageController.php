@@ -146,19 +146,28 @@ class PageController extends Controller //AbstracController
             ->getSingleScalarResult();
 
 
-
+        if($einsätze>0){
+            $brandeinsatz=$brandeinsatz/$einsätze*100;
+            $technischer=$technischer/$einsätze*100;
+            $brandsicherheitswache=$brandsicherheitswache/$einsätze*100;
+        }else{
+            $brandeinsatz=0;
+            $technischer=0;
+            $brandsicherheitswache=0;
+        }
 
         return $this->render('pages/statistiken.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'einsaetze'=> $einsätze,
             'year'=>$year,
+            'lastyear'=>$year-1,
             'einsaetze_last'=>$einsätze_last,
             'gesamt'=>$gesamt,
             'uebungen'=>$übungen,
             'taetigkeiten'=>$tätigkeiten,
-            'brandeinsatz'=>($brandeinsatz/$einsätze*100),
-            'technischer'=>($technischer/$einsätze*100),
-            'brandsicherheitswache'=>($brandsicherheitswache/$einsätze*100),
+            'brandeinsatz'=>$brandeinsatz,
+            'technischer'=>$technischer,
+            'brandsicherheitswache'=>$brandsicherheitswache,
 
         ]);
     }
