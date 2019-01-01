@@ -17,6 +17,8 @@
         }
     </style>
 
+
+
     <h1>Homepage</h1>
 
     <h2>Letzter Newspost</h2>
@@ -31,6 +33,11 @@
     </div>
 
     
-    <a href="{{ path('newentry') }}" class="bigredbutton">Eintrag hinzufügen</a>
+    <a href="{{ path('newcraueentry') }}" id="eintraghinzu" class="bigredbutton">Eintrag hinzufügen</a>
 
+    <script>
+        sessionStorage.clear();
+    </script>
 {% endblock %}
+
+

@@ -189,6 +189,10 @@ text-decoration:none;
     color: white;
 }
 
+.craue_formflow_steplist li.craue_formflow_done_step:after{
+    background-color:var(--red);
+}
+
 /* Checkbox CSS */
 
 /* Kommt hier noch */

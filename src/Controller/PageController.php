@@ -194,7 +194,8 @@ class PageController extends Controller //AbstracController
             ->andWhere('(fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
             ->setParameter('enddatum', $lastDayofYear)
             ->setParameter('startdatum', $firstDayofYear)
-            ->select('fc.idlogbuch, fc.beginnDatum, fc.beschreibung, fc.kategorie, fc.unterkategorie, fc.strasse, fc.hausnummer')
+            ->select('fc.idlogbuch, fc.beginnDatum, fc.beschreibung, fc.kategorie, fc.unterkategorie, fc.strasse, fc.hausnummer, fc.metadata')
+            ->orderBy('fc.metadata', 'DESC')
             ->getQuery()
             ->getResult();
 

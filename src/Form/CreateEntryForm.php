@@ -29,7 +29,8 @@ class CreateEntryForm extends AbstractType
             case 1:
                 $builder->add('kategorie', ChoiceType::class, array(
                 'choices'=>array('Einsatz'=>'Einsatz','Übung'=>'Übung', 'Tätigkeit'=> 'Tätigkeit'),
-                    'placeholder'=> 'Wähle eine Kategorie..'
+                    'placeholder'=> 'Wähle eine Kategorie..',
+                    'required'=>false,
             ));
                 break;
             case 2:

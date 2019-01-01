@@ -75,6 +75,7 @@ $(document).ready(function() {
     $('#form_save').addClass("custom-button");
     $('#form_save').unwrap();
 
+
     var textkategorie=sessionStorage.getItem('kategorie');
     $("p#kategorie_einfügen").text('Kategorie: ' + textkategorie);
 
@@ -126,7 +127,7 @@ $(document).ready(function() {
             $('#lage label').text("Übungsannahme");
             $('#form_lagebeimEintreffen').attr("placeholder", "Genaue Beschreibung der Übungsannahme...");
 
-        } else { //Tätigkeit
+        } else if (textkategorie == 'Tätigkeit'){ //Tätigkeit
             $('#createEntry_kategorie option[value="Tätigkeit"]').attr("selected", "selected");
             $("#title").text(textkategorie + 'sdetails');
             $("#subtitle").text('Bitte gib hier die Details der ' + textkategorie + ' bekannt!');
