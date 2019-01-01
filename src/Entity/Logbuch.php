@@ -298,7 +298,7 @@ class Logbuch
 
 
     /*/**
-     * @ORM\OneToMany(targetEntity="App\Entity\Fahrzeugbesatzung", mappedBy="$idlogbuchLogbuch", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Fahrzeugbesatzung", mappedBy="idlogbuchLogbuch", cascade={"persist", "remove"})
      */
     private $besatzung;
 

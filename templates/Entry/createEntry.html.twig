@@ -414,13 +414,13 @@
                 {% endif %}
 
 
-                {% if flow.getCurrentStepNumber() == 4 %}
-                <div>
-                    {{ form_row(form.besatzung) }}
-                </div>
+                {#{% if flow.getCurrentStepNumber() == 4 %}#}
+                {#<div>#}
+                    {#{{ form_row(form.besatzung) }}#}
+                {#</div>#}
 
 
-                {% endif %}
+                {#{% endif %}#}
 
 
 
@@ -449,7 +449,8 @@
             craue_formflow_button_class_back: 'btn prev-button custom-button',
             craue_formflow_button_class_last: 'btn btn-primary next-button custom-button',
             craue_formflow_button_class_reset: 'btn btn-warning custom-button',
-            craue_formflow_button_label_finish: 'submit',
+            craue_formflow_button_class_finish: 'btn btn-warning custom-button',
+            craue_formflow_button_label_finish: 'Bestätigen',
             craue_formflow_button_label_reset: 'Neustart',
             craue_formflow_button_label_back: 'Zurück',
             craue_formflow_button_label_last: 'Vorwärts'

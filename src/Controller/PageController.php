@@ -168,8 +168,34 @@ class PageController extends Controller //AbstracController
      */
     public function entryAction(Request $request)
     {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $repository =  $em->getRepository(Logbuch::class);
+        //$allFeeds =  $em->getRepository(Logbuch::class)->findBy();
+
+        $rep = $this->getDoctrine()->getRepository(Logbuch::class);
+      //  $eintraege = $rep->findAll();
+
+        $lastDayofYear=date('Y') . '-12-31';
+        $firstDayofYear=date('Y') . '-01-01';
+        $year=date('Y');
+
+        $eintraege=$repository->createQueryBuilder('fc')
+            ->andWhere('(fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
+            ->setParameter('enddatum', $lastDayofYear)
+            ->setParameter('startdatum', $firstDayofYear)
+            ->select('fc.idlogbuch, fc.beginnDatum, fc.beschreibung, fc.kategorie, fc.unterkategorie, fc.strasse, fc.hausnummer')
+            ->getQuery()
+            ->getResult();
+
+
+
+
+
         return $this->render('pages/entryOverview.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+            'eintraege'=> $eintraege,
         ]);
     }
 

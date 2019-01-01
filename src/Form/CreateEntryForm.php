@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use App\Form\BesetzungsType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use App\Entity\Logbuch;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;

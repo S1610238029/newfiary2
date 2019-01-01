@@ -41,7 +41,7 @@ class CraueFormFlowNewEntryController extends Controller
     public function createEntryAction() {
         $formData = new Logbuch(); // Your form data class. Has to be an object, won't work properly with an array.
 
-        $besatzung = new Fahrzeugbesatzung();
+       // $besatzung = new Fahrzeugbesatzung();
         //$besatzung->setIdlogbuchLogbuch($formData);
         //$besatzung->setIdlogbuchLogbuch(); //letzte Id von logbuch holen +1
 
@@ -63,8 +63,10 @@ class CraueFormFlowNewEntryController extends Controller
         $repo=$this->getDoctrine()->getRepository(Haus::class);
         $häuser = $repo->findAll();
 
+
         // form of the current step
         $form = $flow->createForm();
+
         if ($flow->isValid($form)) {
 
 
@@ -90,17 +92,17 @@ class CraueFormFlowNewEntryController extends Controller
                /* $lastinsertedID=$em->createQuery("select LAST_INSERT_ID() as id FROM Logbuch");
                 $id=$lastinsertedID->getResult();*/
 
-                $lastinsertedID=$repository->createQueryBuilder('c')
-                    ->select('MAX(c.idlogbuch)')
-                    ->getQuery()
-                    ->getSingleScalarResult();
+//                $lastinsertedID=$repository->createQueryBuilder('c')
+//                    ->select('MAX(c.idlogbuch)')
+//                    ->getQuery()
+//                    ->getSingleScalarResult();
 
-                echo ($lastinsertedID);
-                $besatzung->setIdlogbuchLogbuch($lastinsertedID+1);
+//                echo ($lastinsertedID);
+//                $besatzung->setIdlogbuchLogbuch($lastinsertedID+1);
 
                 $em->persist($formData);
 
-                $em->persist($besatzung);
+               // $em->persist($besatzung);
 
                 $em->flush();
 
@@ -110,12 +112,12 @@ class CraueFormFlowNewEntryController extends Controller
                 return $this->redirectToRoute('homepage'); // redirect when done
             }
         }
-        if ($flow->redirectAfterSubmit($form)) {
+       /* if ($flow->redirectAfterSubmit($form)) {
             $request = $this->get('request_stack')->getCurrentRequest();
             $params = $this->get('craue_formflow_util')->addRouteParameters(array_merge($request->query->all(),
                 $request->attributes->get('_route_params')), $flow);
             return $this->redirect($this->generateUrl($request->attributes->get('_route'), $params));
-        }
+        }*/
 
         return $this->render('Entry/createEntry.html.twig', array(
             'form' => $form->createView(),
