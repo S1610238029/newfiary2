@@ -3,6 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Feed;
+use App\Form\EditEntryForm;
+use App\Form\Eintrag\EditEinsatz;
+use App\Form\Eintrag\EditTätigkeit;
+use App\Form\Eintrag\EditÜbung;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -177,9 +181,7 @@ class PageController extends Controller //AbstracController
      */
     public function entryAction(Request $request)
     {
-
         $em = $this->getDoctrine()->getManager();
-
         $repository =  $em->getRepository(Logbuch::class);
         //$allFeeds =  $em->getRepository(Logbuch::class)->findBy();
 
@@ -199,14 +201,68 @@ class PageController extends Controller //AbstracController
             ->getQuery()
             ->getResult();
 
-
-
-
-
         return $this->render('pages/entryOverview.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'eintraege'=> $eintraege,
         ]);
+    }
+
+    /**
+     * @Route("/eintraege/delete/{id}", name="entries_delete")
+     */
+    public function deleteEntry($id)
+    {
+        $eintrag = $this->getDoctrine()->getRepository(Logbuch::class)->find($id);
+
+        if ($eintrag) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($eintrag);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('entries');
+    }
+
+    /**
+     * @Route("/eintraege/edit/{id}", name="entries_edit")
+     */
+    public function editEntry($id, Request $request)
+    {
+        $eintrag = $this->getDoctrine()->getRepository(Logbuch::class)->find($id);
+        $kategorie = $eintrag->getKategorie();
+        $unterkategorie = $eintrag->getUnterkategorie();
+
+        if ($eintrag) {
+
+            if ($kategorie == "Einsatz" ) {
+                $form = $this->createForm(EditEinsatz::class, $eintrag);
+            } else if ($kategorie == "Übung") {
+                $form = $this->createForm(EditÜbung::class, $eintrag);
+            } else if ($kategorie == "Tätigkeit") {
+                $form = $this->createForm(EditTätigkeit::class, $eintrag);
+            }
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $eintrag = $form->getData();
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($eintrag);
+                $em->flush();
+
+                return $this->redirectToRoute('entries');
+            }
+
+            return $this->render('new_entry/editEntry.html.twig', [
+                'kategorie' => $kategorie,
+                'unterkategorie' => $unterkategorie,
+                'form' => $form->createView(),
+            ]);
+
+        }
+
+       return $this->redirectToRoute('entries_edit');
     }
 
     /**

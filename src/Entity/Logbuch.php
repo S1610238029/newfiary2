@@ -404,8 +404,13 @@ class Logbuch
         ];
     }
 
+    public static function getUnterKategorieOptions_Einsatz3(){
+        return["Brandeinsatz", "Brandsicherheitswache", "Technischer Einsatz"];
+    }
+
     public static function getUnterKategorieOptions_Übung(){
-        return["Atemschutzübung", "Begehung", "Bewerbsübung",
+        return[
+            "Atemschutzübung", "Begehung", "Bewerbsübung",
             "Branddienstübung",
             "Chargenschulung",
             "FMD-Schulung",

@@ -19,19 +19,86 @@ use App\Entity\Logbuch;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 
-class CreateEntryForm extends AbstractType
+class EditEntryForm extends AbstractType
 {
+
+    public function buildEinsatzForm(FormBuilderInterface $builder, string $type, array $options)
+    {
+        $builder = $this->buildForm($builder);
+        $builder
+            ->add('alarmdatum', DateType::class, array(
+                // renders it as a single text box
+                'widget' => 'single_text',
+                'data' => new \DateTime("now"),
+                'required' => false
+            ))
+            ->add('alarmzeit', TimeType::class, array(
+                // renders it as a single text box
+                'widget' => 'single_text',
+                'empty_data' => '',
+                'required' => false
+
+            ))
+            ->add('lagebeimEintreffen', TextareaType::class, array(
+                'required'=>false
+            ));
+    }
+
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        switch ($options['flow_step']) {
-            case 1:
-                $builder->add('kategorie', ChoiceType::class, array(
+
+        $builder
+            ->add('kategorie', ChoiceType::class, array(
                 'choices'=>array('Einsatz'=>'Einsatz','Übung'=>'Übung', 'Tätigkeit'=> 'Tätigkeit'),
-                    'placeholder'=> 'Wähle eine Kategorie..',
-                    'required'=>false,
-            ));
-                break;
+                'placeholder'=> 'Wähle eine Kategorie..',
+                'required'=>false,
+            ))
+            ->add('unterkategorie', ChoiceType::class, [
+                'choices' => array_flip(Logbuch::getUnterKategorieOptions_Einsatz()),
+                'placeholder'=> 'Wähle eine Unterkategorie'
+            ])
+            // BEGINN UND ENDE
+            ->add('beginnDatum', DateType::class, array(
+                // renders it as a single text box
+                'widget' => 'single_text',
+                'data' => new \DateTime("now")
+            ))
+            ->add('beginnZeit', TimeType::class, array(
+                // renders it as a single text box
+                'widget' => 'single_text',
+            ))
+            ->add('endeDatum', DateType::class, array(
+                // renders it as a single text box
+                'widget' => 'single_text',
+                'data' => new \DateTime("now")
+            ))
+            ->add('endeZeit', TimeType::class, array(
+                // renders it as a single text box
+                'widget' => 'single_text',
+            ))
+            ->add('lagebeimEintreffen', TextareaType::class, array(
+                'required'=>false
+            ))
+            ->add('beschreibung', TextareaType::class, array(
+                'required'=>false
+            ))
+            ->add('eingesetzteGeraete', TextType::class, array(
+                'required'=>false
+            ))
+            // ÖRTLICHES
+            ->add('strasse', TextType::class)
+            ->add('hausnummer', TextType::class)
+            ->add('plz', NumberType::class)
+            ->add('ort', TextType::class);
+
+
+
+
+
+/*
+        switch ($options['flow_step']) {
+
             case 2:
                 // This form type is not defined in the example.
                 $builder->add('unterkategorie', ChoiceType::class, [
@@ -193,10 +260,10 @@ class CreateEntryForm extends AbstractType
                     'allow_add'    => true,
                 ));
                 break;
-                //C:\xampp\htdocs\newfiary\vendor\symfony\framework-bundle\Resources\views\Form
+            //C:\xampp\htdocs\newfiary\vendor\symfony\framework-bundle\Resources\views\Form
 
 
-        }
+        }*/
     }
 
     public function getBlockPrefix() {

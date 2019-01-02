@@ -1,11 +1,12 @@
 <?php
 
 // src/AppBundle/Form/UserType.php
-namespace App\Form;
+namespace App\Form\Eintrag;
 
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -13,39 +14,85 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Form\BesetzungsType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use App\Entity\Logbuch;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 
-class CreateEntryForm extends AbstractType
+class EditEinsatz extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        switch ($options['flow_step']) {
-            case 1:
-                $builder->add('kategorie', ChoiceType::class, array(
-                'choices'=>array('Einsatz'=>'Einsatz','Übung'=>'Übung', 'Tätigkeit'=> 'Tätigkeit'),
-                    'placeholder'=> 'Wähle eine Kategorie..',
-                    'required'=>false,
-            ));
-                break;
-            case 2:
-                // This form type is not defined in the example.
-                $builder->add('unterkategorie', ChoiceType::class, [
-                    'choices' => array_flip(Logbuch::getUnterKategorieOptions_Einsatz()),
-                    'placeholder'=> 'Wähle eine Unterkategorie'
-                ])
-                    //beim technischen einsatz gibts ne unterunterkategorie
-                    ->add('unterunterkategorie', ChoiceType::class, array(
 
-                        'choices' => array_flip(Logbuch::getUnterKategorien_TechEinsatz()),
-                        'required'=>false,
-                        'placeholder' => 'Wähle...'
-                    ))
-                    //wenn unterkategorie==brandeinsatz
+        $builder
+            ->add('unterkategorie', ChoiceType::class, [
+                'choices' => array_flip(Logbuch::getUnterKategorieOptions_Einsatz3()),
+            ])
+
+            // ZEIT
+            ->add('alarmdatum', DateType::class, array(
+                // renders it as a single text box
+                'widget' => 'single_text',
+                'data' => new \DateTime("now"),
+                'required' => false
+            ))
+            ->add('alarmzeit', TimeType::class, array(
+                // renders it as a single text box
+                'widget' => 'single_text',
+                'empty_data' => '',
+                'required' => false
+            ))
+            ->add('beginnDatum', DateType::class, array(
+                // renders it as a single text box
+                'widget' => 'single_text',
+                'data' => new \DateTime("now")
+            ))
+            ->add('beginnZeit', TimeType::class, array(
+                // renders it as a single text box
+                'widget' => 'single_text',
+            ))
+            ->add('endeDatum', DateType::class, array(
+                // renders it as a single text box
+                'widget' => 'single_text',
+                'data' => new \DateTime("now")
+            ))
+            ->add('endeZeit', TimeType::class, array(
+                // renders it as a single text box
+                'widget' => 'single_text',
+            ))
+            ->add('lagebeimEintreffen', TextareaType::class, array(
+                'required'=>false
+            ))
+            ->add('beschreibung', TextareaType::class, array(
+                'required'=>false
+            ))
+            ->add('eingesetzteGeraete', TextType::class, array(
+                'required'=>false
+            ))
+
+            // ORT
+            ->add('strasse', TextType::class)
+            ->add('hausnummer', TextType::class)
+            ->add('plz', NumberType::class)
+            ->add('ort', TextType::class)
+            ->add('photo', FileType::class, array(
+                'required'=>false
+            ))
+
+
+            //wenn unterkategorie==technischen
+            ->add('unterunterkategorie', ChoiceType::class, array(
+                'choices' => array_flip(Logbuch::getUnterKategorien_TechEinsatz()),
+                'required'=>false,
+                'attr'=> array('class'=>'test'),
+                'label' => 'Technische Einsatzart '
+            ))
+
+            //wenn unterkategorie==brandeinsatz
+            ->add(
+                $builder->create('brandeinsatz', FormType::class, array('inherit_data' => true, 'label' => 'Details zum Brand'))
                     ->add('brandausDate', DateType::class, array(
                         // renders it as a single text box
                         'widget' => 'single_text',
@@ -90,63 +137,21 @@ class CreateEntryForm extends AbstractType
                     ->add('brandobjekte', TextType::class, array(
                         'required'=>false
                     ))
-                    //wenn unterkategorie==brandsicherheitswache
+            )
+
+
+            //wenn unterkategorie==brandsicherheitswache
+            ->add(
+                $builder->create('brandsicherheitswache', FormType::class, array('inherit_data' => true))
                     ->add('anlass', ChoiceType::class, array(
                         'choices'=>array('brandgefährliche Tätigkeit'=>'brandgefährliche Tätigkeit','bei Veranstaltung'=>'bei Veranstaltung'),
                         'multiple'=>false,
                         'expanded'=>true,'placeholder' => false,
                         'required'=>false
                     ))
-                    ->add('strasse', TextType::class)
-                    ->add('hausnummer', TextType::class)
-                    ->add('plz', NumberType::class)
-                    ->add('ort', TextType::class)
-                    ->add('alarmdatum', DateType::class, array(
-                        // renders it as a single text box
-                        'widget' => 'single_text',
-                        'data' => new \DateTime("now"),
+                    ->add('geschaedigterName', TextType::class, array(
                         'required'=>false
                     ))
-                    ->add('alarmzeit', TimeType::class, array(
-                        // renders it as a single text box
-                        'widget' => 'single_text',
-                        'empty_data' => '',
-                        'required'=>false
-
-                    ))
-                    ->add('beginnDatum', DateType::class, array(
-                        // renders it as a single text box
-                        'widget' => 'single_text',
-                        'data' => new \DateTime("now")
-                    ))
-                    ->add('beginnZeit', TimeType::class, array(
-                        // renders it as a single text box
-                        'widget' => 'single_text',
-                    ))
-                    ->add('endeDatum', DateType::class, array(
-                        // renders it as a single text box
-                        'widget' => 'single_text',
-                        'data' => new \DateTime("now")
-                    ))
-                    ->add('endeZeit', TimeType::class, array(
-                        // renders it as a single text box
-                        'widget' => 'single_text',
-                    ))
-                    ->add('lagebeimEintreffen', TextareaType::class, array(
-                        'required'=>false
-                    ))
-                    ->add('beschreibung', TextareaType::class, array(
-                        'required'=>false
-                    ))
-                    ->add('eingesetzteGeraete', TextType::class, array(
-                        'required'=>false
-                    ));
-
-                break;
-            case 3:
-                $builder->add('geschaedigterName', TextType::class, array(
-                    'required'=>false
-                ))
                     ->add('geschaedigterAdresse', TextType::class, array(
                         'required'=>false
                     ))
@@ -156,7 +161,6 @@ class CreateEntryForm extends AbstractType
                     ->add('geschaedigterKennzeichen', TextType::class, array(
                         'required'=>false
                     ))
-
                     ->add('wetter', ChoiceType::class, array(
                         'choices' => array_flip(Logbuch::getWetterOptions()),
                         'multiple'=>true,
@@ -179,24 +183,16 @@ class CreateEntryForm extends AbstractType
                     ->add('bericht', TextareaType::class, array(
                         'required'=>false
                     ))
-                    ->add('uebungsleiter', TextType::class, array(
-                        'required'=>false
-                    ))
-                    ->add('photo', FileType::class, array(
-                        'required'=>false
-                    ));
-                break;
-            case 4:
-
-                $builder->add('besatzung', CollectionType::class, array(
-                    'entry_type' => BesetzungsType::class,
-                    'allow_add'    => true,
-                ));
-                break;
-                //C:\xampp\htdocs\newfiary\vendor\symfony\framework-bundle\Resources\views\Form
+            )
 
 
-        }
+            /*->add('besatzung', CollectionType::class, array(
+               'entry_type' => BesetzungsType::class,
+               'allow_add'    => true,
+           ));*/
+
+
+            ->add('submit', SubmitType::class);
     }
 
     public function getBlockPrefix() {
