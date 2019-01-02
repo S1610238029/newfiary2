@@ -103,6 +103,7 @@ $(document).ready(function() {
 
         if (textkategorie == 'Einsatz') { //Einsatz
             $('#createEntry_kategorie option[value="Einsatz"]').attr("selected", "selected");
+
             $("#title").text(textkategorie + 'details');
             $("#subtitle").text('Bitte gib hier die Details des Einsatzes bekannt!');
 
@@ -114,6 +115,7 @@ $(document).ready(function() {
 
         } else if (textkategorie == 'Übung') { //Übung
             $('#createEntry_kategorie option[value="Übung"]').attr("selected", "selected");
+
             $("#title").text(textkategorie + 'sdetails');
             $("#subtitle").text('Bitte gib hier die Details der ' + textkategorie + ' bekannt!');
 
@@ -129,6 +131,7 @@ $(document).ready(function() {
 
         } else if (textkategorie == 'Tätigkeit'){ //Tätigkeit
             $('#createEntry_kategorie option[value="Tätigkeit"]').attr("selected", "selected");
+
             $("#title").text(textkategorie + 'sdetails');
             $("#subtitle").text('Bitte gib hier die Details der ' + textkategorie + ' bekannt!');
 
