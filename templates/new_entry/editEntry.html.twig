@@ -1,14 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Eintrag bearbeiten{% endblock %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/editEntry.css') }}">
+{% endblock %}
 
 
 {% block body %}
 
     <h1>{{ kategorie }} bearbeiten</h1>
 
-    {{ form(form, {'attr': {'novalidate':'novalidate'}}) }}
+    {{ form(form, {'attr': {'novalidate':'novalidate', id: 'form-id'} }) }}
 
 {% endblock %}
+
 {% block javascripts %}<script src="{{ asset('assets/js/editEntry.js') }}"></script>{% endblock %}

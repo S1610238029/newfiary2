@@ -405,7 +405,7 @@ class Logbuch
     }
 
     public static function getUnterKategorieOptions_Einsatz3(){
-        return["Brandeinsatz", "Brandsicherheitswache", "Technischer Einsatz"];
+        return[1 => "Brandeinsatz", 2 => "Brandsicherheitswache", 3 => "Technischer Einsatz"];
     }
 
     public static function getUnterKategorieOptions_Übung(){
@@ -441,30 +441,37 @@ class Logbuch
 
     public static function getUnterKategorieOptions_Tätigkeit(){
         return[
-            "Atemschutz", "Ausbildung", "Beratung der Behörden", "Chargensitzung", "Dienstbesprechung",
-            "EDV", "Fahrzeug- und Gerätedienst/Fahrmeister","Fahrzeug- und Gerätedienst/Zeugmeister",
-            "Feuerwehrball", "Feuerwehrfest",
-            "Feuerwehrmedizinischer Dienst",
-            "Inspektion",
-            "Kirchgang",
-            "Kommandobesprechung",
-            "Mitgliederbesprechung",
-            "Nachrichtendienst",
-            "Öffentlichkeitsarbiet und Dokumentation",
-            "Repräsentationen",
-            "Schadstoffdienst",
-            "Schriftverkehr",
-            "Sprengdienst",
-            "Strahlenschutzdienst",
-            "Tätigkeit im Feuerwehrhaus",
-            "Veranstaltungen",
-            "Versorgungsdienst",
-            "Verwaltungstätigkeiten",
-            "Vorbeugender Brandschutz",
-            "Vorträge/Schulungen",
-            "Wartungsarbeiten",
-            "Wasserdienst",
-            "Sonstiges"
+            29 => "Atemschutz",
+            30 => "Ausbildung",
+            31 => "Beratung der Behörden",
+            32 => "Chargensitzung",
+            33 => "Dienstbesprechung",
+            34 => "EDV",
+            35 => "Fahrzeug- und Gerätedienst/Fahrmeister",
+            36 => "Fahrzeug- und Gerätedienst/Zeugmeister",
+            37 => "Feuerwehrball",
+            38 => "Feuerwehrfest",
+            39 => "Feuerwehrmedizinischer Dienst",
+            40 => "Inspektion",
+            41 => "Kirchgang",
+            42 => "Kommandobesprechung",
+            43 => "Mitgliederbesprechung",
+            44 => "Nachrichtendienst",
+            45 => "Öffentlichkeitsarbiet und Dokumentation",
+            46 => "Repräsentationen",
+            47 => "Schadstoffdienst",
+            48 => "Schriftverkehr",
+            49 => "Sprengdienst",
+            50 => "Strahlenschutzdienst",
+            51 => "Tätigkeit im Feuerwehrhaus",
+            52 => "Veranstaltungen",
+            53 => "Versorgungsdienst",
+            54 => "Verwaltungstätigkeiten",
+            55 => "Vorbeugender Brandschutz",
+            56 => "Vorträge/Schulungen",
+            57 => "Wartungsarbeiten",
+            58 => "Wasserdienst",
+            59 => "Sonstige Tätigkeit"
         ];
     }
 

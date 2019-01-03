@@ -31,49 +31,57 @@ class EditÜbung extends AbstractType
                 'placeholder'=> 'Wähle eine Unterkategorie'
             ])
             // BEGINN UND ENDE
-            ->add('beginnDatum', DateType::class, array(
-                // renders it as a single text box
-                'widget' => 'single_text',
-                'data' => new \DateTime("now")
-            ))
-            ->add('beginnZeit', TimeType::class, array(
-                // renders it as a single text box
-                'widget' => 'single_text',
-            ))
-            ->add('endeDatum', DateType::class, array(
-                // renders it as a single text box
-                'widget' => 'single_text',
-                'data' => new \DateTime("now")
-            ))
-            ->add('endeZeit', TimeType::class, array(
-                // renders it as a single text box
-                'widget' => 'single_text',
-            ))
-            ->add('lagebeimEintreffen', TextareaType::class, array(
-                'required'=>false
-            ))
-            ->add('beschreibung', TextareaType::class, array(
-                'required'=>false
-            ))
-            ->add('eingesetzteGeraete', TextType::class, array(
-                'required'=>false
-            ))
+            ->add(
+                $builder->create('zeit', FormType::class, array('inherit_data' => true, 'attr' => ['class' => 'zeit'], 'label' => 'Zeitliche Details'))
+                    ->add('beginnDatum', DateType::class, array(
+                        // renders it as a single text box
+                        'widget' => 'single_text',
+                        'data' => new \DateTime("now")
+                    ))
+                    ->add('beginnZeit', TimeType::class, array(
+                        // renders it as a single text box
+                        'widget' => 'single_text',
+                    ))
+                    ->add('endeDatum', DateType::class, array(
+                        // renders it as a single text box
+                        'widget' => 'single_text',
+                        'data' => new \DateTime("now")
+                    ))
+                    ->add('endeZeit', TimeType::class, array(
+                        // renders it as a single text box
+                        'widget' => 'single_text',
+                    ))
+                    ->add('lagebeimEintreffen', TextareaType::class, array(
+                        'required'=>false
+                    ))
+                    ->add('beschreibung', TextareaType::class, array(
+                        'required'=>false
+                    ))
+                    ->add('eingesetzteGeraete', TextType::class, array(
+                        'required'=>false
+                    ))
+            )
+
             // ÖRTLICHES
-            ->add('strasse', TextType::class)
-            ->add('hausnummer', TextType::class)
-            ->add('plz', NumberType::class)
-            ->add('ort', TextType::class)
-            ->add('uebungsleiter', TextType::class, array(
-                'required'=>false
-            ))
-            ->add('photo', FileType::class, array(
-                'required'=>false
-            ))
+            ->add(
+                $builder->create('ort', FormType::class, array('inherit_data' => true, 'attr' => ['class' => 'ort'], 'label' => 'Örtliche Details'))
+                    ->add('strasse', TextType::class)
+                    ->add('hausnummer', TextType::class)
+                    ->add('plz', NumberType::class)
+                    ->add('ort', TextType::class)
+                    ->add('uebungsleiter', TextType::class, array(
+                        'required'=>false
+                    ))
+                    ->add('photo', FileType::class, array(
+                        'required'=>false
+                    ))
+            )
+
             /*->add('besatzung', CollectionType::class, array(
                 'entry_type' => BesetzungsType::class,
                 'allow_add'    => true,
             ));*/
-            ->add('submit', SubmitType::class);
+            ->add('submit', SubmitType::class, array('attr' => array('class'=>'bigredbutton')));
     }
 
     public function getBlockPrefix() {

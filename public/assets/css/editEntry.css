@@ -16,7 +16,7 @@ background: var(--grey); */
 /* Start Login CSS */
 
 body{
-    background: var(--grey);
+    background: #fff;
 }
 
 #editEntry body {
@@ -27,7 +27,7 @@ body{
 #form-id{
     width:85%;
     margin:50px auto;
-    text-align:center;
+    /*text-align:center;*/
     position: relative;
 }
 
@@ -45,7 +45,7 @@ body{
     display:none;
 }
 
-#form-id input, .home-button, #form-id button, .colorButton{
+#form-id input:not([type='checkbox']):not([type='radio']), .home-button, #form-id button, .colorButton{
     border:1px solid #ccc;
     border-radius:3px;
     padding:15px;
@@ -198,6 +198,44 @@ text-decoration:none;
 }
 
 /* Checkbox CSS */
+
+#form-id input[type='checkbox'], #form-id input[type='radio'] {
+    display: inline-block;
+    margin: 10px;
+}
+
+
+#form-id #createEntry > div {
+    margin-bottom: 10px;
+}
+
+#form-id #createEntry  > div > label {
+    font-size: 1rem !important;
+    font-weight: 600;
+    font-variant-caps: normal;
+}
+
+#form-id .ort, #form-id .zeit,  #form-id .brandsicherheitswache {
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+#form-id .ort > div, #form-id .zeit > div, #form-id .brandsicherheitswache > div {
+    flex: 50%;
+    padding: 10px;
+}
+
+#form-id .zeit > div:nth-last-child(-n+3), #form-id .brandsicherheitswache > div:not(:nth-child(-n+5)), #form-id .brandsicherheitswache > div:first-child  {
+    flex: 100%;
+}
+
+@media (max-width: 550px) {
+    #form-id .ort > div, #form-id .zeit > div, #form-id .brandsicherheitswache > div{
+        flex: 100%;
+    }
+}
+
 
 /* Kommt hier noch */
 
