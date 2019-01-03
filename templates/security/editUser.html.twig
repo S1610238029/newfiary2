@@ -55,7 +55,21 @@
         </div><br>
 
         <div class="panel-body">
-            {{ form(form) }}
+
+            {{ form_start(form , {'attr': {'novalidate':'novalidate'}} ) }}
+
+            {{ form_row(form.username, {attr: {class: 'text'} }) }}
+            {{ form_row(form.email, {attr: {class: 'text'} }) }}
+            {{ form_row(form.firstname, {attr: {class: 'text'} }) }}
+            {{ form_row(form.lastname, {attr: {class: 'text'} }) }}
+            {{ form_row(form.email, {attr: {class: 'text'} })  }}
+            {{ form_row(form.roles) }}
+            <a href="{{ path('password_recover', {'id': user.id }) }}">Recover Password</a>
+
+            <button type="submit" class="bigredbutton">Submit</button>
+            {{ form_end(form) }}
+
+
         </div>
     </div>
 

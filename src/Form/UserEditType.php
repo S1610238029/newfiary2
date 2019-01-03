@@ -24,19 +24,20 @@ class UserEditType extends AbstractType
             ->add('email', EmailType::class)
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
+          /*  ->add('plainPassword', PasswordType::class)
             ->add('newPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'mapped' => false,
                 'required' => false,
                 'first_options' => array('label' => 'New Password', 'mapped' => false),
                 'second_options' => array('label' => 'Repeat New Password', 'mapped' => false)
-            ))
+            ))*/
             ->add('roles',ChoiceType::class, [
                 'multiple' => true,
                 'expanded' => true,
                 'choices' =>  (User::getRoleOptions()),
             ])
-            ->add('submit', SubmitType::class)
+            //->add('submit', SubmitType::class)
         ;
     }
 

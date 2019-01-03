@@ -16,6 +16,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+
 class RegistrationController extends AbstractController
 {
     /**
@@ -69,33 +71,36 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/recover", name="password_recover")
+     * @Route("/recover/{id}", name="password_recover")
      */
-    public function changePasswdAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, AuthenticationUtils $utils) {
-        $user = $this->getUser();
-        $form = $this->createForm(ChangePasswordType::class, $user);
+    public function changePasswdAction($id, Request $request, UserPasswordEncoderInterface $passwordEncoder, AuthenticationUtils $utils) {
+        //$user = $this->getUser();
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $userInfo = ['plainPassword' => null];
+
+        $form = $this->createForm(ChangePasswordType::class, $userInfo);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $oldPassword = $form->get('plainPassword')->getData();
-
-            if($passwordEncoder->isPasswordValid($user, $oldPassword)) {
-                $newPassword = $form->get('newPassword')->getData();
-                $password = $passwordEncoder->encodePassword($user, $newPassword);
-                $user->setPassword($password);
-            } else {
-                echo "<script type='text/javascript'>alert('falsch');</script>";
-            }
+            $userInfo = $form->getData();
+            $newPassword = $form->get('newPassword')->getData();
+            $password = $passwordEncoder->encodePassword($user, $newPassword);
+            $user->setPassword($password);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-
-            // return $this->redirect($this->generateUrl('change_passwd_success'));
+            if ($user == $this->getUser()){
+                return $this->redirectToRoute('login');
+            } else {
+                return $this->redirectToRoute('dashboard');
+            }
         }
 
         return $this->render('security/recover.html.twig', array(
+            'user' => $user,
             'form' => $form->createView(),
         ));
 

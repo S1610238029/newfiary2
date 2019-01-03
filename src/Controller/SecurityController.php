@@ -120,25 +120,18 @@ class SecurityController extends AbstractController
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
         $form = $this->createForm(UserEditType::class, $user);
-        //$form = $this->buildForm($user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //$user = $form->getData();
-            $resetUser = $user;
-            $newPassword = $form->get('newPassword')->getData();
-            $password = $passwordEncoder->encodePassword($resetUser, $newPassword);
-            $user->setPassword($password);
-
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             return $this->redirectToRoute('dashboard');
         }
 
         return $this->render('security/editUser.html.twig', [
+            'userId' => $id,
             'user' => $user,
             'form' => $form->createView()
         ]);
