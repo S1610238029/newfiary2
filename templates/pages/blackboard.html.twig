@@ -98,20 +98,24 @@
             font-weight: bold;
         }
 
+        #feed-wrapper {
+            margin: 0;
+        }
+
     </style>
 
     <h1 id="newsheading">News</h1><br><hr><br>
 
     <!--Permission Überprüfung -->
     {% if is_granted('ROLE_REGISTERED') %}
-        <a href="{{ path('blackboard_neu') }}" class="bigredbutton2" id="button2">Neuen Feed anlegen</a><br><hr><br>
+        <a href="{{ path('blackboard_neu') }}" class="bigredbutton" id="button">Neuen Feed anlegen</a><br><hr><br>
     {% endif %}
 
     <!-- CARDS STARTING -->
     <section>
-        <div class="container">
+        <!--<div class="container">-->
 
-            <div class="row">
+            <div class="row" id="feed-wrapper">
 
                 {%  for entry in feeds %}
 
@@ -150,8 +154,8 @@
                             <hr><br>
                         </div>
 
-
                     {% endif %}
+
 
                 {% if not loop.first %}
 
@@ -179,6 +183,7 @@
                                             </div>
                                         </div>
 
+
                                     {% endif %}
                                 </div>
                             </div>
@@ -193,7 +198,7 @@
 
             </div>
 
-        </div>
+       <!-- </div>-->
     </section>
 
     <!-- Pen :  https://codepen.io/ChynoDeluxe/pen/bdXeqQ -->

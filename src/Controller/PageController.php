@@ -320,12 +320,6 @@ class PageController extends Controller //AbstracController
             "Attachment" => false
         ]);
 
-
-/*
-        return $this->render('new_entry/saveEntry.html.twig', [
-            'eintrag' => $eintrag,
-            'form' => $form->createView(),
-        ]);*/
     }
 
 
