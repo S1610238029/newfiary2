@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>{% block title %}Eintrag{% endblock %}</title>
+
+    <!-- Including the Stylesheet -->
+    <!--<link type="text/css" href= "{{ asset('assets/css/pdf.css') }}" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+</head>
+
+<body>
+<style>
+    body {
+        font-family: 'Montserrat', Arial, Helvetica, cursive, monospace;
+        font-size: 10pt;
+    }
+    h1 {
+        font-size: 18pt;
+    }
+
+    h2 {
+        font-size: 14pt;
+        margin-top: 25px;
+    }
+    .right {
+        float: right;
+    }
+
+    th {
+        width: 30%;
+    }
+
+    p {
+        margin: 0;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <h1>{{ eintrag.beschreibung }}<span class="right">{{ eintrag.beginnDatum|date('d.m.Y') }}</span></h1>
+
+            {% if eintrag.unterkategorie %}
+                <p>
+                    <span>Kategorie:</span>
+                    <span> {{ eintrag.kategorie }} </span>
+                </p>
+            {% endif %}
+
+            {% if eintrag.unterkategorie %}
+                <p>
+                    <span>Unterkategorie:</span>
+                    <span> {{ unterkategorie }} </span>
+                </p>
+            {% endif %}
+
+            {% if eintrag.unterunterkategorie %}
+                <span>Technische Einsatzart:</span>
+                <span> {{ eintrag.unterunterkategorie }} </span>
+            {% endif %}
+
+            {% if eintrag.uebungsleiter %}
+                <span>Übungsleiter:</span>
+                <span> {{ eintrag.uebungsleiter }} </span>
+            {% endif %}
+
+            <h2>Zeitliche Details</h2>
+
+            <table style="width: 100%;">
+                {% if eintrag.alarmdatum %}
+                    <tr>
+                        <th>Alarmzeit</th>
+                        <td>{{ eintrag.alarmdatum|date('d.m.Y') }} - {{ eintrag.alarmzeit|date('h:m') }} Uhr</td>
+                    </tr>
+                {% endif %}
+
+                {% if eintrag.beginnDatum %}
+                    <tr>
+                        <th>Beginn</th>
+                        <td>{{ eintrag.beginnDatum|date('d.m.Y') }} - {{ eintrag.beginnZeit|date('h:m') }} Uhr</td>
+                    </tr>
+                {% endif %}
+
+                {% if eintrag.endeDatum %}
+                    <tr>
+                        <th>Ende</th>
+                        <td>{{ eintrag.endeDatum|date('d.m.Y') }} - {{ eintrag.endeZeit|date('h:m') }} Uhr</td>
+                    </tr>
+                {% endif %}
+            </table>
+
+            <h2>Örtliche Details</h2>
+            <p>{% if eintrag.strasse %}{{ eintrag.strasse }}{% endif %} {% if eintrag.hausnummer %}{{ eintrag.hausnummer }},{% endif %}</p>
+            <p>{% if eintrag.plz %}{{ eintrag.plz }}{% endif %} {% if eintrag.ort %}{{ eintrag.ort }}{% endif %}</p>
+
+            <h2>Weitere Details</h2>
+            {% if eintrag.lagebeimEintreffen %} <h4>Lage beim Eintreffen</h4><p>{{ eintrag.lagebeimEintreffen }}</p> {% endif %}
+            {% if eintrag.beschreibung %}<h4>Beschreibung</h4> <p>{{ eintrag.beschreibung }}</p> {% endif %}
+            {% if eintrag.eingesetzteGeraete %}<h4>Eingesetzte Geräte</h4> <p>{{ eintrag.eingesetzteGeraete }}</p> {% endif %}
+
+            {% if eintrag.brandausDate %}
+            <h2>Brandeinsatz</h2>
+                <table style="width: 100%;">
+                    {% if eintrag.brandausDate %}
+                        <tr>
+                            <th>Brandauszeit</th>
+                            <td>{{ eintrag.brandausDate|date('d.m.Y') }} - {{ eintrag.brandausTime|date('h:m') }} Uhr</td>
+                        </tr>
+                    {% endif %}
+
+                    {% if eintrag.brandwacheStartDate %}
+                        <tr>
+                            <th>Brandwache Start</th>
+                            <td>{{ eintrag.brandwacheStartDate|date('d.m.Y') }} - {{ eintrag.brandwacheStartTime|date('h:m') }} Uhr</td>
+                        </tr>
+                    {% endif %}
+
+                    {% if eintrag.brandwacheEndeDate %}
+                        <tr>
+                            <th>Brandwache Ende</th>
+                            <td>{{ eintrag.brandwacheEndeDate|date('d.m.Y') }} - {{ eintrag.brandwacheEndeTime|date('h:m') }} Uhr</td>
+                        </tr>
+                    {% endif %}
+
+                    {% if eintrag.brandausmass  %}
+                        <tr>
+                            <th>Brandausmaß</th>
+                            <td>{{ eintrag.brandausmass }}</td>
+                        </tr>
+                    {% endif %}
+
+                    {% if eintrag.brandobjekte  %}
+                        <tr>
+                            <th>Brandobjekte</th>
+                            <td>{{ eintrag.brandobjekte }} </td>
+                        </tr>
+                    {% endif %}
+                </table>
+            {% endif %}
+
+
+            {% if eintrag.anlass %}
+                <h2>Brandsicherheitswache</h2>
+                <table style="width: 100%;">
+                    {% if eintrag.anlass %}
+                        <tr>
+                            <th>Anlass</th>
+                            <td>{{ eintrag.anlass }}</td>
+                        </tr>
+                    {% endif %}
+
+                    {% if eintrag.geschaedigterName %}
+                        <tr>
+                            <th>Geschädigter Name</th>
+                            <td>{{ eintrag.geschaedigterName }}</td>
+                        </tr>
+                    {% endif %}
+
+                    {% if eintrag.geschaedigterAdresse %}
+                        <tr>
+                            <th>Geschädigte Adresse</th>
+                            <td>{{ eintrag.geschaedigterAdresse }}</td>
+                        </tr>
+                    {% endif %}
+
+                    {% if eintrag.geschaedigterTel %}
+                        <tr>
+                            <th>Telefonnr. des Geschädigten</th>
+                            <td>{{ eintrag.geschaedigterTel }}</td>
+                        </tr>
+                    {% endif %}
+
+                    {% if eintrag.geschaedigterKennzeichen %}
+                        <tr>
+                            <th>Kennzeichen des Geschädigten</th>
+                            <td>{{ eintrag.geschaedigterKennzeichen }}</td>
+                        </tr>
+                    {% endif %}
+
+                    {% if eintrag.wetter %}
+                        <tr>
+                            <th>Wetter</th>
+                            <td>{{ eintrag.wetter }}</td>
+                        </tr>
+                    {% endif %}
+
+                    {% if anwesend %}
+                        <tr>
+                            <th>Anwesend</th>
+                            <td>{{ anwesend }}</td>
+                        </tr>
+                    {% endif %}
+
+                </table>
+            {% endif %}
+
+            {% if eintrag.betriebsmittel %}
+                <p>Betriebsmittel</p>
+                <p>{{ eintrag.betriebsmittel }}</p>
+            {% endif %}
+
+            {% if eintrag.notizen %}
+                <p>Betriebsmittel</p>
+                <p>{{ eintrag.notizen }}</p>
+            {% endif %}
+
+            {% if eintrag.bericht %}
+                <p>Betriebsmittel</p>
+                <p>{{ eintrag.bericht }}</p>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -26,8 +26,8 @@ body{
 /* Aussehen des eigentlichen Forms */
 #form-id{
     width:85%;
-    margin:50px auto;
-    /*text-align:center;*/
+    /*margin:50px auto;
+    text-align:center;*/
     position: relative;
 }
 

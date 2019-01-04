@@ -75,7 +75,6 @@ class EditEinsatz extends AbstractType
                     ))
             )
 
-
             // ORT
             ->add(
                 $builder->create('ort', FormType::class, array('inherit_data' => true, 'attr' => ['class' => 'ort'], 'label' => 'Örtliche Details'))
@@ -87,9 +86,6 @@ class EditEinsatz extends AbstractType
                         'required'=>false, 'attr' => ['class' => 'fullwidth']
                     ))
             )
-
-
-
 
             //wenn unterkategorie==technischen
             ->add('unterunterkategorie', ChoiceType::class, array(

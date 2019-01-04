@@ -16,6 +16,10 @@ use App\Entity\Mitglieder;
 use App\Entity\Haus;
 use App\Entity\Logbuch;
 
+// Include Dompdf required namespaces
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 
 class PageController extends Controller //AbstracController
 {
@@ -266,6 +270,66 @@ class PageController extends Controller //AbstracController
     }
 
     /**
+     * @Route("/eintraege/save/{id}", name="entries_save")
+     */
+    public function saveEntry($id, Request $request)
+    {
+        $eintrag = $this->getDoctrine()->getRepository(Logbuch::class)->find($id);
+        $kategorie = $eintrag->getKategorie();
+        $anwesend = null;
+
+        if ($kategorie == "Einsatz" ) {
+            $unterkategorien = $eintrag->getUnterKategorieOptions_Einsatz3();
+            $anwesend = $eintrag->getAnwesendePersonen()[$eintrag->getAnwesend()];
+        } else if ($kategorie == "Übung") {
+            $unterkategorien = $eintrag->getUnterKategorieOptions_Übung();
+        } else if ($kategorie == "Tätigkeit") {
+            $unterkategorien = $eintrag->getUnterKategorieOptions_Tätigkeit();
+        }
+
+        $unterkategorie = $unterkategorien[$eintrag->getUnterkategorie()];
+
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('new_entry/saveEntry.html.twig', [
+            'title' => "Welcome to our PDF Test",
+            'eintrag' => $eintrag,
+            'unterkategorie' => $unterkategorie,
+            'anwesend' => $anwesend
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+        $dompdf->set_base_path(realpath( "newfiary/public/assets/css/pdf.css"));
+
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("Entry.pdf", [
+            "Attachment" => false
+        ]);
+
+
+/*
+        return $this->render('new_entry/saveEntry.html.twig', [
+            'eintrag' => $eintrag,
+            'form' => $form->createView(),
+        ]);*/
+    }
+
+
+        /**
      * @Route("/info", name="infos")
      */
     public function infoAction(Request $request)

@@ -494,6 +494,21 @@ class Logbuch
                  ];
     }
 
+    public static function getAnwesendePersonen(){
+        return [
+            'BH'=>'Bezirkshauptmannschaft',
+            'EVU'=>'EVU',
+            'Polizei'=>'Polizei',
+            'Straßenverwaltung'=>'Straßenverwaltung',
+            'BFKDT/AFKDT'=>'BFKDT/AFKDT',
+            'Gemeinde'=>'Gemeinde',
+            'Rettung'=>'Rettung',
+            'Wasserwerk'=>'Wasserwerk',
+            'Sonstige'=>'Sonstige'
+        ];
+    }
+
+
     public static function getBrandausmassOptions(){
         return["Großbrand", "Mittelbrand", "Kleinbrand", "Vor Eintreffen gelöscht", "Sonstige"];
     }
