@@ -22,3 +22,4 @@ database/1_isabella_newfiary.sql
 templates/security/editUser.html.twig
 *.xml
 .idea/workspace.xml
+.idea/workspace.xml

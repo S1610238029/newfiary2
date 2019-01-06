@@ -83,12 +83,12 @@
                         <h2 class='title'>Kategorie Auswahl</h2>
                         <h3 class='sub-title'>Wähle die Kategorie des Eintrags aus!</h3>
 
-                        <input type='button' id="einsatzbutton" name='next' class='next-button custom-button kategorie'
-                               value="Einsatz"><br>
-                        <input type='button' id="uebungsbutton" name='next' class='next-button custom-button kategorie' value="Übung"><br>
-                        <input type='button' id="taetitgkeitsbutton" name='next' class='next-button custom-button kategorie'
-                               value="Tätigkeit"><br>
-                        <div style="display:none;">
+                        {#<input type='button' id="einsatzbutton" name='next' class='next-button custom-button kategorie'#}
+                               {#value="Einsatz"><br>#}
+                        {#<input type='button' id="uebungsbutton" name='next' class='next-button custom-button kategorie' value="Übung"><br>#}
+                        {#<input type='button' id="taetitgkeitsbutton" name='next' class='next-button custom-button kategorie'#}
+                               {#value="Tätigkeit"><br>#}
+                        <div>
                             {{ form_row(form.kategorie) }}
                             <p id="store"></p>
                         </div>
