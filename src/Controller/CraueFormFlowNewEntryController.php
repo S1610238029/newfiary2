@@ -127,6 +127,7 @@ class CraueFormFlowNewEntryController extends Controller
             'unterunterKategorie' => Logbuch::getUnterKategorien_TechEinsatz(),
             'metadata' => $formData->getMetadata(),
             'weTTer' =>Logbuch::getWetterOptions(),
+            'brandAusmass'=>Logbuch::getBrandausmassOptions(),
             'haeuser' =>$häuser,
         ));
     }

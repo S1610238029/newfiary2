@@ -45,9 +45,30 @@ class PageController extends Controller //AbstracController
                 $ultimateFeed = $feed;
             }
         }
+
+        //erzeuge die letzten EINTRÄGE
+
+        $repository =  $em->getRepository(Logbuch::class);
+        //$allFeeds =  $em->getRepository(Logbuch::class)->findBy();
+
+        $rep = $this->getDoctrine()->getRepository(Logbuch::class);
+        //  $eintraege = $rep->findAll();
+
+
+
+        $eintraege=$repository->createQueryBuilder('fc')
+            ->select('fc.idlogbuch, fc.beginnDatum, fc.beschreibung, fc.kategorie, fc.unterkategorie, fc.strasse, fc.hausnummer, fc.metadata')
+            ->orderBy('fc.beginnDatum', 'DESC')
+            ->setMaxResults(7)
+            ->getQuery()
+            ->getResult();
+
+
+
         // replace this example code with whatever you need
         return $this->render('homepage/index.html.twig', [
             'entry' => $ultimateFeed,
+            'eintraege'=> $eintraege,
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
     }
