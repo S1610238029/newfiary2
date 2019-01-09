@@ -443,6 +443,7 @@
                                     <b>{{ 'Unterkategorie:' | trans }}</b>
                                     <p>{{ unterKategorie[formData.unterkategorie] }}</p>
                                 {% endif %}
+                                </div>
                                 <div class="col-12 col-sm-12 col-md-4">
                                     {% if formData.unterunterkategorie is not empty %}
                                         <b>{{ 'Details zur Kategoire:' | trans }}</b>
@@ -450,11 +451,38 @@
                                     {% endif %}
 
                                 </div>
+                            </div>
+                        </div>
+
+
+
+
+                    <div>
+                                <div class="form-row">
+                                    <div class="col-12 col-sm-12 col-md-12">
                                 {% if formData.beschreibung is not empty %}
                                     <b>{{ 'Beschreibung:' | trans }}</b>
                                     <p>{{ formData.beschreibung }}</p>
                                 {% endif %}
-                            </div>
+                                        </div>
+                                    </div>
+                                <div class="form-row">
+                                    <div class="col-12 col-sm-12 col-md-12">
+                                {% if formData.lagebeimEintreffen is not empty %}
+                                    <b>{{ 'Lage beim Eintreffen:' | trans }}</b>
+                                    <p>{{ formData.lagebeimEintreffen }}</p>
+                                {% endif %}
+                                        </div>
+                                    </div>
+                                <div class="form-row">
+                                    <div class="col-12 col-sm-12 col-md-12">
+                                {% if formData.eingesetzteGeraete is not empty %}
+                                    <b>{{ 'Eingesetzte Geräte:' | trans }}</b>
+                                    <p>{{ formData.eingesetzteGeraete }}</p>
+                                {% endif %}
+                                        </div>
+                                    </div>
+
                         </div>
 
                         <div>
@@ -495,6 +523,7 @@
                             </div>
 
                         </div>
+
                         <div>
                             <p class="legends">Örtliche Details:</p>
                             <div class="form-row">
@@ -518,10 +547,12 @@
                             </div>
                         </div>
 
+                        <div>
+                            <p class="legends">Örtliche Details:</p>
 
                         <div class="form-row">
 
-
+                        </div>
                         </div>
 
                         {% endif %}
