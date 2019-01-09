@@ -529,7 +529,7 @@
                             <div class="form-row">
                                 <div class="col-12 col-sm-12 col-md-6">
                                     {% if formData.ort is not empty %}
-                                        <b>{{ 'Ort' | trans }}:</b>
+                                        <b>{{ 'Ort' | trans }}</b>
                                         <p>{{ formData.plz }} {{ formData.ort }}</p>
                                     {% endif %}
                                 </div>
@@ -537,7 +537,7 @@
 
                                 <div class="col-12 col-sm-12 col-md-6">
                                     {% if formData.strasse is not empty %}
-                                        <b>{{ 'Strasse' | trans }}:</b>
+                                        <b>{{ 'Strasse' | trans }}</b>
                                         <p>{{ formData.strasse }} {{ formData.hausnummer }}</p>
 
                                     {% endif %}
@@ -547,13 +547,180 @@
                             </div>
                         </div>
 
+                    {% if formData.unterkategorie == 0 %}
                         <div>
-                            <p class="legends">Örtliche Details:</p>
+                            <p class="legends">Details zum Brand:</p>
 
                         <div class="form-row">
+                            <div class="col-12 col-sm-12 col-md-12">
+                            {% if formData.brandausDate is not empty %}
+                                <b>{{ 'Brandaus:' | trans }}</b>
+                                <p>{{ formData.brandausDate | date('d.m.Y')}}
+                                {% if formData.brandausTime is not empty %}
+                                    {{ formData.brandausTime | date('H:m')}}
+                                {% endif %} Uhr
+                                </p>
+
+                            {% endif %}
+                                </div>
+
+                            <div class="col-12 col-sm-12 col-md-12">
+                            {% if formData.brandwacheStartDate is not empty %}
+                                <b>{{ 'Brandwache-Beginn:' | trans }}</b>
+                                <p>{{ formData.brandwacheStartDate | date('d.m.Y')}}
+                                {% if formData.brandwacheStartTime is not empty %}
+                                    {{ formData.brandwacheStartTime | date('H:m')}}
+                                {% endif %} Uhr
+                                </p>
+
+                            {% endif %}
+                                </div>
+
+                            <div class="col-12 col-sm-12 col-md-12">
+
+                            {% if formData.brandwacheEndeDate is not empty %}
+                                <b>{{ 'Brandwache-Ende:' | trans }}</b>
+                                <p>{{ formData.brandwacheEndeDate | date('d.m.Y')}}
+                                    {% if formData.brandwacheEndeTime is not empty %}
+                                        {{ formData.brandwacheEndeTime | date('H:m')}}
+                                    {% endif %} Uhr
+                                </p>
+
+                            {% endif %}
+                                </div>
+
+                            <div class="col-12 col-sm-12 col-md-6">
+
+                            {% if formData.brandausmass is not empty %}
+                                <b>{{ 'Brandausmaß:' | trans }}</b>
+                                <p>{{ formData.brandausmass }}</p>
+
+                            {% endif %}
+
+                                </div>
+
+                            <div class="col-12 col-sm-12 col-md-6">
+                            {% if formData.brandobjekte is not empty %}
+                                <b>{{ 'Brandobjekte:' | trans }}</b>
+                                <p>{{ formData.brandobjekte }}</p>
+
+                            {% endif %}
+                                </div>
+
 
                         </div>
                         </div>
+
+                        {% endif %}
+
+                    {% if formData.unterkategorie == 1 %}
+                    <div>
+                        <div class="form-row">
+                            <div class="col-12 col-sm-12 col-md-12">
+                            {% if formData.anlass is not empty %}
+                                <b>{{ 'Anlass:' | trans }}</b>
+                                <p>{{ formData.anlass }}</p>
+
+                            {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                        <!--Geschädigter-->
+
+                        <div class="form-row">
+                            <div class="col-12 col-sm-12 col-md-12">
+                                {% if formData.geschaedigterName is not empty %}
+                                    <b>{{ 'Name des Geschädigten:' | trans }}</b>
+                                    <p>{{ formData.geschaedigterName }}</p>
+
+                                {% endif %}
+                            </div>
+
+                            <div class="col-12 col-sm-12 col-md-12">
+                                {% if formData.geschaedigterAdresse is not empty %}
+                                    <b>{{ 'Adresse des Geschädigten:' | trans }}</b>
+                                    <p>{{ formData.geschaedigterAdresse }}</p>
+
+                                {% endif %}
+                            </div>
+
+                            <div class="col-12 col-sm-12 col-md-12">
+                                {% if formData.geschaedigterTel is not empty %}
+                                    <b>{{ 'Tel-Nummer des Geschädigten:' | trans }}</b>
+                                    <p>{{ formData.geschaedigterTel }}</p>
+
+                                {% endif %}
+                            </div>
+
+                            <div class="col-12 col-sm-12 col-md-12">
+                                {% if formData.geschaedigterKennzeichen is not empty %}
+                                    <b>{{ 'Kennzeichen des Geschädigten:' | trans }}</b>
+                                    <p>{{ formData.geschaedigterKennzeichen }}</p>
+
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            {% if formData.anwesend is not empty %}
+                                <b>{{ 'Anwesende:' | trans }}</b>
+                            {% for an in formData.anwesend %}
+                                <p>{{ an }}, </p>
+                            {% endfor %}
+
+                            {% endif %}
+                        </div>
+
+                        <div class="form-row">
+                            {% if formData.wetter is not empty %}
+                                <div class="col-12 col-sm-12 col-md-12">
+                            <b>Wetter:</b>
+                            <td>
+                                {% for we in formData.wetter %}
+                                    <li>{{ weTTer[we] }}
+                                    </li>
+                                {% endfor %}
+                            </td>
+
+                                    </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-row">
+                            {% if formData.betriebsmittel is not empty %}
+                                <b>{{ 'Betriebsmittel:' | trans }}</b>
+                                <p>{{ formData.betriebsmittel }}</p>
+
+                            {% endif %}
+                        </div>
+
+                        <div class="form-row">
+                            {% if formData.uebungsleiter is not empty %}
+                                <b>{{ 'Übungsleiter:' | trans }}</b>
+                                <p>{{ formData.uebungsleiter }}</p>
+
+                            {% endif %}
+                        </div>
+
+                        <div class="form-row">
+                            {% if formData.bericht is not empty %}
+                                <b>{{ 'Bericht:' | trans }}</b>
+                                <p>{{ formData.bericht }}</p>
+
+                            {% endif %}
+                        </div>
+
+                        <div class="form-row">
+                            {% if formData.notizen is not empty %}
+                                <b>{{ 'Notizen:' | trans }}</b>
+                                <p>{{ formData.notizen }}</p>
+
+                            {% endif %}
+                        </div>
+
+
 
                         {% endif %}
 
