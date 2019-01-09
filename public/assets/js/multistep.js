@@ -77,7 +77,8 @@ $(document).ready(function() {
 
 
     var textkategorie=sessionStorage.getItem('kategorie');
-    $("p#kategorie_einfügen").text('Kategorie: ' + textkategorie);
+
+
 
     /*$('button.next-button').hide();*/
 
@@ -86,7 +87,7 @@ $(document).ready(function() {
 }
 
     /*while clicking on one of the main kategories*/
-    $(".kategorie").click(function () {
+  /*  $(".kategorie").click(function () {
 
     $('button.next-button').show();
 
@@ -96,7 +97,28 @@ $(document).ready(function() {
         console.log(kategorie);
         sessionStorage.setItem('kategorie', kategorie);
 
-    });
+    });*/
+
+    $('#createEntry_kategorie').change(function(){
+        var textkategorie = ($(this).val());
+        sessionStorage.setItem('kategorie', textkategorie);
+        console.log(($(this).val()));
+});
+
+
+        if( $('#createEntry_kategorie option[value="Einsatz"]').is("[selected]")){
+            textkategorie = 'Einsatz';
+            console.log('Einsatz');
+
+        }
+        if( $('#createEntry_kategorie option[value="Übung"]').is("[selected]")){
+            textkategorie = 'Übung';
+        }
+        if( $('#createEntry_kategorie option[value="Tätigkeit"]').is("[selected]")){
+            textkategorie = 'Tätigkeit';
+        }
+
+        $("p#kategorie_einfügen").text('Kategorie: ' + textkategorie);
 
 
 

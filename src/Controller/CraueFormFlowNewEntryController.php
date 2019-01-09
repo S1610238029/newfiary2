@@ -123,6 +123,9 @@ class CraueFormFlowNewEntryController extends Controller
             'form' => $form->createView(),
             'flow' => $flow,
             'formData' => $formData,
+            'unterKategorie' => Logbuch::getUnterKategorieOptions_Einsatz(),
+            'unterunterKategorie' => Logbuch::getUnterKategorien_TechEinsatz(),
+            'metadata' => $formData->getMetadata(),
             'haeuser' =>$häuser,
         ));
     }
