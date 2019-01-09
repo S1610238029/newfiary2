@@ -24,8 +24,8 @@ var errorP='<p class="errors">Pflichtfeld darf nicht leer sein!</p>';
 
 
 
-var addTagLink = $('<a href="#" class="add_tag_link">Füge eine Besatzung hinzu</a>');
-var newLinkLi = $('<li></li>').append(addTagLink);
+var addTagLink = $('<a href="#" class="add_tag_link custom-button">Füge ein Besatzungsmitglied hinzu</a>');
+var newLinkLi = $('<li style="list-style-type:none;"></li>').append(addTagLink);
 
     /* Abbrechen */
 $(document).ready(function() {
@@ -227,7 +227,7 @@ function addTagForm(collectionHolder, newLinkLi) {
     var newFormLi = $('<li></li>').append(newForm);
 
     // also add a remove button, just for this example
-    newFormLi.append('<a href="#" class="remove-tag">x</a>');
+    newFormLi.append('<a href="#" class="remove-tag custom-button">Entfernen</a>');
 
     newLinkLi.before(newFormLi);
 

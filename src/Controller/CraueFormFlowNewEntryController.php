@@ -102,6 +102,17 @@ class CraueFormFlowNewEntryController extends Controller
 
                 $em->persist($formData);
 
+                $array=$formData->getBesatzung();
+
+                foreach($array as $entry){
+                    if($entry->getIdmitgliederMitglieder() != NULL) {
+                        $entry->setIdlogbuchLogbuch($formData);
+                        $em->persist($entry);
+                        $em->flush();
+                    }
+
+                }
+
                // $em->persist($besatzung);
 
                 $em->flush();

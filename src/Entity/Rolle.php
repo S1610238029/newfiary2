@@ -36,6 +36,10 @@ class Rolle
      */
     private $besatzung;
 
+    public function __toString() {
+        return $this->rollenname;
+    }
+
     public function __construct()
     {
         $this->besatzung = new ArrayCollection();

@@ -9,6 +9,7 @@ use Craue\FormFlowBundle\Form\FormFlowEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+
 class CreateEntryFlow extends FormFlow implements EventSubscriberInterface
 {
     /*protected $handleFileUploadsTempDir = '/public/images/';*/
@@ -35,9 +36,12 @@ class CreateEntryFlow extends FormFlow implements EventSubscriberInterface
     public function onPostBindSavedData(PostBindSavedDataEvent $event) {
         if ($event->getStepNumber() === 4) {
             $formData = $event->getFormData();
-            $formData->addBesatzung(new Fahrzeugbesatzung());
-           //$em=$event->getEntityManager();
-           // $em->persist($formData);
+            $besatzung=new Fahrzeugbesatzung();
+            $formData->addBesatzung($besatzung);
+            //$em = $formData->getDoctrine()->getManager();
+            //$em=$event->getEntityManager();
+            //$em->persist($besatzung);
+           // $em->flush();
 
 
         }

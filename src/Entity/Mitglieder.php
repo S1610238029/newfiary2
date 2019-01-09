@@ -86,10 +86,19 @@ class Mitglieder
      */
     private $besatzung;
 
+    public function __toString() {
+        return $this->vorname. ' '.$this->nachname;
+    }
+
     public function __construct()
     {
         $this->besatzung = new ArrayCollection();
 
+    }
+
+    public function getUniqueName()
+    {
+        return sprintf('%s - %s - %s', $this->standesbuchnummer, $this->vorname, $this->nachname);
     }
 
     /**

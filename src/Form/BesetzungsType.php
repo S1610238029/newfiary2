@@ -47,14 +47,15 @@ class BesetzungsType extends AbstractType
 
                 ->add('idmitgliederMitglieder', EntityType::class, array(
                     'class' => Mitglieder::class,
-                    'choice_label' => 'vorname'
+                    'choice_label' => 'uniqueName'
                 ))
                 ->add('rolle', EntityType::class, array(
                     'class' => Rolle::class,
                     'choice_label' => 'rollenname'
                 ))
                 ->add('atemschutz', CheckboxType::class, [
-                    'label' => 'Atemschutztauglichkeit',
+                    'label' => 'Atemschutzeinsatz',
+                    'required' => false,
 
                 ]);
         ;

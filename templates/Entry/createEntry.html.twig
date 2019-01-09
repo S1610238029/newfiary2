@@ -731,6 +731,20 @@
                             </div>
                         </div>
 
+                        <div class="form-row">
+                            <div class="col-12 col-sm-12 col-md-12">
+                                {% if formData.besatzung is not empty %}
+                                    <b>{{ 'Besatzung:' | trans }}</b>
+
+                                {% for we in formData.besatzung %}
+                                {% if we.idfahrzeugFahrzeug is not empty %}
+                                    <p>{{ we.idfahrzeugFahrzeug }}: {{  we.idmitgliederMitglieder}} - {{  we.rolle}} </p>
+                                {% endif %}
+        {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
 
 
                     {% endif %}

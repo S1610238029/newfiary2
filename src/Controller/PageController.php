@@ -59,6 +59,7 @@ class PageController extends Controller //AbstracController
         $eintraege=$repository->createQueryBuilder('fc')
             ->select('fc.idlogbuch, fc.beginnDatum, fc.beschreibung, fc.kategorie, fc.unterkategorie, fc.strasse, fc.hausnummer, fc.metadata')
             ->orderBy('fc.beginnDatum', 'DESC')
+            ->orderBy('fc.metadata', 'DESC')
             ->setMaxResults(7)
             ->getQuery()
             ->getResult();

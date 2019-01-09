@@ -49,6 +49,10 @@ class Fahrzeug
      */
     private $besatzung;
 
+    public function __toString() {
+        return $this->fahrzeugart;
+    }
+
     public function __construct()
     {
         $this->besatzung = new ArrayCollection();
