@@ -215,23 +215,23 @@ text-decoration:none;
     font-variant-caps: normal;
 }
 
-#form-id .ort, #form-id .zeit,  #form-id .brandsicherheitswache {
+#form-id .brand, #form-id .ort, #form-id .zeit,  #form-id .brandsicherheitswache {
     display: flex;
     -webkit-flex-flow: row wrap;
     justify-content: space-around;
 }
 
-#form-id .ort > div, #form-id .zeit > div, #form-id .brandsicherheitswache > div {
+#form-id .brand > div, #form-id .ort > div, #form-id .zeit > div, #form-id .brandsicherheitswache > div {
     flex: 50%;
     padding: 10px;
 }
 
-#form-id .zeit > div:nth-last-child(-n+3), #form-id .brandsicherheitswache > div:not(:nth-child(-n+5)), #form-id .brandsicherheitswache > div:first-child  {
+#form-id .brand > div:nth-last-child(-n+2), #form-id .zeit > div:nth-last-child(-n+3), #form-id .brandsicherheitswache > div:not(:nth-child(-n+5)), #form-id .brandsicherheitswache > div:first-child  {
     flex: 100%;
 }
 
 @media (max-width: 550px) {
-    #form-id .ort > div, #form-id .zeit > div, #form-id .brandsicherheitswache > div{
+    #form-id .brand > div, #form-id .ort > div, #form-id .zeit > div, #form-id .brandsicherheitswache > div{
         flex: 100%;
     }
 }

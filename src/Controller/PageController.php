@@ -302,7 +302,18 @@ class PageController extends Controller //AbstracController
 
         if ($kategorie == "Einsatz" ) {
             $unterkategorien = $eintrag->getUnterKategorieOptions_Einsatz3();
-            $anwesend = $eintrag->getAnwesendePersonen()[$eintrag->getAnwesend()];
+            //print_r(($eintrag->getAnwesend()));
+            //print_r($eintrag->getAnwesendePersonen());
+            $anwesend_index = $eintrag->getAnwesend();
+
+            foreach($anwesend_index as $val){
+                $anwesend = $eintrag->getAnwesendePersonen()[$val];
+                //print_r($anwesend);
+                //debug_to_console($anwesend);
+            }
+
+
+           // $anwesend = $eintrag->getAnwesendePersonen()[$eintrag->getAnwesend()];
         } else if ($kategorie == "Übung") {
             $unterkategorien = $eintrag->getUnterKategorieOptions_Übung();
         } else if ($kategorie == "Tätigkeit") {

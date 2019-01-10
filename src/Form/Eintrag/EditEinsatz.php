@@ -97,7 +97,7 @@ class EditEinsatz extends AbstractType
 
             //wenn unterkategorie==brandeinsatz
             ->add(
-                $builder->create('brandeinsatz', FormType::class, array('inherit_data' => true, 'label' => 'Details zum Brand'))
+                $builder->create('brandeinsatz', FormType::class, array('inherit_data' => true, 'attr' => ['class' => 'brand'], 'label' => 'Details zum Brand'))
                     ->add('brandausDate', DateType::class, array(
                         // renders it as a single text box
                         'widget' => 'single_text',
