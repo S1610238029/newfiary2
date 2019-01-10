@@ -24,7 +24,7 @@ var errorP='<p class="errors">Pflichtfeld darf nicht leer sein!</p>';
 
 
 
-var addTagLink = $('<a href="#" class="add_tag_link custom-button">Füge ein Besatzungsmitglied hinzu</a>');
+var addTagLink = $('<a href="#" class="add_tag_link">Füge ein Besatzungsmitglied hinzu</a>');
 var newLinkLi = $('<li style="list-style-type:none;"></li>').append(addTagLink);
 
     /* Abbrechen */
@@ -210,6 +210,7 @@ $(document).ready(function() {
 });
 
 function addTagForm(collectionHolder, newLinkLi) {
+    console.log("AddTAgForm");
     // Get the data-prototype explained earlier
     var prototype = collectionHolder.data('prototype');
 

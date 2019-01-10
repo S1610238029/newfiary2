@@ -38,11 +38,6 @@ class CreateEntryFlow extends FormFlow implements EventSubscriberInterface
             $formData = $event->getFormData();
             $besatzung=new Fahrzeugbesatzung();
             $formData->addBesatzung($besatzung);
-            //$em = $formData->getDoctrine()->getManager();
-            //$em=$event->getEntityManager();
-            //$em->persist($besatzung);
-           // $em->flush();
-
 
         }
     }

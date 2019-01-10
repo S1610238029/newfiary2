@@ -308,9 +308,9 @@ class Logbuch
 
     }*/
 
-
-
-
+    public function __toString() {
+       return (string)$this->idlogbuch;
+    }
 
     public function __construct()
     {
