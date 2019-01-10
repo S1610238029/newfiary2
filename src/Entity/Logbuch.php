@@ -500,7 +500,7 @@ class Logbuch
 
     public static function getAnwesendePersonen(){
         return [
-            'BH'=>'Bezirkshauptmannschaft',
+            'Bezirkshauptmannschaft'=>'Bezirkshauptmannschaft',
             'EVU'=>'EVU',
             'Polizei'=>'Polizei',
             'Straßenverwaltung'=>'Straßenverwaltung',
