@@ -298,22 +298,49 @@ class PageController extends Controller //AbstracController
     {
         $eintrag = $this->getDoctrine()->getRepository(Logbuch::class)->find($id);
         $kategorie = $eintrag->getKategorie();
+
+        $brandeinsatz = null;
         $anwesend = null;
+        $wetter = null;
+        $ausmass = null;
+
+        $brandwache = null;
+
+        $techeinsatz = null;
 
         if ($kategorie == "Einsatz" ) {
             $unterkategorien = $eintrag->getUnterKategorieOptions_Einsatz3();
-            //print_r(($eintrag->getAnwesend()));
-            //print_r($eintrag->getAnwesendePersonen());
-            $anwesend_index = $eintrag->getAnwesend();
 
-            foreach($anwesend_index as $val){
-                $anwesend = $eintrag->getAnwesendePersonen()[$val];
-                //print_r($anwesend);
-                //debug_to_console($anwesend);
+            if ($unterkategorien[$eintrag->getUnterKategorie()] == "Brandeinsatz" || $unterkategorien[$eintrag->getUnterKategorie()] == "Technischer Einsatz") {
+                if ($unterkategorien[$eintrag->getUnterKategorie()] == "Brandeinsatz") {
+                    $brandeinsatz = true;
+                    $ausmass = $eintrag->getBrandausmassOptions()[$eintrag->getBrandausmass()];
+                } else if ($unterkategorien[$eintrag->getUnterKategorie()] == "Technischer Einsatz") {
+                    $techeinsatz = $eintrag->getUnterKategorien_TechEinsatz()[$eintrag->getUnterunterkategorie()];
+                }
+
+                $wIndex = $eintrag->getWetter();
+                $wetter = '';
+                foreach($wIndex as $val) {
+                    if( !next( $wIndex ) ) {
+                        $wetter .= $eintrag->getWetterOptions()[$val];
+                    } else {
+                        $wetter .= $eintrag->getWetterOptions()[$val] . ', ';
+                    }
+                }
+
+                $aIndex = $eintrag->getAnwesend();
+                $anwesend = '';
+                foreach($aIndex as $val){
+                    if( !next( $aIndex ) ) {
+                        $anwesend .= $eintrag->getAnwesendePersonen()[$val];
+                    } else {
+                        $anwesend .= $eintrag->getAnwesendePersonen()[$val] . ', ';
+                    }
+                }
+            } else if ($unterkategorien[$eintrag->getUnterKategorie()] == "Brandsicherheitswache") {
+                $brandwache = true;
             }
-
-
-           // $anwesend = $eintrag->getAnwesendePersonen()[$eintrag->getAnwesend()];
         } else if ($kategorie == "Übung") {
             $unterkategorien = $eintrag->getUnterKategorieOptions_Übung();
         } else if ($kategorie == "Tätigkeit") {
@@ -334,7 +361,12 @@ class PageController extends Controller //AbstracController
             'title' => "Welcome to our PDF Test",
             'eintrag' => $eintrag,
             'unterkategorie' => $unterkategorie,
-            'anwesend' => $anwesend
+            'brandeinsatz' => $brandeinsatz,
+            'brandwache' => $brandwache,
+            'ausmass' => $ausmass,
+            'anwesend' => $anwesend,
+            'wetter' => $wetter,
+            'techeinsatz' => $techeinsatz
         ]);
 
         // Load HTML to Dompdf
