@@ -82,10 +82,10 @@ class EditÜbung extends AbstractType
                     ))
             )
 
-            ->add('besatzung', CollectionType::class, array(
+           /* ->add('besatzung', CollectionType::class, array(
                 'entry_type' => BesetzungsType::class,
                 'allow_add'    => true,
-            ))
+            ))*/
 
             ->add('submit', SubmitType::class, array('attr' => array('class'=>'bigredbutton')));
     }

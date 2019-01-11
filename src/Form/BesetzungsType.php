@@ -37,9 +37,7 @@ class BesetzungsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('idlogbuchLogbuch', HiddenType::class, array(
-
-    ))
+            ->add('idlogbuchLogbuch', HiddenType::class, array())
             ->add('idfahrzeugFahrzeug', EntityType::class, array(
                 'class' => Fahrzeug::class,
                 'choice_label' => 'fahrzeugart'

@@ -326,6 +326,15 @@ class Logbuch
         return $this->besatzung;
     }
 
+    public function hasBesatzung() :bool
+    {
+        if (empty($this->besatzung)) { // wenn keine elemente in array
+            return false;
+        }
+        return true; // wenn einträge in array
+    }
+
+
     public function addBesatzung(Fahrzeugbesatzung $besatzungeinzeln): self
     {
         if (!$this->besatzung->contains($besatzungeinzeln)) {

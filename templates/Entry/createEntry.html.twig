@@ -736,11 +736,11 @@
                                 {% if formData.besatzung is not empty %}
                                     <b>{{ 'Besatzung:' | trans }}</b>
 
-                                {% for we in formData.besatzung %}
-                                {% if we.idfahrzeugFahrzeug is not empty %}
-                                    <p>{{ we.idfahrzeugFahrzeug }}: {{  we.idmitgliederMitglieder}} - {{  we.rolle}} </p>
-                                {% endif %}
-        {% endfor %}
+                                    {% for we in formData.besatzung %}
+                                        {% if we.idfahrzeugFahrzeug is not empty %}
+                                            <p>{{ we.idfahrzeugFahrzeug }}: {{  we.idmitgliederMitglieder}} - {{  we.rolle}} </p>
+                                        {% endif %}
+                                    {% endfor %}
                                 {% endif %}
                             </div>
                         </div>

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Feed;
+use App\Form\BesetzungsType;
 use App\Form\EditEntryForm;
 use App\Form\Eintrag\EditEinsatz;
 use App\Form\Eintrag\EditTätigkeit;
@@ -15,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Mitglieder;
 use App\Entity\Haus;
 use App\Entity\Logbuch;
+use App\FormBesetzungsType;
 
 // Include Dompdf required namespaces
 use Dompdf\Dompdf;
@@ -257,9 +259,23 @@ class PageController extends Controller //AbstracController
         $eintrag = $this->getDoctrine()->getRepository(Logbuch::class)->find($id);
         $kategorie = $eintrag->getKategorie();
         $unterkategorie = $eintrag->getUnterkategorie();
+        $besatzungsForm = null;
 
         if ($eintrag) {
 
+            if ($eintrag->hasBesatzung()) {
+                print('true');
+                $besatzung = $eintrag->getBesatzung();
+                foreach ($besatzung as $val) {
+                    $besatzungsForm = $this->createForm(BesetzungsType::class, $val);
+                }
+            } else {
+                print('false');
+                $besatzung = $eintrag->getBesatzung();
+                foreach ($besatzung as $val) {
+                    $besatzungsForm = $this->createForm(BesetzungsType::class, $val);
+                }
+            }
             if ($kategorie == "Einsatz" ) {
                 $form = $this->createForm(EditEinsatz::class, $eintrag);
             } else if ($kategorie == "Übung") {
@@ -284,6 +300,7 @@ class PageController extends Controller //AbstracController
                 'kategorie' => $kategorie,
                 'unterkategorie' => $unterkategorie,
                 'form' => $form->createView(),
+                'besatzungsform' => $besatzungsForm
             ]);
 
         }

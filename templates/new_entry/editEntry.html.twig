@@ -12,6 +12,11 @@
 
     {{ form(form, {'attr': {'novalidate':'novalidate', id: 'form-id'} }) }}
 
+    {% for bform in besatzungsform %}
+        {{ form(bform, {'attr': {'novalidate':'novalidate', id: 'form-id'} }) }}
+    {% endfor %}
+
+
 {% endblock %}
 
 {% block javascripts %}<script src="{{ asset('assets/js/editEntry.js') }}"></script>{% endblock %}
