@@ -226,7 +226,7 @@ text-decoration:none;
     padding: 10px;
 }
 
-#form-id .brand > div:nth-last-child(-n+2), #form-id .zeit > div:nth-last-child(-n+3), #form-id .brandsicherheitswache > div:not(:nth-child(-n+5)), #form-id .brandsicherheitswache > div:first-child  {
+#form-id .brand > div:nth-last-child(-n+2), #form-id .brandsicherheitswache > div:not(:nth-child(-n+5)), #form-id .brandsicherheitswache > div:first-child  {
     flex: 100%;
 }
 

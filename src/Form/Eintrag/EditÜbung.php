@@ -31,6 +31,9 @@ class EditÜbung extends AbstractType
                 'choices' => array_flip(Logbuch::getUnterKategorieOptions_Übung()),
                 'placeholder'=> 'Wähle eine Unterkategorie'
             ])
+            ->add('uebungsleiter', TextType::class, array(
+                'required'=>false
+            ))
             // BEGINN UND ENDE
             ->add(
                 $builder->create('zeit', FormType::class, array('inherit_data' => true, 'attr' => ['class' => 'zeit'], 'label' => 'Zeitliche Details'))
@@ -52,15 +55,6 @@ class EditÜbung extends AbstractType
                         // renders it as a single text box
                         'widget' => 'single_text',
                     ))
-                    ->add('lagebeimEintreffen', TextareaType::class, array(
-                        'required'=>false
-                    ))
-                    ->add('beschreibung', TextareaType::class, array(
-                        'required'=>false
-                    ))
-                    ->add('eingesetzteGeraete', TextType::class, array(
-                        'required'=>false
-                    ))
             )
 
             // ÖRTLICHES
@@ -70,18 +64,29 @@ class EditÜbung extends AbstractType
                     ->add('hausnummer', TextType::class)
                     ->add('plz', NumberType::class)
                     ->add('ort', TextType::class)
-                    ->add('uebungsleiter', TextType::class, array(
-                        'required'=>false
-                    ))
                     ->add('photo', FileType::class, array(
                         'required'=>false
                     ))
             )
 
-            /*->add('besatzung', CollectionType::class, array(
+            ->add(
+                $builder->create('zusatz', FormType::class, array('inherit_data' => true, 'attr' => ['class' => 'zusatz'], 'label' => 'Zusätzliche Details'))
+                    ->add('lagebeimEintreffen', TextareaType::class, array('label'=>'Übungsannahme',
+                        'required'=>false
+                    ))
+                    ->add('beschreibung', TextareaType::class, array('label'=>'Tätigkeitsbeschreibung',
+                        'required'=>false
+                    ))
+                    ->add('eingesetzteGeraete', TextType::class, array(
+                        'required'=>false
+                    ))
+            )
+
+            ->add('besatzung', CollectionType::class, array(
                 'entry_type' => BesetzungsType::class,
                 'allow_add'    => true,
-            ));*/
+            ))
+
             ->add('submit', SubmitType::class, array('attr' => array('class'=>'bigredbutton')));
     }
 

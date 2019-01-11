@@ -51,15 +51,6 @@ class EditTätigkeit extends AbstractType
                         // renders it as a single text box
                         'widget' => 'single_text',
                     ))
-                    ->add('lagebeimEintreffen', TextareaType::class, array(
-                        'required'=>false
-                    ))
-                    ->add('beschreibung', TextareaType::class, array(
-                        'required'=>false
-                    ))
-                    ->add('eingesetzteGeraete', TextType::class, array(
-                        'required'=>false
-                    ))
             )
 
 
@@ -71,6 +62,20 @@ class EditTätigkeit extends AbstractType
                     ->add('plz', NumberType::class)
                     ->add('ort', TextType::class)
                     ->add('photo', FileType::class, array(
+                        'required'=>false
+                    ))
+            )
+
+            // ZUSÄTZLICHES
+            ->add(
+                $builder->create('zusatz', FormType::class, array('inherit_data' => true, 'attr' => ['class' => 'zusatz'], 'label' => 'Zusätzliche Details'))
+                    /*->add('lagebeimEintreffen', TextareaType::class, array(
+                       'required'=>false
+                   ))*/
+                    ->add('beschreibung', TextareaType::class, array('label'=>'Tätigkeitsbeschreibung',
+                        'required'=>false
+                    ))
+                    ->add('eingesetzteGeraete', TextType::class, array(
                         'required'=>false
                     ))
             )
