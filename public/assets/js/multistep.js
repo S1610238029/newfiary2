@@ -34,7 +34,28 @@ $(document).ready(function() {
     var collectionHolder = $('div#createEntry_besatzung');
     collectionHolder.append(newLinkLi);
 
+
+    $('div#createEntry_besatzung>div').append('<a href="#" class="remove-tag custom-button">Entfernen</a>');
+
+    if($('div#createEntry_besatzung div div div select option[value=""]').is("[selected]")){
+    console.log("JA");
+        console.log($(this).parent());
+        $(this).parent().parent().parent().remove();
+    }
+
+    $('.remove-tag').click(function(e) {
+        e.preventDefault();
+
+        $(this).parent().remove();
+
+        return false;
+    });
+
+
+
     collectionHolder.data('index', collectionHolder.find(':input').length);
+
+
 
     addTagLink.on('click', function(e) {
         // prevent the link from creating a "#" on the URL

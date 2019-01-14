@@ -39,15 +39,18 @@ class BesetzungsType extends AbstractType
         $builder
             ->add('idlogbuchLogbuch', HiddenType::class, array())
             ->add('idfahrzeugFahrzeug', EntityType::class, array(
+                'placeholder'=> 'Wähle ein Fahrzeug...',
                 'class' => Fahrzeug::class,
                 'choice_label' => 'fahrzeugart'
             ))
 
                 ->add('idmitgliederMitglieder', EntityType::class, array(
+                    'placeholder'=> 'Wähle ein Mitglied..',
                     'class' => Mitglieder::class,
                     'choice_label' => 'uniqueName'
                 ))
                 ->add('rolle', EntityType::class, array(
+                    'placeholder'=> 'Welche Rolle..',
                     'class' => Rolle::class,
                     'choice_label' => 'rollenname'
                 ))
