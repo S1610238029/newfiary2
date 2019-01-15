@@ -429,8 +429,6 @@ class PageController extends Controller //AbstracController
                 return $this->redirectToRoute('entries');
             }
 
-
-
             /*if ($form->isSubmitted() && $form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $eintrag = $form->getData();
@@ -440,7 +438,6 @@ class PageController extends Controller //AbstracController
 
                 return $this->redirectToRoute('entries');
             }*/
-
 
             return $this->render('new_entry/editEntry.html.twig', [
                 'kategorie' => $kategorie,
@@ -470,6 +467,13 @@ class PageController extends Controller //AbstracController
         $brandwache = null;
 
         $techeinsatz = null;
+
+        $besatzung = $this->getDoctrine()->getManager()->getRepository(Fahrzeugbesatzung::class)->findBy(array('idlogbuchLogbuch' => $id));
+        $bForms = null;
+
+        if (!$besatzung) {
+            $besatzung = null;
+        }
 
         if ($kategorie == "Einsatz" ) {
             $unterkategorien = $eintrag->getUnterKategorieOptions_Einsatz3();
@@ -523,6 +527,7 @@ class PageController extends Controller //AbstracController
         $html = $this->renderView('new_entry/saveEntry.html.twig', [
             'title' => "Welcome to our PDF Test",
             'eintrag' => $eintrag,
+            'bForms' => $besatzung,
             'unterkategorie' => $unterkategorie,
             'brandeinsatz' => $brandeinsatz,
             'brandwache' => $brandwache,

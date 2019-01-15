@@ -283,6 +283,50 @@
                 <p>{{ eintrag.bericht }}</p>
             {% endif %}
 
+            {% if bForms %}
+                <h2>Besatzung</h2>
+            {% endif %}
+            {% for form in bForms %}
+                <table style="width: 100%;">
+                    {% if form.idfahrzeugFahrzeug %}
+                        <tr>
+                            <th>Fahrzeug</th>
+                            <td>{{ form.idfahrzeugFahrzeug }} </td>
+                        </tr>
+                    {% endif %}
+
+                    {% if form.idmitgliederMitglieder %}
+                        <tr>
+                            <th>Mitglied</th>
+                            <td>{{ form.idmitgliederMitglieder }} </td>
+                        </tr>
+                    {% endif %}
+
+                    {% if form.rolle %}
+                        <tr>
+                            <th>Rolle</th>
+                            <td>{{ form.rolle }} </td>
+                        </tr>
+                    {% endif %}
+
+                    {% if form.atemschutz %}
+                        <tr>
+                            <th>Atemschutz</th>
+                            <td>Ja</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <th>Atemschutz</th>
+                            <td>Nein</td>
+                        </tr>
+                    {% endif %}
+
+                </table>
+                <br>
+            {% endfor %}
+
+
+
         </div>
     </div>
 </div>
