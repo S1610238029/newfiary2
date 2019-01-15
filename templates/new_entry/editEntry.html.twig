@@ -10,12 +10,15 @@
 
     <h1>{{ kategorie }} bearbeiten</h1>
 
-    {{ form(form, {'attr': {'novalidate':'novalidate', id: 'form-id'} }) }}
-
-    {% for bform in besatzungsform %}
-        {{ form(bform, {'attr': {'novalidate':'novalidate', id: 'form-id'} }) }}
+    {% for member in bForms %}
+        {{ form(member, {'attr': {'novalidate':'novalidate' }} ) }}
     {% endfor %}
 
+    {{ form(form, {'attr': {'novalidate':'novalidate', id: 'form-id'} }) }}
+
+
+
+   <!-- <button type="submit" class="bigredbutton">Submit entry</button>-->
 
 {% endblock %}
 

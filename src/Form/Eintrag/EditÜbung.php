@@ -25,7 +25,6 @@ class EditÜbung extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder
             ->add('unterkategorie', ChoiceType::class, [
                 'choices' => array_flip(Logbuch::getUnterKategorieOptions_Übung()),

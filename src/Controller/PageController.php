@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Fahrzeugbesatzung;
 use App\Entity\Feed;
 use App\Form\BesetzungsType;
-use App\Form\EditEntryForm;
+use App\Form\Eintrag\EditBesatzung;
 use App\Form\Eintrag\EditEinsatz;
 use App\Form\Eintrag\EditTätigkeit;
 use App\Form\Eintrag\EditÜbung;
@@ -16,7 +17,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Mitglieder;
 use App\Entity\Haus;
 use App\Entity\Logbuch;
-use App\FormBesetzungsType;
 
 // Include Dompdf required namespaces
 use Dompdf\Dompdf;
@@ -261,21 +261,22 @@ class PageController extends Controller //AbstracController
         $unterkategorie = $eintrag->getUnterkategorie();
         $besatzungsForm = null;
 
-        if ($eintrag) {
+        $em = $this->getDoctrine()->getManager();
+        $besatzung = $em->getRepository(Fahrzeugbesatzung::class)->findBy(array('idlogbuchLogbuch' => $id));
+        $bForms = null;
 
-            if ($eintrag->hasBesatzung()) {
-                print('true');
-                $besatzung = $eintrag->getBesatzung();
-                foreach ($besatzung as $val) {
-                    $besatzungsForm = $this->createForm(BesetzungsType::class, $val);
-                }
-            } else {
+        if ($eintrag) {
+            if (!$besatzung) {
                 print('false');
-                $besatzung = $eintrag->getBesatzung();
+            } else {
+                print('true');
                 foreach ($besatzung as $val) {
-                    $besatzungsForm = $this->createForm(BesetzungsType::class, $val);
+                    $besatzungsForm[] = $this->createForm(EditBesatzung::class, $val);
+                    $bForms[] = $this->createForm(EditBesatzung::class, $val)->createView();
                 }
+                //$besatzungsForm = $this->createForm(BesetzungsType::class, $bObject);
             }
+
             if ($kategorie == "Einsatz" ) {
                 $form = $this->createForm(EditEinsatz::class, $eintrag);
             } else if ($kategorie == "Übung") {
@@ -284,23 +285,80 @@ class PageController extends Controller //AbstracController
                 $form = $this->createForm(EditTätigkeit::class, $eintrag);
             }
 
-            $form->handleRequest($request);
+            //$form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
+            if ($request->isMethod('POST')) {
+                $em = $this->getDoctrine()->getManager();
+                $repository =  $em->getRepository(Fahrzeugbesatzung::class);
+
+                $form->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $eintrag = $form->getData();
+                    $em->persist($eintrag);
+                    $em->flush();
+                }
+
+                foreach($besatzungsForm as $bform) {
+                    $bform->handleRequest($request);
+
+                    if ($bform->isSubmitted() && $bform->isValid()) {
+                        $data = $bform->getData();
+                        $atemschutz = $bform->get('atemschutz')->getData();
+                        print($atemschutz .' atemschutz');
+
+                        $em->persist($data);
+                        $em->flush();
+
+                        /* foreach($besatzung as $member) {
+                        $bid = $member->getIdfahrzeugbesatzung();
+                        $rolle = $bform->get('rolle')->getData();
+                        print($bid);
+                        $fahrzeugId = $request->request->get('idfahrzeugFahrzeug');
+                        $mitgliederId = $bform->get('idmitgliederMitglieder')->getData();
+                        $atemschutz = $bform->get('atemschutz')->getData();
+                        print($fahrzeugId .' fahrzeug');
+                        print($atemschutz .' atemschutz');
+                        $qb = $repository->createQueryBuilder('fb');
+                        $q = $qb->update()
+                            ->set('fb.rolle', '?1')
+                            ->set('fb.idfahrzeugFahrzeug', '?2')
+                            ->set('fb.idmitgliederMitglieder', '?3')
+                            ->set('fb.atemschutz', '?4')
+                            ->where('fb.idfahrzeugbesatzung = ?5')
+                            ->setParameter(1, $rolle)
+                            ->setParameter(2, $fahrzeugId)
+                            ->setParameter(3, $mitgliederId)
+                            ->setParameter(4, $atemschutz)
+                            ->setParameter(5, $bid)
+                            ->getQuery()
+                            ->execute();
+                        print('update');
+                    }*/
+                    }
+                }
+
+                //debug_to_console( "Test" );
+                return $this->redirectToRoute('entries');
+            }
+
+
+
+            /*if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
                 $eintrag = $form->getData();
 
-                $em = $this->getDoctrine()->getManager();
                 $em->persist($eintrag);
                 $em->flush();
 
                 return $this->redirectToRoute('entries');
-            }
+            }*/
+
 
             return $this->render('new_entry/editEntry.html.twig', [
                 'kategorie' => $kategorie,
                 'unterkategorie' => $unterkategorie,
                 'form' => $form->createView(),
-                'besatzungsform' => $besatzungsForm
+                'bForms' => $bForms
             ]);
 
         }
