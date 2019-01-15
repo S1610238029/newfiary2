@@ -37,26 +37,18 @@
 
 <script>
 
-    /*$(window).on('load', function() {
-        $('li.nav-item').click(function () {
-            $('li.nav-item').removeClass('active');
-            $(this).addClass('active');
-        });
-    });*/
-
-
     $(window).on('load', function() {
-        $("li.nav-item").click(function(){
+
+        $navitem =  $("li.nav-item");
+        $navitem.click(function(){
             localStorage.setItem("clicked", $(this).attr("id"));
         });
         var active = localStorage.getItem("clicked") || "home";//<default
-        $("li.nav-item").each(function(){
+        $navitem.each(function(){
             $("this").removeClass("active");
         });
         $("#"+active).addClass("active");
     });
-
-
     
 </script>
 
