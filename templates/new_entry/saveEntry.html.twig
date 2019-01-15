@@ -41,7 +41,31 @@
         margin-bottom: 0;
         padding-bottom: 0;
     }
+
+    .streifen {
+        width: auto;
+        height: 0.3%;
+        background-color: rgb(141, 4, 3);
+        overflow:auto;
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+
+    #fiaryimage {
+        background-image: url("../../public/assets/img/logo.png");
+        height: auto;
+        width: auto;
+    }
+
+    #fiaryheading {
+        text-align: center;
+    }
+
 </style>
+
+<div id="fiaryimage"></div>
+<h1 id="fiaryheading">FIARY</h1>
+<div class="streifen"></div>
 
 <div class="container">
     <div class="row">
@@ -73,6 +97,8 @@
                 <span> {{ eintrag.uebungsleiter }} </span>
             {% endif %}
 
+            <div class="streifen"></div>
+
             <h2>Zeitliche Details</h2>
 
             <table style="width: 100%;">
@@ -98,6 +124,8 @@
                 {% endif %}
             </table>
 
+            <div class="streifen"></div>
+
             <h2>Örtliche Details</h2>
             <p>
                 {% if eintrag.strasse %}{{ eintrag.strasse }}{% endif %}
@@ -106,6 +134,7 @@
                 {% if eintrag.ort %}{{ eintrag.ort }}{% endif %}
             </p>
 
+            <div class="streifen"></div>
 
             <h2>Weitere Details</h2>
             {% if eintrag.lagebeimEintreffen %} <h4>Lage beim Eintreffen</h4><p>{{ eintrag.lagebeimEintreffen }}</p> {% endif %}
@@ -206,6 +235,7 @@
                 </table>
             {% endif %}
 
+            <div class="streifen"></div>
 
             {% if wetter or anwesend or eintrag.betriebsmittel %}
                 <h2>Zusätzliche Informationen</h2>
