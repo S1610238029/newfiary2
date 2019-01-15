@@ -65,6 +65,12 @@ class Fahrzeugbesatzung
         return $this->idfahrzeugbesatzung;
     }
 
+    public function setIdfahrzeugbesatzung(?int $idfahrzeugbesatzung): ?int
+    {
+        $this->idfahrzeugbesatzung = $idfahrzeugbesatzung;
+        return $this->idfahrzeugbesatzung;
+    }
+
     public function getIdlogbuchLogbuch(): ?Logbuch
     {
         return $this->idlogbuchLogbuch;

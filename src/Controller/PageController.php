@@ -388,14 +388,15 @@ class PageController extends Controller //AbstracController
 
                 foreach($besatzungsForm as $bform) {
                     $bform->handleRequest($request);
-
-                    if ($bform->isSubmitted() && $bform->isValid()) {
+                    if ($bform->get('submit')->isClicked() && $bform->isValid()) {
                         $data = $bform->getData();
                         $atemschutz = $bform->get('atemschutz')->getData();
                         print($atemschutz .' atemschutz');
 
                         $em->persist($data);
                         $em->flush();
+
+                        $bform = null;
 
                         /* foreach($besatzung as $member) {
                         $bid = $member->getIdfahrzeugbesatzung();

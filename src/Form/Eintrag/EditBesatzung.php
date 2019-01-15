@@ -22,6 +22,8 @@ class EditBesatzung extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            //->add('idlogbuchLogbuch', HiddenType::class, array())
+            //->add('idfahrzeugbesatzung', HiddenType::class, array())
             ->add('idfahrzeugFahrzeug', EntityType::class, array(
                 'placeholder'=> 'Wähle ein Fahrzeug...',
                 'class' => Fahrzeug::class,
