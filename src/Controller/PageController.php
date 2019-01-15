@@ -67,11 +67,52 @@ class PageController extends Controller //AbstracController
             ->getResult();
 
 
+        // Aktuelle Monatsstatistik:
+        $month=date('M');
+        $monthnumber=date('m', strtotime('month'));
+        $firstDayofMonth=date('Y') . '-' . $monthnumber . '-01';
+        $lastDayofMonth=date('Y') . '-' . $monthnumber . '-31';
+        $year=date('Y');
+
+        $einsätze_month=$repository->createQueryBuilder('fc')
+            ->andWhere('fc.kategorie = :kategorie and (fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
+            ->setParameter('kategorie', 'einsatz')
+            ->setParameter('enddatum', $lastDayofMonth)
+            ->setParameter('startdatum', $firstDayofMonth)
+            ->select('COUNT(fc.idlogbuch) as einsaetze_month')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $tätigkeiten_month=$repository->createQueryBuilder('fc')
+            ->andWhere('fc.kategorie = :kategorie and (fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
+            ->setParameter('kategorie', 'tätigkeit')
+            ->setParameter('enddatum', $lastDayofMonth)
+            ->setParameter('startdatum', $firstDayofMonth)
+            ->select('COUNT(fc.idlogbuch) as taetigkeiten_month')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $übungen_month=$repository->createQueryBuilder('fc')
+            ->andWhere('fc.kategorie = :kategorie and (fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
+            ->setParameter('kategorie', 'übung')
+            ->setParameter('enddatum', $lastDayofMonth)
+            ->setParameter('startdatum', $firstDayofMonth)
+            ->select('COUNT(fc.idlogbuch) as uebung_month')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+
+
 
         // replace this example code with whatever you need
         return $this->render('homepage/index.html.twig', [
             'entry' => $ultimateFeed,
             'eintraege'=> $eintraege,
+            'month'=>$month,
+            'einsaetze_month'=>$einsätze_month,
+            'taetigkeiten_month'=>$tätigkeiten_month,
+            'uebungen_month'=>$übungen_month,
+            'year'=>$year,
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
     }
@@ -100,8 +141,13 @@ class PageController extends Controller //AbstracController
         $lastDayofYear=date('Y') . '-12-31';
         $firstDayofYear=date('Y') . '-01-01';
         $year=date('Y');
+        $month=date('M');
+        $monthnumber=date('m', strtotime('month'));
         $lastDayofYearBefore=date('Y')-1 . '-12-31';
         $firstDayofYearBefore=date('Y')-1 . '-01-01';
+
+        $firstDayofMonth=date('Y') . '-' . $monthnumber . '-01';
+        $lastDayofMonth=date('Y') . '-' . $monthnumber . '-31';
 
         $einsätze=$repository->createQueryBuilder('fc')
          ->andWhere('fc.kategorie = :kategorie and (fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
@@ -177,7 +223,44 @@ class PageController extends Controller //AbstracController
             ->getQuery()
             ->getSingleScalarResult();
 
+        $gesamt_last=$repository->createQueryBuilder('fc')
+            ->andWhere('(fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
+            ->setParameter('enddatum', $lastDayofYearBefore)
+            ->setParameter('startdatum', $firstDayofYearBefore)
+            ->select('COUNT(fc.idlogbuch) as gesamt_last')
+            ->getQuery()
+            ->getSingleScalarResult();
 
+        $einsätze_month=$repository->createQueryBuilder('fc')
+            ->andWhere('fc.kategorie = :kategorie and (fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
+            ->setParameter('kategorie', 'einsatz')
+            ->setParameter('enddatum', $lastDayofMonth)
+            ->setParameter('startdatum', $firstDayofMonth)
+            ->select('COUNT(fc.idlogbuch) as einsaetze_month')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $tätigkeiten_month=$repository->createQueryBuilder('fc')
+            ->andWhere('fc.kategorie = :kategorie and (fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
+            ->setParameter('kategorie', 'tätigkeit')
+            ->setParameter('enddatum', $lastDayofMonth)
+            ->setParameter('startdatum', $firstDayofMonth)
+            ->select('COUNT(fc.idlogbuch) as taetigkeiten_month')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $übungen_month=$repository->createQueryBuilder('fc')
+            ->andWhere('fc.kategorie = :kategorie and (fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
+            ->setParameter('kategorie', 'übung')
+            ->setParameter('enddatum', $lastDayofMonth)
+            ->setParameter('startdatum', $firstDayofMonth)
+            ->select('COUNT(fc.idlogbuch) as uebung_month')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+
+
+        /*
         if($einsätze>0){
             $brandeinsatz=$brandeinsatz/$einsätze*100;
             $technischer=$technischer/$einsätze*100;
@@ -186,7 +269,7 @@ class PageController extends Controller //AbstracController
             $brandeinsatz=0;
             $technischer=0;
             $brandsicherheitswache=0;
-        }
+        }*/
 
         return $this->render('pages/statistiken.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
@@ -200,6 +283,11 @@ class PageController extends Controller //AbstracController
             'brandeinsatz'=>$brandeinsatz,
             'technischer'=>$technischer,
             'brandsicherheitswache'=>$brandsicherheitswache,
+            'month'=>$month,
+            'gesamt_last'=>$gesamt_last,
+            'einsaetze_month'=>$einsätze_month,
+            'taetigkeiten_month'=>$tätigkeiten_month,
+            'uebungen_month'=>$übungen_month,
 
         ]);
     }

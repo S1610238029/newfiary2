@@ -509,19 +509,23 @@ ul {
 }
 
 .projectFactsWrap .item:nth-child(1){
-    background: rgb(187, 98, 214);
+    /*background: rgb(187, 98, 214); */
+    background: rgb(176, 59, 63)
 }
 
 .projectFactsWrap .item:nth-child(2){
-    background: rgb(223, 82, 100);
+    /*background: rgb(223, 82, 100);*/
+    background: rgb(223, 96, 97);
 }
 
 .projectFactsWrap .item:nth-child(3){
-    background: rgb(255, 154, 153);
+    /*background: rgb(255, 154, 153);*/
+    background: rgb(159, 32, 41);
 }
 
 .projectFactsWrap .item:nth-child(4){
-    background: rgb(241, 140, 85);
+    /*background: rgb(241, 140, 85);*/
+    background: rgb(109, 11, 16);
 }
 
 .projectFactsWrap .item p.number{
