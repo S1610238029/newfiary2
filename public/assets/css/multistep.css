@@ -523,15 +523,8 @@ div#createEntry_besatzung li{
 
 /* Responsive */
 
-@media screen and (min-width: 601px) and (max-width: 900px) {
-    /*Progressbar*/
-    .craue_formflow_steplist {
-        margin: 17% auto 5% auto;
-        /*CSS counters to number the steps*/
-        counter-reset: step;
-        word-break: break-all;
+@media screen and (min-width: 651px) and (max-width: 700px) {
 
-    }
     .craue_formflow_steplist li {
         margin-bottom: 20px;
         list-style-type: none;
@@ -541,68 +534,89 @@ div#createEntry_besatzung li{
         float: left;
         position: relative;
         font-size: 0.6em;
-        word-break: break-all;
+        word-wrap: break-word;
+        padding-left: 3%;
     }
-
-    li.craue_formflow_current_step {
-        overflow: hidden;
-        text-overflow: clip;
-    }
-
-    .craue_formflow_steplist li>a{
-        text-decoration:none;
-        color: white;
-    }
-
-    .craue_formflow_steplist li:before {
-        content: counter(step);
-        counter-increment: step;
-        width: 20px;
-        line-height: 20px;
-        display: block;
-        font-size: 10px;
-        color: #333;
-        background: white;
-        border-radius: 3px;
-        margin: 0 auto 5px auto;
-    }
-    /*progressbar connectors*/
-    .craue_formflow_steplist li:after {
-        content: '';
-        width: 100%;
-        height: 2px;
-        background: #fff;
-        position: absolute;
-        left: -50%;
-        top: 9px;
-        z-index:-1; /*put it behind the numbers*/
-    }
-    .craue_formflow_steplist li:first-child:after {
-        /*connector not needed before the first step*/
-        content: none;
-    }
-    /*marking active/completed steps green*/
-    /*The number of the step and the connector before it = green*/
-    .craue_formflow_steplist li.craue_formflow_current_step:before,  .craue_formflow_steplist li.craue_formflow_current_step:after, .craue_formflow_steplist li.craue_formflow_done_step:before{
-        background: var(--red);
-        color: white;
-    }
-
-    .craue_formflow_steplist li.craue_formflow_done_step:after{
-        background-color:var(--red);
-    }
-
 
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (min-width: 601px) and (max-width: 1000px) {
+
+    #form-id fieldset{
+        background:#fff;
+        border:0 none;
+        border-radius:3px;
+        width: 100%;
+        margin-left: auto;
+    }
+
+    .container {
+        width: 100%;
+        margin: auto;
+        padding: 0;
+    }
+
+    #page-content-wrapper {
+        width: 100%;
+        margin: auto;
+        padding: 0;
+    }
+
     /*Progressbar*/
     .craue_formflow_steplist {
         margin: 17% auto 5% auto;
         /*CSS counters to number the steps*/
         counter-reset: step;
-        font-size: 0;
+        word-break: break-all;
+
     }
+
+    .craue_formflow_steplist li {
+        margin-bottom: 20px;
+        list-style-type: none;
+        color: white;
+        text-transform: uppercase;
+        width: 20%;
+        float: left;
+        position: relative;
+        font-size: 0.6em;
+        word-wrap: break-word;
+        padding-left: 3%;
+    }
+}
+
+
+@media screen and (max-width: 650px) {
+
+    /* Fieldset */
+
+    #form-id {
+        width: 94%;
+        margin: 50px auto;
+        text-align: center;
+        position: relative;
+    }
+
+    #form-id fieldset{
+        background:#fff;
+        border:0 none;
+        border-radius:3px;
+        width: 100%;
+        margin-left: auto;
+    }
+
+    .container {
+        width: 100%;
+        margin: auto;
+        padding: 0;
+    }
+
+    #page-content-wrapper {
+        width: 100%;
+        margin: auto;
+        padding: 0;
+    }
+
     .craue_formflow_steplist li {
         margin-bottom: 20px;
         list-style-type: none;
@@ -614,53 +628,6 @@ div#createEntry_besatzung li{
         font-size: 0;
     }
 
-    li.craue_formflow_current_step {
-        overflow: hidden;
-        text-overflow: clip;
-    }
 
-    .craue_formflow_steplist li>a{
-        text-decoration:none;
-        color: white;
-    }
-
-    .craue_formflow_steplist li:before {
-        content: counter(step);
-        counter-increment: step;
-        width: 20px;
-        line-height: 20px;
-        display: block;
-        font-size: 10px;
-        color: #333;
-        background: white;
-        border-radius: 3px;
-        margin: 0 auto 5px auto;
-    }
-    /*progressbar connectors*/
-    .craue_formflow_steplist li:after {
-        content: '';
-        width: 100%;
-        height: 2px;
-        background: #fff;
-        position: absolute;
-        left: -50%;
-        top: 9px;
-        z-index:-1; /*put it behind the numbers*/
-    }
-    .craue_formflow_steplist li:first-child:after {
-        /*connector not needed before the first step*/
-        content: none;
-    }
-    /*marking active/completed steps green*/
-    /*The number of the step and the connector before it = green*/
-    .craue_formflow_steplist li.craue_formflow_current_step:before,  .craue_formflow_steplist li.craue_formflow_current_step:after, .craue_formflow_steplist li.craue_formflow_done_step:before{
-        background: var(--red);
-        color: white;
-    }
-
-    .craue_formflow_steplist li.craue_formflow_done_step:after{
-        background-color:var(--red);
-    }
 
 }
-

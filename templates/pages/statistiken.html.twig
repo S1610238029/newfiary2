@@ -104,59 +104,6 @@
 
     <h1>Statistiken</h1>
 
-    <!-- Neuer Versuch für mehr Staistiken - PieCharts -->
-    <!-- Verwendeter Codepen: -->
-    <!--https://codepen.io/MaciejCaputa/pen/VjVpRZ -->
-    <!-- https://codepen.io/MaciejCaputa/pen/VjVpRZ -->
-
-    <div class="wrapper">
-        <div class="pie-charts">
-            <div class="pieID--micro-skills pie-chart--wrapper">
-                <h2>Bisherige Ausfahrten</h2>
-                <div class="pie-chart">
-                    <div class="pie-chart__pie"></div>
-                    <ul class="pie-chart__legend">
-                        <li><em>Einsätze</em><span>{{ einsaetze|number_format }}</span></li>
-                        <li><em>Übungen</em><span>{{ uebungen|number_format }}</span></li>
-                        <li><em>Tätigkeiten</em><span>{{ taetigkeiten|number_format }}</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="pieID--categories pie-chart--wrapper">
-                <h2>Gesamte Einsätze pro Jahr</h2>
-                <div class="pie-chart">
-                    <div class="pie-chart__pie"></div>
-                    <ul class="pie-chart__legend">
-                        <li><em>{{ lastyear-1 }}</em><span>20</span></li>
-                        <li><em>{{ lastyear }}</em><span>{{ einsaetze_last|number_format }}</span></li>
-                        <li><em>{{ year }}</em><span>{{ einsaetze|number_format }}</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="pieID--operations pie-chart--wrapper">
-                <h2>Hier können noch mehr Infos hin</h2>
-                <div class="pie-chart">
-                    <div class="pie-chart__pie"></div>
-                    <ul class="pie-chart__legend">
-                        <li><em>Part A</em><span>20</span></li>
-                        <li><em>Part B</em><span>40</span></li>
-                        <li><em>Part C</em><span>10</span></li>
-                        <li><em>Part D</em><span>20</span></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-    <br>
-    <hr>
-    <br>
-
-    <!--
-https://dribbble.com/shots/2227352-Day-067-Smart-Home-UI/attachments/414148
--->
-
     <!-- https://codepen.io/anthonykoch/pen/GpQYrJ -->
 
     <div id="wrapper2">
@@ -167,74 +114,124 @@ https://dribbble.com/shots/2227352-Day-067-Smart-Home-UI/attachments/414148
                         Ausfahrten Insgesamt:
                     </p>
                 </div>
-                <h1 class="consumption">{{ gesamt }} Reportings!</h1>
+                <h1 class="consumption">{{ gesamt }} Ausfahrten!</h1>
                 <svg id="visualisation" width="600" height="100"></svg>
 
-                <p class="title">Einsatzarten</p>
-                <div class="bar-chart">
-
-                    <div class="progress progress--vertical">
-                        <p class="progress__caption">---</p>
-                        <div class="progress__fill" style="height: {{ brandeinsatz }}%"></div>
-
-                    </div>
-                    <p style="text-align:center;">Brandeinsätze</p>
-
-                    <div class="progress progress--vertical">
-                        <div class="progress__fill" style="height: {{ technischer }}%"></div>
-                        <p class="progress__caption">---</p>
-
-                    </div>
-                    <p style="text-align:center;">Technische Einsätze</p>
-
-                    <div class="progress progress--vertical">
-                        <div class="progress__fill" style="height: {{ brandsicherheitswache }}%"></div>
-                        <p class="progress__caption">---</p>
-
-                    </div>
-                    <p style="text-align:center;">Brandsicherheitswachen</p>
-
-
-                </div>
-
-
-                <div class="flex flex--justify-between" style="padding-top:100px;">
-
-                    <div class="numbers">
-                        <h2 class="einsatz__count" style="color:var(--red);">{{ einsaetze|number_format }}</h2>
-                        <p>Einsätze</p>
-                    </div>
-                    <div class="numbers">
-                        <h2 class="einsatz__count" style="color:var(--red);">{{ uebungen|number_format }}</h2>
-                        <p>Übungen</p>
-                    </div>
-                    <div class="numbers">
-                        <h2 class="einsatz__count" style="color:var(--red);">{{ taetigkeiten|number_format }}</h2>
-                        <p>Tätigkeiten</p>
-                    </div>
-                </div>
             </div>
 
             <div class="flex-1">
                 <ul class="einsatz__list">
                     <li class="einsatz__item  einsatz__total">
-                        <h2 class="einsatz__count">{{ einsaetze_last|number_format }}</h2>
-                        <p class="einsatz__description">Einsätze {{ year-1 }}</p>
+                        <h2 class="einsatz__count">{{ gesamt_last|number_format }}</h2>
+                        <p class="einsatz__description">Ausfahrten {{ year-1 }}</p>
                     </li>
 
                     <li class="einsatz__item  einsatz__active">
 
-                        <h2 class="einsatz__count">{{ einsaetze|number_format }}</h2>
+                        <h2 class="einsatz__count">{{ gesamt }}</h2>
 
-                        <p class="einsatz__description">Einsätze {{ year }}</p>
+                        <p class="einsatz__description">Ausfahrten {{ year }}</p>
                     </li>
                 </ul>
             </div>
             <!-- /.right-column -->
 
-                </div>
-                <!-- /.statistics -->
+        </div>
+        <!-- /.statistics -->
     </div>
+
+    <!-- Neuer Versuch für mehr Staistiken - PieCharts -->
+    <!-- Verwendeter Codepen: -->
+    <!--https://codepen.io/MaciejCaputa/pen/VjVpRZ -->
+    <!-- https://codepen.io/MaciejCaputa/pen/VjVpRZ -->
+
+    <div class="wrapper">
+        <div class="pie-charts">
+            <div class="pieID--micro-skills pie-chart--wrapper">
+                <h2>Ausfahrtsarten</h2>
+                <div class="pie-chart">
+                    <div class="pie-chart__pie"></div>
+                    <ul class="pie-chart__legend">
+                        <li><em>Einsätze</em><span>{{ einsaetze|number_format }}</span></li>
+                        <li><em>Übungen</em><span>{{ uebungen|number_format }}</span></li>
+                        <li><em>Tätigkeiten</em><span>{{ taetigkeiten|number_format }}</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pieID--categories pie-chart--wrapper">
+                <h2>Einsatzarten</h2>
+                <div class="pie-chart">
+                    <div class="pie-chart__pie"></div>
+                    <ul class="pie-chart__legend">
+                        <li><em>Brandeinsatz</em><span>{{ brandeinsatz }}</span></li>
+                        <li><em>Brandsicherheitswache</em><span>{{ brandsicherheitswache }} </span></li>
+                        <li><em>Technischer Einsatz</em><span>{{ technischer }} </span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pieID--operations pie-chart--wrapper">
+                <h2>Tätigkeiten pro Jahr</h2>
+                <div class="pie-chart">
+                    <div class="pie-chart__pie"></div>
+                    <ul class="pie-chart__legend">
+                        <li><em>{{ lastyear-1 }}</em><span>15</span></li>
+                        <li><em>{{ lastyear }}</em><span>5</span></li>
+                        <li><em>{{ year }}</em><span>{{ taetigkeiten|number_format }}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <!-- Statistiken Part 3 -->
+    <!-- https://codepen.io/jakubtursky/pen/vEwZop -->
+
+    <div id="projectFacts" class="sectionClass">
+        <div class="fullWidth eight columns">
+
+            <h2 id="stat3heading">{{ month }} {{ year }}</h2>
+
+            <div class="projectFactsWrap ">
+                <div class="item wow fadeInUpBig animated animated" data-number="12" style="visibility: visible;">
+                    <i class="fa fa-briefcase"></i>
+                    <p id="number1" class="number">12</p>
+                    <span></span>
+                    <p>Gesamtstundenanzahl</p>
+                </div>
+                <div class="item wow fadeInUpBig animated animated" data-number="55" style="visibility: visible;">
+                    <i class="fa fa-smile-o"></i>
+                    <p id="number2" class="number">{{ einsaetze_month }}</p>
+                    <span></span>
+                    <p>Einsätze</p>
+                </div>
+                <div class="item wow fadeInUpBig animated animated" data-number="359" style="visibility: visible;">
+                    <i class="fa fa-coffee"></i>
+                    <p id="number3" class="number">{{ taetigkeiten_month }}</p>
+                    <span></span>
+                    <p>Tätigkeiten</p>
+                </div>
+                <div class="item wow fadeInUpBig animated animated" data-number="246" style="visibility: visible;">
+                    <i class="fa fa-camera"></i>
+                    <p id="number4" class="number">{{ uebungen_month }}</p>
+                    <span></span>
+                    <p>Übungen</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <br>
+    <hr>
+    <br>
+
+    <!--
+https://dribbble.com/shots/2227352-Day-067-Smart-Home-UI/attachments/414148
+-->
+
+
 
 
 
