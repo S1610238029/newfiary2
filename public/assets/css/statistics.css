@@ -308,7 +308,7 @@ ul {
 
 .statistics {
     background-color: white;
-    box-shadow: 0 20px 70px 4px rgba(0, 0, 0, 0.15);
+    border: black;
     display: flex;
     -webkit-transform: translate(-20px, -20px);
     transform: translate(-20px, -20px);
