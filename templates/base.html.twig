@@ -10,12 +10,21 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
 
 </head>
+
+<style>
+    .active {
+        box-shadow: inset 6px 0 0 #6d0b10, inset 6px 0 0 #222;
+        background: #444;
+    }
+</style>
 
 <script>
     function closeNav(){
@@ -24,6 +33,31 @@
         document.getElementById("arrow").classList.toggle("active");
         console.log("toggle");
     }
+</script>
+
+<script>
+
+    /*$(window).on('load', function() {
+        $('li.nav-item').click(function () {
+            $('li.nav-item').removeClass('active');
+            $(this).addClass('active');
+        });
+    });*/
+
+
+    $(window).on('load', function() {
+        $("li.nav-item").click(function(){
+            localStorage.setItem("clicked", $(this).attr("id"));
+        });
+        var active = localStorage.getItem("clicked") || "home";//<default
+        $("li.nav-item").each(function(){
+            $("this").removeClass("active");
+        });
+        $("#"+active).addClass("active");
+    });
+
+
+    
 </script>
 
 <div class='thetop' id="toppoint"></div>
@@ -54,44 +88,44 @@
 
         <ul class="list-unstyled components">
             {% if is_granted('ROLE_ADMIN') %}
-            <li class="nav-item">
+            <li class="nav-item" id="user_entry">
                 <a class="nav-link" href="{{ path('dashboard') }}">
-                    <i><img src="{{  asset('assets/img/key.svg') }}" alt="home symbol"></i>
+                    <i><img src="{{  asset('assets/img/key.svg') }}" alt="user verwalten symbol"></i>
                     <span class="link-content">User verwalten</span>
                 </a>
             </li>
             {% endif %}
-            <li class="active nav-item">
+            <li class="nav-item" id="home_entry">
                 <a class="nav-link" href="{{ path('homepage') }}">
                     <i><img src="{{  asset('assets/img/home_big.svg') }}" alt="home symbol"></i>
                     <span  class="link-content">Home</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="statistik_entry">
                 <a class="nav-link" href="{{ path('statistics') }}">
-                    <i><img src="{{  asset('assets/img/stats.svg') }}" alt="home symbol"></i>
+                    <i><img src="{{  asset('assets/img/stats.svg') }}" alt="statistik symbol"></i>
                     <span class="link-content">Statistiken</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="entry_entry">
                 <a class="nav-link" href="{{ path('entries') }}">
                     <i><img src="{{  asset('assets/img/entries.svg') }}" alt="entries symbol"></i>
                     <span class="link-content">Einträge</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="info_entry">
                 <a class="nav-link" href="{{ path('infos') }}">
                     <i><img src="{{  asset('assets/img/info.svg') }}" alt="entries symbol"></i>
                     <span class="link-content">Info & Downloads</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="news_entry">
                 <a class="nav-link" href="{{ path('blackboard') }}">
                     <i><img src="{{  asset('assets/img/bookmark.svg') }}" alt="entries symbol"></i>
                     <span class="link-content">News</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="support_entry">
                 <a class="nav-link" href="{{ path('support') }}">
                     <i><img src="{{  asset('assets/img/settings.svg') }}" alt="entries symbol"></i>
                     <span class="link-content">Support</span>
