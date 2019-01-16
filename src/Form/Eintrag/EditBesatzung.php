@@ -30,7 +30,7 @@ class EditBesatzung extends AbstractType
                 'placeholder'=> 'Wähle ein Fahrzeug...',
                 'class' => Fahrzeug::class,
                 'choice_label' => 'fahrzeugart',
-                'label'=> 'Fahrzeug'
+                'label'=> 'Fahrzeug',
             ))
             ->add('idmitgliederMitglieder', EntityType::class, array(
                 'placeholder'=> 'Wähle ein Mitglied..',

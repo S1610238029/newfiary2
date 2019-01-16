@@ -19,8 +19,14 @@ $(document).ready(function() {
 
         // add a new tag form (see code block below)
         addTagForm(collectionHolder, newLinkLi);
+        addBesatzung(this);
     });
 });
+
+function addBesatzung(el) {
+    // form hinzufügen
+}
+
 
 function addTagForm(collectionHolder, newLinkLi) {
     console.log("AddTAgForm");
@@ -37,18 +43,10 @@ function addTagForm(collectionHolder, newLinkLi) {
     // increase the index with one for the next item
     collectionHolder.data('index', index + 1);
 
-    collectionHolder.data('index', collectionHolder.find(':input').length);
-
-
-
     // Display the form in the page in an li, before the "Add a tag" link li
     var newFormLi = $('<li></li>').append(newForm);
 
-    // also add a remove button, just for this example
-    newFormLi.append('<a href="#" class="remove-tag custom-button">Entfernen</a>');
-
     newLinkLi.before(newFormLi);
-
 }
 
 function toggleVisibility(select) {
