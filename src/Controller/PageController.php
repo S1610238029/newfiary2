@@ -32,21 +32,15 @@ class PageController extends Controller //AbstracController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $allFeeds =  $em->getRepository(Feed::class)->findAll();
-        $allDates = [];
-        foreach($allFeeds as $feed) {
-            $allDates[] = $feed->getDate();
-        }
-
-        usort($allDates, function($a, $b) {
-            return strtotime($a) - strtotime($b);
-        });
-
-        foreach($allFeeds as $feed) {
-            if ($feed->getDate() == $allDates[0]){
-                $ultimateFeed = $feed;
-            }
-        }
+        $repository = $em->getRepository(Feed::class);
+        $allDates = $repository->createQueryBuilder('fd')
+            ->select('fd.idfeed, fd.title, fd.feed, fd.date')
+            ->orderBy('fd.date', 'DESC')
+            ->setMaxResults(7)
+            ->getQuery()
+            ->getResult();
+        
+        $ultimateFeed = $allDates[0];
 
         //erzeuge die letzten EINTRÄGE
 
@@ -358,10 +352,14 @@ class PageController extends Controller //AbstracController
                 print('false');
             } else {
                 print('true');
-                foreach ($besatzung as $val) {
-                    $besatzungsForm[] = $this->createForm(EditBesatzung::class, $val);
-                    $bForms[] = $this->createForm(EditBesatzung::class, $val)->createView();
+                for ($i = 0; $i<sizeof($besatzung); $i++){
+                    $besatzungsForm[$i] = $this->createForm(EditBesatzung::class, $besatzung[$i]);
+                    $bForms[$i] = $besatzungsForm[$i]->createView();
                 }
+                /*foreach ($besatzung as $val) {
+                    $besatzungsForm[] = $this->createForm(EditBesatzung::class, $val);
+                    $bForms[] = $besatzungsForm->createView();
+                }*/
                 //$besatzungsForm = $this->createForm(BesetzungsType::class, $bObject);
             }
 
@@ -386,44 +384,47 @@ class PageController extends Controller //AbstracController
                     $em->flush();
                 }
 
+                $member = null;
+                $count = 0;
                 foreach($besatzungsForm as $bform) {
                     $bform->handleRequest($request);
-                    if ($bform->get('submit')->isClicked() && $bform->isValid()) {
-                        $data = $bform->getData();
-                        $atemschutz = $bform->get('atemschutz')->getData();
-                        print($atemschutz .' atemschutz');
+                    $count++;
+                    if ($bform->get('submit' .$count)->isClicked() && $bform->isValid()) {
 
+                        echo $count;
+                        $data = $bform->getData();
                         $em->persist($data);
                         $em->flush();
 
-                        $bform = null;
 
-                        /* foreach($besatzung as $member) {
-                        $bid = $member->getIdfahrzeugbesatzung();
-                        $rolle = $bform->get('rolle')->getData();
-                        print($bid);
-                        $fahrzeugId = $request->request->get('idfahrzeugFahrzeug');
-                        $mitgliederId = $bform->get('idmitgliederMitglieder')->getData();
-                        $atemschutz = $bform->get('atemschutz')->getData();
-                        print($fahrzeugId .' fahrzeug');
-                        print($atemschutz .' atemschutz');
-                        $qb = $repository->createQueryBuilder('fb');
-                        $q = $qb->update()
-                            ->set('fb.rolle', '?1')
-                            ->set('fb.idfahrzeugFahrzeug', '?2')
-                            ->set('fb.idmitgliederMitglieder', '?3')
-                            ->set('fb.atemschutz', '?4')
-                            ->where('fb.idfahrzeugbesatzung = ?5')
-                            ->setParameter(1, $rolle)
-                            ->setParameter(2, $fahrzeugId)
-                            ->setParameter(3, $mitgliederId)
-                            ->setParameter(4, $atemschutz)
-                            ->setParameter(5, $bid)
-                            ->getQuery()
-                            ->execute();
-                        print('update');
-                    }*/
+
+                        /*foreach($besatzung as $member) {
+                            $bid = $member->getIdfahrzeugbesatzung();
+                            $rolle = $bform->get('rolle')->getData();
+                            print($bid);
+                            $fahrzeugId = $bform->get('idfahrzeugFahrzeug')->getData();
+                            $mitgliederId = $bform->get('idmitgliederMitglieder')->getData();
+                            $atemschutz = $bform->get('atemschutz')->getData();
+                            print($fahrzeugId .' fahrzeug');
+                            print($atemschutz .' atemschutz');
+                            $qb = $repository->createQueryBuilder('fb');
+                            $q = $qb->update()
+                                ->set('fb.rolle', '?1')
+                                ->set('fb.idfahrzeugFahrzeug', '?2')
+                                ->set('fb.idmitgliederMitglieder', '?3')
+                                ->set('fb.atemschutz', '?4')
+                                ->where('fb.idfahrzeugbesatzung = ?5 and fb.idfahrzeugbesatzung = ?3')
+                                ->setParameter(1, $rolle)
+                                ->setParameter(2, $fahrzeugId)
+                                ->setParameter(3, $mitgliederId)
+                                ->setParameter(4, $atemschutz)
+                                ->setParameter(5, $bid)
+                                ->getQuery()
+                                ->execute();
+                            print('update');
+                        }*/
                     }
+                    $bform = null;
                 }
 
                 //debug_to_console( "Test" );

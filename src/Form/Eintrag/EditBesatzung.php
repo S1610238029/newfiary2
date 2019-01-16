@@ -19,6 +19,8 @@ use App\Entity\Fahrzeugbesatzung;
 class EditBesatzung extends AbstractType
 {
 
+    protected $count = 1;
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -29,23 +31,25 @@ class EditBesatzung extends AbstractType
                 'class' => Fahrzeug::class,
                 'choice_label' => 'fahrzeugart'
             ))
-
-                ->add('idmitgliederMitglieder', EntityType::class, array(
-                    'placeholder'=> 'Wähle ein Mitglied..',
-                    'class' => Mitglieder::class,
-                    'choice_label' => 'uniqueName'
-                ))
-                ->add('rolle', EntityType::class, array(
-                    'placeholder'=> 'Welche Rolle..',
-                    'class' => Rolle::class,
-                    'choice_label' => 'rollenname'
-                ))
-                ->add('atemschutz', CheckboxType::class, [
-                    'label' => 'Atemschutzeinsatz',
-                    'required' => false,
-                ])
-        ->add('submit', SubmitType::class, array('attr' => array('class'=>'bigredbutton')));
+            ->add('idmitgliederMitglieder', EntityType::class, array(
+                'placeholder'=> 'Wähle ein Mitglied..',
+                'class' => Mitglieder::class,
+                'choice_label' => 'uniqueName'
+            ))
+            ->add('rolle', EntityType::class, array(
+                'placeholder'=> 'Welche Rolle..',
+                'class' => Rolle::class,
+                'choice_label' => 'rollenname'
+            ))
+            ->add('atemschutz', CheckboxType::class, [
+                'label' => 'Atemschutzeinsatz',
+                'required' => false,
+            ])
+            ->add('submit' . $this->count, SubmitType::class, ['label'=> 'Submit', 'attr' => array(
+                'class'=>'bigredbutton') ])
+            ->getForm();
         ;
+        $this->count++;
     }
 
     public function configureOptions(OptionsResolver $resolver)

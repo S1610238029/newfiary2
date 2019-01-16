@@ -85,7 +85,7 @@ class Fahrzeugbesatzung
         return $this;
     }
 
-    public function getIdfahrzeugFahrzeug(): ?Fahrzeug
+    public function getidfahrzeugFahrzeug(): ?Fahrzeug
     {
         return $this->idfahrzeugFahrzeug;
     }

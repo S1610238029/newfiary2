@@ -87,7 +87,7 @@
         <div class="blog-card">
             <div class="description">
                 <h2>{{ entry.title }}</h2>
-                <h3>Beitrag erstellt am: {{ entry.date }}</h3>
+                <h3>Beitrag erstellt am: {{ entry.date|date('d.m.Y') }}</h3>
                 <p>{{ entry.feed }}</p><br>
             </div>
         </div>
