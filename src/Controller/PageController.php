@@ -39,7 +39,7 @@ class PageController extends Controller //AbstracController
             ->setMaxResults(7)
             ->getQuery()
             ->getResult();
-        
+
         $ultimateFeed = $allDates[0];
 
         //erzeuge die letzten EINTRÄGE
@@ -348,10 +348,7 @@ class PageController extends Controller //AbstracController
         $bForms = null;
 
         if ($eintrag) {
-            if (!$besatzung) {
-                print('false');
-            } else {
-                print('true');
+            if ($besatzung) {
                 for ($i = 0; $i<sizeof($besatzung); $i++){
                     $besatzungsForm[$i] = $this->createForm(EditBesatzung::class, $besatzung[$i]);
                     $bForms[$i] = $besatzungsForm[$i]->createView();
@@ -391,38 +388,43 @@ class PageController extends Controller //AbstracController
                     $count++;
                     if ($bform->get('submit' .$count)->isClicked() && $bform->isValid()) {
 
-                        echo $count;
                         $data = $bform->getData();
-                        $em->persist($data);
-                        $em->flush();
+                        print_r('id: ' . $bform->get('idfahrzeugbesatzung')->getData());
+                        //print_r($bform->get('rolle')->getData());
+                        /*$em->persist($data);
+                        $em->flush();*/
 
 
 
-                        /*foreach($besatzung as $member) {
-                            $bid = $member->getIdfahrzeugbesatzung();
-                            $rolle = $bform->get('rolle')->getData();
-                            print($bid);
-                            $fahrzeugId = $bform->get('idfahrzeugFahrzeug')->getData();
-                            $mitgliederId = $bform->get('idmitgliederMitglieder')->getData();
-                            $atemschutz = $bform->get('atemschutz')->getData();
-                            print($fahrzeugId .' fahrzeug');
-                            print($atemschutz .' atemschutz');
-                            $qb = $repository->createQueryBuilder('fb');
-                            $q = $qb->update()
-                                ->set('fb.rolle', '?1')
-                                ->set('fb.idfahrzeugFahrzeug', '?2')
-                                ->set('fb.idmitgliederMitglieder', '?3')
-                                ->set('fb.atemschutz', '?4')
-                                ->where('fb.idfahrzeugbesatzung = ?5 and fb.idfahrzeugbesatzung = ?3')
-                                ->setParameter(1, $rolle)
-                                ->setParameter(2, $fahrzeugId)
-                                ->setParameter(3, $mitgliederId)
-                                ->setParameter(4, $atemschutz)
-                                ->setParameter(5, $bid)
-                                ->getQuery()
-                                ->execute();
-                            print('update');
-                        }*/
+                        foreach($besatzung as $member) {
+                            print('___ID:___' .$member->getIdfahrzeugbesatzung() );
+                            if ($member->getIdfahrzeugbesatzung() == $bform->get('idfahrzeugbesatzung')->getData()){
+                                print('YAAAY');
+                                $bid = $bform->get('idfahrzeugbesatzung')->getData();
+                                $rolle = $bform->get('rolle')->getData();
+                                print($bid);
+                                $fahrzeugId = $bform->get('idfahrzeugFahrzeug')->getData();
+                                $mitgliederId = $bform->get('idmitgliederMitglieder')->getData();
+                                $atemschutz = $bform->get('atemschutz')->getData();
+                                print($fahrzeugId ." fahrzeug <br>");
+                                print($mitgliederId .' member <br>');
+                                print($atemschutz .' atemschutz <br>');
+                                $qb = $repository->createQueryBuilder('fb');
+                                $q = $qb->update()
+                                    ->set('fb.rolle', '?1')
+                                    ->set('fb.idfahrzeugFahrzeug', '?2')
+                                    ->set('fb.idmitgliederMitglieder', '?3')
+                                    ->set('fb.atemschutz', '?4')
+                                    ->where('fb.idfahrzeugbesatzung = ?5')
+                                    ->setParameter(1, $rolle)
+                                    ->setParameter(2, $fahrzeugId)
+                                    ->setParameter(3, $mitgliederId)
+                                    ->setParameter(4, $atemschutz)
+                                    ->setParameter(5, $bid)
+                                    ->getQuery()
+                                    ->execute();
+                            }
+                        }
                     }
                     $bform = null;
                 }

@@ -25,7 +25,7 @@ class EditBesatzung extends AbstractType
     {
         $builder
             //->add('idlogbuchLogbuch', HiddenType::class, array())
-            //->add('idfahrzeugbesatzung', HiddenType::class, array())
+            ->add('idfahrzeugbesatzung', HiddenType::class, array())
             ->add('idfahrzeugFahrzeug', EntityType::class, array(
                 'placeholder'=> 'Wähle ein Fahrzeug...',
                 'class' => Fahrzeug::class,
