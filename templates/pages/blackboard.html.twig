@@ -119,9 +119,9 @@
 
                 {%  for entry in feeds %}
 
-                    {% if loop.first %}
+                {% if loop.last %}
 
-                        <div class="firstelement">
+                    <div class="firstelement">
                         <div class="row">
                             <div class="blog-card" id="test">
                                 <div class="description">
@@ -151,13 +151,20 @@
                                 </div>
                             </div>
                         </div>
-                            <hr><br>
-                        </div>
+                        <hr><br>
+                    </div>
 
-                    {% endif %}
+                {% endif %}
 
+                {% endfor %}
 
-                {% if not loop.first %}
+            </div>
+
+            <div class="row" id="feed-wrapper">
+
+                {%  for entry in feeds %}
+
+                {% if not loop.last %}
 
                         <div class="col-sm-6" id="zindex">
                         <div class="blog-card" id="test">
@@ -192,7 +199,6 @@
                         </div>
 
                 {% endif %}
-
 
                 {% endfor %}
 
