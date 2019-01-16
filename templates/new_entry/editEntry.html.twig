@@ -11,11 +11,17 @@
     <h1>{{ kategorie }} bearbeiten</h1>
 
 
+
+    {% if bForms %}
+        <label class="label">Besatzung</label>
+    {% endif %}
     <div id="createEntry_besatzung">
+
         {% for member in bForms %}
-            {{ form(member, {'attr': {'novalidate':'novalidate' }} ) }}
+            {{ form(member, {'attr': {'novalidate':'novalidate', class: 'besatzung_form' }} ) }}
         {% endfor %}
     </div>
+
 
 
     {{ form(form, {'attr': {'novalidate':'novalidate', id: 'form-id'} }) }}

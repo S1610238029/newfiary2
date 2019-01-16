@@ -387,28 +387,13 @@ class PageController extends Controller //AbstracController
                     $bform->handleRequest($request);
                     $count++;
                     if ($bform->get('submit' .$count)->isClicked() && $bform->isValid()) {
-
-                        $data = $bform->getData();
-                        print_r('id: ' . $bform->get('idfahrzeugbesatzung')->getData());
-                        //print_r($bform->get('rolle')->getData());
-                        /*$em->persist($data);
-                        $em->flush();*/
-
-
-
                         foreach($besatzung as $member) {
-                            print('___ID:___' .$member->getIdfahrzeugbesatzung() );
                             if ($member->getIdfahrzeugbesatzung() == $bform->get('idfahrzeugbesatzung')->getData()){
-                                print('YAAAY');
                                 $bid = $bform->get('idfahrzeugbesatzung')->getData();
                                 $rolle = $bform->get('rolle')->getData();
-                                print($bid);
                                 $fahrzeugId = $bform->get('idfahrzeugFahrzeug')->getData();
                                 $mitgliederId = $bform->get('idmitgliederMitglieder')->getData();
                                 $atemschutz = $bform->get('atemschutz')->getData();
-                                print($fahrzeugId ." fahrzeug <br>");
-                                print($mitgliederId .' member <br>');
-                                print($atemschutz .' atemschutz <br>');
                                 $qb = $repository->createQueryBuilder('fb');
                                 $q = $qb->update()
                                     ->set('fb.rolle', '?1')
@@ -425,12 +410,40 @@ class PageController extends Controller //AbstracController
                                     ->execute();
                             }
                         }
+                    } else if ($bform->get('delete' .$count)->isClicked() && $bform->isValid()) {
+                        foreach($besatzung as $member) {
+                            if ($member->getIdfahrzeugbesatzung() == $bform->get('idfahrzeugbesatzung')->getData()){
+                                $em->remove($member);
+                                $em->flush();
+
+                                /*$bid = $bform->get('idfahrzeugbesatzung')->getData();
+                                $rolle = $bform->get('rolle')->getData();
+                                $fahrzeugId = $bform->get('idfahrzeugFahrzeug')->getData();
+                                $mitgliederId = $bform->get('idmitgliederMitglieder')->getData();
+                                $atemschutz = $bform->get('atemschutz')->getData();
+                                $qb = $repository->createQueryBuilder('fb');
+                                $q = $qb->update()
+                                    ->set('fb.rolle', '?1')
+                                    ->set('fb.idfahrzeugFahrzeug', '?2')
+                                    ->set('fb.idmitgliederMitglieder', '?3')
+                                    ->set('fb.atemschutz', '?4')
+                                    ->where('fb.idfahrzeugbesatzung = ?5')
+                                    ->setParameter(1, $rolle)
+                                    ->setParameter(2, $fahrzeugId)
+                                    ->setParameter(3, $mitgliederId)
+                                    ->setParameter(4, $atemschutz)
+                                    ->setParameter(5, $bid)
+                                    ->getQuery()
+                                    ->execute();*/
+                            }
+                        }
                     }
-                    $bform = null;
                 }
 
                 //debug_to_console( "Test" );
-                return $this->redirectToRoute('entries');
+                //return $this->redirectToRoute('entries');
+                print($request->attributes->get('_route'));
+                return $this->redirectToRoute('entries_edit', ['id' => $id]);
             }
 
             /*if ($form->isSubmitted() && $form->isValid()) {

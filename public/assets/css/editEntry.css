@@ -45,7 +45,7 @@ body{
     display:none;
 }
 
-#form-id input:not([type='checkbox']):not([type='radio']), .home-button, #form-id button, .colorButton{
+#form-id input:not([type='checkbox']):not([type='radio']), .home-button, #form-id button, .colorButton, select {
     border:1px solid #ccc;
     border-radius:3px;
     padding:15px;
@@ -209,17 +209,45 @@ text-decoration:none;
     margin-bottom: 10px;
 }
 
-#form-id #createEntry  > div > label {
+#form-id #createEntry  > div > label, .label {
     font-size: 1rem !important;
     font-weight: 600;
     font-variant-caps: normal;
+    color: var(--red);
 }
 
-#form-id .brand, #form-id .ort, #form-id .zeit,  #form-id .brandsicherheitswache {
+#form-id .brand, #form-id .ort, #form-id .zeit,  #form-id .brandsicherheitswache, #createEntry_besatzung {
     display: flex;
     -webkit-flex-flow: row wrap;
     justify-content: space-around;
 }
+
+#createEntry_besatzung > .besatzung_form {
+    flex: 33%;
+    padding: 10px;
+}
+
+.besatzung_form .besatzungbutton {
+    background-color: var(--red);
+    color: #FFF;
+    width: 50%;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+}
+
+.besatzung_form .besatzungbutton:hover{
+    background: #c10612;
+    cursor: pointer;
+    color: #FFF;
+    text-decoration: none;
+}
+
+
 
 #form-id .brand > div, #form-id .ort > div, #form-id .zeit > div, #form-id .brandsicherheitswache > div {
     flex: 50%;
@@ -231,7 +259,7 @@ text-decoration:none;
 }
 
 @media (max-width: 550px) {
-    #form-id .brand > div, #form-id .ort > div, #form-id .zeit > div, #form-id .brandsicherheitswache > div{
+    #form-id .brand > div, #form-id .ort > div, #form-id .zeit > div, #form-id .brandsicherheitswache > div, #createEntry_besatzung > .besatzung_form{
         flex: 100%;
     }
 }

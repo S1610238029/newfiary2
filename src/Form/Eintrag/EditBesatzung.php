@@ -29,12 +29,14 @@ class EditBesatzung extends AbstractType
             ->add('idfahrzeugFahrzeug', EntityType::class, array(
                 'placeholder'=> 'Wähle ein Fahrzeug...',
                 'class' => Fahrzeug::class,
-                'choice_label' => 'fahrzeugart'
+                'choice_label' => 'fahrzeugart',
+                'label'=> 'Fahrzeug'
             ))
             ->add('idmitgliederMitglieder', EntityType::class, array(
                 'placeholder'=> 'Wähle ein Mitglied..',
                 'class' => Mitglieder::class,
-                'choice_label' => 'uniqueName'
+                'choice_label' => 'uniqueName',
+                'label'=> 'Mitglied'
             ))
             ->add('rolle', EntityType::class, array(
                 'placeholder'=> 'Welche Rolle..',
@@ -45,8 +47,10 @@ class EditBesatzung extends AbstractType
                 'label' => 'Atemschutzeinsatz',
                 'required' => false,
             ])
-            ->add('submit' . $this->count, SubmitType::class, ['label'=> 'Submit', 'attr' => array(
-                'class'=>'bigredbutton') ])
+            ->add('submit' . $this->count, SubmitType::class, ['label'=> 'Bestätigen', 'attr' => array(
+                'class'=>'besatzungbutton') ])
+            ->add('delete' . $this->count, SubmitType::class, ['label'=> 'x', 'attr' => array(
+                'class'=>'besatzungbutton') ])
             ->getForm();
         ;
         $this->count++;
