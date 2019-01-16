@@ -18,8 +18,8 @@
         }
 
         #fiaryimage {
-            width: 7%;
-            height: 7%;
+            width: 11%;
+            height: 11%;
             margin: 2% auto -2% auto;
         }
 
@@ -35,11 +35,19 @@
             }
         }
 
+        #eintraghinzu {
+            margin: auto;
+        }
+
     </style>
 
     <div id="fiaryimage">
         <img src="{{  asset('assets/img/logo.png') }}" alt="logo homepage">
     </div>
+
+    <hr>
+
+    <a href="{{ path('newcraueentry') }}" id="eintraghinzu" class="bigredbutton">Neuen Ausfahrts-Eintrag hinzufügen!</a>
 
     <hr>
 
@@ -49,32 +57,30 @@
     <div id="projectFacts" class="sectionClass">
         <div class="fullWidth eight columns">
 
-            <h3 id="stat3heading">Aktuelle Daten - {{ month }} {{ year }}</h3>
-
             <div class="projectFactsWrap ">
                 <div class="item wow fadeInUpBig animated animated" data-number="12" style="visibility: visible;">
                     <i class="fa fa-briefcase"></i>
                     <p id="number1" class="number">12</p>
                     <span></span>
-                    <p>Gesamtstunden</p>
+                    <p>Gesamtstunden<br>{{ month }} {{ year }}</p>
                 </div>
                 <div class="item wow fadeInUpBig animated animated" data-number="55" style="visibility: visible;">
                     <i class="fa fa-smile-o"></i>
                     <p id="number2" class="number">{{ einsaetze_month }}</p>
                     <span></span>
-                    <p>Einsätze</p>
+                    <p>Einsätze<br>{{ month }} {{ year }}</p>
                 </div>
                 <div class="item wow fadeInUpBig animated animated" data-number="359" style="visibility: visible;">
                     <i class="fa fa-coffee"></i>
                     <p id="number3" class="number">{{ taetigkeiten_month }}</p>
                     <span></span>
-                    <p>Tätigkeiten</p>
+                    <p>Tätigkeiten<br>{{ month }} {{ year }}</p>
                 </div>
                 <div class="item wow fadeInUpBig animated animated" data-number="246" style="visibility: visible;">
                     <i class="fa fa-camera"></i>
                     <p id="number4" class="number">{{ uebungen_month }}</p>
                     <span></span>
-                    <p>Übungen</p>
+                    <p>Übungen<br>{{ month }} {{ year }}</p>
                 </div>
             </div>
         </div>
@@ -82,7 +88,6 @@
 
     <hr><br>
 
-    <h2>Letzter Newspost</h2>
     <div id="firstentry">
         <div class="blog-card">
             <div class="description">
@@ -92,10 +97,6 @@
             </div>
         </div>
     </div>
-
-    
-    <a href="{{ path('newcraueentry') }}" id="eintraghinzu" class="bigredbutton">Eintrag hinzufügen</a>
-
 
     <br><hr><br>
 
