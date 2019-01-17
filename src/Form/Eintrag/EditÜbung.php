@@ -86,7 +86,7 @@ class EditÜbung extends AbstractType
                 'allow_add'    => true,
             ))*/
 
-            ->add('submit', SubmitType::class, array('attr' => array('class'=>'bigredbutton')));
+            ->add('submit', SubmitType::class, array('attr' => array('class'=>'submit bigredbutton')));
     }
 
     public function getBlockPrefix() {

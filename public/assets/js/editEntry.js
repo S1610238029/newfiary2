@@ -1,5 +1,21 @@
 $(document).ready(function() {
 
+    $('#saveForm').click(function(e) {
+       e.preventDefault();
+       console.log('save');
+
+       var allButtons = $("button.submit");
+       var allForms = $("form");
+       console.log(allButtons);
+        console.log(allForms);
+       for (var i = 0; i < allButtons.length; i++) {
+           //allButtons[i].click();
+           allForms[i].submit();
+           console.log('click');
+       }
+
+    });
+
     var collectionHolder = $('div#createEntry_besatzung');
     var newLinkLi = $('<li style="list-style-type:none;"></li>');
 

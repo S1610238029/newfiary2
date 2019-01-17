@@ -84,7 +84,7 @@ class EditTätigkeit extends AbstractType
                 'entry_type' => BesetzungsType::class,
                 'allow_add'    => true,
             ));*/
-            ->add('submit', SubmitType::class, array('attr' => array('class'=>'bigredbutton')));
+            ->add('submit', SubmitType::class, array('attr' => array('class'=>'submit bigredbutton')));
 
 
 
