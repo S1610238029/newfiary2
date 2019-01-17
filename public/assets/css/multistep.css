@@ -520,6 +520,10 @@ div#createEntry_besatzung li{
 
 }
 
+div#createEntry_besatzung>div{
+    margin-bottom:30px;
+}
+
 
 /* Responsive */
 

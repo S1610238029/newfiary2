@@ -38,6 +38,13 @@ class CreateEntryFlow extends FormFlow implements EventSubscriberInterface
             $formData = $event->getFormData();
             $besatzung=new Fahrzeugbesatzung();
             $formData->addBesatzung($besatzung);
+            $array = $formData->getBesatzung();
+            foreach ($array as $key => $value){
+                if($value->getIdmitgliederMitglieder() == NULL){
+                    $formData->removeBesatzung($array[$key]);
+                }
+                /*printf($value->getIdmitgliederMitglieder());*/
+            }
 
         }
     }

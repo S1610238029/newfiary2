@@ -24,7 +24,7 @@ var errorP='<p class="errors">Pflichtfeld darf nicht leer sein!</p>';
 
 
 
-var addTagLink = $('<a href="#" class="add_tag_link">Füge ein Besatzungsmitglied hinzu</a>');
+var addTagLink = $('<a href="#" class=" custom-button add_tag_link">Füge ein Besatzungsmitglied hinzu</a>');
 var newLinkLi = $('<li style="list-style-type:none;"></li>').append(addTagLink);
 
     /* Abbrechen */
@@ -35,9 +35,17 @@ $(document).ready(function() {
     collectionHolder.append(newLinkLi);
 
 
-    $('div#createEntry_besatzung>div').append('<a href="#" class="remove-tag custom-button">Entfernen</a>');
+    $('div#createEntry_besatzung>div').append('<a href="#" class="remove-tag delete custom-button">Entfernen</a>');
 
-    if($('div#createEntry_besatzung div div div select option[value=""]').is("[selected]")){
+    $('.remove-tag').click(function(e) {
+        e.preventDefault();
+
+        $(this).parent().remove();
+
+        return false;
+    });
+
+   /* if($('div#createEntry_besatzung div div div select option[value=""]').is("[selected]")){
     console.log("JA");
         console.log($(this).parent());
         $(this).parent().parent().parent().remove();
@@ -49,7 +57,7 @@ $(document).ready(function() {
         $(this).parent().remove();
 
         return false;
-    });
+    });*/
 
 
 

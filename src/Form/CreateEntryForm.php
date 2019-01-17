@@ -190,6 +190,7 @@ class CreateEntryForm extends AbstractType
 
                 $builder->add('besatzung', CollectionType::class, array(
                     'entry_type' => BesetzungsType::class,
+                    'entry_options' => ['label' => false],
                     'allow_add'    => true,
                 ));
                 break;
