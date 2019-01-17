@@ -203,7 +203,7 @@ class EditEinsatz extends AbstractType
            ));*/
 
 
-            ->add('submit', SubmitType::class, array('attr' => array('class'=>'bigredbutton')));
+            ->add('submit', SubmitType::class, array('attr' => array('class'=>'submit bigredbutton')));
     }
 
     public function getBlockPrefix() {

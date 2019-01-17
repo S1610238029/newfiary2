@@ -48,7 +48,7 @@ class EditBesatzung extends AbstractType
                 'required' => false,
             ])
             ->add('submit' . $this->count, SubmitType::class, ['label'=> 'Bestätigen', 'attr' => array(
-                'class'=>'besatzungbutton') ])
+                'class'=>'submit besatzungbutton') ])
             ->add('delete' . $this->count, SubmitType::class, ['label'=> 'x', 'attr' => array(
                 'class'=>'besatzungbutton') ])
             ->getForm();

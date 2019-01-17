@@ -371,6 +371,8 @@ class PageController extends Controller //AbstracController
             //$form->handleRequest($request);
 
             if ($request->isMethod('POST')) {
+                print('POST');
+
                 $em = $this->getDoctrine()->getManager();
                 $repository =  $em->getRepository(Fahrzeugbesatzung::class);
 
@@ -379,6 +381,7 @@ class PageController extends Controller //AbstracController
                     $eintrag = $form->getData();
                     $em->persist($eintrag);
                     $em->flush();
+                    return $this->redirectToRoute('entries');
                 }
 
                 $member = null;
@@ -389,6 +392,7 @@ class PageController extends Controller //AbstracController
                     if ($bform->get('submit' .$count)->isClicked() && $bform->isValid()) {
                         foreach($besatzung as $member) {
                             if ($member->getIdfahrzeugbesatzung() == $bform->get('idfahrzeugbesatzung')->getData()){
+                                print('update');
                                 $bid = $bform->get('idfahrzeugbesatzung')->getData();
                                 $rolle = $bform->get('rolle')->getData();
                                 $fahrzeugId = $bform->get('idfahrzeugFahrzeug')->getData();
@@ -412,49 +416,17 @@ class PageController extends Controller //AbstracController
                         }
                     } else if ($bform->get('delete' .$count)->isClicked() && $bform->isValid()) {
                         foreach($besatzung as $member) {
-                            if ($member->getIdfahrzeugbesatzung() == $bform->get('idfahrzeugbesatzung')->getData()){
+                            if ($member->getIdfahrzeugbesatzung() == $bform->get('idfahrzeugbesatzung')->getData() && $member->getIdmitgliederMitglieder() == $bform->get('idmitgliederMitglieder')->getData()){
                                 $em->remove($member);
                                 $em->flush();
-
-                                /*$bid = $bform->get('idfahrzeugbesatzung')->getData();
-                                $rolle = $bform->get('rolle')->getData();
-                                $fahrzeugId = $bform->get('idfahrzeugFahrzeug')->getData();
-                                $mitgliederId = $bform->get('idmitgliederMitglieder')->getData();
-                                $atemschutz = $bform->get('atemschutz')->getData();
-                                $qb = $repository->createQueryBuilder('fb');
-                                $q = $qb->update()
-                                    ->set('fb.rolle', '?1')
-                                    ->set('fb.idfahrzeugFahrzeug', '?2')
-                                    ->set('fb.idmitgliederMitglieder', '?3')
-                                    ->set('fb.atemschutz', '?4')
-                                    ->where('fb.idfahrzeugbesatzung = ?5')
-                                    ->setParameter(1, $rolle)
-                                    ->setParameter(2, $fahrzeugId)
-                                    ->setParameter(3, $mitgliederId)
-                                    ->setParameter(4, $atemschutz)
-                                    ->setParameter(5, $bid)
-                                    ->getQuery()
-                                    ->execute();*/
                             }
                         }
                     }
                 }
 
                 //debug_to_console( "Test" );
-                //return $this->redirectToRoute('entries');
-                print($request->attributes->get('_route'));
                 return $this->redirectToRoute('entries_edit', ['id' => $id]);
             }
-
-            /*if ($form->isSubmitted() && $form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $eintrag = $form->getData();
-
-                $em->persist($eintrag);
-                $em->flush();
-
-                return $this->redirectToRoute('entries');
-            }*/
 
             return $this->render('new_entry/editEntry.html.twig', [
                 'kategorie' => $kategorie,
