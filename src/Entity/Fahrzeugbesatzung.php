@@ -114,7 +114,7 @@ class Fahrzeugbesatzung
         return $this->rolle;
     }
 
-    public function setRolle(Rolle $rolle): self
+    public function setRolle(Rolle $rolle = null): self
     {
         $this->rolle = $rolle;
 
