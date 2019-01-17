@@ -353,11 +353,6 @@ class PageController extends Controller //AbstracController
                     $besatzungsForm[$i] = $this->createForm(EditBesatzung::class, $besatzung[$i]);
                     $bForms[$i] = $besatzungsForm[$i]->createView();
                 }
-                /*foreach ($besatzung as $val) {
-                    $besatzungsForm[] = $this->createForm(EditBesatzung::class, $val);
-                    $bForms[] = $besatzungsForm->createView();
-                }*/
-                //$besatzungsForm = $this->createForm(BesetzungsType::class, $bObject);
             }
 
             if ($kategorie == "Einsatz" ) {
@@ -437,7 +432,7 @@ class PageController extends Controller //AbstracController
 
         }
 
-       return $this->redirectToRoute('entries_edit');
+       //return $this->redirectToRoute('entries_edit');
     }
 
     /**

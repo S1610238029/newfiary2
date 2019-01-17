@@ -3,6 +3,24 @@
 {% block title %}Einträge{% endblock %}
 
 {% block body %}
+    <style>
+        .table-responsive  thead {
+            background-color: rgba(0, 0, 0, 0.85);
+            color: #fff;
+        }
+
+        .table-responsive {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            -ms-overflow-style: -ms-autohiding-scrollbar;
+        }
+
+        .table-responsive .table tr td:nth-child(3) {
+            width: 250px;
+        }
+    </style>
     <h1>Einträge</h1>
 
     <div class="row">
@@ -11,7 +29,7 @@
             <a href="{{ path('newcraueentry') }}" id="eintraghinzu" class="bigredbutton">Eintrag hinzufügen</a><br>
 
             <div class="table-responsive">
-                <table class="fixed_header table display "  style="width:100%">
+                <table class="fixed_header table display " id="example" style="width:100%">
 
                     <thead>
                         <tr>

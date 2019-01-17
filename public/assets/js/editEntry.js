@@ -9,8 +9,8 @@ $(document).ready(function() {
        console.log(allButtons);
         console.log(allForms);
        for (var i = 0; i < allButtons.length; i++) {
-           //allButtons[i].click();
-           allForms[i].submit();
+           allButtons[i].click();
+           //allForms[i].submit();
            console.log('click');
        }
 
