@@ -43,7 +43,7 @@ class CreateEntryFlow extends FormFlow implements EventSubscriberInterface
             $array = $formData->getBesatzung();
 
             foreach ($array as $key => $value){
-                if($value->getIdmitgliederMitglieder() == NULL){
+                if($value->getRolle() == NULL){
                     $formData->removeBesatzung($array[$key]);
                 }
                 /*printf($value->getIdmitgliederMitglieder());*/
