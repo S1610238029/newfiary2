@@ -660,7 +660,7 @@ class PageController extends Controller //AbstracController
                 // print($form->get('dueDate')->getData()->format('Y-m-d H:i:s'));
                 $em = $this->getDoctrine()->getManager();
                 $rep = $this->getDoctrine()->getRepository(Logbuch::class);
-                $allEntries = $rep->findAll();
+               // $allEntries = $rep->findAll();
                 $entries = $em->getRepository(Logbuch::class)->findBy(array('alarmdatum' => $form->get('datum')->getData()));
                 /*foreach ($allEntries as $entry) {
                     print($entry->getAlarmdatum()->format('Y-m-d'));
