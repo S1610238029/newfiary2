@@ -1,3 +1,40 @@
+/*datepicker*/
+
+form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+form div, label {
+    padding-right: 20px;
+    /*flex: 50%;*/
+}
+
+form button {
+    width: 300px;
+}
+
+.datepicker, .form:last-child {
+    display: inline-block;
+}
+
+.datepicker select {
+    padding: 10px 10px;
+}
+
+label {
+    font-weight: bold;
+}
+
+.error {
+    color: var(--red);
+    font-style: italic;
+}
+
+
 #accordion {
     width: 100%;
 }
@@ -98,7 +135,7 @@
 }
 
 /* MITGLIEDER */
-#accordion .biggreybutton {
+.biggreybutton {
     background-color: var(--grey);
     color: #FFF;
     display: block;
@@ -109,7 +146,7 @@
     transition: all 0.5s ease-in-out;
 }
 
-#accordion .biggreybutton:hover {
+.biggreybutton:hover {
     background: rgba(0, 0, 0, 0.9);
     cursor: pointer;
 }
@@ -172,7 +209,7 @@ tr:hover td {
 
 /* Hier müssen die Werte dann noch an das Burgermenü angepasst werden*/
 @media (min-width: 501px) {
-    #accordion #adduser, #accordion .biggreybutton {
+    #accordion #adduser, .biggreybutton {
         font-size: 15px;
     }
 }

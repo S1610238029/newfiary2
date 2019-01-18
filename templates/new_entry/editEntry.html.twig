@@ -17,8 +17,11 @@
     <div id="createEntry_besatzung">
         <div class="row">
             <!--<div id= "hiddenForm" style="display: none;">
-
-
+                {% if sampleForm %}
+                    {{ form_start(sampleForm, {attr: {class: 'col-sm-12 col-md-6'} }) }}
+                    {{ form_widget(sampleForm) }}
+                    {{ form_end(sampleForm) }}
+                {% endif %}
             </div>-->
             {% for member in bForms %}
                 {{ form_start(member, {attr: {class: 'col-sm-12 col-md-6'} }) }}

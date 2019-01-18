@@ -10,6 +10,8 @@ use App\Form\Eintrag\EditBesatzung;
 use App\Form\Eintrag\EditEinsatz;
 use App\Form\Eintrag\EditTätigkeit;
 use App\Form\Eintrag\EditÜbung;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Mitglieder;
 use App\Entity\Haus;
 use App\Entity\Logbuch;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 // Include Dompdf required namespaces
 use Dompdf\Dompdf;
@@ -620,9 +623,76 @@ class PageController extends Controller //AbstracController
         $repo=$this->getDoctrine()->getRepository(Haus::class);
         $häuser = $repo->findAll();
 
+        $defaultData = ['message' => 'Type your message here'];
+        $form = $this->createFormBuilder($defaultData)
+
+            ->add('datum', DateType::class, [
+                'attr' => ['class' => 'datepicker'],
+                'format' => 'yyyy-MM-dd',
+                'placeholder' => [
+                    'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
+                ]])
+             /*  ->add('day', ChoiceType::class, [
+                   'choices'  => range(1,31)
+               ])*/
+
+
+            ->add('submit', SubmitType::class, ['label'=> 'Generieren', 'attr' => array(
+                'class'=>'submit btn biggreybutton') ])
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        $date = null;
+        $entries = null;
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $dateData = $form->get('datum')->getData();
+            if ($dateData != null) {
+                $date = $form->get('datum')->getData()->format('Y-m-d');
+                $year = $form->get('datum')->getData()->format('Y');
+                $month = $form->get('datum')->getData()->format('m');
+                $day = $form->get('datum')->getData()->format('d');
+                /*print($year);
+                print($month);
+                print($day);*/
+                // print($form->get('dueDate')->getData()->format('Y-m-d H:i:s'));
+                $em = $this->getDoctrine()->getManager();
+                $rep = $this->getDoctrine()->getRepository(Logbuch::class);
+                $allEntries = $rep->findAll();
+                $entries = $em->getRepository(Logbuch::class)->findBy(array('alarmdatum' => $form->get('datum')->getData()));
+                /*foreach ($allEntries as $entry) {
+                    print($entry->getAlarmdatum()->format('Y-m-d'));
+                }*/
+            }
+
+        }
+
+
+
+
+
+        /*$repository =  $em->getRepository(Logbuch::class);
+
+        $firstDayofMonth = 1;
+        $lastDayofMonth = 31;
+        $eintraege=$repository->createQueryBuilder('fc')
+            ->andWhere('fc.beginnDatum BETWEEN :startdatum AND :enddatum')
+            ->select('fc.idlogbuch, fc.beginnDatum, fc.beschreibung, fc.kategorie, fc.unterkategorie, fc.strasse, fc.hausnummer, fc.metadata')
+            ->setParameter('enddatum', $lastDayofMonth)
+            ->setParameter('startdatum', $firstDayofMonth)
+            ->orderBy('fc.beginnDatum', 'DESC')
+            ->orderBy('fc.metadata', 'DESC')
+            ->setMaxResults(7)
+            ->getQuery()
+            ->getResult();*/
+
         return $this->render('pages/info.html.twig', [
             'mitglieder' => $mitglieder,
             'haeuser'=>$häuser,
+            'form' => $form->createView(),
+            'eintraege' => $entries
         ]);
     }
 

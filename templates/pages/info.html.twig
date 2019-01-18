@@ -37,7 +37,13 @@
                     <div id="panelBodyOne" class="panel-collapse collapse show in">
                         <div class="panel-body">
                             <div class="panel-content">
-                                <form>
+
+
+                                {{ form_start(form , {'attr': {'novalidate':'novalidate'}} ) }}
+                                    {{ form_row(form.datum) }}
+                                    {{ form_row(form.submit) }}
+                                {{ form_end(form) }}
+                               <!-- <form>
                                     <div class="form-group row">
                                         <label for="example-date-input" class="col-2 col-md-1 col-form-label">Datum</label>
                                         <div class="col-10 col-md-6">
@@ -45,7 +51,27 @@
                                         </div>
                                         <button class="col-8 col-sm-3 col-md-4 offset-md-0 btn biggreybutton">Generieren</button>
                                     </div>
-                                </form>
+                                </form>-->
+
+
+                                    {% if eintraege %}
+                                        <ul>
+                                            {% for eintrag in eintraege %}
+                                                <li>{% if is_granted('ROLE_ADMIN') %}
+                                                    <a href="{{ path('entries_save', {'id':eintrag.idlogbuch} ) }}">
+                                                        <i><img src="{{  asset('assets/img/pdf.svg') }}" alt="delete symbol"></i>
+                                                    </a>
+
+                                                    {% endif %}
+                                                    {% if eintrag.beginnDatum %}{{ eintrag.beginnDatum|date('d.m.Y') }}{% else %}{% endif %}:
+                                                    {% if eintrag.kategorie %}{{ eintrag.kategorie }}{% else %}{% endif %} -
+                                                    {% if eintrag.beschreibung %}{{ eintrag.beschreibung }}{% else %}{% endif %}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% else %}
+                                        <p class="error">Keine Einträge an zu diesem Datum gefunden</p>
+                                    {% endif %}
                                 <ul>
                                     <li>
                                         <a href="#" download>
@@ -226,7 +252,7 @@
                             {% endif %}#}
                             <div class="panel-content">
 
-                                <table class="fixed_header table display" id="häuser"  style="width:100%">
+                                <table class="fixed_header table table-responsive display" id="häuser"  style="width:100%">
 
                                     <thead>
                                     <tr>
