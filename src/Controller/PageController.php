@@ -623,6 +623,8 @@ class PageController extends Controller //AbstracController
         $repo=$this->getDoctrine()->getRepository(Haus::class);
         $häuser = $repo->findAll();
 
+        $repPdf = $this->getDoctrine()->getRepository(Logbuch::class);
+
         $defaultData = ['message' => 'Type your message here'];
         $form = $this->createFormBuilder($defaultData)
 
@@ -642,9 +644,16 @@ class PageController extends Controller //AbstracController
                     'expanded'     => true,
                 ]
             )
-             /*  ->add('day', ChoiceType::class, [
-                   'choices'  => range(1,31)
-               ])*/
+           ->add('kategorie', ChoiceType::class, [
+                    'choices'  => [
+                        'Einsatz' => 'Einsatz',
+                        'Übung' => 'Übung',
+                        'Tätigkeit' => 'Tätigkeit',
+                    ],
+                    'multiple'     => false,
+                    'expanded'     => true,
+                ]
+            )
 
 
             ->add('submit', SubmitType::class, ['label'=> 'Generieren', 'attr' => array(
@@ -668,26 +677,29 @@ class PageController extends Controller //AbstracController
 
 
 
-                $rep = $this->getDoctrine()->getRepository(Logbuch::class);
 
+                $kategorie = $form->get('kategorie')->getData();
+                print($form->get('time')->getData());
                 if ($form->get('time')->getData() == 'Monat') {
                     $firstDayofMonth = $year . '-' . $month . '-01';
                     $lastDayofMonth = $year . '-' . $month . '-31';
-                    $entries = $rep->createQueryBuilder('fc')
-                    ->andWhere('fc.beginnDatum BETWEEN :startdatum AND :enddatum')
-                    ->setParameter('enddatum', $lastDayofMonth)
-                    ->setParameter('startdatum', $firstDayofMonth)
-                    ->select('fc.idlogbuch, fc.kategorie, fc.beschreibung, fc.beginnDatum')
-                    ->orderBy('fc.beginnDatum', 'ASC')
-                    ->getQuery()
-                    ->getResult();
+                    $entries = $repPdf->createQueryBuilder('fc')
+                        ->andWhere('fc.kategorie = :kategorie and (fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
+                        ->setParameter('enddatum', $lastDayofMonth)
+                        ->setParameter('startdatum', $firstDayofMonth)
+                        ->setParameter('kategorie', $kategorie)
+                        ->select('fc.idlogbuch, fc.kategorie, fc.beschreibung, fc.beginnDatum')
+                        ->orderBy('fc.beginnDatum', 'ASC')
+                        ->getQuery()
+                        ->getResult();
                 } else if ($form->get('time')->getData() == 'Jahr') {
                     $firstDayofYear = $year . '-' . '01' . '-01';
                     $lastDayofYear = $year . '-' . '12' . '-31';
-                    $entries = $rep->createQueryBuilder('fc')
-                        ->andWhere('fc.beginnDatum BETWEEN :startdatum AND :enddatum')
+                    $entries = $repPdf->createQueryBuilder('fc')
+                        ->andWhere('fc.kategorie = :kategorie and (fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
                         ->setParameter('enddatum', $lastDayofYear)
                         ->setParameter('startdatum', $firstDayofYear)
+                        ->setParameter('kategorie', $kategorie)
                         ->select('fc.idlogbuch, fc.kategorie, fc.beschreibung, fc.beginnDatum')
                         ->orderBy('fc.beginnDatum', 'ASC')
                         ->getQuery()
@@ -697,27 +709,7 @@ class PageController extends Controller //AbstracController
                     $entries = $em->getRepository(Logbuch::class)->findBy(array('beginnDatum' => $form->get('datum')->getData()));
                 }
             }
-
         }
-
-
-
-
-
-        /*$repository =  $em->getRepository(Logbuch::class);
-
-        $firstDayofMonth = 1;
-        $lastDayofMonth = 31;
-        $eintraege=$repository->createQueryBuilder('fc')
-            ->andWhere('fc.beginnDatum BETWEEN :startdatum AND :enddatum')
-            ->select('fc.idlogbuch, fc.beginnDatum, fc.beschreibung, fc.kategorie, fc.unterkategorie, fc.strasse, fc.hausnummer, fc.metadata')
-            ->setParameter('enddatum', $lastDayofMonth)
-            ->setParameter('startdatum', $firstDayofMonth)
-            ->orderBy('fc.beginnDatum', 'DESC')
-            ->orderBy('fc.metadata', 'DESC')
-            ->setMaxResults(7)
-            ->getQuery()
-            ->getResult();*/
 
         return $this->render('pages/info.html.twig', [
             'mitglieder' => $mitglieder,
