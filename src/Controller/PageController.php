@@ -632,6 +632,16 @@ class PageController extends Controller //AbstracController
                 'placeholder' => [
                     'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
                 ]])
+            ->add('time', ChoiceType::class, [
+                    'choices'  => [
+                        'Standard' => 'Standard',
+                        'Monat' => 'Monat',
+                        'Jahr' => 'Jahr',
+                    ],
+                    'multiple'     => false,
+                    'expanded'     => true,
+                ]
+            )
              /*  ->add('day', ChoiceType::class, [
                    'choices'  => range(1,31)
                ])*/
@@ -654,17 +664,38 @@ class PageController extends Controller //AbstracController
                 $year = $form->get('datum')->getData()->format('Y');
                 $month = $form->get('datum')->getData()->format('m');
                 $day = $form->get('datum')->getData()->format('d');
-                /*print($year);
-                print($month);
-                print($day);*/
                 // print($form->get('dueDate')->getData()->format('Y-m-d H:i:s'));
-                $em = $this->getDoctrine()->getManager();
+
+
+
                 $rep = $this->getDoctrine()->getRepository(Logbuch::class);
-               // $allEntries = $rep->findAll();
-                $entries = $em->getRepository(Logbuch::class)->findBy(array('alarmdatum' => $form->get('datum')->getData()));
-                /*foreach ($allEntries as $entry) {
-                    print($entry->getAlarmdatum()->format('Y-m-d'));
-                }*/
+
+                if ($form->get('time')->getData() == 'Monat') {
+                    $firstDayofMonth = $year . '-' . $month . '-01';
+                    $lastDayofMonth = $year . '-' . $month . '-31';
+                    $entries = $rep->createQueryBuilder('fc')
+                    ->andWhere('fc.beginnDatum BETWEEN :startdatum AND :enddatum')
+                    ->setParameter('enddatum', $lastDayofMonth)
+                    ->setParameter('startdatum', $firstDayofMonth)
+                    ->select('fc.idlogbuch, fc.kategorie, fc.beschreibung, fc.beginnDatum')
+                    ->orderBy('fc.beginnDatum', 'ASC')
+                    ->getQuery()
+                    ->getResult();
+                } else if ($form->get('time')->getData() == 'Jahr') {
+                    $firstDayofYear = $year . '-' . '01' . '-01';
+                    $lastDayofYear = $year . '-' . '12' . '-31';
+                    $entries = $rep->createQueryBuilder('fc')
+                        ->andWhere('fc.beginnDatum BETWEEN :startdatum AND :enddatum')
+                        ->setParameter('enddatum', $lastDayofYear)
+                        ->setParameter('startdatum', $firstDayofYear)
+                        ->select('fc.idlogbuch, fc.kategorie, fc.beschreibung, fc.beginnDatum')
+                        ->orderBy('fc.beginnDatum', 'ASC')
+                        ->getQuery()
+                        ->getResult();
+                } else {
+                    $em = $this->getDoctrine()->getManager();
+                    $entries = $em->getRepository(Logbuch::class)->findBy(array('beginnDatum' => $form->get('datum')->getData()));
+                }
             }
 
         }
