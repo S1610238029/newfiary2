@@ -49,17 +49,22 @@ class EditBesatzung extends AbstractType
             ])
             ->add('submit' . $this->count, SubmitType::class, ['label'=> 'Bestätigen', 'attr' => array(
                 'class'=>'submit besatzungbutton') ])
-            /*->add('delete' . $this->count, SubmitType::class, ['label'=> 'x', 'attr' => array(
-                'class'=>'besatzungbutton') ])*/
+            ->add('delete' . $this->count, SubmitType::class, ['label'=> 'x', 'attr' => array(
+                'class'=>'besatzungbutton') ])
             ->getForm();
         ;
         $this->count++;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+   public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => Fahrzeugbesatzung::class,
         ));
+    }
+
+    public function getBlockPrefix()
+    {
+        return "edit_besatzung" . $this->count;
     }
 }

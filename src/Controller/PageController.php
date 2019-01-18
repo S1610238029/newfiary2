@@ -374,55 +374,57 @@ class PageController extends Controller //AbstracController
                 $em = $this->getDoctrine()->getManager();
                 $repository =  $em->getRepository(Fahrzeugbesatzung::class);
 
-                $form->handleRequest($request);
-
-                if ($form->isSubmitted() && $form->isValid()) {
-                    $eintrag = $form->getData();
-                    $em->persist($eintrag);
-                    $em->flush();
-                    print('submit big form');
-
-                    //return $this->redirectToRoute('entries_edit', ['id' => $id]);
-                    // return $this->redirectToRoute('entries');
-                }
-
                 $count = 0;
                 if ($besatzungsForm) {
                     foreach ($besatzungsForm as $bform) {
+
+                        //$bform->submit($request->request->get($bform->getName()));
                         $bform->handleRequest($request);
                         $count++;
                         print($count);
-                        if ($bform->isSubmitted() && $bform->isValid()) {
+
+                        //if ($bform->isSubmitted() && $bform->isValid()) {
                         //if ($bform->get('submit' .$count)->isClicked() && $bform->isValid()) {
-                            print('clickBesatzung');
                             foreach ($besatzung as $member) {
-                                if ($member->getIdmitgliederMitglieder() == $bform->get('idmitgliederMitglieder')->getData()) {
-                                    if ($member->getIdfahrzeugbesatzung() == $bform->get('idfahrzeugbesatzung')->getData()) {
-                                        print('small ');
-                                        $bid = $bform->get('idfahrzeugbesatzung')->getData();
-                                        $rolle = $bform->get('rolle')->getData();
-                                        $fahrzeugId = $bform->get('idfahrzeugFahrzeug')->getData();
-                                        $mitgliederId = $bform->get('idmitgliederMitglieder')->getData();
-                                        $atemschutz = $bform->get('atemschutz')->getData();
-                                        $qb = $repository->createQueryBuilder('fb');
-                                        $q = $qb->update()
-                                            ->set('fb.rolle', '?1')
-                                            ->set('fb.idfahrzeugFahrzeug', '?2')
-                                            ->set('fb.idmitgliederMitglieder', '?3')
-                                            ->set('fb.atemschutz', '?4')
-                                            ->where('fb.idfahrzeugbesatzung = ?5')
-                                            ->setParameter(1, $rolle)
-                                            ->setParameter(2, $fahrzeugId)
-                                            ->setParameter(3, $mitgliederId)
-                                            ->setParameter(4, $atemschutz)
-                                            ->setParameter(5, $bid)
-                                            ->getQuery()
-                                            ->execute();
+                                if ($member->getIdmitgliederMitglieder() == $bform->get('idmitgliederMitglieder')->getData()){
+                                    print('small ');
+                                    /*$data = $bform->getData();
+                                    $em->persist($data);
+                                    $em->flush();*/
+                                    $b = $bform->getData();
+                                    $em->persist($b);
+                                    $em->flush();
+
+                                    $bid = $bform->get('idfahrzeugbesatzung')->getData();
+                                    $rolle = $bform->get('rolle')->getData();
+
+                                    $fahrzeugId = $bform->get('idfahrzeugFahrzeug')->getData();
+                                    $mitgliederId = $bform->get('idmitgliederMitglieder')->getData();
+                                    $atemschutz = $bform->get('atemschutz')->getData();
+                                    print('rolle:' . $rolle . ' und ' . $member->getRolle());
+                                    $qb = $repository->createQueryBuilder('fb');
+                                    $p = $qb->update()
+                                        ->set('fb.rolle', '?1')
+                                        ->set('fb.idfahrzeugFahrzeug', '?2')
+                                        ->set('fb.idmitgliederMitglieder', '?3')
+                                        ->set('fb.atemschutz', '?4')
+                                        ->where('fb.idfahrzeugbesatzung = ?5')
+                                        ->setParameter(1, $rolle)
+                                        ->setParameter(2, $fahrzeugId)
+                                        ->setParameter(3, $mitgliederId)
+                                        ->setParameter(4, $atemschutz)
+                                        ->setParameter(5, $bid)
+                                        ->getQuery()
+                                        ->execute();
+                                    if ($p) {
+                                        print('success');
+                                    } else {
+                                        print('fail');
                                     }
                                 }
                                 break;
                             }
-                        }/* else if ($bform->get('delete' .$count)->isClicked() && $bform->isValid()) {
+                       /*} else if ($bform->get('delete' .$count)->isClicked() && $bform->isValid()) {
                             foreach($besatzung as $member) {
                                 if ($member->getIdfahrzeugbesatzung() == $bform->get('idfahrzeugbesatzung')->getData() && $member->getIdmitgliederMitglieder() == $bform->get('idmitgliederMitglieder')->getData()){
                                     $em->remove($member);
@@ -432,9 +434,17 @@ class PageController extends Controller //AbstracController
                         }*/
                     }
                 }
-                //debug_to_console("Test");
+               debug_to_console("Test");
                 return $this->redirectToRoute('entries_edit', ['id' => $id]);
 
+                $form->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $eintrag = $form->getData();
+                    $em->persist($eintrag);
+                    $em->flush();
+                    //return $this->redirectToRoute('entries_edit', ['id' => $id]);
+                    // return $this->redirectToRoute('entries');
+                }
                 /*if ($besatzungsForm) {
                     foreach ($besatzungsForm as $bform) {
                         $bform->handleRequest($request);

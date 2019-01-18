@@ -21,10 +21,18 @@ $(document).ready(function() {
        }
 
     });
+    /*
+    $('#createEntry_submit').click(function(e) {
+        alert('submit big');
+    });
 
     $('#edit_besatzung_submit1').click(function(e) {
-        alert('click');
+        alert('small 1');
     });
+
+    $('#edit_besatzung_submit2').click(function(e) {
+        alert('small 2');
+    });*/
 
     var collectionHolder = $('div#createEntry_besatzung');
     var newLinkLi = $('<li style="list-style-type:none;"></li>');
