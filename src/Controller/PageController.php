@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Fahrzeugbesatzung;
 use App\Entity\Feed;
 use App\Form\BesetzungsType;
+use App\Form\Eintrag\EditTestBesatzung;
 use App\Form\Eintrag\EditBesatzung;
 use App\Form\Eintrag\EditEinsatz;
 use App\Form\Eintrag\EditTätigkeit;
@@ -347,6 +348,10 @@ class PageController extends Controller //AbstracController
         $besatzung = $em->getRepository(Fahrzeugbesatzung::class)->findBy(array('idlogbuchLogbuch' => $id));
         $bForms = null;
 
+        $newBesatzung = new Fahrzeugbesatzung();
+        $newBesatzung->setIdlogbuchLogbuch($eintrag);
+        $sForm = $this->createForm(EditTestBesatzung::class, $newBesatzung)->createView();
+
         if ($eintrag) {
             if ($besatzung) {
                 for ($i = 0; $i<sizeof($besatzung); $i++){
@@ -363,8 +368,6 @@ class PageController extends Controller //AbstracController
                 $form = $this->createForm(EditTätigkeit::class, $eintrag);
             }
 
-            //$form->handleRequest($request);
-
             if ($request->isMethod('POST')) {
                 print('POST');
 
@@ -372,62 +375,118 @@ class PageController extends Controller //AbstracController
                 $repository =  $em->getRepository(Fahrzeugbesatzung::class);
 
                 $form->handleRequest($request);
+
                 if ($form->isSubmitted() && $form->isValid()) {
                     $eintrag = $form->getData();
                     $em->persist($eintrag);
                     $em->flush();
-                    return $this->redirectToRoute('entries');
+                    print('submit big form');
+
+                    //return $this->redirectToRoute('entries_edit', ['id' => $id]);
+                    // return $this->redirectToRoute('entries');
                 }
 
-                $member = null;
                 $count = 0;
-                foreach($besatzungsForm as $bform) {
-                    $bform->handleRequest($request);
-                    $count++;
-                    if ($bform->get('submit' .$count)->isClicked() && $bform->isValid()) {
-                        foreach($besatzung as $member) {
-                            if ($member->getIdfahrzeugbesatzung() == $bform->get('idfahrzeugbesatzung')->getData()){
-                                print('update');
-                                $bid = $bform->get('idfahrzeugbesatzung')->getData();
-                                $rolle = $bform->get('rolle')->getData();
-                                $fahrzeugId = $bform->get('idfahrzeugFahrzeug')->getData();
-                                $mitgliederId = $bform->get('idmitgliederMitglieder')->getData();
-                                $atemschutz = $bform->get('atemschutz')->getData();
-                                $qb = $repository->createQueryBuilder('fb');
-                                $q = $qb->update()
-                                    ->set('fb.rolle', '?1')
-                                    ->set('fb.idfahrzeugFahrzeug', '?2')
-                                    ->set('fb.idmitgliederMitglieder', '?3')
-                                    ->set('fb.atemschutz', '?4')
-                                    ->where('fb.idfahrzeugbesatzung = ?5')
-                                    ->setParameter(1, $rolle)
-                                    ->setParameter(2, $fahrzeugId)
-                                    ->setParameter(3, $mitgliederId)
-                                    ->setParameter(4, $atemschutz)
-                                    ->setParameter(5, $bid)
-                                    ->getQuery()
-                                    ->execute();
+                if ($besatzungsForm) {
+                    foreach ($besatzungsForm as $bform) {
+                        $bform->handleRequest($request);
+                        $count++;
+                        print($count);
+                        if ($bform->isSubmitted() && $bform->isValid()) {
+                        //if ($bform->get('submit' .$count)->isClicked() && $bform->isValid()) {
+                            print('clickBesatzung');
+                            foreach ($besatzung as $member) {
+                                if ($member->getIdmitgliederMitglieder() == $bform->get('idmitgliederMitglieder')->getData()) {
+                                    if ($member->getIdfahrzeugbesatzung() == $bform->get('idfahrzeugbesatzung')->getData()) {
+                                        print('small ');
+                                        $bid = $bform->get('idfahrzeugbesatzung')->getData();
+                                        $rolle = $bform->get('rolle')->getData();
+                                        $fahrzeugId = $bform->get('idfahrzeugFahrzeug')->getData();
+                                        $mitgliederId = $bform->get('idmitgliederMitglieder')->getData();
+                                        $atemschutz = $bform->get('atemschutz')->getData();
+                                        $qb = $repository->createQueryBuilder('fb');
+                                        $q = $qb->update()
+                                            ->set('fb.rolle', '?1')
+                                            ->set('fb.idfahrzeugFahrzeug', '?2')
+                                            ->set('fb.idmitgliederMitglieder', '?3')
+                                            ->set('fb.atemschutz', '?4')
+                                            ->where('fb.idfahrzeugbesatzung = ?5')
+                                            ->setParameter(1, $rolle)
+                                            ->setParameter(2, $fahrzeugId)
+                                            ->setParameter(3, $mitgliederId)
+                                            ->setParameter(4, $atemschutz)
+                                            ->setParameter(5, $bid)
+                                            ->getQuery()
+                                            ->execute();
+                                    }
+                                }
+                                break;
                             }
-                        }
-                    } else if ($bform->get('delete' .$count)->isClicked() && $bform->isValid()) {
-                        foreach($besatzung as $member) {
-                            if ($member->getIdfahrzeugbesatzung() == $bform->get('idfahrzeugbesatzung')->getData() && $member->getIdmitgliederMitglieder() == $bform->get('idmitgliederMitglieder')->getData()){
-                                $em->remove($member);
-                                $em->flush();
+                        }/* else if ($bform->get('delete' .$count)->isClicked() && $bform->isValid()) {
+                            foreach($besatzung as $member) {
+                                if ($member->getIdfahrzeugbesatzung() == $bform->get('idfahrzeugbesatzung')->getData() && $member->getIdmitgliederMitglieder() == $bform->get('idmitgliederMitglieder')->getData()){
+                                    $em->remove($member);
+                                    $em->flush();
+                                }
+                            }
+                        }*/
+                    }
+                }
+                //debug_to_console("Test");
+                return $this->redirectToRoute('entries_edit', ['id' => $id]);
+
+                /*if ($besatzungsForm) {
+                    foreach ($besatzungsForm as $bform) {
+                        $bform->handleRequest($request);
+                        $count++;
+
+                        if ($bform->get('submit' .$count)->isClicked() && $bform->isValid()) {
+                            foreach ($besatzung as $member) {
+                                print('small ');
+                                if ($member->getIdfahrzeugbesatzung() == $bform->get('idfahrzeugbesatzung')->getData()) {
+                                    $bid = $bform->get('idfahrzeugbesatzung')->getData();
+                                    $rolle = $bform->get('rolle')->getData();
+                                    $fahrzeugId = $bform->get('idfahrzeugFahrzeug')->getData();
+                                    $mitgliederId = $bform->get('idmitgliederMitglieder')->getData();
+                                    $atemschutz = $bform->get('atemschutz')->getData();
+                                    $qb = $repository->createQueryBuilder('fb');
+                                    $q = $qb->update()
+                                        ->set('fb.rolle', '?1')
+                                        ->set('fb.idfahrzeugFahrzeug', '?2')
+                                        ->set('fb.idmitgliederMitglieder', '?3')
+                                        ->set('fb.atemschutz', '?4')
+                                        ->where('fb.idfahrzeugbesatzung = ?5')
+                                        ->setParameter(1, $rolle)
+                                        ->setParameter(2, $fahrzeugId)
+                                        ->setParameter(3, $mitgliederId)
+                                        ->setParameter(4, $atemschutz)
+                                        ->setParameter(5, $bid)
+                                        ->getQuery()
+                                        ->execute();
+                                }
+                            }
+                        } else if ($bform->get('delete' .$count)->isClicked() && $bform->isValid()) {
+                            foreach($besatzung as $member) {
+                                if ($member->getIdfahrzeugbesatzung() == $bform->get('idfahrzeugbesatzung')->getData() && $member->getIdmitgliederMitglieder() == $bform->get('idmitgliederMitglieder')->getData()){
+                                    $em->remove($member);
+                                    $em->flush();
+                                }
                             }
                         }
                     }
-                }
+                }*/
 
-                //debug_to_console( "Test" );
-                return $this->redirectToRoute('entries_edit', ['id' => $id]);
+               // debug_to_console( "Test" );
+               // return $this->redirectToRoute('entries_edit', ['id' => $id]);
             }
+
 
             return $this->render('new_entry/editEntry.html.twig', [
                 'kategorie' => $kategorie,
                 'unterkategorie' => $unterkategorie,
                 'form' => $form->createView(),
-                'bForms' => $bForms
+                'bForms' => $bForms,
+                'sampleForm' => $sForm
             ]);
 
         }

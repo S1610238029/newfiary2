@@ -16,10 +16,8 @@ use App\Entity\Rolle;
 use App\Entity\Fahrzeugbesatzung;
 
 
-class EditBesatzung extends AbstractType
+class EditTestBesatzung extends AbstractType
 {
-
-    protected $count = 1;
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -47,13 +45,7 @@ class EditBesatzung extends AbstractType
                 'label' => 'Atemschutzeinsatz',
                 'required' => false,
             ])
-            ->add('submit' . $this->count, SubmitType::class, ['label'=> 'Bestätigen', 'attr' => array(
-                'class'=>'submit besatzungbutton') ])
-            /*->add('delete' . $this->count, SubmitType::class, ['label'=> 'x', 'attr' => array(
-                'class'=>'besatzungbutton') ])*/
-            ->getForm();
         ;
-        $this->count++;
     }
 
     public function configureOptions(OptionsResolver $resolver)

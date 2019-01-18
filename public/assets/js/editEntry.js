@@ -1,19 +1,29 @@
 $(document).ready(function() {
+    var hiddenForm = $('#hiddenForm .sampleForm');
+    var submit = $('#hiddenForm .sampleForm .submit');
+    submit.id = '';
 
     $('#saveForm').click(function(e) {
        e.preventDefault();
        console.log('save');
 
        var allButtons = $("button.submit");
+       // console.log(allButtons);
        var allForms = $("form");
-       console.log(allButtons);
-        console.log(allForms);
+
+       // console.log(allForms);
+
+      // $('#edit_besatzung_submit1').click();
        for (var i = 0; i < allButtons.length; i++) {
            allButtons[i].click();
            //allForms[i].submit();
            console.log('click');
        }
 
+    });
+
+    $('#edit_besatzung_submit1').click(function(e) {
+        alert('click');
     });
 
     var collectionHolder = $('div#createEntry_besatzung');
@@ -30,16 +40,27 @@ $(document).ready(function() {
        toggleVisibility(selectedKategorie);
     });
 
+   $count = 10;
     $('.add-tag').click(function(e) {
         e.preventDefault();
 
         // add a new tag form (see code block below)
-        addTagForm(collectionHolder, newLinkLi);
-        addBesatzung(this);
+        //addTagForm(collectionHolder, newLinkLi);
+        addBesatzung($count++);
     });
 });
 
-function addBesatzung(el) {
+function addBesatzung(count) {
+    console.log('addBesatzung');
+
+    var hiddenForm = $('#hiddenForm .sampleForm');
+    var submit = $('#hiddenForm .sampleForm .submit');
+    submit.id = '';
+    submit.id = 'edit_besatzung_submit' + count;
+    submit.name = 'edit_besatzung[submit' + count + ']';
+
+    $('#createEntry_besatzung .row').append(hiddenForm);
+
     // form hinzufügen
 }
 
