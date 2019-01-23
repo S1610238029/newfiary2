@@ -33,18 +33,66 @@
             height: 65%;
         }
 
-        @media screen and (min-width: 901px) and (max-width: 1200px) {
+        @media screen and (max-width: 991px) {
+            .base-container {
+                margin-top: 6em;
+            }
+
+        }
+
+        @media screen and (min-width: 992px) and (max-width: 1201px) {
+            #fiaryimage img {
+                width: 100%;
+                height: 55%;
+            }
+        }
+
+
+
+
+        /*
+        @media screen and (min-width: 901px) and (max-width: 1400px) {
+            #fiaryimage img {
+                width: 100%;
+                height: 55%;
+                margin-top: 45%;
+
+        }
+
+        @media screen and (min-width: 661px) and (max-width: 900px) {
             #fiaryimage img {
                 width: 100%;
                 height: 65%;
+                margin-top: 65%;
             }
         }
+
+        @media screen and (max-width: 660px) {
+            #fiaryimage img {
+                width: 100%;
+                height: 65%;
+                margin-top: 30%;
+            }
+
+        }*/
+
+
 
         #eintraghinzu {
             margin: auto;
         }
 
     </style>
+
+    <script>
+        $(document).ready(function() {
+            var height = $(".mobileNav").height();
+            if(height > 0)
+            {
+                $(".base-container").css("margin-top","10px");
+            }
+        });
+    </script>
 
     <div id="fiaryimage">
         <img src="{{  asset('assets/img/logo.png') }}" alt="logo homepage">
