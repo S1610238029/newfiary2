@@ -573,7 +573,9 @@ class PageController extends Controller //AbstracController
         $unterkategorie = $unterkategorien[$eintrag->getUnterkategorie()];
 
         // Configure Dompdf according to your needs
+
         $pdfOptions = new Options();
+        $pdfOptions->set('isRemoteEnabled', true);
         $pdfOptions->set('defaultFont', 'Arial');
 
         // Instantiate Dompdf with our options
