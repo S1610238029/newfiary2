@@ -135,9 +135,11 @@ form > div > label {
 }
 
 /* MITGLIEDER */
-.biggreybutton a {
+.biggreybutton a, .biggreybutton:hover {
     color: #FFF;
+    text-decoration: none;
 }
+
 .biggreybutton {
     background-color: var(--grey);
     color: #FFF;
