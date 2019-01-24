@@ -41,21 +41,24 @@ class BesetzungsType extends AbstractType
             ->add('idfahrzeugFahrzeug', EntityType::class, array(
                 'placeholder'=> 'Wähle ein Fahrzeug...',
                 'class' => Fahrzeug::class,
-                'choice_label' => 'fahrzeugart'
+                'choice_label' => 'fahrzeugart',
+                'label' => 'Fahrzeug',
             ))
 
                 ->add('idmitgliederMitglieder', EntityType::class, array(
                     'placeholder'=> 'Wähle ein Mitglied..',
                     'class' => Mitglieder::class,
-                    'choice_label' => 'uniqueName'
+                    'choice_label' => 'uniqueName',
+                    'label' => 'Mitglied',
                 ))
                 ->add('rolle', EntityType::class, array(
                     'placeholder'=> 'Welche Rolle..',
                     'class' => Rolle::class,
-                    'choice_label' => 'rollenname'
+                    'choice_label' => 'rollenname',
+                    'label' => 'Rolle',
                 ))
                 ->add('atemschutz', CheckboxType::class, [
-                    'label' => 'Atemschutzeinsatz',
+                    'label' => 'Atemschutzträger',
                     'required' => false,
 
                 ]);

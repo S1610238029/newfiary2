@@ -312,6 +312,12 @@ $(document).ready(function() {
 
         }
     } );
+
+
+    //Buttons vertauschen
+
+    $('button.btn-warning').before($('button.prev-button'));
+    $('div.craue_formflow_buttons button:nth-child(3)').remove();
 });
 
 

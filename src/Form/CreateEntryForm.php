@@ -139,7 +139,9 @@ class CreateEntryForm extends AbstractType
                         'required'=>true
                     ))
                     ->add('eingesetzteGeraete', TextType::class, array(
-                        'required'=>false
+                        'label' => 'Eingesetzte Geräte',
+                        'required'=>false,
+
                     ));
 
                 break;
