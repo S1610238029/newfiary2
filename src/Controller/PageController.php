@@ -437,8 +437,8 @@ class PageController extends Controller //AbstracController
                         }*/
                     }
                 }
-               debug_to_console("Test");
-                return $this->redirectToRoute('entries_edit', ['id' => $id]);
+               //debug_to_console("Test");
+                //return $this->redirectToRoute('entries_edit', ['id' => $id]);
 
                 $form->handleRequest($request);
                 if ($form->isSubmitted() && $form->isValid()) {
@@ -446,7 +446,7 @@ class PageController extends Controller //AbstracController
                     $em->persist($eintrag);
                     $em->flush();
                     //return $this->redirectToRoute('entries_edit', ['id' => $id]);
-                    // return $this->redirectToRoute('entries');
+                    return $this->redirectToRoute('entries');
                 }
                 /*if ($besatzungsForm) {
                     foreach ($besatzungsForm as $bform) {
