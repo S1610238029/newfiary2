@@ -45,9 +45,8 @@ form > div > label {
     border: 0;
     margin-top: 0;
 }
-#accordion a {
+#accordion .panel-title>a, #accordion .panel-body ul li a{
     color: #000;
-
     padding: 10px 15px;
     border-bottom: 1px solid var(--red);
     text-decoration: none;
@@ -136,6 +135,9 @@ form > div > label {
 }
 
 /* MITGLIEDER */
+.biggreybutton a {
+    color: #FFF;
+}
 .biggreybutton {
     background-color: var(--grey);
     color: #FFF;

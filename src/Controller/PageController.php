@@ -605,7 +605,7 @@ class PageController extends Controller //AbstracController
 
 
         // Output the generated PDF to Browser (force download)
-        $dompdf->stream("Entry.pdf", [
+        $dompdf->stream("Eintragsübersicht.pdf", [
             "Attachment" => false
         ]);
 
