@@ -636,7 +636,7 @@ class PageController extends Controller //AbstracController
                 'placeholder' => [
                     'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
                 ]])
-            ->add('time', ChoiceType::class, [
+            ->add('zeit', ChoiceType::class, [
                     'choices'  => [
                         'Standard' => 'Standard',
                         'Monat' => 'Monat',
@@ -644,6 +644,7 @@ class PageController extends Controller //AbstracController
                     ],
                     'multiple'     => false,
                     'expanded'     => true,
+                    'data' => 'Standard'
                 ]
             )
            ->add('kategorie', ChoiceType::class, [
@@ -691,9 +692,13 @@ class PageController extends Controller //AbstracController
                             $einsatz = $val;
                         }
                     }
+                } else {
+                    $uebung = 'Übung';
+                    $taetigkeit = 'Tätigkeit';
+                    $einsatz = 'Einsatz';
                 }
 
-                if ($form->get('time')->getData() == 'Monat') {
+                if ($form->get('zeit')->getData() == 'Monat') {
                     $firstDayofMonth = $year . '-' . $month . '-01';
                     $lastDayofMonth = $year . '-' . $month . '-31';
                     $entries = $repPdf->createQueryBuilder('fc')
@@ -707,7 +712,7 @@ class PageController extends Controller //AbstracController
                         ->orderBy('fc.beginnDatum', 'ASC')
                         ->getQuery()
                         ->getResult();
-                } else if ($form->get('time')->getData() == 'Jahr') {
+                } else if ($form->get('zeit')->getData() == 'Jahr') {
                     $firstDayofYear = $year . '-' . '01' . '-01';
                     $lastDayofYear = $year . '-' . '12' . '-31';
                     $entries = $repPdf->createQueryBuilder('fc')
