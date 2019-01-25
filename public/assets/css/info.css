@@ -149,6 +149,7 @@ form > div > label {
     text-decoration: none;
     text-align: center;
     transition: all 0.5s ease-in-out;
+    margin-top: 10px;
 }
 
 .biggreybutton:hover {
@@ -221,6 +222,11 @@ tr:hover td {
 
 
 @media (max-width: 720px) {
+
+    form div:nth-child(4) {
+        width: 100% !important;
+    }
+
     #accordion #adduser, .biggreybutton {
         font-size: 12px;
         width: 180px;

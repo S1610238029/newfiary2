@@ -652,7 +652,7 @@ class PageController extends Controller //AbstracController
                         'Übung' => 'Übung',
                         'Tätigkeit' => 'Tätigkeit',
                     ],
-                    'multiple'     => false,
+                    'multiple'     => true,
                     'expanded'     => true,
                 ]
             )
@@ -677,19 +677,32 @@ class PageController extends Controller //AbstracController
                 $day = $form->get('datum')->getData()->format('d');
                 // print($form->get('dueDate')->getData()->format('Y-m-d H:i:s'));
 
-
-
-
                 $kategorie = $form->get('kategorie')->getData();
-                print($form->get('time')->getData());
+                $einsatz = null;
+                $uebung = null;
+                $taetigkeit = null;
+                if ($kategorie) {
+                    foreach ($kategorie as $val) {
+                        if ($val == 'Übung') {
+                            $uebung = $val;
+                        } else if ($val == 'Tätigkeit') {
+                            $taetigkeit = $val;
+                        } else if ($val == 'Einsatz') {
+                            $einsatz = $val;
+                        }
+                    }
+                }
+
                 if ($form->get('time')->getData() == 'Monat') {
                     $firstDayofMonth = $year . '-' . $month . '-01';
                     $lastDayofMonth = $year . '-' . $month . '-31';
                     $entries = $repPdf->createQueryBuilder('fc')
-                        ->andWhere('fc.kategorie = :kategorie and (fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
+                        ->andWhere('(fc.kategorie = :einsatz or fc.kategorie = :uebung or fc.kategorie = :taetigkeit) and (fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
                         ->setParameter('enddatum', $lastDayofMonth)
                         ->setParameter('startdatum', $firstDayofMonth)
-                        ->setParameter('kategorie', $kategorie)
+                        ->setParameter('einsatz', $einsatz)
+                        ->setParameter('uebung', $uebung)
+                        ->setParameter('taetigkeit', $taetigkeit)
                         ->select('fc.idlogbuch, fc.kategorie, fc.beschreibung, fc.beginnDatum')
                         ->orderBy('fc.beginnDatum', 'ASC')
                         ->getQuery()
@@ -698,17 +711,30 @@ class PageController extends Controller //AbstracController
                     $firstDayofYear = $year . '-' . '01' . '-01';
                     $lastDayofYear = $year . '-' . '12' . '-31';
                     $entries = $repPdf->createQueryBuilder('fc')
-                        ->andWhere('fc.kategorie = :kategorie and (fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
+                        ->andWhere('(fc.kategorie = :einsatz or fc.kategorie = :uebung or fc.kategorie = :taetigkeit) and (fc.beginnDatum BETWEEN :startdatum AND :enddatum)')
                         ->setParameter('enddatum', $lastDayofYear)
                         ->setParameter('startdatum', $firstDayofYear)
-                        ->setParameter('kategorie', $kategorie)
+                        ->setParameter('einsatz', $einsatz)
+                        ->setParameter('uebung', $uebung)
+                        ->setParameter('taetigkeit', $taetigkeit)
                         ->select('fc.idlogbuch, fc.kategorie, fc.beschreibung, fc.beginnDatum')
                         ->orderBy('fc.beginnDatum', 'ASC')
                         ->getQuery()
                         ->getResult();
                 } else {
-                    $em = $this->getDoctrine()->getManager();
-                    $entries = $em->getRepository(Logbuch::class)->findBy(array('beginnDatum' => $form->get('datum')->getData()));
+                    $entries = $repPdf->createQueryBuilder('fc')
+                        ->andWhere('(fc.kategorie = :einsatz or fc.kategorie = :uebung or fc.kategorie = :taetigkeit) and fc.beginnDatum = :datum')
+                        ->setParameter('datum', $date)
+                        ->setParameter('einsatz', $einsatz)
+                        ->setParameter('uebung', $uebung)
+                        ->setParameter('taetigkeit', $taetigkeit)
+                        ->select('fc.idlogbuch, fc.kategorie, fc.beschreibung, fc.beginnDatum')
+                        ->orderBy('fc.beginnDatum', 'ASC')
+                        ->getQuery()
+                        ->getResult();
+
+                    //$em = $this->getDoctrine()->getManager();
+                    //$entries = $em->getRepository(Logbuch::class)->findBy(array('beginnDatum' => $form->get('datum')->getData()));
                 }
             }
         }
