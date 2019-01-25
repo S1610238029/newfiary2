@@ -57,8 +57,7 @@
                 color         = [
                     "orange",
                     "tomato",
-                    "crimson",
-                    "purple"
+                    "crimson"
                 ];
 
                 color = shuffle( color );
@@ -102,7 +101,9 @@
         }
     </script>
 
-    <h1>Statistiken</h1>
+    <h1 id="overallheading">Statistiken</h1>
+
+    <hr>
 
     <!-- https://codepen.io/anthonykoch/pen/GpQYrJ -->
 
@@ -114,8 +115,7 @@
                         Ausfahrten Insgesamt:
                     </p>
                 </div>
-                <h1 class="consumption">{{ gesamt }} Ausfahrten!</h1>
-                <svg id="visualisation" width="600" height="100"></svg>
+                <h2 class="consumption">{{ gesamt }} Ausfahrten!</h2>
 
             </div>
 
@@ -139,6 +139,8 @@
         </div>
         <!-- /.statistics -->
     </div>
+
+    <hr>
 
     <!-- Neuer Versuch für mehr Staistiken - PieCharts -->
     <!-- Verwendeter Codepen: -->
