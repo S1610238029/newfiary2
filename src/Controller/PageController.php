@@ -635,7 +635,10 @@ class PageController extends Controller //AbstracController
                 'format' => 'yyyy-MM-dd',
                 'placeholder' => [
                     'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
-                ]])
+                ],
+                'data' => new \DateTime("now")
+            ])
+
             ->add('zeit', ChoiceType::class, [
                     'choices'  => [
                         'Standard' => 'Standard',
