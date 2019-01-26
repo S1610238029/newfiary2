@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>{% block title %}Eintrag speichern{% endblock %}</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+</head>
+
+<body>
+<style>
+    body {
+        font-family: 'Montserrat', Arial, Helvetica, cursive, monospace;
+        font-size: 10pt;
+    }
+    h1 {
+        font-size: 18pt;
+    }
+
+    h2 {
+        font-size: 14pt;
+        margin-top: 25px;
+    }
+    .right {
+        float: right;
+    }
+
+    th {
+        width: 40%;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    h4 {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .streifen {
+        width: auto;
+        height: 0.3%;
+        background-color: rgb(141, 4, 3);
+        overflow:auto;
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+
+    #fiaryimage {
+        background-image: url("../../public/assets/img/logo.png");
+        height: auto;
+        width: auto;
+    }
+
+    #fiaryheading {
+        text-align: center;
+    }
+
+    .entry {
+        page-break-after: always;
+    }
+
+</style>
+
+<!--<div id="fiaryimage">
+    <img src="{{ asset('/public/assets/img/logo.jpg') }}">
+</div>-->
+<!--<img src="{{ asset('/img')}}/logo.jpg">-->
+
+<h1 id="fiaryheading">FIARY</h1>
+<div class="streifen"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            {% for eintrag in eintraege %}
+
+                <div class="entry">
+                    <h1>{{ eintrag.beschreibung }}<span class="right">{{ eintrag.beginnDatum|date('d.m.Y') }}</span></h1>
+
+                    {% if eintrag.unterkategorie %}
+                        <p>
+                            <span>Kategorie:</span>
+                            <span> {{ eintrag.kategorie }} </span>
+                        </p>
+                    {% endif %}
+
+
+
+                    {% if eintrag.unterunterkategorie %}
+                        <span>Technische Einsatzart:</span>
+                        <span> {{ techeinsatz }} </span>
+                    {% endif %}
+
+                    {% if eintrag.uebungsleiter %}
+                        <span>Übungsleiter:</span>
+                        <span> {{ eintrag.uebungsleiter }} </span>
+                    {% endif %}
+
+                    <div class="streifen"></div>
+
+                    <h2>Zeitliche Details</h2>
+
+                    <table style="width: 100%;">
+
+
+                        {% if eintrag.beginnDatum %}
+                            <tr>
+                                <th>Beginn</th>
+                                <td>{{ eintrag.beginnDatum|date('d.m.Y') }} - {{ eintrag.beginnZeit|date('h:m') }} Uhr</td>
+                            </tr>
+                        {% endif %}
+
+                        {% if eintrag.endeDatum %}
+                            <tr>
+                                <th>Ende</th>
+                                <td>{{ eintrag.endeDatum|date('d.m.Y') }} - {{ eintrag.endeZeit|date('h:m') }} Uhr</td>
+                            </tr>
+                        {% endif %}
+                    </table>
+
+                    <div class="streifen"></div>
+
+                    <h2>Örtliche Details</h2>
+                    <p>
+                        {% if eintrag.strasse %}{{ eintrag.strasse }}{% endif %}
+                        {% if eintrag.hausnummer %}{{ eintrag.hausnummer }}, {% endif %}
+                        {% if eintrag.plz %}{{ eintrag.plz }}{% endif %}
+                        {% if eintrag.ort %}{{ eintrag.ort }}{% endif %}
+                    </p>
+
+                    <div class="streifen"></div>
+
+                    <h2>Weitere Details</h2>
+                    {% if eintrag.lagebeimEintreffen %} <h4>Lage beim Eintreffen</h4><p>{{ eintrag.lagebeimEintreffen }}</p> {% endif %}
+                    {% if eintrag.beschreibung %}<h4>Beschreibung</h4> <p>{{ eintrag.beschreibung }}</p> {% endif %}
+                    {% if eintrag.eingesetzteGeraete %}<h4>Eingesetzte Geräte</h4> <p>{{ eintrag.eingesetzteGeraete }}</p> {% endif %}
+
+
+
+
+                    <div class="streifen"></div>
+
+
+
+                    {% if eintrag.notizen %}
+                        <h4>Notizen</h4>
+                        <p>{{ eintrag.notizen }}</p>
+                    {% endif %}
+
+                    {% if eintrag.bericht %}
+                        <h4>Bericht</h4>
+                        <p>{{ eintrag.bericht }}</p>
+                    {% endif %}
+                </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

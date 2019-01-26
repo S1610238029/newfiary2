@@ -711,7 +711,7 @@ class PageController extends Controller //AbstracController
                         ->setParameter('einsatz', $einsatz)
                         ->setParameter('uebung', $uebung)
                         ->setParameter('taetigkeit', $taetigkeit)
-                        ->select('fc.idlogbuch, fc.kategorie, fc.beschreibung, fc.beginnDatum')
+                        ->select('fc')
                         ->orderBy('fc.beginnDatum', 'ASC')
                         ->getQuery()
                         ->getResult();
@@ -725,7 +725,7 @@ class PageController extends Controller //AbstracController
                         ->setParameter('einsatz', $einsatz)
                         ->setParameter('uebung', $uebung)
                         ->setParameter('taetigkeit', $taetigkeit)
-                        ->select('fc.idlogbuch, fc.kategorie, fc.beschreibung, fc.beginnDatum')
+                        ->select('fc')
                         ->orderBy('fc.beginnDatum', 'ASC')
                         ->getQuery()
                         ->getResult();
@@ -736,7 +736,7 @@ class PageController extends Controller //AbstracController
                         ->setParameter('einsatz', $einsatz)
                         ->setParameter('uebung', $uebung)
                         ->setParameter('taetigkeit', $taetigkeit)
-                        ->select('fc.idlogbuch, fc.kategorie, fc.beschreibung, fc.beginnDatum')
+                        ->select('fc')
                         ->orderBy('fc.beginnDatum', 'ASC')
                         ->getQuery()
                         ->getResult();
@@ -745,6 +745,43 @@ class PageController extends Controller //AbstracController
                     //$entries = $em->getRepository(Logbuch::class)->findBy(array('beginnDatum' => $form->get('datum')->getData()));
                 }
             }
+
+           /* $pdfOptions = new Options();
+            $pdfOptions->set('isRemoteEnabled', true);
+            $pdfOptions->set('defaultFont', 'Arial');
+
+            // Instantiate Dompdf with our options
+            $dompdf = new Dompdf($pdfOptions);
+
+            // Retrieve the HTML generated in our twig file
+            $html = $this->renderView('new_entry/saveEntries.html.twig', [
+                'title' => "Welcome to our PDF Test",
+                'eintraege' => $entries,
+                //'bForms' => $besatzung,
+                //'unterkategorie' => $unterkategorie,
+                //'brandeinsatz' => $brandeinsatz,
+                //'brandwache' => $brandwache,
+                //'ausmass' => $ausmass,
+                //'anwesend' => $anwesend,
+                //'wetter' => $wetter,
+                //'techeinsatz' => $techeinsatz
+            ]);
+
+            // Load HTML to Dompdf
+            $dompdf->loadHtml($html);
+
+            // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+            $dompdf->setPaper('A4', 'portrait');
+
+            // Render the HTML as PDF
+            $dompdf->render();
+            $dompdf->set_base_path(realpath( "newfiary/public/assets/css/pdf.css"));
+
+
+            // Output the generated PDF to Browser (force download)
+            $dompdf->stream("Eintragsübersicht.pdf", [
+                "Attachment" => false
+            ]);*/
         }
 
         return $this->render('pages/info.html.twig', [
