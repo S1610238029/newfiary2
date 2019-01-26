@@ -23,9 +23,6 @@
         font-size: 14pt;
         margin-top: 25px;
     }
-    .right {
-        float: right;
-    }
 
     th {
         width: 40%;
@@ -73,7 +70,8 @@
     <div class="row">
         <div class="col-md-12">
 
-            <h1>{{ eintrag.beschreibung }}<span class="right">{{ eintrag.beginnDatum|date('d.m.Y') }}</span></h1>
+            <h1>{{ eintrag.beschreibung }}</h1>
+            <span>Datum: {{ eintrag.beginnDatum|date('d.m.Y') }}</span>
 
             {% if eintrag.unterkategorie %}
                 <p>

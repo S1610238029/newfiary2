@@ -23,9 +23,6 @@
         font-size: 14pt;
         margin-top: 25px;
     }
-    .right {
-       /* float: right;*/
-    }
 
     th {
         width: 40%;
@@ -80,7 +77,9 @@
             {% for eintrag in eintraege %}
 
                 <div class="entry">
-                    <h1>{{ eintrag.beschreibung }} - <span class="right">{{ eintrag.beginnDatum|date('d.m.Y') }}</span></h1>
+
+                    <h1>{{ eintrag.beschreibung }}</h1>
+                    <span>Datum: {{ eintrag.beginnDatum|date('d.m.Y') }}</span>
 
                     {% if eintrag.kategorie %}
                         <p>
