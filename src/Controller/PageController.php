@@ -448,6 +448,7 @@ class PageController extends Controller //AbstracController
                     //return $this->redirectToRoute('entries_edit', ['id' => $id]);
                     return $this->redirectToRoute('entries');
                 }
+                return $this->redirectToRoute('entries');
                 /*if ($besatzungsForm) {
                     foreach ($besatzungsForm as $bform) {
                         $bform->handleRequest($request);
@@ -613,12 +614,120 @@ class PageController extends Controller //AbstracController
 
     }
 
+    /**
+     * @Route("/eintraege/saveAll", name="entries_save_all")
+     */
+    public function saveAllEntries(Request $request)
+    {
+        /*$loop = 0;
+        foreach ($entries as $eintrag) {
+            $kategorie = $eintrag->getKategorie();
+            $wetter_array[$loop] = null;
+            $anwesend_array[$loop] = null;
+            $ausmass[$loop] = null;
+            $techeinsatz[$loop] = null;
+            $brandeinsatz[$loop] = null;
+            $brandwache[$loop] = null;
+
+            $besatzung[$loop] = null;
+            $id = $eintrag->getIdlogbuch();
+
+            $besatzung[$loop] = $this->getDoctrine()->getManager()->getRepository(Fahrzeugbesatzung::class)->findBy(array('idlogbuchLogbuch' => $id));
+            $bForms = null;
+
+            if (!$besatzung[$loop]) {
+                $besatzung[$loop] = null;
+            }
+
+            if ($kategorie == "Einsatz" ) {
+                $unterkategorien = $eintrag->getUnterKategorieOptions_Einsatz3();
+
+                if ($unterkategorien[$eintrag->getUnterKategorie()] == "Brandeinsatz" || $unterkategorien[$eintrag->getUnterKategorie()] == "Technischer Einsatz") {
+                    if ($unterkategorien[$eintrag->getUnterKategorie()] == "Brandeinsatz") {
+                        $brandeinsatz[$loop] = true;
+                        $ausmass[$loop] = $eintrag->getBrandausmassOptions()[$eintrag->getBrandausmass()];
+                    } else if ($unterkategorien[$eintrag->getUnterKategorie()] == "Technischer Einsatz") {
+                        $techeinsatz[$loop] = $eintrag->getUnterKategorien_TechEinsatz()[$eintrag->getUnterunterkategorie()];
+                    }
+
+                    $wetter = '';
+                    $wIndex = $eintrag->getWetter();
+                    foreach($wIndex as $val) {
+                        if( !next( $wIndex ) ) {
+                            $wetter .= $eintrag->getWetterOptions()[$val];
+                        } else {
+                            $wetter .= $eintrag->getWetterOptions()[$val] . ', ';
+                        }
+                    }
+                    $wetter_array[$loop] = $wetter;
+
+                    $aIndex = $eintrag->getAnwesend();
+                    $anwesend = '';
+                    foreach($aIndex as $val){
+                        if( !next( $aIndex ) ) {
+                            $anwesend .= $eintrag->getAnwesendePersonen()[$val];
+                        } else {
+                            $anwesend .= $eintrag->getAnwesendePersonen()[$val] . ', ';
+                        }
+                    }
+                    $anwesend_array[$loop] = $anwesend;
+                } else if ($unterkategorien[$eintrag->getUnterKategorie()] == "Brandsicherheitswache") {
+                    $brandwache[$loop] = true;
+                }
+            } else if ($kategorie == "Übung") {
+                $unterkategorien = $eintrag->getUnterKategorieOptions_Übung();
+            } else if ($kategorie == "Tätigkeit") {
+                $unterkategorien = $eintrag->getUnterKategorieOptions_Tätigkeit();
+            }
+
+            $loop++;
+            $unterkategorie[] = $unterkategorien[$eintrag->getUnterkategorie()];
+        }
+
+        $pdfOptions = new Options();
+        $pdfOptions->set('isRemoteEnabled', true);
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('new_entry/saveEntries.html.twig', [
+            'title' => "Welcome to our PDF Test",
+            'eintraege' => $entries,
+            'bForms' => $besatzung,
+            'unterkategorie' => $unterkategorie,
+            'brandeinsatz' => $brandeinsatz,
+            'brandwache' => $brandwache,
+            'ausmass' => $ausmass,
+            'anwesend' => $anwesend_array,
+            'wetter' => $wetter_array,
+            'techeinsatz' => $techeinsatz
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+        $dompdf->set_base_path(realpath( "newfiary/public/assets/css/pdf.css"));
+
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("Eintragsübersicht.pdf", [
+            "Attachment" => false
+        ]);*/
+    }
 
         /**
      * @Route("/info", name="infos")
      */
     public function infoAction(Request $request)
     {
+        $button = null;
         $rep = $this->getDoctrine()->getRepository(Mitglieder::class);
         $mitglieder = $rep->findAll();
 
@@ -660,9 +769,18 @@ class PageController extends Controller //AbstracController
                     'expanded'     => true,
                 ]
             )
-
-
+           /* ->add('ansicht',ChoiceType::class, [
+                'choices'  => [
+                    'Einzelansicht' => 'Einzelansicht',
+                    'Gesamtansicht' => 'Gesamtansicht',
+                ],
+                'multiple'     => false,
+                'expanded'     => false,
+                'data' => 'Einzelansicht'
+            ])*/
             ->add('submit', SubmitType::class, ['label'=> 'Generieren', 'attr' => array(
+                'class'=>'submit btn biggreybutton') ])
+            ->add('submit1', SubmitType::class, ['label'=> 'Gesamtansicht', 'attr' => array(
                 'class'=>'submit btn biggreybutton') ])
             ->getForm();
 
@@ -746,46 +864,118 @@ class PageController extends Controller //AbstracController
                 }
             }
 
-           /* $pdfOptions = new Options();
-            $pdfOptions->set('isRemoteEnabled', true);
-            $pdfOptions->set('defaultFont', 'Arial');
+            if ($entries) {
+                $button = true;
+            }
 
-            // Instantiate Dompdf with our options
-            $dompdf = new Dompdf($pdfOptions);
+            if ($form->get('submit1')->isClicked() && $form->isValid()) {
+                $loop = 0;
 
-            // Retrieve the HTML generated in our twig file
-            $html = $this->renderView('new_entry/saveEntries.html.twig', [
-                'title' => "Welcome to our PDF Test",
-                'eintraege' => $entries,
-                //'bForms' => $besatzung,
-                //'unterkategorie' => $unterkategorie,
-                //'brandeinsatz' => $brandeinsatz,
-                //'brandwache' => $brandwache,
-                //'ausmass' => $ausmass,
-                //'anwesend' => $anwesend,
-                //'wetter' => $wetter,
-                //'techeinsatz' => $techeinsatz
-            ]);
+                foreach ($entries as $eintrag) {
+                    $kategorie = $eintrag->getKategorie();
+                    $wetter_array[$loop] = null;
+                    $anwesend_array[$loop] = null;
+                    $ausmass[$loop] = null;
+                    $techeinsatz[$loop] = null;
+                    $brandeinsatz[$loop] = null;
+                    $brandwache[$loop] = null;
 
-            // Load HTML to Dompdf
-            $dompdf->loadHtml($html);
+                    $besatzung[$loop] = null;
+                    $id = $eintrag->getIdlogbuch();
 
-            // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
-            $dompdf->setPaper('A4', 'portrait');
+                    $besatzung[$loop] = $this->getDoctrine()->getManager()->getRepository(Fahrzeugbesatzung::class)->findBy(array('idlogbuchLogbuch' => $id));
+                    $bForms = null;
 
-            // Render the HTML as PDF
-            $dompdf->render();
-            $dompdf->set_base_path(realpath( "newfiary/public/assets/css/pdf.css"));
+                    if (!$besatzung[$loop]) {
+                        $besatzung[$loop] = null;
+                    }
+
+                    if ($kategorie == "Einsatz" ) {
+                        $unterkategorien = $eintrag->getUnterKategorieOptions_Einsatz3();
+
+                        if ($unterkategorien[$eintrag->getUnterKategorie()] == "Brandeinsatz" || $unterkategorien[$eintrag->getUnterKategorie()] == "Technischer Einsatz") {
+                            if ($unterkategorien[$eintrag->getUnterKategorie()] == "Brandeinsatz") {
+                                $brandeinsatz[$loop] = true;
+                                $ausmass[$loop] = $eintrag->getBrandausmassOptions()[$eintrag->getBrandausmass()];
+                            } else if ($unterkategorien[$eintrag->getUnterKategorie()] == "Technischer Einsatz") {
+                                $techeinsatz[$loop] = $eintrag->getUnterKategorien_TechEinsatz()[$eintrag->getUnterunterkategorie()];
+                            }
+
+                            $wetter = '';
+                            $wIndex = $eintrag->getWetter();
+                            foreach($wIndex as $val) {
+                                if( !next( $wIndex ) ) {
+                                    $wetter .= $eintrag->getWetterOptions()[$val];
+                                } else {
+                                    $wetter .= $eintrag->getWetterOptions()[$val] . ', ';
+                                }
+                            }
+                            $wetter_array[$loop] = $wetter;
+
+                            $aIndex = $eintrag->getAnwesend();
+                            $anwesend = '';
+                            foreach($aIndex as $val){
+                                if( !next( $aIndex ) ) {
+                                    $anwesend .= $eintrag->getAnwesendePersonen()[$val];
+                                } else {
+                                    $anwesend .= $eintrag->getAnwesendePersonen()[$val] . ', ';
+                                }
+                            }
+                            $anwesend_array[$loop] = $anwesend;
+                        } else if ($unterkategorien[$eintrag->getUnterKategorie()] == "Brandsicherheitswache") {
+                            $brandwache[$loop] = true;
+                        }
+                    } else if ($kategorie == "Übung") {
+                        $unterkategorien = $eintrag->getUnterKategorieOptions_Übung();
+                    } else if ($kategorie == "Tätigkeit") {
+                        $unterkategorien = $eintrag->getUnterKategorieOptions_Tätigkeit();
+                    }
+
+                    $loop++;
+                    $unterkategorie[] = $unterkategorien[$eintrag->getUnterkategorie()];
+                }
+
+                $pdfOptions = new Options();
+                $pdfOptions->set('isRemoteEnabled', true);
+                $pdfOptions->set('defaultFont', 'Arial');
+
+                // Instantiate Dompdf with our options
+                $dompdf = new Dompdf($pdfOptions);
+
+                // Retrieve the HTML generated in our twig file
+                $html = $this->renderView('new_entry/saveEntries.html.twig', [
+                    'title' => "Welcome to our PDF Test",
+                    'eintraege' => $entries,
+                    'bForms' => $besatzung,
+                    'unterkategorie' => $unterkategorie,
+                    'brandeinsatz' => $brandeinsatz,
+                    'brandwache' => $brandwache,
+                    'ausmass' => $ausmass,
+                    'anwesend' => $anwesend_array,
+                    'wetter' => $wetter_array,
+                    'techeinsatz' => $techeinsatz
+                ]);
+
+                // Load HTML to Dompdf
+                $dompdf->loadHtml($html);
+
+                // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+                $dompdf->setPaper('A4', 'portrait');
+
+                // Render the HTML as PDF
+                $dompdf->render();
+                $dompdf->set_base_path(realpath( "newfiary/public/assets/css/pdf.css"));
 
 
-            // Output the generated PDF to Browser (force download)
-            $dompdf->stream("Eintragsübersicht.pdf", [
-                "Attachment" => false
-            ]);*/
+                // Output the generated PDF to Browser (force download)
+                $dompdf->stream("Eintragsübersicht.pdf", [
+                    "Attachment" => false
+                ]);
+            }
         }
-
         return $this->render('pages/info.html.twig', [
             'mitglieder' => $mitglieder,
+            'button' => $button,
             'haeuser'=>$häuser,
             'form' => $form->createView(),
             'eintraege' => $entries

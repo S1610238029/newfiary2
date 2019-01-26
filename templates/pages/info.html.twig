@@ -47,31 +47,29 @@
                                     {{ form_row(form.kategorie) }}
                                     {{ form_row(form.submit) }}
                                 {{ form_end(form) }}
-                               <!-- <form>
-                                    <div class="form-group row">
-                                        <label for="example-date-input" class="col-2 col-md-1 col-form-label">Datum</label>
-                                        <div class="col-10 col-md-6">
-                                            <input class="form-control" type="date" value="2018-11-9" id="example-date-input">
-                                        </div>
-                                        <button class="col-8 col-sm-3 col-md-4 offset-md-0 btn biggreybutton">Generieren</button>
-                                    </div>
-                                </form>-->
-
 
                                     {% if eintraege %}
                                         <ul>
-                                            {% for eintrag in eintraege %}
-                                                <li>{% if is_granted('ROLE_ADMIN') %}
-                                                    <a href="{{ path('entries_save', {'id':eintrag.idlogbuch} ) }}">
-                                                        <i><img src="{{  asset('assets/img/pdf.svg') }}" alt="delete symbol"></i>
-                                                    </a>
+                                            {% if button %}
+                                               <!-- <li>
+                                                    <a href="{{ path('entries_save_all') }}">
+                                                        <i><img src="{{ asset('assets/img/pdf.svg') }}" alt="pdf symbol"></i>
+                                                    </a>Gesamtansicht
+                                                </li>-->
+                                            {% endif %}
+                                                {% for eintrag in eintraege %}
+                                                    <li>{% if is_granted('ROLE_ADMIN') %}
+                                                            <a href="{{ path('entries_save', {'id':eintrag.idlogbuch} ) }}">
+                                                                <i><img src="{{  asset('assets/img/pdf.svg') }}" alt="delete symbol"></i>
+                                                            </a>
 
-                                                    {% endif %}
-                                                    {% if eintrag.beginnDatum %}{{ eintrag.beginnDatum|date('d.m.Y') }}{% else %}{% endif %}:
-                                                    {% if eintrag.kategorie %}{{ eintrag.kategorie }}{% else %}{% endif %} -
-                                                    {% if eintrag.beschreibung %}{{ eintrag.beschreibung }}{% else %}{% endif %}
-                                                </li>
-                                            {% endfor %}
+                                                        {% endif %}
+                                                        {% if eintrag.beginnDatum %}{{ eintrag.beginnDatum|date('d.m.Y') }}{% else %}{% endif %}:
+                                                        {% if eintrag.kategorie %}{{ eintrag.kategorie }}{% else %}{% endif %} -
+                                                        {% if eintrag.beschreibung %}{{ eintrag.beschreibung }}{% else %}{% endif %}
+                                                    </li>
+                                                {% endfor %}
+
                                         </ul>
                                     {% else %}
                                         <p class="error">Keine Einträge an zu diesem Datum gefunden</p>

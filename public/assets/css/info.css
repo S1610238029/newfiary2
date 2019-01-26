@@ -8,6 +8,10 @@ form {
     margin-bottom: 20px;
 }
 
+form div:nth-child(4), form div:nth-child(5){
+    flex: 100%;
+}
+
 form div, label {
     padding-right: 20px;
     padding-bottom: 5px;
@@ -223,7 +227,7 @@ tr:hover td {
 
 @media (max-width: 720px) {
 
-    form div:nth-child(4) {
+    form div:nth-child(4), form div:nth-child(5){
         width: 100% !important;
     }
 
